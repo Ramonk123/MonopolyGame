@@ -1,4 +1,6 @@
 package Views;
 
-public interface View {
+import ObserveablePattern.Observer;
+
+public interface View extends Observer {
 }
