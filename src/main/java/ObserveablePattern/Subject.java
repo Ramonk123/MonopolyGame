@@ -1,4 +1,4 @@
-package Models;
+package ObserveablePattern;
 
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
