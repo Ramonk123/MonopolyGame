@@ -1,4 +1,4 @@
 package Models;
 
-public interface Model extends Observer{
+public interface Model extends Subject {
 }
