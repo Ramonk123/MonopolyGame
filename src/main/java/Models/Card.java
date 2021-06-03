@@ -1,4 +1,4 @@
 package Models;
 
-public abstract class Card {
+public abstract class Card implements Model {
 }
