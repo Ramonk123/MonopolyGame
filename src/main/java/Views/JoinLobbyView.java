@@ -36,7 +36,7 @@ public class JoinLobbyView implements View {
     }
 
     private void createPrimaryStage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/FXML/MainMenuView.fxml"));
         loader.setController(joinLobbyCtrl);
         Parent root = loader.load();
 
