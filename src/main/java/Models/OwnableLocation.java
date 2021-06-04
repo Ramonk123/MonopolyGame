@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class OwnableLocation extends Location {
-    private int price;
+    private final int price;
     private Player owner = null;
     private final List<View> observers = new ArrayList<>();
 
@@ -39,5 +39,9 @@ public abstract class OwnableLocation extends Location {
             return Optional.empty();
         }
         return Optional.of(owner);
+    }
+
+    public int getPrice() {
+        return price;
     }
 }
