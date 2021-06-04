@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #bfdbae;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" layoutY="40.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="45.0" prefWidth="100.0" text="Game token">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="LobbyViewTokenLabel" alignment="CENTER" prefHeight="45.0" prefWidth="100.0" text="0123456">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="150.0" layoutY="132.0" prefWidth="600.0" spacing="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
+         <children>
+            <Button fx:id="LobbyViewStartGameButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #93d28f;" text="Start game" />
+            <Button fx:id="LobbyViewLeaveLobbyButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #f04747;" text="Leave lobby" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutY="192.0" prefWidth="600.0" spacing="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <VBox spacing="5.0">
+               <children>
+                  <Label fx:id="LobbyViewUsername1Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username1" />
+                  <Label fx:id="LobbyViewUsername3Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username3" />
+                  <Label fx:id="LobbyViewUsername5Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username5" />
+                  <Label fx:id="LobbyViewUsername7Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username7" />
+               </children>
+            </VBox>
+            <VBox spacing="5.0">
+               <children>
+                  <Label fx:id="LobbyViewUsername2Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username2" />
+                  <Label fx:id="LobbyViewUsername4Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username4" />
+                  <Label fx:id="LobbyViewUsername6Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username6" />
+                  <Label fx:id="LobbyViewUsername8Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username8" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
