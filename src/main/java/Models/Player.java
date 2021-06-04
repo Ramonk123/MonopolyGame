@@ -1,13 +1,12 @@
 package Models;
 
-import ObserveablePattern.Observer;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements Model, Position {
+public class Player implements Model, Position, Nameable {
     private final List<View> observers = new ArrayList<>();
 
     private String name;
@@ -39,5 +38,18 @@ public class Player implements Model, Position {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public String getPawnIcon() {
+        return pawn_icon;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
     }
 }
