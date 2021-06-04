@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.BoardController;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,9 +16,9 @@ public class BoardView implements View {
 
     private final Stage primaryStage;
 
-    private final boardController;
+    private BoardController boardController;
 
-    public MainMenuView(Stage primaryStage) {
+    public BoardView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
         boardController = boardController.getInstance();

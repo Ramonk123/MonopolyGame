@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.LobbyController;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,9 +16,9 @@ public class JoinLobbyView implements View {
 
     private final Stage primaryStage;
 
-    private final joinLobbyController;
+    private LobbyController joinLobbyController;
 
-    public MainMenuView(Stage primaryStage) {
+    public JoinLobbyView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
         joinLobbyController = joinLobbyController.getInstance();

@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.LobbyController;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,9 +16,9 @@ public class LobbyView implements View {
 
     private final Stage primaryStage;
 
-    private final lobbyCtrl;
+    private LobbyController lobbyController;
 
-    public MainMenuView(Stage primaryStage) {
+    public LobbyView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
         lobbyController = lobbyController.getInstance();
