@@ -35,10 +35,7 @@ public abstract class OwnableLocation extends Location {
     }
 
     public Optional<Player> getOwner() {
-        if (owner == null) {
-            return Optional.empty();
-        }
-        return Optional.of(owner);
+        return Optional.ofNullable(owner);
     }
 
     public int getPrice() {

@@ -1,14 +1,20 @@
 package Models;
 
 public abstract class StreetLocation extends OwnableLocation {
-    public int houses;
-    public boolean hotel;
-    public PriceInflator priceInflator;
+    private int houses;
+    private boolean hotel;
+    private PriceInflator priceInflator;
+    private Set set;
+    private int housePrice;
+    private int hotelPrice;
 
-    public StreetLocation(String name, int position, int price, int priceOfHouse) {
+    public StreetLocation(String name, int position, int price, Set set, int rent, int housePrice, int hotelPrice) {
         super(name, position, price);
-        this.houses = 0;
-        this.hotel = false;
-        this.priceInflator = new PriceInflator(priceOfHouse, 0.6);
+        this.houses         = 0;
+        this.hotel          = false;
+        this.priceInflator  = new PriceInflator(rent, 1.6);
+        this.set            = set;
+        this.housePrice     = housePrice;
+        this.hotelPrice     = hotelPrice;
     }
 }

@@ -5,14 +5,20 @@ import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+// still needs work
 public class Turn implements Model, DiceThrower {
     private Player player;
-    private int amountOfDoublee;
+    private int amountOfDouble;
     private Throw currentThrow;
-
-
     private final List<View> observers = new ArrayList<>();
+
+    public Turn() {
+        this.player = null;
+        this.amountOfDouble = 0;
+        this.currentThrow = new Throw();
+    }
 
     @Override
     public void registerObserver(View v) {
@@ -31,8 +37,13 @@ public class Turn implements Model, DiceThrower {
         }
     }
 
-    public Player getCurrentPlayer() {
-        return player;
+    public void setCurrentPlayer(Player player) {
+        this.player = player;
+    }
+
+    public Optional<Player> getCurrentPlayer()
+    {
+        return Optional.ofNullable(player);
     }
 
     public Throw getCurrentThrow() {

@@ -27,15 +27,19 @@ public class Wallet implements Model {
         }
     }
 
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
     public int getBalance() {
         return balance;
     }
 
-    public void addBalance(int money) {
-        balance += money;
+    public void addBalance(int value) {
+        this.balance += value;
     }
 
-    public void subtractBalance(int money) {
-        balance -= money;
+    public void subtractBalance(int value) {
+        this.balance -= value;
     }
 }
