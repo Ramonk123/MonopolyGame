@@ -20,8 +20,8 @@ public class LobbyView implements View {
     public MainMenuView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        lobbyCtrl = lobbyCtrl.getInstance();
-        lobbyCtrl.registerObserver(this);
+        lobbyController = lobbyController.getInstance();
+        lobbyController.registerObserver(this);
 
         try {
             createPrimaryStage();
@@ -37,7 +37,7 @@ public class LobbyView implements View {
 
     private void createPrimaryStage() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/FXML/LobbyView.fxml"));
-        loader.setController(lobbyCtrl);
+        loader.setController(lobbyController);
         Parent root = loader.load();
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
