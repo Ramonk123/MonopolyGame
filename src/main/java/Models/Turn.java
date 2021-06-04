@@ -8,8 +8,8 @@ import java.util.List;
 
 public class Turn implements Model, DiceThrower {
     private Player player;
-    private int amount_of_double;
-    private Throw current_throw;
+    private int amountOfDoublee;
+    private Throw currentThrow;
 
 
     private final List<View> observers = new ArrayList<>();
@@ -36,21 +36,21 @@ public class Turn implements Model, DiceThrower {
     }
 
     public Throw getCurrentThrow() {
-        return current_throw;
+        return currentThrow;
     }
 
     @Override
     public void throwDice() {
-        current_throw.throwDice();
+        currentThrow.throwDice();
     }
 
     @Override
     public boolean isDouble() {
-        return current_throw.isDouble();
+        return currentThrow.isDouble();
     }
 
     @Override
     public int getTotalEyes() {
-        return current_throw.getTotalEyes();
+        return currentThrow.getTotalEyes();
     }
 }

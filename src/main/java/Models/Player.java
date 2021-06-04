@@ -10,7 +10,7 @@ public class Player implements Model, Position, Nameable {
     private final List<View> observers = new ArrayList<>();
 
     private String name;
-    private String pawn_icon;
+    private String pawnIcon;
     private Wallet wallet;
     private int position;
 
