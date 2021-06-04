@@ -36,7 +36,7 @@ public class CreateLobbyView implements View {
     }
 
     private void createPrimaryStage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/FXML/MainMenuView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/FXML/CreateLobbyView.fxml"));
         loader.setController(createLobbyCtrl);
         Parent root = loader.load();
 
