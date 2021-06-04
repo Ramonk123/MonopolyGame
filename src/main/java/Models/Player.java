@@ -46,7 +46,7 @@ public class Player implements Model, Position, Nameable {
     }
 
     public String getPawnIcon() {
-        return pawn_icon;
+        return pawnIcon;
     }
 
     public Wallet getWallet() {
