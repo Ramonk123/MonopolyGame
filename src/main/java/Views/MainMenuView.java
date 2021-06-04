@@ -15,13 +15,13 @@ public class MainMenuView implements View {
 
     private final Stage primaryStage;
 
-    private final mainMenuCtrl;
+    private final mainMenuController;
 
     public MainMenuView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        mainMenuCtrl = mainMenuCtrl.getInstance();
-        mainMenuCtrl.registerObserver(this);
+        mainMenuController = mainMenuController.getInstance();
+        mainMenuController.registerObserver(this);
 
         try {
             createPrimaryStage();
@@ -36,8 +36,8 @@ public class MainMenuView implements View {
     }
 
     private void createPrimaryStage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenuView.fxml"));
-        loader.setController(mainMenuCtrl);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/FXML/MainMenuView.fxml"));
+        loader.setController(mainMenuController);
         Parent root = loader.load();
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
