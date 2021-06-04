@@ -37,7 +37,7 @@ public class MainMenuView implements View {
     }
 
     private void createPrimaryStage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/FXML/MainMenuView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MainMenuView.fxml"));
         loader.setController(mainMenuController);
         Parent root = loader.load();
 

@@ -37,7 +37,7 @@ public class BoardView implements View {
     }
 
     private void createPrimaryStage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/FXML/BoardView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/BoardView.fxml"));
         loader.setController(boardController);
         Parent root = loader.load();
 
