@@ -22,16 +22,16 @@ public class WalletController implements Controller {
 
     @Override
     public void registerObserver(View v) {
-
+        wallet.registerObserver(v);
     }
 
     @Override
     public void unregisterObserver(View v) {
-
+        wallet.unregisterObserver(v);
     }
 
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
-
+        wallet.notifyObservers(ds);
     }
 }
