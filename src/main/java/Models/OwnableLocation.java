@@ -12,6 +12,11 @@ public abstract class OwnableLocation extends Location {
     private Player owner = null;
     private final List<View> observers = new ArrayList<>();
 
+    public OwnableLocation(String name, int position, int price) {
+        super(name, position);
+        this.price = price;
+    }
+
     @Override
     public void registerObserver(View v) {
         observers.add(v);

@@ -11,6 +11,11 @@ public abstract class Location implements Model, Position, Action, Nameable {
     private int position;
     private final List<View> observers = new ArrayList<>();
 
+    public Location(String name, int position) {
+        this.name = name;
+        this.position = position;
+    }
+
     @Override
     public void registerObserver(View v) {
         observers.add(v);
