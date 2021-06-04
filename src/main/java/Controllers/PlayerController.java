@@ -23,16 +23,16 @@ public class PlayerController implements Controller {
 
     @Override
     public void registerObserver(View v) {
-
+        player.registerObserver(v);
     }
 
     @Override
     public void unregisterObserver(View v) {
-
+        player.unregisterObserver(v);
     }
 
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
-
+        player.notifyObservers(ds);
     }
 }

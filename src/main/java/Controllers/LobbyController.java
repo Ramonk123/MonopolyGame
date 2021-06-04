@@ -23,16 +23,16 @@ public class LobbyController implements Controller {
 
     @Override
     public void registerObserver(View v) {
-
+        lobby.registerObserver(v);
     }
 
     @Override
     public void unregisterObserver(View v) {
-
+        lobby.unregisterObserver(v);
     }
 
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
-
+        lobby.notifyObservers(ds);
     }
 }

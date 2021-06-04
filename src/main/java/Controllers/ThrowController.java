@@ -23,16 +23,16 @@ public class ThrowController implements Controller {
 
     @Override
     public void registerObserver(View v) {
-
+        currentThrow.registerObserver(v);
     }
 
     @Override
     public void unregisterObserver(View v) {
-
+        currentThrow.unregisterObserver(v);
     }
 
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
-
+        currentThrow.notifyObservers(ds);
     }
 }
