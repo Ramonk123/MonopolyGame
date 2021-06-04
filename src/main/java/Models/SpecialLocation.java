@@ -9,6 +9,10 @@ import java.util.List;
 public abstract class SpecialLocation extends Location {
     private final List<View> observers = new ArrayList<>();
 
+    public SpecialLocation(String name, int position) {
+        super(name, position);
+    }
+
     @Override
     public void registerObserver(View v) {
         observers.add(v);
