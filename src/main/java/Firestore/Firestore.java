@@ -2,6 +2,7 @@ package Firestore;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.FieldValue;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
@@ -51,5 +52,23 @@ public class Firestore {
 
         //only use this for testing, print Update time to console
         System.out.println("Update time: " + future.get().getUpdateTime());
+
+
+        //use this line to add a document
+        db.collection("collectie").document("documentname").set("data");
+
+        //line for updating
+        db.collection("collectie").document("documentname").update("titlething", 12);
+
+        //update array door 1 toe te voegen
+        ApiFuture<WriteResult> array1 = db.collection("collectieofc").document("documentname")
+                .update("array", FieldValue.arrayUnion("extra array value"));
+        //I use arrayUnion
+
+
+        //verwijder een array waarde
+        ApiFuture<WriteResult> array2 =  db.collection("collectieofc").document("documentname")
+                .update("array", FieldValue.arrayRemove("array value you want to remove"));
+        // used arrayRemove
     }
 }
