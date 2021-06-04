@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.MainMenuController;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +16,7 @@ public class MainMenuView implements View {
 
     private final Stage primaryStage;
 
-    private final mainMenuController;
+    private final MainMenuController mainMenuController;
 
     public MainMenuView(Stage primaryStage) {
         this.primaryStage = primaryStage;
