@@ -23,16 +23,16 @@ public class TurnController implements Controller {
 
     @Override
     public void registerObserver(View v) {
-
+        turn.registerObserver(v);
     }
 
     @Override
     public void unregisterObserver(View v) {
-
+        turn.unregisterObserver(v);
     }
 
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
-
+        turn.notifyObservers(ds);
     }
 }

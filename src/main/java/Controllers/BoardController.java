@@ -23,16 +23,16 @@ public class BoardController implements Controller {
 
     @Override
     public void registerObserver(View v) {
-
+        board.registerObserver(v);
     }
 
     @Override
     public void unregisterObserver(View v) {
-
+        board.unregisterObserver(v);
     }
 
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
-
+        board.notifyObservers(ds);
     }
 }

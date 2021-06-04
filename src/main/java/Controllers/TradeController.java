@@ -23,16 +23,16 @@ public class TradeController implements Controller {
 
     @Override
     public void registerObserver(View v) {
-
+        trade.registerObserver(v);
     }
 
     @Override
     public void unregisterObserver(View v) {
-
+        trade.unregisterObserver(v);
     }
 
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
-
+        trade.notifyObservers(ds);
     }
 }
