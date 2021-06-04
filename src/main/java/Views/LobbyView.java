@@ -16,7 +16,7 @@ public class LobbyView implements View {
 
     private final Stage primaryStage;
 
-    private final LobbyController lobbyController;
+    private LobbyController lobbyController;
 
     public LobbyView(Stage primaryStage) {
         this.primaryStage = primaryStage;

@@ -6,7 +6,7 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpecialLocation extends Location {
+public abstract class SpecialLocation extends Location {
     private final List<View> observers = new ArrayList<>();
 
     @Override

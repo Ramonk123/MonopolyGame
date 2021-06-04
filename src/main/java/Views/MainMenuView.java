@@ -16,7 +16,7 @@ public class MainMenuView implements View {
 
     private final Stage primaryStage;
 
-    private final MainMenuController mainMenuController;
+    private MainMenuController mainMenuController;
 
     public MainMenuView(Stage primaryStage) {
         this.primaryStage = primaryStage;

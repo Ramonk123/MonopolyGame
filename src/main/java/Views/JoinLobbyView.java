@@ -16,7 +16,7 @@ public class JoinLobbyView implements View {
 
     private final Stage primaryStage;
 
-    private final LobbyController joinLobbyController;
+    private LobbyController joinLobbyController;
 
     public JoinLobbyView(Stage primaryStage) {
         this.primaryStage = primaryStage;

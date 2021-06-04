@@ -16,7 +16,7 @@ public class BoardView implements View {
 
     private final Stage primaryStage;
 
-    private final BoardController boardController;
+    private BoardController boardController;
 
     public BoardView(Stage primaryStage) {
         this.primaryStage = primaryStage;

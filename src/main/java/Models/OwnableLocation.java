@@ -5,8 +5,11 @@ import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class OwnableLocation extends Location {
+public abstract class OwnableLocation extends Location {
+    private int price;
+    private Player owner = null;
     private final List<View> observers = new ArrayList<>();
 
     @Override
@@ -24,5 +27,12 @@ public class OwnableLocation extends Location {
         for(View v : observers) {
             v.update(ds);
         }
+    }
+
+    public Optional<Player> getOwner() {
+        if (owner == null) {
+            return Optional.empty();
+        }
+        return Optional.of(owner);
     }
 }
