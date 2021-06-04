@@ -8,11 +8,6 @@ import com.google.cloud.firestore.DocumentSnapshot;
 public class LocationController implements Controller {
 
     private static LocationController locationController;
-    private Location location;
-
-    private LocationController() {
-        location = new Location();
-    }
 
     public static LocationController getInstance() {
         if(locationController == null) {
