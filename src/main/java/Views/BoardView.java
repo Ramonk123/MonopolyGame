@@ -15,13 +15,13 @@ public class BoardView implements View {
 
     private final Stage primaryStage;
 
-    private final boardCtrl;
+    private final boardController;
 
     public MainMenuView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        boardCtrl = boardCtrl.getInstance();
-        boardCtrl.registerObserver(this);
+        boardController = boardController.getInstance();
+        boardController.registerObserver(this);
 
         try {
             createPrimaryStage();
@@ -36,8 +36,8 @@ public class BoardView implements View {
     }
 
     private void createPrimaryStage() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/FXML/MainMenuView.fxml"));
-        loader.setController(boardCtrl);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/FXML/BoardView.fxml"));
+        loader.setController(boardController);
         Parent root = loader.load();
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
