@@ -2,8 +2,15 @@ package Controllers;
 
 import Models.Board;
 import Models.MainMenu;
+import Views.MainMenuView;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import org.apache.log4j.chainsaw.Main;
 
 public class MainMenuController implements Controller {
@@ -35,5 +42,16 @@ public class MainMenuController implements Controller {
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
         mainMenu.notifyObservers(ds);
+    }
+
+    @FXML
+    private Pane ConfirmQuitScreen;
+
+    public void displayQuitScreen() {
+        ConfirmQuitScreen.setVisible(!ConfirmQuitScreen.isVisible());
+    }
+
+    public void ConfirmQuitGame() {
+        mainMenu.quitGame();
     }
 }
