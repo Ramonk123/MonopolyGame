@@ -61,7 +61,7 @@ public class LobbyController implements Controller {
 
     //Return to Main Menu
     @FXML
-    private void goToMainMenu(ActionEvent e) {
+    private void returnToMainMenu(ActionEvent e) {
         Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
         MainMenuView returnToMainMenuView = new MainMenuView(primaryStage);
     }
@@ -82,10 +82,6 @@ public class LobbyController implements Controller {
         //TODO:
         //Program should first check if the lobby exists and if the name is not already used.
         goToLobby(e);
-    }
-
-    private void returnToMenu(ActionEvent e){
-        goToMainMenu(e);
     }
 
     //Create Lobby
