@@ -8,7 +8,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #bfdbae;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" layoutX="225.0" layoutY="14.0" spacing="120.0" AnchorPane.bottomAnchor="11.600000000000023" AnchorPane.leftAnchor="225.00000000000003" AnchorPane.rightAnchor="225.4" AnchorPane.topAnchor="14.0">
+      <VBox alignment="CENTER" layoutX="225.0" layoutY="14.0" spacing="25.0" AnchorPane.bottomAnchor="11.600000000000023" AnchorPane.leftAnchor="225.00000000000003" AnchorPane.rightAnchor="225.4" AnchorPane.topAnchor="14.0">
          <children>
             <Label alignment="CENTER" prefHeight="45.0" prefWidth="100.0" text="Create Lobby" />
             <VBox alignment="CENTER">
@@ -18,7 +18,9 @@
                </children>
             </VBox>
             <Button fx:id="CreateLobbyViewCreateLobbyButton" mnemonicParsing="false" onAction="#CreateLobbySubmit" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #8fbc72;" text="Create Lobby" />
+            <Button fx:id="ReturnToMainMenuViewButton" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #8fbc72;" text="Return To Main Menu" wrapText="true" />
          </children>
+
       </VBox>
    </children>
 </AnchorPane>
