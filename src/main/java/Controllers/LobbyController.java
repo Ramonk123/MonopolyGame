@@ -2,7 +2,9 @@ package Controllers;
 
 import Models.Board;
 import Models.Lobby;
+import Models.MainMenu;
 import Views.LobbyView;
+import Views.MainMenuView;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.event.ActionEvent;
@@ -11,7 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -91,4 +95,25 @@ public class LobbyController implements Controller {
     }
 
     //Lobby
+
+
+    // Leave Lobby button functionality
+    @FXML Pane ConfirmToMenuView;
+    @FXML Button GoToMainMenuYesBtn;
+    @FXML Button GoToMainMenuNoBtn;
+    @FXML
+    private void goToMainMenu() {
+        //TODO:
+        //Method needs to remove player from lobby document in Firestore
+        ConfirmToMenuView.setVisible(!ConfirmToMenuView.isVisible());
+        GoToMainMenuYesBtn.setOnAction(e -> {
+            Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
+            MainMenuView mainMenuView = new MainMenuView(primaryStage);
+        });
+
+
+        GoToMainMenuNoBtn.setOnAction(event -> {
+            ConfirmToMenuView.setVisible(false);
+        });
+    }
 }
