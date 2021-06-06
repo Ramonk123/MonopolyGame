@@ -61,6 +61,7 @@ public class MainMenuController implements Controller {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
     //Create Lobby
     @FXML
     private void goToCreateLobby(ActionEvent e) throws IOException {
