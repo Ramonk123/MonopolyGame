@@ -2,6 +2,8 @@ package Controllers;
 
 import Models.Board;
 import Models.MainMenu;
+import Views.CreateLobbyView;
+import Views.JoinLobbyView;
 import Views.MainMenuView;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -54,22 +56,16 @@ public class MainMenuController implements Controller {
 
     //Join Lobby
     @FXML
-    private void goToJoinLobby(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/JoinLobbyView.fxml"));
+    private void goToJoinLobby(ActionEvent e) {
         Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        JoinLobbyView joinLobbyView = new JoinLobbyView(primaryStage);
     }
 
     //Create Lobby
     @FXML
-    private void goToCreateLobby(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/FXML/CreateLobbyView.fxml"));
+    private void goToCreateLobby(ActionEvent e) {
         Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        CreateLobbyView createLobbyView = new CreateLobbyView(primaryStage);
     }
 
     //Quit button
