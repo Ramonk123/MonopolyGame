@@ -30,7 +30,6 @@ public class MainMenu implements Model {
 
     public void quitGame() {
         System.exit(1);
-
     }
 
 }
