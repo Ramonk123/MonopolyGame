@@ -2,7 +2,6 @@ package Monopoly;
 
 import java.util.HashMap;
 
-// I wanna implement Identifiable onto this but it wouldn't make much sense.
 public class UUID {
     private static HashMap<String, Boolean> cache = new HashMap<>();
     private String id;

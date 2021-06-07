@@ -1,5 +1,4 @@
 package Models;
 
-import ObserveablePattern.Subject;
-
+// Merely serves as an identifier.
 public interface Model { }

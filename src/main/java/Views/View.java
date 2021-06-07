@@ -1,6 +1,4 @@
 package Views;
 
-import ObserveablePattern.Observer;
-
-public interface View {
-}
+// Merely serves as an identifier.
+public interface View { }
