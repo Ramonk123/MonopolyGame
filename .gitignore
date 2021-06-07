@@ -1,3 +1,4 @@
 /target
 /.idea
 /JavaFxApplication.iml
+.idea/libraries/lib.xml
