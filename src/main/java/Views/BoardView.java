@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.BoardController;
+import ObserveablePattern.Observer;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class BoardView implements View<BoardSubject> {
+public class BoardView implements View, Observer<BoardSubject> {
     //Screensize
     int WIDTH = 1920;
     int HEIGHT = 1080;
@@ -39,5 +40,10 @@ public class BoardView implements View<BoardSubject> {
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
         primaryStage.show();
+    }
+
+    @Override
+    public void update(BoardSubject state) {
+
     }
 }

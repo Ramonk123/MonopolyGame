@@ -1,5 +1,6 @@
 package Models;
 
+import ObserveablePattern.Observer;
 import Views.BoardSubject;
 import Views.BoardView;
 import Views.View;
@@ -9,23 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board implements Model, BoardSubject {
-    private final List<View> observers = new ArrayList<>();
+    private final List<Observer<BoardSubject>> observers = new ArrayList<>();
 
     @Override
-    public void registerObserver(View v) {
-        observers.add(v);
+    public void registerObserver(Observer<BoardSubject> o) {
+
     }
 
     @Override
-    public void unregisterObserver(View v) {
-        observers.remove(v);
+    public void unregisterObserver(Observer<BoardSubject> o) {
+
     }
 
     @Override
-    public void notifyObservers(DocumentSnapshot ds) {
-        for(View v : observers) {
-            v.update(ds);
-        }
+    public void notifyObservers(BoardSubject state) {
+
     }
 
     @Override
@@ -36,20 +35,5 @@ public class Board implements Model, BoardSubject {
     @Override
     public List<Player> getPlayers() {
         return null;
-    }
-
-    @Override
-    public void registerObserver(BoardView o) {
-
-    }
-
-    @Override
-    public void unregisterObserver(BoardView o) {
-
-    }
-
-    @Override
-    public void notifyObservers(BoardSubject state) {
-
     }
 }

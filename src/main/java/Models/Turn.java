@@ -12,29 +12,11 @@ public class Turn implements Model, DiceThrower {
     private Player player;
     private int amountOfDouble;
     private Throw currentThrow;
-    private final List<View> observers = new ArrayList<>();
 
     public Turn() {
         this.player = null;
         this.amountOfDouble = 0;
         this.currentThrow = new Throw();
-    }
-
-    @Override
-    public void registerObserver(View v) {
-        observers.add(v);
-    }
-
-    @Override
-    public void unregisterObserver(View v) {
-        observers.remove(v);
-    }
-
-    @Override
-    public void notifyObservers(DocumentSnapshot ds) {
-        for(View v : observers) {
-            v.update(ds);
-        }
     }
 
     public void setCurrentPlayer(Player player) {

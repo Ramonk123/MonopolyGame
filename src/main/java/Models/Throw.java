@@ -11,22 +11,6 @@ public class Throw implements Model, DiceThrower {
     private Dice diceOne;
     private Dice diceTwo;
 
-    @Override
-    public void registerObserver(View v) {
-        observers.add(v);
-    }
-
-    @Override
-    public void unregisterObserver(View v) {
-        observers.remove(v);
-    }
-
-    @Override
-    public void notifyObservers(DocumentSnapshot ds) {
-        for(View v : observers) {
-            v.update(ds);
-        }
-    }
 
     @Override
     public void throwDice() {
