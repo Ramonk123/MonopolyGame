@@ -21,7 +21,7 @@ public class ThrowController implements Controller {
         return throwController;
     }
 
-    @Override
+    /*@Override
     public void registerObserver(View v) {
         currentThrow.registerObserver(v);
     }
@@ -34,5 +34,5 @@ public class ThrowController implements Controller {
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
         currentThrow.notifyObservers(ds);
-    }
+    }*/
 }

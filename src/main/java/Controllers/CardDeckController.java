@@ -22,7 +22,7 @@ public class CardDeckController implements Controller {
         return cardController;
     }
 
-    @Override
+    /*@Override
     public void registerObserver(View v) {
         cardDeck.registerObserver(v);
     }
@@ -35,5 +35,5 @@ public class CardDeckController implements Controller {
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
         cardDeck.notifyObservers(ds);
-    }
+    }*/
 }

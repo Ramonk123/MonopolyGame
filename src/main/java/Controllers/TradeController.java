@@ -21,7 +21,7 @@ public class TradeController implements Controller {
         return tradeController;
     }
 
-    @Override
+    /*@Override
     public void registerObserver(View v) {
         trade.registerObserver(v);
     }
@@ -34,5 +34,5 @@ public class TradeController implements Controller {
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
         trade.notifyObservers(ds);
-    }
+    }*/
 }

@@ -6,5 +6,5 @@ import com.google.cloud.firestore.DocumentSnapshot;
 public interface Subject<T> {
     void registerObserver(Observer<T> o);
     void unregisterObserver(Observer<T> o);
-    void notifyObservers(final T state);
+    void notifyObservers();
 }

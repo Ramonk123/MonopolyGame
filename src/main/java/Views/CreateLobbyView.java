@@ -22,8 +22,8 @@ public class CreateLobbyView implements View {
     public CreateLobbyView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        lobbyController = lobbyController.getInstance();
-        lobbyController.registerObserver(this);
+        //lobbyController = lobbyController.getInstance();
+        //lobbyController.registerObserver(this);
 
         try {
             createPrimaryStage();
@@ -39,11 +39,5 @@ public class CreateLobbyView implements View {
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
         primaryStage.show();
-    }
-
-    // temp
-    @Override
-    public void update(Object state) {
-
     }
 }

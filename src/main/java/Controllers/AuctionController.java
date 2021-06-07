@@ -20,7 +20,7 @@ public class AuctionController implements Controller {
         return auctionController;
     }
 
-    @Override
+    /*@Override
     public void registerObserver(View v) {
         auction.registerObserver(v);
     }
@@ -33,6 +33,6 @@ public class AuctionController implements Controller {
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
         auction.notifyObservers(ds);
-    }
+    }*/
 
 }

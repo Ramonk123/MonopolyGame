@@ -39,7 +39,7 @@ public class LobbyController implements Controller {
         return lobbyController;
     }
 
-    @Override
+    /*@Override
     public void registerObserver(View v) {
         lobby.registerObserver(v);
     }
@@ -52,7 +52,7 @@ public class LobbyController implements Controller {
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
         lobby.notifyObservers(ds);
-    }
+    }*/
 
     private void goToLobby(ActionEvent e) {
         Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();

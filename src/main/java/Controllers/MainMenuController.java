@@ -2,6 +2,8 @@ package Controllers;
 
 import Models.Board;
 import Models.MainMenu;
+import ObserveablePattern.Observer;
+import ObserveablePattern.Subject;
 import Views.CreateLobbyView;
 import Views.JoinLobbyView;
 import Views.MainMenuView;
@@ -23,13 +25,25 @@ import org.apache.log4j.chainsaw.Main;
 
 import java.io.IOException;
 
-public class MainMenuController implements Controller {
+public class MainMenuController implements Controller, Subject<DocumentSnapshot> {
 
     private static MainMenuController mainMenuController;
     private MainMenu mainMenu;
+    private DocumentSnapshot ds;
 
-    private MainMenuController() {
+    public MainMenuController() {
         mainMenu = new MainMenu();
+    }
+
+    @Override
+    public void registerObserver(Observer<DocumentSnapshot> o) { }
+
+    @Override
+    public void unregisterObserver(Observer<DocumentSnapshot> o) { }
+
+    @Override
+    public void notifyObservers() {
+        mainMenu.update(ds);
     }
 
     public static MainMenuController getInstance() {
@@ -37,21 +51,6 @@ public class MainMenuController implements Controller {
             mainMenuController = new MainMenuController();
         }
         return mainMenuController;
-    }
-
-    @Override
-    public void registerObserver(View v) {
-        mainMenu.registerObserver(v);
-    }
-
-    @Override
-    public void unregisterObserver(View v) {
-        mainMenu.unregisterObserver(v);
-    }
-
-    @Override
-    public void notifyObservers(DocumentSnapshot ds) {
-        mainMenu.notifyObservers(ds);
     }
 
     //Join Lobby

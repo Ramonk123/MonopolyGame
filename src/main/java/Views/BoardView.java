@@ -22,9 +22,6 @@ public class BoardView implements View, Observer<BoardSubject> {
     public BoardView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        boardController = boardController.getInstance();
-        boardController.registerObserver(this);
-
         try {
             createPrimaryStage();
         } catch(IOException e) {

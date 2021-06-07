@@ -21,7 +21,7 @@ public class TurnController implements Controller {
         return turnController;
     }
 
-    @Override
+    /*@Override
     public void registerObserver(View v) {
         turn.registerObserver(v);
     }
@@ -34,5 +34,5 @@ public class TurnController implements Controller {
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
         turn.notifyObservers(ds);
-    }
+    }*/
 }

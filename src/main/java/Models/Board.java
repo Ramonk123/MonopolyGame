@@ -9,12 +9,16 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board implements Model, BoardSubject {
-    private final List<Observer<BoardSubject>> observers = new ArrayList<>();
+public class Board implements Model, BoardSubject, Observer<DocumentSnapshot> {
+    private List<Observer<BoardSubject>> observers = new ArrayList<>();
+
+    public Board() {
+        //this.observers.add(new BoardView());
+    }
 
     @Override
     public void registerObserver(Observer<BoardSubject> o) {
-
+        observers.add(o);
     }
 
     @Override
@@ -23,8 +27,16 @@ public class Board implements Model, BoardSubject {
     }
 
     @Override
-    public void notifyObservers(BoardSubject state) {
+    public void notifyObservers() {
+        for (Observer<BoardSubject> o : observers) {
+            o.update(this);
+        }
+    }
 
+    @Override
+    public void update(DocumentSnapshot state) {
+        // perform updates here
+        notifyObservers();
     }
 
     @Override
