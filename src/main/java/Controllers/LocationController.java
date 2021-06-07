@@ -16,7 +16,7 @@ public class LocationController implements Controller {
         return locationController;
     }
 
-    @Override
+    /*@Override
     public void registerObserver(View v) {
 
     }
@@ -29,5 +29,5 @@ public class LocationController implements Controller {
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
 
-    }
+    }*/
 }

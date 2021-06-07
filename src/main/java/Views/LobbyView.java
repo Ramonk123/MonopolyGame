@@ -21,19 +21,14 @@ public class LobbyView implements View {
     public LobbyView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        lobbyController = lobbyController.getInstance();
-        lobbyController.registerObserver(this);
+        //lobbyController = lobbyController.getInstance();
+        //lobbyController.registerObserver(this);
 
         try {
             createPrimaryStage();
         } catch(IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void update(DocumentSnapshot ds) {
-
     }
 
     private void createPrimaryStage() throws IOException {

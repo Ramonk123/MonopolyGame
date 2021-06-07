@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.BoardController;
+import ObserveablePattern.Observer;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class BoardView implements View {
+public class BoardView implements View, Observer<BoardSubject> {
     //Screensize
     int WIDTH = 1920;
     int HEIGHT = 1080;
@@ -21,9 +22,6 @@ public class BoardView implements View {
     public BoardView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        boardController = boardController.getInstance();
-        boardController.registerObserver(this);
-
         try {
             createPrimaryStage();
         } catch(IOException e) {
@@ -31,10 +29,6 @@ public class BoardView implements View {
         }
     }
 
-    @Override
-    public void update(DocumentSnapshot ds) {
-
-    }
 
     private void createPrimaryStage() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/BoardView.fxml"));
@@ -43,5 +37,10 @@ public class BoardView implements View {
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
         primaryStage.show();
+    }
+
+    @Override
+    public void update(BoardSubject state) {
+
     }
 }

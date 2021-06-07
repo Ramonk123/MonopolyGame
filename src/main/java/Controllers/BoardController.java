@@ -2,13 +2,16 @@ package Controllers;
 
 import Models.Board;
 import Models.Wallet;
+import ObserveablePattern.Observer;
+import ObserveablePattern.Subject;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
-public class BoardController implements Controller {
+public class BoardController implements Controller, Subject<DocumentSnapshot> {
 
     private static BoardController boardController;
     private Board board;
+    private DocumentSnapshot ds;
 
     private BoardController() {
         board = new Board();
@@ -22,17 +25,13 @@ public class BoardController implements Controller {
     }
 
     @Override
-    public void registerObserver(View v) {
-        board.registerObserver(v);
-    }
+    public void registerObserver(Observer<DocumentSnapshot> o) { }
 
     @Override
-    public void unregisterObserver(View v) {
-        board.unregisterObserver(v);
-    }
+    public void unregisterObserver(Observer<DocumentSnapshot> o) { }
 
     @Override
-    public void notifyObservers(DocumentSnapshot ds) {
-        board.notifyObservers(ds);
+    public void notifyObservers() {
+        board.update(ds);
     }
 }

@@ -21,7 +21,7 @@ public class PlayerController implements Controller {
         return playerController;
     }
 
-    @Override
+    /*@Override
     public void registerObserver(View v) {
         player.registerObserver(v);
     }
@@ -34,5 +34,5 @@ public class PlayerController implements Controller {
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
         player.notifyObservers(ds);
-    }
+    }*/
 }

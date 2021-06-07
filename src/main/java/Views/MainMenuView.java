@@ -21,19 +21,14 @@ public class MainMenuView implements View {
     public MainMenuView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        mainMenuController = mainMenuController.getInstance();
-        mainMenuController.registerObserver(this);
+        //mainMenuController = mainMenuController.getInstance();
+        //mainMenuController.registerObserver(this);
 
         try {
             createPrimaryStage();
         } catch(IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void update(DocumentSnapshot ds) {
-
     }
 
     private void createPrimaryStage() throws IOException {

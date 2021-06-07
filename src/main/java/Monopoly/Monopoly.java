@@ -1,5 +1,7 @@
 package Monopoly;
 
+import Controllers.ControllerRegistry;
+import Controllers.MainMenuController;
 import Views.MainMenuView;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -12,6 +14,9 @@ public class Monopoly extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        MainMenuView mainMenuView = new MainMenuView(primaryStage);
+        ControllerRegistry.put(new MainMenuController());
+        MainMenuController mmc = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
+        //MainMenuController mmc = new MainMenuController();
+        //MainMenuView mainMenuView = new MainMenuView(primaryStage);
     }
 }

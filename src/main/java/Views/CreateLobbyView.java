@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.LobbyController;
+import ObserveablePattern.Observer;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,19 +22,14 @@ public class CreateLobbyView implements View {
     public CreateLobbyView(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
-        lobbyController = lobbyController.getInstance();
-        lobbyController.registerObserver(this);
+        //lobbyController = lobbyController.getInstance();
+        //lobbyController.registerObserver(this);
 
         try {
             createPrimaryStage();
         } catch(IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void update(DocumentSnapshot ds) {
-
     }
 
     private void createPrimaryStage() throws IOException {

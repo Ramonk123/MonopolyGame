@@ -20,7 +20,7 @@ public class WalletController implements Controller {
         return walletController;
     }
 
-    @Override
+    /*@Override
     public void registerObserver(View v) {
         wallet.registerObserver(v);
     }
@@ -33,5 +33,5 @@ public class WalletController implements Controller {
     @Override
     public void notifyObservers(DocumentSnapshot ds) {
         wallet.notifyObservers(ds);
-    }
+    }*/
 }
