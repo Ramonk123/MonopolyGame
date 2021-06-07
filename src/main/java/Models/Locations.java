@@ -9,7 +9,7 @@ public enum Locations implements Identifiable {
 
     private UUID id;
 
-    private Locations(UUID id) {
+    Locations(UUID id) {
         this.id = id;
     }
 
