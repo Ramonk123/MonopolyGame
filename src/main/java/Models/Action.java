@@ -1,5 +1,5 @@
 package Models;
 
 public interface Action {
-    void action();
+    void action(Player player);
 }
