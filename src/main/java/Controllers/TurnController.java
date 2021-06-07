@@ -14,13 +14,6 @@ public class TurnController implements Controller {
         turn = new Turn();
     }
 
-    public static TurnController getInstance() {
-        if(turnController == null) {
-            turnController = new TurnController();
-        }
-        return turnController;
-    }
-
     /*@Override
     public void registerObserver(View v) {
         turn.registerObserver(v);

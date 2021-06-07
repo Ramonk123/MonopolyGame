@@ -17,13 +17,6 @@ public class BoardController implements Controller, Subject<DocumentSnapshot> {
         board = new Board();
     }
 
-    public static BoardController getInstance() {
-        if(boardController == null) {
-            boardController = new BoardController();
-        }
-        return boardController;
-    }
-
     @Override
     public void registerObserver(Observer<DocumentSnapshot> o) { }
 

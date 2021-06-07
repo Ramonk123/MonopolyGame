@@ -35,13 +35,6 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot> {
         lobby = new Lobby();
     }
 
-    public static LobbyController getInstance() {
-        if(lobbyController == null) {
-            lobbyController = new LobbyController();
-        }
-        return lobbyController;
-    }
-
     @Override
     public void registerObserver(Observer<DocumentSnapshot> o) { }
 

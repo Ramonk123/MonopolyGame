@@ -9,13 +9,6 @@ public class LocationController implements Controller {
 
     private static LocationController locationController;
 
-    public static LocationController getInstance() {
-        if(locationController == null) {
-            locationController = new LocationController();
-        }
-        return locationController;
-    }
-
     /*@Override
     public void registerObserver(View v) {
 

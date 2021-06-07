@@ -13,13 +13,6 @@ public class AuctionController implements Controller {
         auction = new Auction();
     }
 
-    public static AuctionController getInstance() {
-        if(auctionController == null) {
-            auctionController = new AuctionController();
-        }
-        return auctionController;
-    }
-
     /*@Override
     public void registerObserver(View v) {
         auction.registerObserver(v);

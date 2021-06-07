@@ -32,13 +32,6 @@ public class MainMenuController implements Controller, Subject<DocumentSnapshot>
         mainMenu.update(ds);
     }
 
-    public static MainMenuController getInstance() {
-        if(mainMenuController == null) {
-            mainMenuController = new MainMenuController();
-        }
-        return mainMenuController;
-    }
-
     //Join Lobby
     @FXML
     private void goToJoinLobby(ActionEvent e) {

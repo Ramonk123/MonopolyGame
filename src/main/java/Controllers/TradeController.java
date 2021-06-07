@@ -14,13 +14,6 @@ public class TradeController implements Controller {
         trade = new Trade();
     }
 
-    public static TradeController getInstance() {
-        if(tradeController == null) {
-            tradeController = new TradeController();
-        }
-        return tradeController;
-    }
-
     /*@Override
     public void registerObserver(View v) {
         trade.registerObserver(v);
