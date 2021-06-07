@@ -5,6 +5,7 @@ import Views.BoardSubject;
 import Views.BoardView;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;

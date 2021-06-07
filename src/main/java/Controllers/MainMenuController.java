@@ -1,31 +1,17 @@
 package Controllers;
 
-import Models.Board;
 import Models.MainMenu;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
-import Views.CreateLobbyView;
-import Views.JoinLobbyView;
-import Views.MainMenuView;
-import Views.View;
+import Views.*;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import org.apache.log4j.chainsaw.Main;
 
-import java.io.IOException;
-
-public class MainMenuController implements Controller, Subject<DocumentSnapshot> {
+public class MainMenuController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
     private static MainMenuController mainMenuController;
     private MainMenu mainMenu;
@@ -77,5 +63,10 @@ public class MainMenuController implements Controller, Subject<DocumentSnapshot>
     @FXML
     public void ConfirmQuitGame() {
         mainMenu.quitGame();
+    }
+
+    @Override
+    public void setStage(Stage primaryStage) {
+        mainMenu.setStage(primaryStage);
     }
 }
