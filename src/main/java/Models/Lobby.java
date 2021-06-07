@@ -1,9 +1,12 @@
 package Models;
 
 import ObserveablePattern.Observer;
+import Views.HasStage;
 import Views.LobbySubject;
+import Views.MainMenuView;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,4 +36,5 @@ public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot> {
         // perform updates on this model
         notifyObservers();
     }
+
 }

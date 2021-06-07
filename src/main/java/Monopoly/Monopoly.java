@@ -21,7 +21,8 @@ public class Monopoly extends Application {
         ControllerRegistry.put(new LobbyController());
 
         // Voorbeeld van opvraging Controller.
-        //MainMenuController mmc = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
+        MainMenuController mmc = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
+        mmc.setStage(primaryStage);
 
         //MainMenuView mainMenuView = new MainMenuView(primaryStage);
     }

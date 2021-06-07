@@ -1,6 +1,8 @@
 package Views;
 
 import Controllers.BoardController;
+import Controllers.ControllerRegistry;
+import Controllers.MainMenuController;
 import ObserveablePattern.Observer;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +34,7 @@ public class BoardView implements View, Observer<BoardSubject> {
 
     private void createPrimaryStage() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/BoardView.fxml"));
-        loader.setController(boardController);
+        loader.setController((BoardController) ControllerRegistry.get(BoardController.class));
         Parent root = loader.load();
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));

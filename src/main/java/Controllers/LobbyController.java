@@ -62,7 +62,8 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot> {
     @FXML
     private void returnToMainMenu(ActionEvent e) {
         Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        MainMenuView returnToMainMenuView = new MainMenuView(primaryStage);
+        MainMenuController mmc = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
+        mmc.setStage(primaryStage);
     }
 
     //Join Lobby
@@ -114,7 +115,8 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot> {
         ConfirmToMenuView.setVisible(!ConfirmToMenuView.isVisible());
         GoToMainMenuYesBtn.setOnAction(e -> {
             Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-            MainMenuView mainMenuView = new MainMenuView(primaryStage);
+            MainMenuController mmc = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
+            mmc.setStage(primaryStage);
         });
 
 

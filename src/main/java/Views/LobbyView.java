@@ -1,6 +1,8 @@
 package Views;
 
+import Controllers.ControllerRegistry;
 import Controllers.LobbyController;
+import Controllers.MainMenuController;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -33,7 +35,7 @@ public class LobbyView implements View {
 
     private void createPrimaryStage() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/LobbyView.fxml"));
-        loader.setController(lobbyController);
+        loader.setController((LobbyController) ControllerRegistry.get(LobbyController.class));
         Parent root = loader.load();
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));

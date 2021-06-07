@@ -1,17 +1,19 @@
 package Models;
 
 import ObserveablePattern.Observer;
-import Views.MainMenuSubject;
-import Views.View;
+import Views.*;
 import com.google.cloud.firestore.DocumentSnapshot;
-import javafx.application.Platform;
-import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainMenu implements Model, MainMenuSubject, Observer<DocumentSnapshot> {
+public class MainMenu implements Model, MainMenuSubject, Observer<DocumentSnapshot>, HasStage {
     private List<Observer<MainMenuSubject>> observers = new ArrayList<>();
+
+    public MainMenu() {
+        registerObserver(new MainMenuView());
+    }
 
     public void quitGame() {
         System.exit(1);
@@ -38,5 +40,10 @@ public class MainMenu implements Model, MainMenuSubject, Observer<DocumentSnapsh
         for (Observer<MainMenuSubject> o : observers) {
             o.update(this);
         }
+    }
+
+    @Override
+    public void setStage(Stage primaryStage) {
+        ((MainMenuView) observers.get(0)).setStage(primaryStage);
     }
 }
