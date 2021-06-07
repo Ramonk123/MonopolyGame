@@ -13,13 +13,6 @@ public class WalletController implements Controller {
         wallet = new Wallet();
     }
 
-    public static WalletController getInstance() {
-        if(walletController == null) {
-            walletController = new WalletController();
-        }
-        return walletController;
-    }
-
     /*@Override
     public void registerObserver(View v) {
         wallet.registerObserver(v);

@@ -14,13 +14,6 @@ public class ThrowController implements Controller {
         currentThrow  = new Throw();
     }
 
-    public static ThrowController getInstance() {
-        if(throwController == null) {
-            throwController = new ThrowController();
-        }
-        return throwController;
-    }
-
     /*@Override
     public void registerObserver(View v) {
         currentThrow.registerObserver(v);

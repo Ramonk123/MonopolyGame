@@ -1,11 +1,16 @@
 package Models;
 
+import Monopoly.UUID;
 import java.util.function.Consumer;
 
-public class Card implements Model , Action{
+public class Card implements Model, Action{
 
-    public Card(cardType title, String description, Consumer<Player> action) {
-        this.title = title;
+    private final UUID id;
+    private String description;
+    private Consumer<Player> action;
+
+    public Card(UUID id, String description, Consumer<Player> action) {
+        this.id = id;
         this.description = description;
         this.action = action;
     }
@@ -15,17 +20,7 @@ public class Card implements Model , Action{
         // TODO
     }
 
-    public enum cardType{
-        CHANCE, COMMUNITY_CHEST
-    }
-
-    public cardType getTitle() {
-        return title;
-    }
-
-    public void setTitle(cardType title) {
-        this.title = title;
-    }
+    public UUID getId() { return id; }
 
     public String getDescription() {
         return description;
@@ -42,10 +37,4 @@ public class Card implements Model , Action{
     public void setAction(Consumer action) {
         this.action = action;
     }
-
-    private cardType title;
-    private String description;
-    private Consumer action;
-
-
 }

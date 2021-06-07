@@ -14,13 +14,6 @@ public class PlayerController implements Controller {
         player = new Player();
     }
 
-    public static PlayerController getInstance() {
-        if(playerController == null) {
-            playerController = new PlayerController();
-        }
-        return playerController;
-    }
-
     /*@Override
     public void registerObserver(View v) {
         player.registerObserver(v);
