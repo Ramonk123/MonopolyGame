@@ -11,8 +11,8 @@ public abstract class OwnableLocation extends Location {
     private final int price;
     private Player owner = null;
 
-    public OwnableLocation(String name, int position, int price) {
-        super(name, position);
+    public OwnableLocation(Locations locationEnum, String name, int position, int price) {
+        super(locationEnum, name, position);
         this.price = price;
     }
 
