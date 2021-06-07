@@ -18,7 +18,7 @@ public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot> {
 
     @Override
     public void unregisterObserver(Observer<LobbySubject> o) {
-        
+
     }
 
     @Override
