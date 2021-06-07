@@ -3,6 +3,8 @@ package Controllers;
 import Models.Board;
 import Models.MainMenu;
 import Models.Lobby;
+import ObserveablePattern.Observer;
+import ObserveablePattern.Subject;
 import Views.LobbyView;
 import Views.MainMenuView;
 import Views.View;
@@ -20,15 +22,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LobbyController implements Controller {
+public class LobbyController implements Controller, Subject<DocumentSnapshot> {
 
     private static LobbyController lobbyController;
     private Lobby lobby;
+    private DocumentSnapshot ds;
 
     private int token;
     private String name;
 
-    private LobbyController() {
+    public LobbyController() {
         lobby = new Lobby();
     }
 
@@ -39,20 +42,16 @@ public class LobbyController implements Controller {
         return lobbyController;
     }
 
-    /*@Override
-    public void registerObserver(View v) {
-        lobby.registerObserver(v);
-    }
+    @Override
+    public void registerObserver(Observer<DocumentSnapshot> o) { }
 
     @Override
-    public void unregisterObserver(View v) {
-        lobby.unregisterObserver(v);
-    }
+    public void unregisterObserver(Observer<DocumentSnapshot> o) { }
 
     @Override
-    public void notifyObservers(DocumentSnapshot ds) {
-        lobby.notifyObservers(ds);
-    }*/
+    public void notifyObservers() {
+        lobby.update(ds);
+    }
 
     private void goToLobby(ActionEvent e) {
         Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();

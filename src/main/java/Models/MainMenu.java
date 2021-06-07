@@ -20,9 +20,7 @@ public class MainMenu implements Model, MainMenuSubject, Observer<DocumentSnapsh
     @Override
     public void update(final DocumentSnapshot state) {
         // do updates
-        for (Observer<MainMenuSubject> o : observers) {
-            o.update(this);
-        }
+        notifyObservers();
     }
 
     @Override

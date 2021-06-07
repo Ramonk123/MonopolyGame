@@ -13,7 +13,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot> {
     private Board board;
     private DocumentSnapshot ds;
 
-    private BoardController() {
+    public BoardController() {
         board = new Board();
     }
 

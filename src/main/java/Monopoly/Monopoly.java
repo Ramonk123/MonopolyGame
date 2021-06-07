@@ -1,5 +1,6 @@
 package Monopoly;
 
+import Controllers.BoardController;
 import Controllers.ControllerRegistry;
 import Controllers.MainMenuController;
 import Views.MainMenuView;
@@ -15,8 +16,11 @@ public class Monopoly extends Application {
     @Override
     public void start(Stage primaryStage) {
         ControllerRegistry.put(new MainMenuController());
-        MainMenuController mmc = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
-        //MainMenuController mmc = new MainMenuController();
+        ControllerRegistry.put(new BoardController());
+
+        // Voorbeeld van opvraging Controller.
+        //MainMenuController mmc = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
+
         //MainMenuView mainMenuView = new MainMenuView(primaryStage);
     }
 }
