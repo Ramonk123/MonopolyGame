@@ -1,9 +1,10 @@
 package Models;
 
+import Monopoly.Identifiable;
 import Monopoly.UUID;
 import java.util.function.Consumer;
 
-public class Card implements Model, Action{
+public class Card implements Model, Action, Identifiable {
 
     private final UUID id;
     private String description;
@@ -20,8 +21,6 @@ public class Card implements Model, Action{
         // TODO
     }
 
-    public UUID getId() { return id; }
-
     public String getDescription() {
         return description;
     }
@@ -36,5 +35,10 @@ public class Card implements Model, Action{
 
     public void setAction(Consumer action) {
         this.action = action;
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
     }
 }

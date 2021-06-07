@@ -17,7 +17,7 @@ public class CardDeckController implements Controller {
     private final static UUID CHANCE_JAIL_CARD_UUID = new UUID("CARD-8");
     private final static UUID COMMUNITY_JAIL_CARD_UUID = new UUID("CARD-20");
 
-    private CardDeckController() {
+    public CardDeckController() {
         cardDeck = new CardDeck();
     }
 

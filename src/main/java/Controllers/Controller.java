@@ -1,7 +1,4 @@
 package Controllers;
 
-import ObserveablePattern.Subject;
-
-public interface Controller {
-
-}
+// Merely serves as an identifier.
+public interface Controller { }
