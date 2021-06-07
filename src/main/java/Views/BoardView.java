@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class BoardView implements View {
+public class BoardView implements View<BoardSubject> {
     //Screensize
     int WIDTH = 1920;
     int HEIGHT = 1080;
@@ -31,10 +31,6 @@ public class BoardView implements View {
         }
     }
 
-    @Override
-    public void update(DocumentSnapshot ds) {
-
-    }
 
     private void createPrimaryStage() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/BoardView.fxml"));

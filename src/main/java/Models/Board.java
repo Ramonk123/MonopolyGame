@@ -1,12 +1,14 @@
 package Models;
 
+import Views.BoardSubject;
+import Views.BoardView;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board implements Model {
+public class Board implements Model, BoardSubject {
     private final List<View> observers = new ArrayList<>();
 
     @Override
@@ -24,5 +26,30 @@ public class Board implements Model {
         for(View v : observers) {
             v.update(ds);
         }
+    }
+
+    @Override
+    public List<Location> getLocations() {
+        return null;
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+        return null;
+    }
+
+    @Override
+    public void registerObserver(BoardView o) {
+
+    }
+
+    @Override
+    public void unregisterObserver(BoardView o) {
+
+    }
+
+    @Override
+    public void notifyObservers(BoardSubject state) {
+
     }
 }
