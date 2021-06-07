@@ -2,12 +2,17 @@ package Models;
 
 import java.util.function.Consumer;
 
-public class Card implements Model {
+public class Card implements Model , Action{
 
     public Card(cardType title, String description, Consumer<Player> action) {
         this.title = title;
         this.description = description;
         this.action = action;
+    }
+
+    @Override
+    public void action(Player player) {
+        // TODO
     }
 
     public enum cardType{
