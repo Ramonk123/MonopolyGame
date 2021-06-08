@@ -7,5 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Trade implements Model {
-
+    private OwnableLocation selectedLocation;
+    private Player biddingPlayer;
+    private int biddingAmount;
 }

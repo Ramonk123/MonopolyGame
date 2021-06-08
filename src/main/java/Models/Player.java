@@ -12,6 +12,7 @@ public class Player implements Model, Position, Nameable {
     private String pawnIcon;
     private Wallet wallet;
     private int position;
+    private boolean inJail;
 
     @Override
     public int getPosition() {

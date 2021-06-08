@@ -1,31 +1,27 @@
 package Models;
 
-import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 // still needs work
 public class Turn implements Model, DiceThrower {
-    private Player player;
+    private Player activePlayer;
     private int amountOfDouble;
     private Throw currentThrow;
 
+
     public Turn() {
-        this.player = null;
+        this.activePlayer = null;
         this.amountOfDouble = 0;
         this.currentThrow = new Throw();
     }
 
     public void setCurrentPlayer(Player player) {
-        this.player = player;
+        this.activePlayer = player;
     }
 
     public Optional<Player> getCurrentPlayer()
     {
-        return Optional.ofNullable(player);
+        return Optional.ofNullable(activePlayer);
     }
 
     public Throw getCurrentThrow() {
