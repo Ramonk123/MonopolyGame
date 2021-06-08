@@ -79,9 +79,17 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     private TextField JoinLobbyViewNameTextField;
     @FXML
     private void JoinLobbySubmit(ActionEvent e) throws IOException {
-        token = Integer.parseInt(JoinLobbyViewTokenTextField.getText());
-        name = JoinLobbyViewNameTextField.getText();
-        joinLobby(e);
+        try {
+            token = Integer.parseInt(JoinLobbyViewTokenTextField.getText());
+            name = JoinLobbyViewNameTextField.getText();
+            joinLobby(e);
+        } catch(NumberFormatException exception) {
+            JoinLobbyViewTokenTextField.setText("Numbers Only");
+        }
+    }
+    @FXML
+    private void clearTokenTextFieldOnEnter(ActionEvent e) {
+        JoinLobbyViewTokenTextField.clear();
     }
 
     private void joinLobby(ActionEvent e) {
