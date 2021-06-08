@@ -14,6 +14,11 @@ public class Player implements Model, Position, Nameable {
     private int position;
     private boolean inJail;
 
+    public Player(String name) {
+        this.name = name;
+        wallet = new Wallet();
+    }
+
     @Override
     public int getPosition() {
         return position;
