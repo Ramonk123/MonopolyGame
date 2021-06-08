@@ -1,6 +1,6 @@
 package Models;
 
-public abstract class StreetLocation extends OwnableLocation {
+public class StreetLocation extends OwnableLocation {
     private int houses;
     private boolean hotel;
     private PriceInflator priceInflator;
@@ -19,5 +19,10 @@ public abstract class StreetLocation extends OwnableLocation {
 
     private boolean containsProperty(){
         return this.houses > 0 || this.hotel;
+    }
+
+    @Override
+    public void action(Player player) {
+
     }
 }
