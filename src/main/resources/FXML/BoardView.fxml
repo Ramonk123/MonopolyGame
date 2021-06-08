@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -10,8 +12,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <FlowPane prefHeight="400.0" prefWidth="100.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -40,6 +43,7 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -155,17 +159,17 @@
                   <Label text="Coolsingel" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <BorderPane fx:id="StationOost" style="-fx-border-color: #000000;" GridPane.columnIndex="10" GridPane.rowIndex="5">
+            <BorderPane fx:id="StationOost" style="-fx-border-color: #000000;" GridPane.columnIndex="10" GridPane.rowIndex="6">
                <top>
                   <Label text="Station Oost" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
-            <BorderPane fx:id="Kans3" style="-fx-border-color: #000000;" GridPane.columnIndex="10" GridPane.rowIndex="6">
+            <BorderPane fx:id="Kans3" style="-fx-border-color: #000000;" GridPane.columnIndex="10" GridPane.rowIndex="7">
                <top>
                   <Label text="Kans" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
-            <BorderPane fx:id="DonkerBlauwLeidsestraat" style="-fx-border-color: #000000;" GridPane.columnIndex="10" GridPane.rowIndex="7">
+            <BorderPane fx:id="DonkerBlauwLeidsestraat" style="-fx-border-color: #000000;" GridPane.columnIndex="10" GridPane.rowIndex="8">
                <top>
                   <Pane prefHeight="10.0" style="-fx-background-color: #00008b;" BorderPane.alignment="CENTER" />
                </top>
@@ -173,12 +177,12 @@
                   <Label text="Leidsestraat" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <BorderPane fx:id="ExtraBelasting" style="-fx-border-color: #000000;" GridPane.columnIndex="10" GridPane.rowIndex="8">
+            <BorderPane fx:id="ExtraBelasting" style="-fx-border-color: #000000;" GridPane.columnIndex="10" GridPane.rowIndex="9">
                <center>
                   <Label text="Extra belasting" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <BorderPane fx:id="DonkerBlauwKalverstraat" style="-fx-border-color: #000000;" GridPane.columnIndex="10" GridPane.rowIndex="9">
+            <BorderPane fx:id="DonkerBlauwKalverstraat" style="-fx-border-color: #000000;" GridPane.columnIndex="10" GridPane.rowIndex="10">
                <top>
                   <Pane prefHeight="10.0" style="-fx-background-color: #00008b;" BorderPane.alignment="CENTER" />
                </top>
@@ -186,12 +190,12 @@
                   <Label text="Kalverstraat" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <BorderPane fx:id="Start" style="-fx-border-color: #000000;" GridPane.columnIndex="10" GridPane.rowIndex="10">
+            <BorderPane fx:id="Start" style="-fx-border-color: #000000;" GridPane.columnIndex="10" GridPane.rowIndex="11">
                <top>
                   <Label text="Start" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
-            <BorderPane fx:id="BruinDorpstraat" style="-fx-border-color: #000000;" GridPane.columnIndex="9" GridPane.rowIndex="10">
+            <BorderPane fx:id="BruinDorpstraat" style="-fx-border-color: #000000;" GridPane.columnIndex="9" GridPane.rowIndex="11">
                <top>
                   <Pane prefHeight="10.0" style="-fx-background-color: #964B00;" BorderPane.alignment="CENTER" />
                </top>
@@ -199,12 +203,12 @@
                   <Label text="Dorpstraat" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <BorderPane fx:id="AlgemeenFonds1" style="-fx-border-color: #000000;" GridPane.columnIndex="8" GridPane.rowIndex="10">
+            <BorderPane fx:id="AlgemeenFonds1" style="-fx-border-color: #000000;" GridPane.columnIndex="8" GridPane.rowIndex="11">
                <top>
                   <Label text="Algemeen Fonds" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
-            <BorderPane fx:id="BruinBrink" style="-fx-border-color: #000000;" GridPane.columnIndex="7" GridPane.rowIndex="10">
+            <BorderPane fx:id="BruinBrink" style="-fx-border-color: #000000;" GridPane.columnIndex="7" GridPane.rowIndex="11">
                <top>
                   <Pane prefHeight="10.0" style="-fx-background-color: #964B00;" BorderPane.alignment="CENTER" />
                </top>
@@ -212,17 +216,17 @@
                   <Label text="Brink" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <BorderPane fx:id="InkomstenBelasting" style="-fx-border-color: #000000;" GridPane.columnIndex="6" GridPane.rowIndex="10">
+            <BorderPane fx:id="InkomstenBelasting" style="-fx-border-color: #000000;" GridPane.columnIndex="6" GridPane.rowIndex="11">
                <top>
                   <Label text="Inkomsten Belasting" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
-            <BorderPane fx:id="StationZuid" style="-fx-border-color: #000000;" GridPane.columnIndex="5" GridPane.rowIndex="10">
+            <BorderPane fx:id="StationZuid" style="-fx-border-color: #000000;" GridPane.columnIndex="5" GridPane.rowIndex="11">
                <top>
                   <Label text="Station Zuid" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
-            <BorderPane fx:id="LightBlauwSteenstraat" style="-fx-border-color: #000000;" GridPane.columnIndex="4" GridPane.rowIndex="10">
+            <BorderPane fx:id="LightBlauwSteenstraat" style="-fx-border-color: #000000;" GridPane.columnIndex="4" GridPane.rowIndex="11">
                <top>
                   <Pane prefHeight="10.0" style="-fx-background-color: add8e6;" BorderPane.alignment="CENTER" />
                </top>
@@ -230,12 +234,12 @@
                   <Label text="Steenstraat" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <BorderPane fx:id="Kans1" style="-fx-border-color: #000000;" GridPane.columnIndex="3" GridPane.rowIndex="10">
+            <BorderPane fx:id="Kans1" style="-fx-border-color: #000000;" GridPane.columnIndex="3" GridPane.rowIndex="11">
                <top>
                   <Label text="Kans" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
-            <BorderPane fx:id="LichtBlauwKetelstraat" style="-fx-border-color: #000000;" GridPane.columnIndex="2" GridPane.rowIndex="10">
+            <BorderPane fx:id="LichtBlauwKetelstraat" style="-fx-border-color: #000000;" GridPane.columnIndex="2" GridPane.rowIndex="11">
                <top>
                   <Pane prefHeight="10.0" style="-fx-background-color: add8e6;" BorderPane.alignment="CENTER" />
                </top>
@@ -243,7 +247,7 @@
                   <Label text="Ketelstraat" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <BorderPane fx:id="LIchtBlauwVelperplein" style="-fx-border-color: #000000;" GridPane.columnIndex="1" GridPane.rowIndex="10">
+            <BorderPane fx:id="LIchtBlauwVelperplein" style="-fx-border-color: #000000;" GridPane.columnIndex="1" GridPane.rowIndex="11">
                <top>
                   <Pane prefHeight="10.0" style="-fx-background-color: add8e6;" BorderPane.alignment="CENTER" />
                </top>
@@ -251,12 +255,12 @@
                   <Label text="Velperplein" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <BorderPane fx:id="Gevangenis" style="-fx-border-color: #000000;" GridPane.rowIndex="10">
+            <BorderPane fx:id="Gevangenis" style="-fx-border-color: #000000;" GridPane.rowIndex="11">
                <top>
                   <Label text="Gevangenis" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
-            <BorderPane fx:id="RozeBarteljorisstraat" style="-fx-border-color: #000000;" GridPane.rowIndex="9">
+            <BorderPane fx:id="RozeBarteljorisstraat" style="-fx-border-color: #000000;" GridPane.rowIndex="10">
                <top>
                   <Pane prefHeight="10.0" style="-fx-background-color: #FFC0CB;" BorderPane.alignment="CENTER" />
                </top>
@@ -264,12 +268,12 @@
                   <Label text="Barteljorisstraat" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <BorderPane fx:id="Elektriciteitsbedrijf" style="-fx-border-color: #000000;" GridPane.rowIndex="8">
+            <BorderPane fx:id="Elektriciteitsbedrijf" style="-fx-border-color: #000000;" GridPane.rowIndex="9">
                <top>
                   <Label text="Elektriciteitsbedrijf" BorderPane.alignment="CENTER" />
                </top>
             </BorderPane>
-            <BorderPane fx:id="RozeZijlweg" style="-fx-border-color: #000000;" GridPane.rowIndex="7">
+            <BorderPane fx:id="RozeZijlweg" style="-fx-border-color: #000000;" GridPane.rowIndex="8">
                <top>
                   <Pane prefHeight="10.0" style="-fx-background-color: #FFC0CB;" BorderPane.alignment="CENTER" />
                </top>
@@ -277,7 +281,7 @@
                   <Label text="Zijlweg" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <BorderPane fx:id="RozeHoutstraat" style="-fx-border-color: #000000;" GridPane.rowIndex="6">
+            <BorderPane fx:id="RozeHoutstraat" style="-fx-border-color: #000000;" GridPane.rowIndex="7">
                <top>
                   <Pane prefHeight="10.0" style="-fx-background-color: #FFC0CB;" BorderPane.alignment="CENTER" />
                </top>
@@ -285,7 +289,7 @@
                   <Label text="Houtstraat" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
-            <BorderPane fx:id="StationWest" style="-fx-border-color: #000000;" GridPane.rowIndex="5">
+            <BorderPane fx:id="StationWest" style="-fx-border-color: #000000;" GridPane.rowIndex="6">
                <top>
                   <Label text="Station West" BorderPane.alignment="CENTER" />
                </top>
@@ -350,5 +354,49 @@
             <Button fx:id="BoardViewRollDiceButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Roll Dice" />
          </children>
       </VBox>
+      <GridPane fx:id="auctionPane" layoutX="100.0" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #bfdbae;">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Auction" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="3">
+               <font>
+                  <Font name="System Bold" size="62.0" />
+               </font>
+            </Label>
+            <Label fx:id="cardPlaceholder" prefHeight="116.0" prefWidth="268.0" text="Placeholder Card" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <padding>
+                  <Insets left="50.0" />
+               </padding>
+            </Label>
+            <TextArea fx:id="bidTextArea" prefHeight="28.0" prefWidth="123.0" promptText="Enter amount" style="-fx-border: 50; -fx-border-color: #93d28f;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextArea>
+            <Label prefHeight="60.0" prefWidth="288.0" text="Place your bid" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+            <Button fx:id="placeBidButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" style="-fx-background-color: #93d28f;" text="Place Bid" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Label fx:id="NoNumberOnInputError" prefHeight="85.0" prefWidth="100.0" text="Make sure to only use numbers and sufficient balance!" textFill="RED" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="2">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
