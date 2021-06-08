@@ -12,14 +12,14 @@ import com.google.cloud.firestore.WriteResult;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class FireStoreController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
+    public FireStoreController() {
+
+    }
 
     @Override
     public void registerObserver(Observer<DocumentSnapshot> o) {
@@ -86,6 +86,20 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
         com.google.cloud.firestore.Firestore db = Firestore.getFirestore();
         ApiFuture<WriteResult> upload = db.collection("Lobbies").document(String.valueOf(token)).set(lobbyData);
+    }
+
+    public static void removePlayer(int token, Player player) throws InterruptedException, ExecutionException, IOException {
+        DocumentSnapshot document = getSnapshot(token);
+        ArrayList<Player> players = (ArrayList<Player>) document.get("players");
+
+        for(int i = 0; Objects.requireNonNull(players).size() > i ; i++){
+            if(players.get(i) == player){
+                players.remove(i);
+            }
+        }
+
+        com.google.cloud.firestore.Firestore db = Firestore.getFirestore();
+        db.collection("Lobbies").document(String.valueOf(token)).update("players", players);
     }
 
 

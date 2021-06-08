@@ -71,10 +71,14 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         // Stuff to add the player to firebase
     }
 
-    private void removePlayerFromLobby() {
+    private void removePlayerFromLobby() throws InterruptedException, ExecutionException, IOException {
         //TODO:
         // Stuff to remove the player from firebase
         // Question is: "How do you know which player pressed the leave button?"
+
+        //Added Firebase functionality assuming var player is the player who wants to leave the game.
+        Player player = new Player("Removeme"); // TODO: remove this of course
+        FireStoreController.removePlayer(token, player);
     }
 
     private Optional<Player> getPlayerByName(String name) {
@@ -171,7 +175,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         ConfirmToMenuView.setVisible(true);
     }
     @FXML
-    private void ConfirmLeaveLobby(ActionEvent e) {
+    private void ConfirmLeaveLobby(ActionEvent e) throws InterruptedException, ExecutionException, IOException {
         //TODO:
         // Method needs to remove player from lobby document in Firestore
         removePlayerFromLobby();
