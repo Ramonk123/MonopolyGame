@@ -51,4 +51,9 @@ public class PlayerController implements Controller {
         players.add(player);
     }
 
+    public void movePlayer(String name, int amountThrown) {
+        Player player = getPlayerByName(name);
+        player.movePlayer(amountThrown);
+    }
+
 }
