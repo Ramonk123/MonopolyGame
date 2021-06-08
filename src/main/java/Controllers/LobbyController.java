@@ -3,6 +3,7 @@ package Controllers;
 import Models.Board;
 import Models.MainMenu;
 import Models.Lobby;
+import Models.Player;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
@@ -22,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class LobbyController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
@@ -59,17 +61,41 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         lobby.setJoinLobbyStage(primaryStage);
     }
 
-    private void goToLobby(ActionEvent e) {
-        Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        lobby.setStage(primaryStage);
-    }
-
-    //Return to Main Menu
     @FXML
     private void returnToMainMenu(ActionEvent e) {
         Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
         MainMenuController mmc = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
         mmc.setStage(primaryStage);
+    }
+
+    private void goToLobby(ActionEvent e) {
+        Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        lobby.setStage(primaryStage);
+    }
+
+    private void addPlayerToLobby(String name) {
+        Player player = getPlayerByName(name);
+        //TODO:
+        // Stuff to add the player to firebase
+    }
+
+    private void removePlayerFromLobby() {
+        //TODO:
+        // Stuff to remove the player from firebase
+        // Question is: "How do you know which player pressed the leave button?"
+    }
+
+    private Player getPlayerByName(String name) {
+        PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        return pc.getPlayerByName(name);
+    }
+
+    private boolean playerNameExists(String name) {
+        PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        if(pc.nameExists(name)) {
+            return true;
+        }
+        return false;
     }
 
     //Join Lobby
@@ -82,16 +108,21 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         try {
             token = Integer.parseInt(JoinLobbyViewTokenTextField.getText());
             name = JoinLobbyViewNameTextField.getText();
-            joinLobby(e);
+
+            joinLobby(e, name);
+            goToLobby(e);
         } catch(NumberFormatException exception) {
             JoinLobbyViewTokenTextField.setText("Numbers Only");
         }
     }
 
-    private void joinLobby(ActionEvent e) {
+    private void joinLobby(ActionEvent e, String name) {
         //TODO:
-        //Program should first check if the lobby exists and if the name is not already used.
-        goToLobby(e);
+        // Program should first check if the lobby exists or is full, and then add the player.
+        if(!playerNameExists(name)) {
+            addPlayerToLobby(name);
+        }
+        JoinLobbyViewNameTextField.setText("Name already exists");
     }
 
     //Create Lobby
@@ -100,15 +131,30 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @FXML
     private void CreateLobbySubmit(ActionEvent e) throws IOException {
         //TODO:
-        //create random 6 digit token and check if that token doesn't exists.
-        name = CreateLobbyViewNameTextField.getText();
-        createLobby(e);
+        // Lobby should get created/checked if the token already exists in the while loop
+        boolean isCreatingLobby = true;
+
+        while(isCreatingLobby) {
+            Random random = new Random();
+            token = random.nextInt(6);
+            //TODO:
+            // if lobby token does not already exist continue to create it
+                createLobby(e);
+                isCreatingLobby = false;
+
+                name = CreateLobbyViewNameTextField.getText();
+                PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
+                pc.setPlayer(name);
+
+                //Open the lobby view
+                goToLobby(e);
+        }
     }
 
     private void createLobby(ActionEvent e) {
         //TODO:
-        //Program should first make the lobby before the user can join it.
-        goToLobby(e);
+        // Fill this method with stuff to create the lobby
+
     }
 
     //Lobby
@@ -124,7 +170,8 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @FXML
     private void ConfirmLeaveLobby(ActionEvent e) {
         //TODO:
-        //Method needs to remove player from lobby document in Firestore
+        // Method needs to remove player from lobby document in Firestore
+        removePlayerFromLobby();
         returnToMainMenu(e);
     }
     @FXML
