@@ -9,6 +9,10 @@ import java.util.List;
 public class Wallet implements Model {
     private int balance;
 
+    public Wallet() {
+        balance = 1500;
+    }
+
     public void setBalance(int balance) {
         this.balance = balance;
     }
