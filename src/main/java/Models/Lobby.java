@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot> {
+    private int gameToken;
+    private int amountOfPlayers;
+
     private List<Observer<LobbySubject>> observers = new ArrayList<>();
 
     @Override

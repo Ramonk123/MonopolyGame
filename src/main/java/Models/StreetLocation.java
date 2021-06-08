@@ -7,6 +7,7 @@ public abstract class StreetLocation extends OwnableLocation {
     private int housePrice;
     private int hotelPrice;
 
+
     public StreetLocation(Locations locationEnum, String name, Set set, int position, int price, int rent, int housePrice, int hotelPrice) {
         super(locationEnum, name, set, position, price);
         this.houses         = 0;
@@ -14,5 +15,13 @@ public abstract class StreetLocation extends OwnableLocation {
         this.priceInflator  = new PriceInflator(rent, 1.6);
         this.housePrice     = housePrice;
         this.hotelPrice     = hotelPrice;
+    }
+
+    private boolean containsProperty(){
+        if(this.houses > 0 || this.hotel == true) {
+            return true;
+        }else{
+            return false;
+        }
     }
 }
