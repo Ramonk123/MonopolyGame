@@ -28,4 +28,16 @@ public class ThrowController implements Controller {
     public void notifyObservers(DocumentSnapshot ds) {
         currentThrow.notifyObservers(ds);
     }*/
+
+    public void throwDice() {
+        currentThrow.throwDice();
+    }
+
+    public int getTotalEyes() {
+        return currentThrow.getTotalEyes();
+    }
+
+    public boolean getIsDouble() {
+        return currentThrow.isDouble();
+    }
 }

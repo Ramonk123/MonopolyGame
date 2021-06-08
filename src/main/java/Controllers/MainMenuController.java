@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 
 public class MainMenuController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
-    private static MainMenuController mainMenuController;
     private MainMenu mainMenu;
     private DocumentSnapshot ds;
 
@@ -32,18 +31,25 @@ public class MainMenuController implements Controller, Subject<DocumentSnapshot>
         mainMenu.update(ds);
     }
 
+    @Override
+    public void setStage(Stage primaryStage) {
+        mainMenu.setStage(primaryStage);
+    }
+
     //Join Lobby
     @FXML
     private void goToJoinLobby(ActionEvent e) {
         Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        JoinLobbyView joinLobbyView = new JoinLobbyView(primaryStage);
+        LobbyController lc = (LobbyController) ControllerRegistry.get(LobbyController.class);
+        lc.setJoinLobbyStage(primaryStage);
     }
 
     //Create Lobby
     @FXML
     private void goToCreateLobby(ActionEvent e) {
         Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        CreateLobbyView createLobbyView = new CreateLobbyView(primaryStage);
+        LobbyController lc = (LobbyController) ControllerRegistry.get(LobbyController.class);
+        lc.setCreateLobbyStage(primaryStage);
     }
 
     //Quit button
@@ -58,8 +64,4 @@ public class MainMenuController implements Controller, Subject<DocumentSnapshot>
         mainMenu.quitGame();
     }
 
-    @Override
-    public void setStage(Stage primaryStage) {
-        mainMenu.setStage(primaryStage);
-    }
 }

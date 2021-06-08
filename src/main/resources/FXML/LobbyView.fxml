@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #bfdbae;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #bfdbae;" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" layoutY="40.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
@@ -31,7 +31,7 @@
       <HBox alignment="CENTER" layoutX="150.0" layoutY="132.0" prefWidth="600.0" spacing="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
          <children>
             <Button fx:id="LobbyViewStartGameButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #93d28f;" text="Start game" />
-            <Button fx:id="LobbyViewLeaveLobbyButton" mnemonicParsing="false" onAction="#goToMainMenu" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #f04747;" text="Leave lobby" />
+            <Button fx:id="LobbyViewLeaveLobbyButton" mnemonicParsing="false" onAction="#LeaveLobby" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #f04747;" text="Leave lobby" />
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutY="192.0" prefWidth="600.0" spacing="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -66,7 +66,7 @@
             <RowConstraints minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="GoToMainMenuNoBtn" mnemonicParsing="false" prefHeight="56.0" prefWidth="132.0" style="-fx-background-color: #e0634a;" text="No" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Button fx:id="GoToMainMenuNoBtn" mnemonicParsing="false" onAction="#DenyLeaveLobby" prefHeight="56.0" prefWidth="132.0" style="-fx-background-color: #e0634a;" text="No" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
                </cursor>
@@ -80,7 +80,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Button fx:id="GoToMainMenuYesBtn" mnemonicParsing="false" prefHeight="56.0" prefWidth="132.0" style="-fx-background-color: #f04747;" text="Yes" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Button fx:id="GoToMainMenuYesBtn" mnemonicParsing="false" onAction="#ConfirmLeaveLobby" prefHeight="56.0" prefWidth="132.0" style="-fx-background-color: #f04747;" text="Yes" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="15.0" />
                </GridPane.margin>
