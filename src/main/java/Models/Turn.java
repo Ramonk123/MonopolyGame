@@ -25,7 +25,7 @@ public class Turn implements Model, DiceThrower {
     }
 
     //TODO:
-    // Alles hieronder hoort hiet niet, indien je deze informatie wilt hebben moet dat via de Dice > Throw > ThrowController > TurnController > Turn, en vice versa. - Vincent
+    // Alles hieronder hoort hiet niet toch? Indien je deze informatie zou willen hebben moet dat toch via de Dice > Throw > ThrowController > Turn, en vice versa? - Vincent
     public Throw getCurrentThrow() {
         return currentThrow;
     }
