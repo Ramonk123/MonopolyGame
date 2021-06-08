@@ -5,12 +5,14 @@ import Models.Player;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
+import java.util.ArrayList;
+
 public class PlayerController implements Controller {
 
-    private Player player;
+    private ArrayList<Player> players = new ArrayList<>();
 
     public PlayerController() {
-        player = new Player();
+
     }
 
     /*@Override
@@ -27,4 +29,19 @@ public class PlayerController implements Controller {
     public void notifyObservers(DocumentSnapshot ds) {
         player.notifyObservers(ds);
     }*/
+
+    public Player getPlayerByName(String name) {
+        for(Player player : players) {
+            if(player.getName().equals(name)) {
+                return player;
+            }
+        }
+        return null; //Should not return null, but currently I have no solution for this - Vincent
+    }
+
+    public void setPlayer(String name) {
+        Player player = new Player(name);
+        players.add(player);
+    }
+
 }
