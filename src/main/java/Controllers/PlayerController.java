@@ -7,10 +7,9 @@ import com.google.cloud.firestore.DocumentSnapshot;
 
 public class PlayerController implements Controller {
 
-    private static PlayerController playerController;
     private Player player;
 
-    private PlayerController() {
+    public PlayerController() {
         player = new Player();
     }
 
