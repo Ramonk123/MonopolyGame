@@ -19,8 +19,6 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
 
     private Stage primaryStage;
 
-    private BoardController boardController;
-
     public BoardView() {
 
     }
@@ -48,6 +46,4 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
     public void update(BoardSubject state) {
 
     }
-
-
 }

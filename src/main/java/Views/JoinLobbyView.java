@@ -20,12 +20,7 @@ public class JoinLobbyView implements View, Observer<LobbySubject>, HasStage {
 
     private Stage primaryStage;
 
-    private LobbyController lobbyController;
-
     public JoinLobbyView() {
-
-        //lobbyController = lobbyController.getInstance();
-        //lobbyController.registerObserver(this);
 
     }
 

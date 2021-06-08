@@ -17,11 +17,7 @@ public class MainMenuView implements View, Observer<MainMenuSubject>, HasStage {
 
     private Stage primaryStage;
 
-    private MainMenuController mainMenuController;
-
     public MainMenuView() {
-        //mainMenuController = mainMenuController.getInstance();
-        //mainMenuController.registerObserver(this);
 
     }
 

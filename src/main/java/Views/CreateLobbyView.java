@@ -19,18 +19,13 @@ public class CreateLobbyView implements View, Observer<LobbySubject>, HasStage {
 
     private Stage primaryStage;
 
-    private LobbyController lobbyController;
-
     public CreateLobbyView() {
-
-        //lobbyController = lobbyController.getInstance();
-        //lobbyController.registerObserver(this);
 
     }
 
     private void createPrimaryStage() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/CreateLobbyView.fxml"));
-        loader.setController((LobbyController) ControllerRegistry.get(LobbyController.class));
+        loader.setController(ControllerRegistry.get(LobbyController.class));
         Parent root = loader.load();
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
