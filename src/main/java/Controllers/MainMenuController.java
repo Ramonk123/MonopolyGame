@@ -36,14 +36,16 @@ public class MainMenuController implements Controller, Subject<DocumentSnapshot>
     @FXML
     private void goToJoinLobby(ActionEvent e) {
         Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        JoinLobbyView joinLobbyView = new JoinLobbyView(primaryStage);
+        LobbyController lc = (LobbyController) ControllerRegistry.get(LobbyController.class);
+        lc.setJoinLobbyStage(primaryStage);
     }
 
     //Create Lobby
     @FXML
     private void goToCreateLobby(ActionEvent e) {
         Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        CreateLobbyView createLobbyView = new CreateLobbyView(primaryStage);
+        LobbyController lc = (LobbyController) ControllerRegistry.get(LobbyController.class);
+        lc.setCreateLobbyStage(primaryStage);
     }
 
     //Quit button

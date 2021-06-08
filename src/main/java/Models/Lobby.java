@@ -13,6 +13,8 @@ public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot>, H
 
     public Lobby() {
         registerObserver(new LobbyView());
+        registerObserver(new CreateLobbyView());
+        registerObserver(new JoinLobbyView());
     }
 
     @Override
@@ -41,5 +43,13 @@ public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot>, H
     @Override
     public void setStage(Stage primaryStage) {
         ((LobbyView) observers.get(0)).setStage(primaryStage);
+    }
+
+    public void setCreateLobbyStage(Stage primaryStage) {
+        ((CreateLobbyView) observers.get(1)).setStage(primaryStage);
+    }
+
+    public void setJoinLobbyStage(Stage primaryStage) {
+        ((JoinLobbyView) observers.get(2)).setStage(primaryStage);
     }
 }

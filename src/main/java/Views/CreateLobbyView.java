@@ -12,26 +12,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CreateLobbyView implements View {
+public class CreateLobbyView implements View, Observer<LobbySubject>, HasStage {
     //Screensize
     int WIDTH = 600;
     int HEIGHT = 400;
 
-    private final Stage primaryStage;
+    private Stage primaryStage;
 
     private LobbyController lobbyController;
 
-    public CreateLobbyView(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+    public CreateLobbyView() {
 
         //lobbyController = lobbyController.getInstance();
         //lobbyController.registerObserver(this);
 
-        try {
-            createPrimaryStage();
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
     }
 
     private void createPrimaryStage() throws IOException {
@@ -41,5 +35,20 @@ public class CreateLobbyView implements View {
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
         primaryStage.show();
+    }
+
+    @Override
+    public void setStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+        try {
+            createPrimaryStage();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(LobbySubject state) {
+
     }
 }

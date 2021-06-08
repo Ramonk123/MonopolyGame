@@ -5,6 +5,7 @@ import Models.MainMenu;
 import Models.Lobby;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
+import Views.HasStage;
 import Views.LobbyView;
 import Views.MainMenuView;
 import Views.View;
@@ -22,7 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class LobbyController implements Controller, Subject<DocumentSnapshot> {
+public class LobbyController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
     private static LobbyController lobbyController;
     private Lobby lobby;
@@ -113,5 +114,18 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot> {
     @FXML
     private void DenyLeaveLobby(ActionEvent e) {
         ConfirmToMenuView.setVisible(false);
+    }
+
+    @Override
+    public void setStage(Stage primaryStage) {
+        lobby.setStage(primaryStage);
+    }
+
+    public void setCreateLobbyStage(Stage primaryStage) {
+        lobby.setCreateLobbyStage(primaryStage);
+    }
+
+    public void setJoinLobbyStage(Stage primaryStage) {
+        lobby.setJoinLobbyStage(primaryStage);
     }
 }
