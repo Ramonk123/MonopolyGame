@@ -28,6 +28,14 @@ public class Player implements Model, Position, Nameable {
         this.position = position;
     }
 
+    public void movePlayer(int amountThrown) {
+        int newPosition = getPosition() + amountThrown;
+        if(newPosition >= 40) {
+            newPosition -= 40;
+        }
+        setPosition(newPosition);
+    }
+
     @Override
     public String getName() {
         return name;
