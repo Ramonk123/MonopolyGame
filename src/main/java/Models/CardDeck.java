@@ -8,6 +8,5 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardDeck implements Model {
-    private ArrayList<UUID> commonFundsCardDeck;
-    private ArrayList<UUID> chanceCardDeck;
+    private ArrayList<Card> deck;
 }
