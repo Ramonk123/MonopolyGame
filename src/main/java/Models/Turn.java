@@ -24,6 +24,8 @@ public class Turn implements Model, DiceThrower {
         return Optional.ofNullable(activePlayer);
     }
 
+    //TODO:
+    // Alles hieronder hoort hiet niet, indien je deze informatie wilt hebben moet dat via de Dice > Throw > ThrowController > TurnController > Turn, en vice versa. - Vincent
     public Throw getCurrentThrow() {
         return currentThrow;
     }
