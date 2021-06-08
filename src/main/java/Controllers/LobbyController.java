@@ -65,15 +65,13 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         lobby.setStage(primaryStage);
     }
 
-    private void addPlayerToLobby(String name) {
-        //Player player = getPlayerByName(name);
-        //TODO:
-        // Stuff to add the player to firebase
+    private void addPlayerToLobby(String name) throws IOException {
+        Optional<Player> player = getPlayerByName(name); // TODO: idk if this is supposed to be optional
+        FireStoreController.addPlayer(token, player);
     }
 
     private void removePlayerFromLobby() throws InterruptedException, ExecutionException, IOException {
         //TODO:
-        // Stuff to remove the player from firebase
         // Question is: "How do you know which player pressed the leave button?"
 
         //Added Firebase functionality assuming var player is the player who wants to leave the game.
@@ -176,8 +174,6 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     }
     @FXML
     private void ConfirmLeaveLobby(ActionEvent e) throws InterruptedException, ExecutionException, IOException {
-        //TODO:
-        // Method needs to remove player from lobby document in Firestore
         removePlayerFromLobby();
         returnToMainMenu(e);
     }

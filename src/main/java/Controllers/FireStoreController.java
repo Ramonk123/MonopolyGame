@@ -8,6 +8,7 @@ import Views.HasStage;
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.FieldValue;
 import com.google.cloud.firestore.WriteResult;
 import javafx.stage.Stage;
 
@@ -16,6 +17,9 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class FireStoreController implements Controller, Subject<DocumentSnapshot>, HasStage {
+
+    private static int token;
+    private static Player player;
 
     public FireStoreController() {
 
@@ -100,6 +104,13 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
         com.google.cloud.firestore.Firestore db = Firestore.getFirestore();
         db.collection("Lobbies").document(String.valueOf(token)).update("players", players);
+    }
+
+    public static void addPlayer(int token, Optional<Player> player) throws IOException {
+        com.google.cloud.firestore.Firestore db = Firestore.getFirestore();
+
+        ApiFuture<WriteResult> upload = db.collection("Lobbies").document(String.valueOf(token))
+                .update("players", FieldValue.arrayUnion(player));
     }
 
 
