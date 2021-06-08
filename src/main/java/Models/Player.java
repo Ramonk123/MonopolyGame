@@ -14,6 +14,11 @@ public class Player implements Model, Position, Nameable {
     private int position;
     private boolean inJail;
 
+    public Player(String name) {
+        this.name = name;
+        wallet = new Wallet();
+    }
+
     @Override
     public int getPosition() {
         return position;
@@ -21,6 +26,14 @@ public class Player implements Model, Position, Nameable {
 
     public void setPosition(int position) {
         this.position = position;
+    }
+
+    public void movePlayer(int amountThrown) {
+        int newPosition = getPosition() + amountThrown;
+        if(newPosition >= 40) {
+            newPosition -= 40;
+        }
+        setPosition(newPosition);
     }
 
     @Override

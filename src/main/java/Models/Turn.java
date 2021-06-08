@@ -24,6 +24,8 @@ public class Turn implements Model, DiceThrower {
         return Optional.ofNullable(activePlayer);
     }
 
+    //TODO:
+    // Alles hieronder hoort hiet niet toch? Indien je deze informatie zou willen hebben moet dat toch via de Dice > Throw > ThrowController > Turn, en vice versa? - Vincent
     public Throw getCurrentThrow() {
         return currentThrow;
     }

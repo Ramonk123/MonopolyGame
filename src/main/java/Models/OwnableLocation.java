@@ -25,4 +25,7 @@ public abstract class OwnableLocation extends Location {
     public int getPrice() {
         return price;
     }
+
+
+
 }

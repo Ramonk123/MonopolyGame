@@ -17,17 +17,13 @@ public class MainMenuView implements View, Observer<MainMenuSubject>, HasStage {
 
     private Stage primaryStage;
 
-    private MainMenuController mainMenuController;
-
     public MainMenuView() {
-        //mainMenuController = mainMenuController.getInstance();
-        //mainMenuController.registerObserver(this);
 
     }
 
     private void createPrimaryStage() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/MainMenuView.fxml"));
-        loader.setController((MainMenuController) ControllerRegistry.get(MainMenuController.class));
+        loader.setController(ControllerRegistry.get(MainMenuController.class));
         Parent root = loader.load();
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
