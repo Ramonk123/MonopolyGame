@@ -118,11 +118,15 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     }
 
     private void joinLobby(ActionEvent e, String name) throws InterruptedException, ExecutionException, IOException {
-        //TODO:
-        // Check if the popups are right
-
+        //Added some functions, thought I could write the error messages while I'm at it. Feel free to change it.
         if(!FireStoreController.checkExistence(token)){
-            JoinLobbyViewNameTextField.setText("This lobby does not exist");
+            JoinLobbyViewTokenTextField.setText("This lobby does not exist");
+        }
+
+        if(FireStoreController.getLobbySize(token) >= 8){
+            //Lobby is full
+            //TODO:
+            // add pop up
         }
 
         if(!playerNameExists(name)) {
