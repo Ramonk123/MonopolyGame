@@ -93,10 +93,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
 
     private boolean playerNameExists(String name) {
         PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        if(pc.nameExists(name)) {
-            return true;
-        }
-        return false;
+        return pc.nameExists(name);
     }
 
     //Join Lobby
