@@ -1,23 +1,13 @@
 package Controllers;
 
-import Models.Board;
-import Models.MainMenu;
-import Models.Lobby;
-import Models.Player;
+import Models.*;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
-import Views.LobbyView;
-import Views.MainMenuView;
-import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -139,33 +129,36 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @FXML
     private TextField CreateLobbyViewNameTextField;
     @FXML
-    private void CreateLobbySubmit(ActionEvent e){
-        //TODO:
-        // Lobby should get created/checked if the token already exists in the while loop
-        boolean isCreatingLobby = true;
+    private void CreateLobbySubmit(ActionEvent e) throws InterruptedException, ExecutionException, IOException {
+        generateToken();
 
-        while(isCreatingLobby) {
-            Random random = new Random();
-            token = random.nextInt(6);
-            //TODO:
-            // if lobby token does not already exist continue to create it
-                createLobby(e);
-                isCreatingLobby = false;
-
-                name = CreateLobbyViewNameTextField.getText();
-                PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
-                pc.setPlayer(name);
-
-                //Open the lobby view
-                goToLobby(e);
+        while(FireStoreController.checkExistence(token)){
+            generateToken();
         }
+
+
+        FireStoreController.createLobby(token);
+
+        name = CreateLobbyViewNameTextField.getText();
+        PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        pc.setPlayer(name);
+
+        //Open the lobby view
+        goToLobby(e);
+
     }
 
-    private void createLobby(ActionEvent e) {
-        //TODO:
-        // Fill this method with stuff to create the lobby
-
+    private void generateToken(){
+        Random random = new Random();
+        token = random.nextInt(6);
     }
+
+// TODO: Think we can delete this
+
+//    private void createLobby(ActionEvent e) throws IOException {
+//        FireStoreController.createLobby(token);
+//
+//    }
 
     //Lobby
 

@@ -13,6 +13,10 @@ public class PlayerController implements Controller {
 
     private ArrayList<Player> players = new ArrayList<>();
 
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
     public PlayerController() {
 
     }
