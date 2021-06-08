@@ -1,16 +1,14 @@
 package Models;
 
 import ObserveablePattern.Observer;
-import Views.BoardSubject;
-import Views.BoardView;
-import Views.View;
+import Views.*;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board implements Model, BoardSubject, Observer<DocumentSnapshot> {
+public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, HasStage {
     private List<Observer<BoardSubject>> observers = new ArrayList<>();
 
     public Board() {
@@ -48,5 +46,10 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot> {
     @Override
     public List<Player> getPlayers() {
         return null;
+    }
+
+    @Override
+    public void setStage(Stage primaryStage) {
+        ((BoardView) observers.get(0)).setStage(primaryStage);
     }
 }
