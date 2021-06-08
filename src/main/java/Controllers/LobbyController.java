@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class LobbyController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
@@ -111,12 +112,19 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
             goToLobby(e);
         } catch(NumberFormatException exception) {
             JoinLobbyViewTokenTextField.setText("Numbers Only");
+        } catch (InterruptedException | ExecutionException interruptedException) {
+            interruptedException.printStackTrace();
         }
     }
 
-    private void joinLobby(ActionEvent e, String name) {
+    private void joinLobby(ActionEvent e, String name) throws InterruptedException, ExecutionException, IOException {
         //TODO:
-        // Program should first check if the lobby exists or is full, and then add the player.
+        // Check if the popups are right
+
+        if(!FireStoreController.checkExistence(token)){
+            JoinLobbyViewNameTextField.setText("This lobby does not exist");
+        }
+
         if(!playerNameExists(name)) {
             addPlayerToLobby(name);
         }
@@ -127,7 +135,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @FXML
     private TextField CreateLobbyViewNameTextField;
     @FXML
-    private void CreateLobbySubmit(ActionEvent e) throws IOException {
+    private void CreateLobbySubmit(ActionEvent e){
         //TODO:
         // Lobby should get created/checked if the token already exists in the while loop
         boolean isCreatingLobby = true;

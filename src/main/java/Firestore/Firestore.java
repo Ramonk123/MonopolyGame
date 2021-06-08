@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutionException;
 
 public class Firestore {
 
-    public com.google.cloud.firestore.Firestore getdb() throws IOException {
+    public static com.google.cloud.firestore.Firestore getFirestore() throws IOException {
 
         FileInputStream serviceAccount =
                 new FileInputStream("monopolyteam6-47708-firebase-adminsdk-tp5m6-9a482af7f7.json");
