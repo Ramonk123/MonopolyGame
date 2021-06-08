@@ -5,7 +5,9 @@ import Models.Player;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class PlayerController implements Controller {
 
@@ -30,20 +32,18 @@ public class PlayerController implements Controller {
         player.notifyObservers(ds);
     }*/
 
-    public Player getPlayerByName(String name) {
+    public Optional<Player> getPlayerByName(String name) {
+        Player p = null;
         for(Player player : players) {
             if(player.getName().equals(name)) {
-                return player;
+                p = player;
             }
         }
-        return null;
+        return Optional.ofNullable(p);
     }
 
     public boolean nameExists(String name) {
-        if(getPlayerByName(name) == null) {
-            return true;
-        }
-        return false;
+        return getPlayerByName(name).isPresent();
     }
 
     public void setPlayer(String name) {
@@ -51,8 +51,8 @@ public class PlayerController implements Controller {
         players.add(player);
     }
 
-    public void movePlayer(String name, int amountThrown) {
-        Player player = getPlayerByName(name);
+    public void movePlayer(String name, int amountThrown) throws Exception {
+        Player player = getPlayerByName(name).orElseThrow(Exception::new);
         player.movePlayer(amountThrown);
     }
 
