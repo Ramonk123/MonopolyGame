@@ -87,10 +87,6 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
             JoinLobbyViewTokenTextField.setText("Numbers Only");
         }
     }
-    @FXML
-    private void clearTokenTextFieldOnEnter(ActionEvent e) {
-        JoinLobbyViewTokenTextField.clear();
-    }
 
     private void joinLobby(ActionEvent e) {
         //TODO:
