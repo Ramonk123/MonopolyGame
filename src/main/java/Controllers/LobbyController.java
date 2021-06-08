@@ -48,7 +48,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot> {
 
     private void goToLobby(ActionEvent e) {
         Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        LobbyView lobbyView = new LobbyView(primaryStage);
+        lobby.setStage(primaryStage);
     }
 
     //Return to Main Menu
@@ -98,23 +98,20 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot> {
 
 
     // Leave Lobby button functionality
-    @FXML Pane ConfirmToMenuView;
-    @FXML Button GoToMainMenuYesBtn;
-    @FXML Button GoToMainMenuNoBtn;
     @FXML
-    private void goToMainMenu() {
+    Pane ConfirmToMenuView;
+    @FXML
+    private void LeaveLobby(ActionEvent e) {
+        ConfirmToMenuView.setVisible(true);
+    }
+    @FXML
+    private void ConfirmLeaveLobby(ActionEvent e) {
         //TODO:
         //Method needs to remove player from lobby document in Firestore
-        ConfirmToMenuView.setVisible(!ConfirmToMenuView.isVisible());
-        GoToMainMenuYesBtn.setOnAction(e -> {
-            Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-            MainMenuController mmc = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
-            mmc.setStage(primaryStage);
-        });
-
-
-        GoToMainMenuNoBtn.setOnAction(event -> {
-            ConfirmToMenuView.setVisible(false);
-        });
+        returnToMainMenu(e);
+    }
+    @FXML
+    private void DenyLeaveLobby(ActionEvent e) {
+        ConfirmToMenuView.setVisible(false);
     }
 }
