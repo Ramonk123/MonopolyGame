@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 
 public class MainMenuController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
-    private static MainMenuController mainMenuController;
     private MainMenu mainMenu;
     private DocumentSnapshot ds;
 
@@ -30,6 +29,11 @@ public class MainMenuController implements Controller, Subject<DocumentSnapshot>
     @Override
     public void notifyObservers() {
         mainMenu.update(ds);
+    }
+
+    @Override
+    public void setStage(Stage primaryStage) {
+        mainMenu.setStage(primaryStage);
     }
 
     //Join Lobby
@@ -60,8 +64,4 @@ public class MainMenuController implements Controller, Subject<DocumentSnapshot>
         mainMenu.quitGame();
     }
 
-    @Override
-    public void setStage(Stage primaryStage) {
-        mainMenu.setStage(primaryStage);
-    }
 }

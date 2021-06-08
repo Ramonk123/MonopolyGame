@@ -25,7 +25,6 @@ import java.io.IOException;
 
 public class LobbyController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
-    private static LobbyController lobbyController;
     private Lobby lobby;
     private DocumentSnapshot ds;
 
@@ -45,6 +44,19 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @Override
     public void notifyObservers() {
         lobby.update(ds);
+    }
+
+    @Override
+    public void setStage(Stage primaryStage) {
+        lobby.setStage(primaryStage);
+    }
+
+    public void setCreateLobbyStage(Stage primaryStage) {
+        lobby.setCreateLobbyStage(primaryStage);
+    }
+
+    public void setJoinLobbyStage(Stage primaryStage) {
+        lobby.setJoinLobbyStage(primaryStage);
     }
 
     private void goToLobby(ActionEvent e) {
@@ -116,16 +128,4 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         ConfirmToMenuView.setVisible(false);
     }
 
-    @Override
-    public void setStage(Stage primaryStage) {
-        lobby.setStage(primaryStage);
-    }
-
-    public void setCreateLobbyStage(Stage primaryStage) {
-        lobby.setCreateLobbyStage(primaryStage);
-    }
-
-    public void setJoinLobbyStage(Stage primaryStage) {
-        lobby.setJoinLobbyStage(primaryStage);
-    }
 }

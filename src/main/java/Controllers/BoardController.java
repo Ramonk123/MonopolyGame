@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 
 public class BoardController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
-    private static BoardController boardController;
     private Board board;
     private DocumentSnapshot ds;
 
