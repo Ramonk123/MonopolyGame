@@ -18,10 +18,6 @@ public abstract class StreetLocation extends OwnableLocation {
     }
 
     private boolean containsProperty(){
-        if(this.houses > 0 || this.hotel == true) {
-            return true;
-        }else{
-            return false;
-        }
+        return this.houses > 0 || this.hotel;
     }
 }
