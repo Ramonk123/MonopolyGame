@@ -1,11 +1,12 @@
 package Controllers;
 
+import Models.DiceThrower;
 import Models.Player;
 import Models.Throw;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
-public class ThrowController implements Controller {
+public class ThrowController implements Controller, DiceThrower {
 
     private static ThrowController throwController;
     private Throw currentThrow;
@@ -28,16 +29,18 @@ public class ThrowController implements Controller {
     public void notifyObservers(DocumentSnapshot ds) {
         currentThrow.notifyObservers(ds);
     }*/
-
+    @Override
     public void throwDice() {
         currentThrow.throwDice();
     }
 
-    public int getTotalEyes() {
-        return currentThrow.getTotalEyes();
+    @Override
+    public boolean isDouble() {
+        return currentThrow.isDouble();
     }
 
-    public boolean getIsDouble() {
-        return currentThrow.isDouble();
+    @Override
+    public int getTotalEyes() {
+        return currentThrow.getTotalEyes();
     }
 }

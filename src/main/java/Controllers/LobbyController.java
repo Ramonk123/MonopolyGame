@@ -23,6 +23,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Random;
 
 public class LobbyController implements Controller, Subject<DocumentSnapshot>, HasStage {
@@ -74,7 +75,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     }
 
     private void addPlayerToLobby(String name) {
-        Player player = getPlayerByName(name);
+        //Player player = getPlayerByName(name);
         //TODO:
         // Stuff to add the player to firebase
     }
@@ -85,17 +86,14 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         // Question is: "How do you know which player pressed the leave button?"
     }
 
-    private Player getPlayerByName(String name) {
+    private Optional<Player> getPlayerByName(String name) {
         PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
         return pc.getPlayerByName(name);
     }
 
     private boolean playerNameExists(String name) {
         PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        if(pc.nameExists(name)) {
-            return true;
-        }
-        return false;
+        return pc.nameExists(name);
     }
 
     //Join Lobby

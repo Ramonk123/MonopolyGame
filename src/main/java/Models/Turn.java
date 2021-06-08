@@ -26,6 +26,8 @@ public class Turn implements Model, DiceThrower {
 
     //TODO:
     // Alles hieronder hoort hiet niet toch? Indien je deze informatie zou willen hebben moet dat toch via de Dice > Throw > ThrowController > Turn, en vice versa? - Vincent
+    // Ik denk dat je gelijk hebt. We moeten volgens mij dan de currentThrow loskoppelen van deze model en alleen activePlayer en amountOfDouble erin laten.
+    // Maar in plaats van (Dice > Throw > ThrowController > Turn) zal de TurnController de informatie van ThrowController opvragen. - Kadir
     public Throw getCurrentThrow() {
         return currentThrow;
     }
