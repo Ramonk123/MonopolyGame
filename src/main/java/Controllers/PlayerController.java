@@ -36,7 +36,14 @@ public class PlayerController implements Controller {
                 return player;
             }
         }
-        return null; //Should not return null, but currently I have no solution for this - Vincent
+        return null;
+    }
+
+    public boolean nameExists(String name) {
+        if(getPlayerByName(name) == null) {
+            return true;
+        }
+        return false;
     }
 
     public void setPlayer(String name) {
