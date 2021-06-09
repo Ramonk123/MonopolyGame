@@ -25,11 +25,6 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     private int token;
     private String name;
 
-
-    // Dit is niet mogelijk
-    // Redenering: Lobbycontroller is nu afhankelijk van het feit dat firestorecontroller als eerste geregistreerd is.
-    // FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-
     public LobbyController() {
         lobby = new Lobby();
     }
@@ -44,7 +39,6 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         }
         Players playersEnum = Players.getByOrder(lobbySize + 1)
                 .orElseThrow(() -> new LobbyException("Exception at LobbyController@joinLobby: The lobby is full.", null));
-        
     }
 
     @Override
@@ -83,14 +77,14 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         lobby.setStage(primaryStage);
     }
 
-    private void addPlayerToLobby(String name) throws IOException {
+    private void addPlayerToLobby(String name) {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         Optional<Player> player = getPlayerByName(name); // TODO: idk if this is supposed to be optional
 
         fireStoreController.addPlayer(token, player);
     }
 
-    private void removePlayerFromLobby() throws InterruptedException, ExecutionException, IOException {
+    private void removePlayerFromLobby() throws InterruptedException, ExecutionException {
         //TODO:
         // Question is: "How do you know which player pressed the leave button?"
 
@@ -152,7 +146,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @FXML
     private TextField CreateLobbyViewNameTextField;
     @FXML
-    private void CreateLobbySubmit(ActionEvent actionEvent) throws InterruptedException, ExecutionException, IOException {
+    private void CreateLobbySubmit(ActionEvent actionEvent) throws InterruptedException, ExecutionException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         generateToken();
 
@@ -179,7 +173,6 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
 
     //Lobby
 
-
     // Leave Lobby button functionality
     @FXML
     Pane ConfirmToMenuView;
@@ -196,5 +189,4 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     private void DenyLeaveLobby(ActionEvent actionEvent) {
         ConfirmToMenuView.setVisible(false);
     }
-
 }

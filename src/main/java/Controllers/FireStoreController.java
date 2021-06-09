@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
+import Monopoly.UUID;
 
 public class FireStoreController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
@@ -50,11 +51,12 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     Firestore firestore = new Firestore();
 
+
     public void initializeFirestore() throws IOException {
         firestore.initializeFirestore();
     }
 
-    public DocumentSnapshot getSnapshot(int token) throws IOException, ExecutionException, InterruptedException {
+    public DocumentSnapshot getSnapshot(int token) throws ExecutionException, InterruptedException {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         DocumentReference documentReference = database.collection("Lobbies").document(String.valueOf(token));
         ApiFuture<DocumentSnapshot> documentSnapshot = documentReference.get();
@@ -62,13 +64,13 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         return documentSnapshot.get();
     }
 
-    public boolean checkExistence(int token) throws ExecutionException, InterruptedException, IOException {
+    public boolean checkExistence(int token) throws ExecutionException, InterruptedException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
 
         return documentSnapshot.exists();
     }
 
-    public int getLobbySize(int token) throws IOException, ExecutionException, InterruptedException {
+    public int getLobbySize(int token) throws ExecutionException, InterruptedException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
 
         ArrayList<Player> players = (ArrayList<Player>) documentSnapshot.get("players");
@@ -77,29 +79,29 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         return players.size();
     }
 
-
-    public void createLobby(int token) throws IOException {
-        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+    public void createLobby(int token) {
 
         //TODO:
         // add the real data instead of sample.
         //    Subdirectories may be helpful for locations and players. Data structure still needs to be designed.
 
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
+
         Map<String, Object> lobbyData = new HashMap<>();
         lobbyData.put("players", playerController.getPlayers());
-        lobbyData.put("commonFundCardDeck", "sample");
-        lobbyData.put("chanceCardDeck", "sample");
+        lobbyData.put("commonFundCardDeck", cardDeckController.getCommonFundCardDeck());
+        lobbyData.put("chanceCardDeck", cardDeckController.getChanceCardDeck());
         lobbyData.put("owner", "sample");
         lobbyData.put("activePlayer", "sample");
         lobbyData.put("playerBids", "sample");
         lobbyData.put("trade", "sample");
 
-
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).set(lobbyData);
     }
 
-    public void removePlayer(int token, Player player) throws InterruptedException, ExecutionException, IOException {
+    public void removePlayer(int token, Player player) throws InterruptedException, ExecutionException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
         ArrayList<Player> players = (ArrayList<Player>) documentSnapshot.get("players");
 
@@ -113,13 +115,35 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         database.collection("Lobbies").document(String.valueOf(token)).update("players", players);
     }
 
-    public void addPlayer(int token, Optional<Player> player) throws IOException {
+    public void addPlayer(int token, Optional<Player> player) {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
                 .update("players", FieldValue.arrayUnion(player));
     }
 
+    public void updateChanceCard(){
+        CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
+        ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
+                .update("chanceCardDeck", cardDeckController.getChanceCardDeck());
+    }
 
+    public void updateCommonFundCard(){
+        CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+
+        ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
+                .update("commonFundCardDeck", cardDeckController.getCommonFundCardDeck());
+    }
+    public ArrayList<UUID> getChanceCard() throws InterruptedException, ExecutionException {
+        DocumentSnapshot documentSnapshot = getSnapshot(token);
+        return (ArrayList<UUID>) documentSnapshot.get("chanceCardDeck");
+    }
+
+    public ArrayList<UUID> getCommonFundCard() throws InterruptedException, ExecutionException {
+        DocumentSnapshot documentSnapshot = getSnapshot(token);
+        return (ArrayList<UUID>) documentSnapshot.get("commonFundCardDeck");
+    }
 }

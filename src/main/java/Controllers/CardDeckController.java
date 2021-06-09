@@ -5,8 +5,10 @@ import Models.Card;
 import Models.CardDeck;
 import Monopoly.UUID;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.concurrent.ExecutionException;
 
 public class CardDeckController implements Controller {
 
@@ -19,13 +21,13 @@ public class CardDeckController implements Controller {
 //        cardDeck = new CardDeck();
     }
 
-
-
     ArrayList<Card> chanceCardDeckArray = new ArrayList<>(), commonFundCardDeckArray = new ArrayList<>();
-
 
     CardDeck chanceCardDeck = new CardDeck(chanceCardDeckArray);
     CardDeck commonFundCardDeck = new CardDeck(commonFundCardDeckArray);
+
+    // this sucks
+    ArrayList<UUID> firestoreChanceDeck = new ArrayList<>(), firestoreCommonFundDeck = new ArrayList<>();
 
 // TODO:
 //  1. Update index on .teleportToLocation()
@@ -33,6 +35,7 @@ public class CardDeckController implements Controller {
 //  3. implement get out of jail free card
 //  4. implement go to jail card
 //  5. implement make general repairs for property
+//  6. Initialize
     public void setCardDecks() {
         chanceCardDeckArray.add(new Card(new UUID("CARD-1"), "Advance to Boardwalk", (player -> { Actions.teleportToLocation(player,0); })));
         chanceCardDeckArray.add(new Card(new UUID("CARD-2"), "Advance to go (collect $200)", (player -> { Actions.teleportToLocation(player,0); })));
@@ -72,22 +75,26 @@ public class CardDeckController implements Controller {
     }
 
     public Card grabChanceCard() {
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         chanceCardDeckArray = chanceCardDeck.getCardDeck();
         Card takenCard = chanceCardDeckArray.get(0);
         chanceCardDeckArray.remove(0);
         if(!UUID.compare("CARD-8", takenCard.getId())) {
             chanceCardDeckArray.add(takenCard);
         }
+        fireStoreController.updateChanceCard();
         return takenCard;
     }
 
     public Card grabCommonFundCard() {
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         commonFundCardDeckArray = commonFundCardDeck.getCardDeck();
         Card takenCard = commonFundCardDeckArray.get(0);
         commonFundCardDeckArray.remove(0);
         if(!UUID.compare("CARD-20", takenCard.getId())) {
             commonFundCardDeckArray.add(takenCard);
         }
+        fireStoreController.updateCommonFundCard();
         return takenCard;
     }
 
@@ -100,9 +107,36 @@ public class CardDeckController implements Controller {
         }
     }
 
+    public ArrayList<UUID> getChanceCardDeck(){
+        firestoreChanceDeck = returnUUID(chanceCardDeckArray);
+        return firestoreChanceDeck;
+    }
 
-    //TODO:
-    // 2. Upload the array of the decks that are shuffled to firebase
-    // 3. when a player grabs a card, card gets taken from index 0 and returns to the back of the deck.
+    public void setChanceCardDeck() throws InterruptedException, ExecutionException, IOException {
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        firestoreChanceDeck = fireStoreController.getChanceCard();
+        //TODO:
+        // 1. implement this in the right way, Arraylist<UUID> is stored in firestore.
+        // 2. add method to add this to the model
+    }
 
+    public ArrayList<UUID> getCommonFundCardDeck(){
+        firestoreCommonFundDeck = returnUUID(commonFundCardDeckArray);
+        return firestoreCommonFundDeck;
+    }
+
+    public void setCommonFundCardDeck() throws InterruptedException, ExecutionException, IOException {
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        firestoreCommonFundDeck = fireStoreController.getCommonFundCard();
+        //TODO:
+        // same as with setChanceCardDeck()
+    }
+
+    public ArrayList<UUID> returnUUID(ArrayList<Card> arrayListCard) {
+        ArrayList<UUID> arrayListUUID = new ArrayList<>();
+        for(int i = 0; arrayListCard.size() >= i; i++){
+            arrayListUUID.add(arrayListCard.get(i).getId());
+        }
+        return arrayListUUID;
+    }
 }
