@@ -18,19 +18,19 @@ public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot>, H
     }
 
     @Override
-    public void registerObserver(Observer<LobbySubject> o) {
-        observers.add(o);
+    public void registerObserver(Observer<LobbySubject> observer) {
+        observers.add(observer);
     }
 
     @Override
-    public void unregisterObserver(Observer<LobbySubject> o) {
-        observers.remove(o);
+    public void unregisterObserver(Observer<LobbySubject> observer) {
+        observers.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
-        for (Observer<LobbySubject> o : observers) {
-            o.update(this);
+        for (Observer<LobbySubject> observer : observers) {
+            observer.update(this);
         }
     }
 

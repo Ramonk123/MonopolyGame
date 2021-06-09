@@ -33,6 +33,7 @@ public class Player implements Model, Position, Nameable, Identifiable {
     }
 
     public void movePlayer(int amountThrown) {
+        //TODO: 40 should not be hard coded
         int newPosition = getPosition() + amountThrown;
         if(newPosition >= 40) {
             newPosition -= 40;
