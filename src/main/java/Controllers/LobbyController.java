@@ -32,6 +32,19 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         lobby = new Lobby();
     }
 
+    public void joinLobby(int token) throws LobbyException {
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        int lobbySize = 0;
+        try {
+            lobbySize = fireStoreController.getLobbySize(token);
+        } catch (Throwable e) {
+            throw new LobbyException("Exception at LobbyController@joinLobby", e);
+        }
+        Players playersEnum = Players.getByOrder(lobbySize + 1)
+                .orElseThrow(() -> new LobbyException("Exception at LobbyController@joinLobby: The lobby is full.", null));
+        
+    }
+
     @Override
     public void registerObserver(Observer<DocumentSnapshot> observer) { }
 

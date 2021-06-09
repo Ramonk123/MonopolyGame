@@ -3,6 +3,8 @@ package Controllers;
 import Monopoly.Identifiable;
 import Monopoly.UUID;
 
+import java.util.Optional;
+
 public enum Players implements Identifiable {
     PLAYER_ONE(new UUID("PLAYER-ONE"), 1),
     PLAYER_TWO(new UUID("PLAYER-TWO"), 2),
@@ -19,6 +21,17 @@ public enum Players implements Identifiable {
     Players(UUID id, int playerOrder) {
         this.id = id;
         this.order = playerOrder;
+    }
+
+    public static Optional<Players> getByOrder(int order) {
+        Players playersEnum = null;
+        for (Players p : Players.values()) {
+            if (p.order == order) {
+                playersEnum = p;
+                break;
+            }
+        }
+        return Optional.ofNullable(playersEnum);
     }
 
     @Override
