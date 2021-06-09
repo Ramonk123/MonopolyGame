@@ -11,34 +11,34 @@ import java.util.Optional;
 
 public class TransactionController implements Controller {
 
-    private Optional<Player> getPlayerByUUID(UUID playerUUID) {
+    private Optional<Player> getPlayerByPlayersEnum(Players playersEnum) {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        return playerController.getPlayerByUUID(playerUUID);
+        return playerController.getPlayerByPlayersEnum(playersEnum);
     }
 
-    public void setBalance(UUID playerUUID, int balance) throws Exception {
-        Player player = getPlayerByUUID(playerUUID).orElseThrow(Exception::new);
+    public void setBalance(Players playersEnum, int balance) throws Exception {
+        Player player = getPlayerByPlayersEnum(playersEnum).orElseThrow(Exception::new);
         player.getWallet().setBalance(balance);
     }
 
-    public int getBalance(UUID playerUUID) throws Exception {
-        Player player = getPlayerByUUID(playerUUID).orElseThrow(Exception::new);
+    public int getBalance(Players playersEnum) throws Exception {
+        Player player = getPlayerByPlayersEnum(playersEnum).orElseThrow(Exception::new);
         return player.getWallet().getBalance();
     }
 
-    public void addBalance(UUID playerUUID, int value) throws Exception {
-        Player player = getPlayerByUUID(playerUUID).orElseThrow(Exception::new);
+    public void addBalance(Players playersEnum, int value) throws Exception {
+        Player player = getPlayerByPlayersEnum(playersEnum).orElseThrow(Exception::new);
         player.getWallet().addBalance(value);
     }
 
-    public void subtractBalance(UUID playerUUID, int value) throws Exception {
-        Player player = getPlayerByUUID(playerUUID).orElseThrow(Exception::new);
+    public void subtractBalance(Players playersEnum, int value) throws Exception {
+        Player player = getPlayerByPlayersEnum(playersEnum).orElseThrow(Exception::new);
         player.getWallet().subtractBalance(value);
     }
 
-    public void payBalance(UUID payerUUID, UUID receiverUUID, int value) throws Exception {
-        Player payer = getPlayerByUUID(payerUUID).orElseThrow(Exception::new);
-        Player receiver = getPlayerByUUID(receiverUUID).orElseThrow(Exception::new);
+    public void payBalance(Players payerEnum, Players receiverEnum, int value) throws Exception {
+        Player payer = getPlayerByPlayersEnum(payerEnum).orElseThrow(Exception::new);
+        Player receiver = getPlayerByPlayersEnum(receiverEnum).orElseThrow(Exception::new);
         payer.getWallet().subtractBalance(value);
         receiver.getWallet().addBalance(value);
     }
