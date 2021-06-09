@@ -1,9 +1,7 @@
 package Controllers;
 
-import Models.Board;
 import Models.Player;
-import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
+import Monopoly.UUID;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -44,6 +42,11 @@ public class PlayerController implements Controller {
                 p = player;
             }
         }
+        return Optional.ofNullable(p);
+    }
+
+    public Optional<Player> getPlayerByUUID(UUID playerUUID) {
+        Player p = null;
         return Optional.ofNullable(p);
     }
 
