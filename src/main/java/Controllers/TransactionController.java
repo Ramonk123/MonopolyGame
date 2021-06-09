@@ -12,8 +12,8 @@ import java.util.Optional;
 public class TransactionController implements Controller {
 
     private Optional<Player> getPlayerByUUID(UUID playerUUID) {
-        PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        return pc.getPlayerByUUID(playerUUID);
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        return playerController.getPlayerByUUID(playerUUID);
     }
 
     public void setBalance(UUID playerUUID, int balance) throws Exception {
