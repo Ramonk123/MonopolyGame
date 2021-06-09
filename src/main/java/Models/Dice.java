@@ -13,8 +13,7 @@ public class Dice implements Model, DiceThrower {
     @Override
     public void throwDice() {
         Random random = new Random();
-        int number = random.nextInt(6);
-        eyes = number + 1;
+        eyes = random.nextInt(6) + 1;
     }
 
     @Override
