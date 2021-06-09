@@ -19,10 +19,8 @@ public class Monopoly extends Application {
         ControllerRegistry.register(new PlayerController());
         ControllerRegistry.register(new FireStoreController());
 
-        // Voorbeeld van opvraging Controller.
-        MainMenuController mmc = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
-        mmc.setStage(primaryStage);
+        MainMenuController mainMenuController = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
+        mainMenuController.setStage(primaryStage);
 
-        //MainMenuView mainMenuView = new MainMenuView(primaryStage);
     }
 }
