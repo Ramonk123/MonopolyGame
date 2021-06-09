@@ -11,6 +11,7 @@ import java.util.Optional;
 
 public class PlayerController implements Controller {
 
+    private Players clientPlayer;
     private ArrayList<Player> players = new ArrayList<>();
 
     public ArrayList<Player> getPlayers() {
