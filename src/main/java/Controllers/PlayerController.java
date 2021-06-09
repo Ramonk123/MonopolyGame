@@ -61,4 +61,8 @@ public class PlayerController implements Controller {
         player.movePlayer(amountThrown);
     }
 
+    public void teleportTo(Player player, int position) {
+        player.setPosition(position);
+    }
+
 }
