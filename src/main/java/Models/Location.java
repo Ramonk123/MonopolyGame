@@ -12,10 +12,12 @@ public abstract class Location implements Model, Position, Action, Nameable, Ide
     private UUID id;
     private String name;
     private int position;
+    private Set set;
 
-    public Location(Locations locationEnum, String name, int position) {
+    public Location(Locations locationEnum, String name, Set set, int position) {
         this.id = locationEnum.getId();
         this.name = name;
+        this.set = set;
         this.position = position;
     }
 
