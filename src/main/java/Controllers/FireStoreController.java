@@ -18,9 +18,6 @@ import java.util.concurrent.ExecutionException;
 
 public class FireStoreController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
-    private static int token;
-    private static Player player;
-
     public FireStoreController() {
 
     }
@@ -53,13 +50,13 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         return documentSnapshot.get();
     }
 
-    public static boolean checkExistence(int token) throws ExecutionException, InterruptedException, IOException {
+    public boolean checkExistence(int token) throws ExecutionException, InterruptedException, IOException {
         DocumentSnapshot document = getSnapshot(token);
 
         return document.exists();
     }
 
-    public static int getLobbySize(int token) throws IOException, ExecutionException, InterruptedException {
+    public int getLobbySize(int token) throws IOException, ExecutionException, InterruptedException {
         DocumentSnapshot document = getSnapshot(token);
 
         ArrayList<Player> players = (ArrayList<Player>) document.get("players");
@@ -69,7 +66,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
     }
 
 
-    public static void createLobby(int token) throws IOException {
+    public void createLobby(int token) throws IOException {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
 
         //TODO:
@@ -81,8 +78,6 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         lobbyData.put("commonFundCardDeck", "sample");
         lobbyData.put("chanceCardDeck", "sample");
         lobbyData.put("owner", "sample");
-        lobbyData.put("houses", "sample");
-        lobbyData.put("hotel", "sample");
         lobbyData.put("activePlayer", "sample");
         lobbyData.put("playerBids", "sample");
         lobbyData.put("trade", "sample");
@@ -92,7 +87,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         ApiFuture<WriteResult> upload = db.collection("Lobbies").document(String.valueOf(token)).set(lobbyData);
     }
 
-    public static void removePlayer(int token, Player player) throws InterruptedException, ExecutionException, IOException {
+    public void removePlayer(int token, Player player) throws InterruptedException, ExecutionException, IOException {
         DocumentSnapshot document = getSnapshot(token);
         ArrayList<Player> players = (ArrayList<Player>) document.get("players");
 
@@ -106,7 +101,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         db.collection("Lobbies").document(String.valueOf(token)).update("players", players);
     }
 
-    public static void addPlayer(int token, Optional<Player> player) throws IOException {
+    public void addPlayer(int token, Optional<Player> player) throws IOException {
         com.google.cloud.firestore.Firestore db = Firestore.getFirestore();
 
         ApiFuture<WriteResult> upload = db.collection("Lobbies").document(String.valueOf(token))
