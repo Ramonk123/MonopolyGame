@@ -8,20 +8,30 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.file.Files;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 
 public class Firestore {
 
     public static com.google.cloud.firestore.Firestore getFirestore() throws IOException {
 
-        FileInputStream serviceAccount =
-                new FileInputStream("monopolyteam6-47708-firebase-adminsdk-tp5m6-9a482af7f7.json");
+//        FileInputStream serviceAccount =
+//                new FileInputStream("monopolyteam6-47708-firebase-adminsdk-tp5m6-9a482af7f7.json");
+
+        String fileName = "monopolyteam6-47708-firebase-adminsdk-tp5m6-9a482af7f7.json";
+
+        ClassLoader classLoader = Firestore.class.getClassLoader();
+        File file = new File(Objects.requireNonNull(classLoader.getResource(fileName)).getFile());
+        FileInputStream serviceAccount = new FileInputStream(String.valueOf(file.toPath()));
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))

@@ -18,6 +18,8 @@ import java.util.concurrent.ExecutionException;
 
 public class FireStoreController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
+    private int token;
+
     public FireStoreController() {
 
     }
@@ -42,7 +44,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     }
 
-    public static DocumentSnapshot getSnapshot(int token) throws IOException, ExecutionException, InterruptedException {
+    public DocumentSnapshot getSnapshot(int token) throws IOException, ExecutionException, InterruptedException {
         com.google.cloud.firestore.Firestore db = Firestore.getFirestore();
         DocumentReference documentReference = db.collection("Lobbies").document(String.valueOf(token));
         ApiFuture<DocumentSnapshot> documentSnapshot = documentReference.get();
