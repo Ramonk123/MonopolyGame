@@ -17,6 +17,7 @@ public class Monopoly extends Application {
         ControllerRegistry.register(new LobbyController());
         ControllerRegistry.register(new CardDeckController());
         ControllerRegistry.register(new PlayerController());
+        ControllerRegistry.register(new FireStoreController());
 
         // Voorbeeld van opvraging Controller.
         MainMenuController mmc = (MainMenuController) ControllerRegistry.get(MainMenuController.class);

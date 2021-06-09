@@ -25,6 +25,9 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     private int token;
     private String name;
 
+
+    FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+
     public LobbyController() {
         lobby = new Lobby();
     }
@@ -67,7 +70,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
 
     private void addPlayerToLobby(String name) throws IOException {
         Optional<Player> player = getPlayerByName(name); // TODO: idk if this is supposed to be optional
-        FireStoreController.addPlayer(token, player);
+        fireStoreController.addPlayer(token, player);
     }
 
     private void removePlayerFromLobby() throws InterruptedException, ExecutionException, IOException {
@@ -111,11 +114,11 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
 
     private void joinLobby(ActionEvent e, String name) throws InterruptedException, ExecutionException, IOException {
         //Added some functions, thought I could write the error messages while I'm at it. Feel free to change it.
-        if(!FireStoreController.checkExistence(token)){
+        if(!fireStoreController.checkExistence(token)){
             JoinLobbyViewTokenTextField.setText("This lobby does not exist");
         }
 
-        if(FireStoreController.getLobbySize(token) >= 8){
+        if(fireStoreController.getLobbySize(token) >= 8){
             //Lobby is full
             //TODO:
             // add pop up
@@ -134,12 +137,12 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     private void CreateLobbySubmit(ActionEvent e) throws InterruptedException, ExecutionException, IOException {
         generateToken();
 
-        while(FireStoreController.checkExistence(token)){
+        while(fireStoreController.checkExistence(token)){
             generateToken();
         }
 
 
-        FireStoreController.createLobby(token);
+        fireStoreController.createLobby(token);
 
         name = CreateLobbyViewNameTextField.getText();
         PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
@@ -154,13 +157,6 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         Random random = new Random();
         token = random.nextInt(6);
     }
-
-// TODO: Think we can delete this
-
-//    private void createLobby(ActionEvent e) throws IOException {
-//        FireStoreController.createLobby(token);
-//
-//    }
 
     //Lobby
 
