@@ -45,10 +45,9 @@ public class PlayerController implements Controller {
         return Optional.ofNullable(p);
     }
 
-    @Nullable
-    public Player getPlayerByUUID(UUID playerUUID) {
+    public Optional<Player> getPlayerByUUID(UUID playerUUID) {
         Player p = null;
-        return p;
+        return Optional.ofNullable(p);
     }
 
     public boolean nameExists(String name) {
