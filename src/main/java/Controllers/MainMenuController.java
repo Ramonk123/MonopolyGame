@@ -21,10 +21,10 @@ public class MainMenuController implements Controller, Subject<DocumentSnapshot>
     }
 
     @Override
-    public void registerObserver(Observer<DocumentSnapshot> o) { }
+    public void registerObserver(Observer<DocumentSnapshot> observer) { }
 
     @Override
-    public void unregisterObserver(Observer<DocumentSnapshot> o) { }
+    public void unregisterObserver(Observer<DocumentSnapshot> observer) { }
 
     @Override
     public void notifyObservers() {
@@ -38,8 +38,8 @@ public class MainMenuController implements Controller, Subject<DocumentSnapshot>
 
     //Join Lobby
     @FXML
-    private void goToJoinLobby(ActionEvent e) {
-        Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    private void goToJoinLobby(ActionEvent actionEvent) {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
         lobbyController.setJoinLobbyStage(primaryStage);
     }
