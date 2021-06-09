@@ -21,22 +21,34 @@ public class CardDeckController implements Controller {
     }
 
 // TODO:
-//  1. Add Actions.
+//  1. Update index on .teleportToLocation()
     public void setCardDecks() {
 
-        Card c1 = new Card(new UUID("CARD-1"), "Advance to Boardwalk", Actions::teleportToBoardWalk);
-        Card c2 = new Card(new UUID("CARD-2"), "Advance to go (collect $200)", Actions::teleportToGo);
-        Card c3 = new Card(new UUID("CARD-3"), "Advance to Illinois Avenue. If you pass go, collect $200", Actions::teleportToIllinois);
-        Card c4 = new Card(new UUID("CARD-4"), "Advance to St. Charles Place. If you pass go, collect $200", Actions::teleportToStCharles);
+        Card c1 = new Card(new UUID("CARD-1"), "Advance to Boardwalk", (player -> {
+            Actions.teleportToLocation(player,0);
+        }));
+        Card c2 = new Card(new UUID("CARD-2"), "Advance to go (collect $200)", (player -> {
+            Actions.teleportToLocation(player,0);
+        }));
+        Card c3 = new Card(new UUID("CARD-3"), "Advance to Illinois Avenue. If you pass go, collect $200", (player -> {
+            Actions.teleportToLocation(player,0);
+        }));
+        Card c4 = new Card(new UUID("CARD-4"), "Advance to St. Charles Place. If you pass go, collect $200", (player -> {
+            Actions.teleportToLocation(player,0);
+        }));
         Card c5 = new Card(new UUID("CARD-5"), "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled.", Actions::teleportToNearestRailroad);
-        Card c6 = new Card(new UUID("CARD-6"), "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total of ten times amount thrown.", Actions::exampleAction);
-        Card c7 = new Card(new UUID("CARD-7"), "Bank pays you dividend of $50", Actions::exampleAction);
+        Card c6 = new Card(new UUID("CARD-6"), "Advance to the nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total of ten times amount thrown.", Actions::teleportToNearestUtility);
+        Card c7 = new Card(new UUID("CARD-7"), "Bank pays you dividend of $50", (player -> {
+            Actions.receiveFunds(player, 50);
+        }));
         Card c8 = new Card(CardDeckController.CHANCE_JAIL_CARD_UUID, "Get out of jail free", Actions::exampleAction);
-        Card c9 = new Card(new UUID("CARD-9"), "Go back 3 spaces", Actions::exampleAction);
+        Card c9 = new Card(new UUID("CARD-9"), "Go back 3 spaces", Actions::goBackThreeSpaces);
         Card c10 = new Card(new UUID("CARD-10"), "Go to Jail. Go directly to Jail, do not pass Go, do not collect $200", Actions::exampleAction);
         Card c11 = new Card(new UUID("CARD-11"), "Make general repairs on all your property. For each house pay $25. For each hotel pay $100", Actions::exampleAction);
         Card c12 = new Card(new UUID("CARD-12"), "Speeding fine $15", Actions::exampleAction);
-        Card c13 = new Card(new UUID("CARD-13"), "Take a trip to Reading Railroad. If you pass Go, collect $200", Actions::exampleAction);
+        Card c13 = new Card(new UUID("CARD-13"), "Take a trip to Reading Railroad. If you pass Go, collect $200", (player -> {
+            Actions.teleportToLocation(player,0);
+        }));
         Card c14 = new Card(new UUID("CARD-14"), "You have been elected Chairman of the Board. Pay each player $50", Actions::exampleAction);
         Card c15 = new Card(new UUID("CARD-15"), "Your building loan matures. Collect $150", Actions::exampleAction);
 
@@ -61,6 +73,6 @@ public class CardDeckController implements Controller {
     //TODO:
     // 1. Create the card decks for both community chest and chance - function gets called when game gets created
     // 2. Upload the array of the decks that are shuffled to firebase
-    // 3. when a player graps a card, card gets taken from index 0 and returns to the back of the deck.
+    // 3. when a player grabs a card, card gets taken from index 0 and returns to the back of the deck.
 
 }

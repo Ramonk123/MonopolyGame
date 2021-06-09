@@ -3,6 +3,7 @@ package Models;
 import Controllers.ControllerRegistry;
 import Controllers.MainMenuController;
 import Controllers.PlayerController;
+import Controllers.TransactionController;
 
 public class Actions {
 
@@ -10,32 +11,37 @@ public class Actions {
         System.out.println("An example action has been performed.");
     }
 
-    public static void teleportToBoardWalk(Player player) {
-        final int BOARDWALK_INDEX = 40; //TODO: Set right index for location
+    public static void teleportToLocation(Player player, int index) {
+         int BOARDWALK_INDEX = 40; //TODO: Set right index for location
+
+
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         playerController.teleportTo(player, BOARDWALK_INDEX);
     }
 
-    public static void teleportToGo(Player player) {
-        final int GO_INDEX = 0;
-        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        playerController.teleportTo(player, GO_INDEX);
-    }
-
-    public static void teleportToIllinois(Player player) {
-        final int ILLINOIS_INDEX = 0; //TODO: Set right index for location
-        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        playerController.teleportTo(player, ILLINOIS_INDEX);
-    }
-
-    public static void teleportToStCharles(Player player) {
-        final int ST_CHARLES_INDEX = 0; //TODO: Set right index for location
-        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        playerController.teleportTo(player, ST_CHARLES_INDEX);
-    }
-
     public static void teleportToNearestRailroad(Player player) {
-
+        //TODO:
+        // add functionality to method.
+        // Unable to do so now because location array not implemented
     }
 
+    public static void teleportToNearestUtility(Player player) {
+        //TODO:
+        // add functionality to method.
+        // Unable to do so now because location array not implemented
+    }
+
+    public static void receiveFunds(Player player, int amount) {
+        TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
+        try{
+            transactionController.addBalance(player.getId(), 50);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public static void goBackThreeSpaces(Player player) {
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+
+    }
 }
