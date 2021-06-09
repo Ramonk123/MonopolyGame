@@ -32,6 +32,12 @@ public class PlayerController implements Controller {
 
     public Optional<Player> getPlayerByUUID(UUID playerUUID) {
         Player player = null;
+        for (Player p : players) {
+            if (UUID.compare(playerUUID, p)) {
+                player = p;
+                break;
+            }
+        }
         return Optional.ofNullable(player);
     }
 
