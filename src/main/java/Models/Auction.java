@@ -12,7 +12,6 @@ import java.util.List;
 
 public class Auction implements Model {
     private Player player;
-    public static AuctionController auctionController;
     private boolean startedAuction = false;
     private HashMap<Player, Integer> playerBidInfo = new HashMap<>();
     private ArrayList playerBidCollection = new ArrayList();

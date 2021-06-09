@@ -15,7 +15,6 @@ import javafx.scene.layout.Pane;
 
 public class AuctionController implements Controller, Subject<DocumentSnapshot> {
 
-    private static AuctionController auctionController;
     private Player player;
     private Auction auction;
 
@@ -24,12 +23,12 @@ public class AuctionController implements Controller, Subject<DocumentSnapshot> 
     }
 
     @Override
-    public void registerObserver(Observer<DocumentSnapshot> o) {
+    public void registerObserver(Observer<DocumentSnapshot> observer) {
 
     }
 
     @Override
-    public void unregisterObserver(Observer<DocumentSnapshot> o) {
+    public void unregisterObserver(Observer<DocumentSnapshot> observer) {
 
     }
 
@@ -49,7 +48,7 @@ public class AuctionController implements Controller, Subject<DocumentSnapshot> 
         //TODO:  add card to FX:ID cardPlaceHolder
         auctionPane.setVisible(!auctionPane.isVisible());
 
-        placeBidButton.setOnAction(event -> {
+        placeBidButton.setOnAction(actionEvent -> {
 
             if (!auction.hasStartedAuction()){
                 try{
@@ -58,8 +57,8 @@ public class AuctionController implements Controller, Subject<DocumentSnapshot> 
                         auction.addPlayerBid(bid);
                     }
 
-                } catch(NumberFormatException e) {
-                    System.out.println(e);
+                } catch(NumberFormatException numberFormatException) {
+                    System.out.println(numberFormatException);
                     NoNumberOnInputError.setVisible(true);
                     bidTextArea.clear();
                 }

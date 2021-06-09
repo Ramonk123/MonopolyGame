@@ -7,7 +7,7 @@ import Controllers.TransactionController;
 
 public class Actions {
 
-    public static void exampleAction(Player p) {
+    public static void exampleAction(Player player) {
         System.out.println("An example action has been performed.");
     }
 

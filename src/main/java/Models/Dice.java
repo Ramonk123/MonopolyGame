@@ -12,9 +12,9 @@ public class Dice implements Model, DiceThrower {
 
     @Override
     public void throwDice() {
-        Random rand = new Random();
-        int n = rand.nextInt(6);
-        eyes = n + 1;
+        Random random = new Random();
+        int number = random.nextInt(6);
+        eyes = number + 1;
     }
 
     @Override

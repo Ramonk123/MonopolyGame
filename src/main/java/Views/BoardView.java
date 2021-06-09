@@ -37,8 +37,8 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
         this.primaryStage = primaryStage;
         try {
             createPrimaryStage();
-        } catch(IOException e) {
-            e.printStackTrace();
+        } catch(IOException ioException) {
+            ioException.printStackTrace();
         }
     }
 

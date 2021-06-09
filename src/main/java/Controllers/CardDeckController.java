@@ -11,7 +11,6 @@ import java.util.function.Consumer;
 // check commit msg for reasoning for changes
 public class CardDeckController implements Controller {
 
-    private static CardDeckController cardController;
     private CardDeck cardDeck;
 
     private final static UUID CHANCE_JAIL_CARD_UUID = new UUID("CARD-8");
@@ -76,19 +75,4 @@ public class CardDeckController implements Controller {
     // 2. Upload the array of the decks that are shuffled to firebase
     // 3. when a player grabs a card, card gets taken from index 0 and returns to the back of the deck.
 
-
-    /*@Override
-    public void registerObserver(View v) {
-        cardDeck.registerObserver(v);
-    }
-
-    @Override
-    public void unregisterObserver(View v) {
-        cardDeck.unregisterObserver(v);
-    }
-
-    @Override
-    public void notifyObservers(DocumentSnapshot ds) {
-        cardDeck.notifyObservers(ds);
-    }*/
 }

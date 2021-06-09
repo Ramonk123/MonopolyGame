@@ -16,19 +16,19 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
     }
 
     @Override
-    public void registerObserver(Observer<BoardSubject> o) {
-        observers.add(o);
+    public void registerObserver(Observer<BoardSubject> observer) {
+        observers.add(observer);
     }
 
     @Override
-    public void unregisterObserver(Observer<BoardSubject> o) {
+    public void unregisterObserver(Observer<BoardSubject> observer) {
 
     }
 
     @Override
     public void notifyObservers() {
-        for (Observer<BoardSubject> o : observers) {
-            o.update(this);
+        for (Observer<BoardSubject> observer : observers) {
+            observer.update(this);
         }
     }
 

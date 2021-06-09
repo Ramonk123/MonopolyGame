@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 public class LobbyController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
     private Lobby lobby;
-    private DocumentSnapshot ds;
+    private DocumentSnapshot documentSnapshot;
 
     private int token;
     private String name;
@@ -33,14 +33,14 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     }
 
     @Override
-    public void registerObserver(Observer<DocumentSnapshot> o) { }
+    public void registerObserver(Observer<DocumentSnapshot> observer) { }
 
     @Override
-    public void unregisterObserver(Observer<DocumentSnapshot> o) { }
+    public void unregisterObserver(Observer<DocumentSnapshot> observer) { }
 
     @Override
     public void notifyObservers() {
-        lobby.update(ds);
+        lobby.update(documentSnapshot);
     }
 
     @Override
@@ -57,14 +57,14 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     }
 
     @FXML
-    private void returnToMainMenu(ActionEvent e) {
-        Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        MainMenuController mmc = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
-        mmc.setStage(primaryStage);
+    private void returnToMainMenu(ActionEvent actionEvent) {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        MainMenuController mainMenuController = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
+        mainMenuController.setStage(primaryStage);
     }
 
-    private void goToLobby(ActionEvent e) {
-        Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
+    private void goToLobby(ActionEvent actionEvent) {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         lobby.setStage(primaryStage);
     }
 
@@ -83,13 +83,13 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     }
 
     private Optional<Player> getPlayerByName(String name) {
-        PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        return pc.getPlayerByName(name);
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        return playerController.getPlayerByName(name);
     }
 
     private boolean playerNameExists(String name) {
-        PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        return pc.nameExists(name);
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        return playerController.nameExists(name);
     }
 
     //Join Lobby
@@ -98,13 +98,13 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @FXML
     private TextField JoinLobbyViewNameTextField;
     @FXML
-    private void JoinLobbySubmit(ActionEvent e) throws IOException {
+    private void JoinLobbySubmit(ActionEvent actionEvent) throws IOException {
         try {
             token = Integer.parseInt(JoinLobbyViewTokenTextField.getText());
             name = JoinLobbyViewNameTextField.getText();
 
-            joinLobby(e, name);
-            goToLobby(e);
+            joinLobby(actionEvent, name);
+            goToLobby(actionEvent);
         } catch(NumberFormatException exception) {
             JoinLobbyViewTokenTextField.setText("Numbers Only");
         } catch (InterruptedException | ExecutionException interruptedException) {
@@ -112,7 +112,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         }
     }
 
-    private void joinLobby(ActionEvent e, String name) throws InterruptedException, ExecutionException, IOException {
+    private void joinLobby(ActionEvent actionEvent, String name) throws InterruptedException, ExecutionException, IOException {
         //Added some functions, thought I could write the error messages while I'm at it. Feel free to change it.
         if(!fireStoreController.checkExistence(token)){
             JoinLobbyViewTokenTextField.setText("This lobby does not exist");
@@ -134,7 +134,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @FXML
     private TextField CreateLobbyViewNameTextField;
     @FXML
-    private void CreateLobbySubmit(ActionEvent e) throws InterruptedException, ExecutionException, IOException {
+    private void CreateLobbySubmit(ActionEvent actionEvent) throws InterruptedException, ExecutionException, IOException {
         generateToken();
 
         while(fireStoreController.checkExistence(token)){
@@ -145,11 +145,11 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         fireStoreController.createLobby(token);
 
         name = CreateLobbyViewNameTextField.getText();
-        PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        pc.setPlayer(name);
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        playerController.setPlayer(name);
 
         //Open the lobby view
-        goToLobby(e);
+        goToLobby(actionEvent);
 
     }
 
@@ -165,16 +165,16 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @FXML
     Pane ConfirmToMenuView;
     @FXML
-    private void LeaveLobby(ActionEvent e) {
+    private void LeaveLobby(ActionEvent actionEvent) {
         ConfirmToMenuView.setVisible(true);
     }
     @FXML
-    private void ConfirmLeaveLobby(ActionEvent e) throws InterruptedException, ExecutionException, IOException {
+    private void ConfirmLeaveLobby(ActionEvent actionEvent) throws InterruptedException, ExecutionException, IOException {
         removePlayerFromLobby();
-        returnToMainMenu(e);
+        returnToMainMenu(actionEvent);
     }
     @FXML
-    private void DenyLeaveLobby(ActionEvent e) {
+    private void DenyLeaveLobby(ActionEvent actionEvent) {
         ConfirmToMenuView.setVisible(false);
     }
 

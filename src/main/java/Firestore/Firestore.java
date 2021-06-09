@@ -39,11 +39,11 @@ public class Firestore {
 
         FirebaseApp.initializeApp(options);
 
-        com.google.cloud.firestore.Firestore db = FirestoreClient.getFirestore();
+        com.google.cloud.firestore.Firestore database = FirestoreClient.getFirestore();
 
         Firestore firestore = new Firestore();
 
-        return db;
+        return database;
     }
 
     // methods you can use to upload data to firestore.
