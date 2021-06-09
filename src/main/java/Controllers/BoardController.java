@@ -72,11 +72,13 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, H
 
     private void setPlayerNameToLabel(String name, int labelNumber) {
         Label label = getLabelByNumber(labelNumber);
+        assert label != null;
         label.setText(name);
     }
 
     private void setVisibilityLabel(int labelNumber) {
         Label label = getLabelByNumber(labelNumber);
+        assert label != null;
         label.setVisible(false);
     }
 
