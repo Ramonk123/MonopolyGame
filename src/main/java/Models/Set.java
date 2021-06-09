@@ -1,6 +1,7 @@
 package Models;
 
 public enum Set {
+    BROWN(2),
     BLUE(2),
     GREEN(4),
     UTILITY(2),
