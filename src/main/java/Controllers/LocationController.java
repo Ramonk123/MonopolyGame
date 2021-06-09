@@ -370,4 +370,50 @@ public class LocationController implements Controller {
 
         );
     }
+    public void setStationLocations(){
+        StationLocation stationNorth = new StationLocation(
+                Locations.StationNorth,
+                "Station Noord",
+                Set.TRAINSTATION,
+                25,
+                0
+        );
+        StationLocation stationEast = new StationLocation(
+                Locations.StationEast,
+                "Station Oost",
+                Set.TRAINSTATION,
+                35,
+                0
+        );
+        StationLocation stationSouth = new StationLocation(
+                Locations.StationSouth,
+                "Station Zuid",
+                Set.TRAINSTATION,
+                5,
+                0
+        );
+        StationLocation stationWest = new StationLocation(
+                Locations.StationWest,
+                "Station West",
+                Set.TRAINSTATION,
+                15,
+                0
+        );
+    }
+    public void setUtilityLocations(){
+        UtilityLocation waterWorks = new UtilityLocation(
+                Locations.WaterWorks,
+                "Waterleiding",
+                Set.TRAINSTATION,
+                28,
+                0
+        );
+        UtilityLocation electricComapany = new UtilityLocation(
+                Locations.ElectricCompany,
+                "Elektriciteitsbedrijf",
+                Set.TRAINSTATION,
+                12,
+                0
+        );
+    }
 }
