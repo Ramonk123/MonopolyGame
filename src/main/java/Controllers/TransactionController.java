@@ -35,4 +35,11 @@ public class TransactionController implements Controller {
         player.getWallet().subtractBalance(value);
     }
 
+    public void payBalance(UUID payerUUID, UUID receiverUUID, int value) {
+        Player payer = getPlayerByUUID(payerUUID);
+        Player receiver = getPlayerByUUID(receiverUUID);
+        payer.getWallet().subtractBalance(value);
+        receiver.getWallet().addBalance(value);
+    }
+
 }
