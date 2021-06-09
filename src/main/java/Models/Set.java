@@ -2,11 +2,16 @@ package Models;
 
 public enum Set {
     BROWN(2),
-    BLUE(2),
-    GREEN(4),
+    LIGHTBLUE(3),
+    PINK(3),
+    ORANGE(3),
+    RED(3),
+    YELLOW(3),
+    GREEN(3),
+    DARKBLUE(2),
     UTILITY(2),
     TRAINSTATION(4),
-    NONE(0);
+    NONE(12);
 
     private int amount;
 

@@ -25,15 +25,4 @@ public class StreetLocation extends OwnableLocation {
     public void action(Player player) {
 
     }
-    StreetLocation dorpStraat = new StreetLocation(
-            // The Locations enum is an enum that contains all existing locations with their respective UUIDs
-            Locations.Dorpstraat,
-            "Start",
-            Set.BROWN,
-            0,
-            0,
-            0,
-            0,
-            0
-    );
 }

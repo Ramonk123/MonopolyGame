@@ -1,14 +1,19 @@
 package Controllers;
 
-import Models.Board;
-import Models.Location;
+import Models.*;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
+import java.util.function.Consumer;
+
 public class LocationController implements Controller {
     private AuctionController auctionController = new AuctionController();
+    private SpecialLocation specialLocations;
+    private StreetLocation streetLocations;
 
     private static LocationController locationController;
+
+
 
     /*@Override
     public void registerObserver(View v) {
@@ -30,5 +35,339 @@ public class LocationController implements Controller {
     private void refuseToBuyLocation() {
         auctionController.setAuctionStarter();
         auctionController.startAuction();
+    }
+
+    public void setStreetLocation(){
+        StreetLocation dorpStraat = new StreetLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.Dorpstraat,
+                "Dorpstraat",
+                Set.BROWN,
+                1,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation brink = new StreetLocation(
+                Locations.Brink,
+                "Brink",
+                Set.BROWN,
+                3,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation steenStraat = new StreetLocation(
+                Locations.Steenstraat,
+                "Steenstraat",
+                Set.LIGHTBLUE,
+                6,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation ketelStraat = new StreetLocation(
+                Locations.Ketelstraat,
+                "Ketelstraat",
+                Set.LIGHTBLUE,
+                8,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation velperPlein = new StreetLocation(
+                Locations.Velperplein,
+                "Velperplein",
+                Set.LIGHTBLUE,
+                9,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation bartelJorisStraat = new StreetLocation(
+                Locations.Barteljorisstraat,
+                "Barteljorisstraat",
+                Set.PINK,
+                11,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation zijlWeg = new StreetLocation(
+                Locations.Zijlweg,
+                "Zijlweg",
+                Set.PINK,
+                13,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation houtStraat = new StreetLocation(
+                Locations.Houtstraat,
+                "Houtstraat",
+                Set.PINK,
+                14,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation neude = new StreetLocation(
+                Locations.Neude,
+                "Neude",
+                Set.ORANGE,
+                16,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation biltStraat = new StreetLocation(
+                Locations.Biltstraat,
+                "Biltstraat",
+                Set.ORANGE,
+                18,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation vreeBurg = new StreetLocation(
+                Locations.Vreeburg,
+                "Vreeburg",
+                Set.ORANGE,
+                19,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation aKerkhof = new StreetLocation(
+                Locations.A_Kerkhof,
+                "A-Kerkhof",
+                Set.RED,
+                21,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation groteMarkt = new StreetLocation(
+                Locations.GroteMarkt,
+                "Grote Markt",
+                Set.RED,
+                23,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation hereStraat = new StreetLocation(
+                Locations.Herestraat,
+                "Herestraat",
+                Set.RED,
+                24,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation spui = new StreetLocation(
+                Locations.Spui,
+                "Spui",
+                Set.YELLOW,
+                26,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation plein = new StreetLocation(
+                Locations.Plein,
+                "Plein",
+                Set.YELLOW,
+                27,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation langePoten = new StreetLocation(
+                Locations.LangePoten,
+                "Lange Poten",
+                Set.YELLOW,
+                29,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation hofplein = new StreetLocation(
+                Locations.Hofplein,
+                "Hofplein",
+                Set.GREEN,
+                31,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation blaak = new StreetLocation(
+                Locations.Blaak,
+                "Blaak",
+                Set.GREEN,
+                32,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation coolSingel = new StreetLocation(
+                Locations.Coolsingel,
+                "Coolsingel",
+                Set.GREEN,
+                34,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation leidseStraat = new StreetLocation(
+                Locations.Leidsestraat,
+                "Leidsestraat",
+                Set.DARKBLUE,
+                37,
+                0,
+                0,
+                0,
+                0
+        );
+        StreetLocation kalverStraat = new StreetLocation(
+                Locations.Kalverstraat,
+                "Kalverstraat",
+                Set.DARKBLUE,
+                39,
+                0,
+                0,
+                0,
+                0
+        );
+    }
+
+    public void setSpecialLocations(){
+        SpecialLocation start = new SpecialLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.Start,
+                "Start",
+                Set.NONE,
+                0,
+                Actions::exampleAction
+        );
+        SpecialLocation jail = new SpecialLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.Jail,
+                "Gevangenis",
+                Set.NONE,
+                10,
+                Actions::exampleAction
+
+        );
+        SpecialLocation goToJail = new SpecialLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.GoToJail,
+                "Naar de Gevangenis",
+                Set.NONE,
+                30,
+                Actions::exampleAction
+
+        );
+        SpecialLocation incomeTax = new SpecialLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.IncomeTax,
+                "Inkomsten Belasting",
+                Set.NONE,
+                4,
+                Actions::exampleAction
+
+        );
+        SpecialLocation superTax = new SpecialLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.SuperTax,
+                "Extra Belasting",
+                Set.NONE,
+                38,
+                Actions::exampleAction
+
+        );
+        SpecialLocation chanceOne = new SpecialLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.ChanceOne,
+                "Kans",
+                Set.NONE,
+                7,
+                Actions::exampleAction
+
+        );
+        SpecialLocation chanceTwo = new SpecialLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.ChanceTwo,
+                "Kans",
+                Set.NONE,
+                22,
+                Actions::exampleAction
+
+        );
+        SpecialLocation chanceThree = new SpecialLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.ChanceThree,
+                "Kans",
+                Set.NONE,
+                36,
+                Actions::exampleAction
+
+        );
+        SpecialLocation communityChestOne = new SpecialLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.CommunityChestOne,
+                "Algemeen Fonds",
+                Set.NONE,
+                2,
+                Actions::exampleAction
+
+        );
+        SpecialLocation communityChestTwo = new SpecialLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.CommunityChestTwo,
+                "Algemeen Fonds",
+                Set.NONE,
+                17,
+                Actions::exampleAction
+
+        );
+        SpecialLocation communityChestThree = new SpecialLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.CommunityChestThree,
+                "Algemeen Fonds",
+                Set.NONE,
+                33,
+                Actions::exampleAction
+
+        );
+        SpecialLocation freeParking = new SpecialLocation(
+                // The Locations enum is an enum that contains all existing locations with their respective UUIDs
+                Locations.FreeParking,
+                "Vrij Parkeren",
+                Set.NONE,
+                20,
+                Actions::exampleAction
+
+        );
     }
 }

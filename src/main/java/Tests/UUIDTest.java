@@ -46,9 +46,9 @@ public class UUIDTest {
         // Location implements Identifiable and thus can be compared to a UUID
         StreetLocation location = new StreetLocation(
                 // The Locations enum is an enum that contains all existing locations with their respective UUIDs
-                Locations.Amsterdam,
-                "Amsterdam",
-                Set.BLUE,
+                Locations.Dorpstraat,
+                "Dorpstraat",
+                Set.BROWN,
                 0,
                 0,
                 0,
@@ -58,7 +58,7 @@ public class UUIDTest {
 
         // The Locations enum implements Identifiable and thus can be compared to other Identifiables.
         // True
-        Assertions.assertTrue(UUID.compare(Locations.Amsterdam, location));
+        Assertions.assertTrue(UUID.compare(Locations.Dorpstraat, location));
 
         // False
         Assertions.assertFalse(UUID.compare(card, location));

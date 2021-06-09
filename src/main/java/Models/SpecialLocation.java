@@ -20,4 +20,7 @@ public class SpecialLocation extends Location {
     public void action(Player player) {
         this.action.accept(player);
     }
+
+    public Consumer<Player> getAction(){return action; }
+
 }

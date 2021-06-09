@@ -35,4 +35,8 @@ public abstract class Location implements Model, Position, Action, Nameable, Ide
     public UUID getId() {
         return id;
     }
+
+    public Set getSet() {
+        return set;
+    }
 }
