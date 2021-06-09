@@ -38,8 +38,8 @@ public class JoinLobbyView implements View, Observer<LobbySubject>, HasStage {
         this.primaryStage = primaryStage;
         try {
             createPrimaryStage();
-        } catch(IOException e) {
-            e.printStackTrace();
+        } catch(IOException ioException) {
+            ioException.printStackTrace();
         }
     }
 
