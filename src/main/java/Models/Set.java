@@ -1,6 +1,15 @@
 package Models;
 
 public enum Set {
-    BLUE,
-    UTILITY,
+    BLUE(2),
+    GREEN(4),
+    UTILITY(2),
+    TRAINSTATION(4),
+    NONE(0);
+
+    private int amount;
+
+    private Set(int amount) {
+        this.amount = amount;
+    }
 }

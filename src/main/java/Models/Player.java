@@ -1,20 +1,24 @@
 package Models;
 
+import Monopoly.Identifiable;
+import Monopoly.UUID;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements Model, Position, Nameable {
+public class Player implements Model, Position, Nameable, Identifiable {
 
     private String name;
     private String pawnIcon;
     private Wallet wallet;
     private int position;
     private boolean inJail;
+    private UUID id;
 
-    public Player(String name) {
+    public Player(UUID id, String name) {
+        this.id = id;
         this.name = name;
         wallet = new Wallet();
     }
@@ -47,5 +51,10 @@ public class Player implements Model, Position, Nameable {
 
     public Wallet getWallet() {
         return wallet;
+    }
+
+    @Override
+    public UUID getId() {
+        return id;
     }
 }
