@@ -26,19 +26,19 @@ public class MainMenu implements Model, MainMenuSubject, Observer<DocumentSnapsh
     }
 
     @Override
-    public void registerObserver(Observer<MainMenuSubject> o) {
-        observers.add(o);
+    public void registerObserver(Observer<MainMenuSubject> observer) {
+        observers.add(observer);
     }
 
     @Override
-    public void unregisterObserver(Observer<MainMenuSubject> o) {
-        observers.remove(o);
+    public void unregisterObserver(Observer<MainMenuSubject> observer) {
+        observers.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
-        for (Observer<MainMenuSubject> o : observers) {
-            o.update(this);
+        for (Observer<MainMenuSubject> observer : observers) {
+            observer.update(this);
         }
     }
 
