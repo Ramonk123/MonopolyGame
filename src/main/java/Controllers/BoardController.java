@@ -12,21 +12,21 @@ import javafx.stage.Stage;
 public class BoardController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
     private Board board;
-    private DocumentSnapshot ds;
+    private DocumentSnapshot documentSnapshot;
 
     public BoardController() {
         board = new Board();
     }
 
     @Override
-    public void registerObserver(Observer<DocumentSnapshot> o) { }
+    public void registerObserver(Observer<DocumentSnapshot> observer) { }
 
     @Override
-    public void unregisterObserver(Observer<DocumentSnapshot> o) { }
+    public void unregisterObserver(Observer<DocumentSnapshot> observer) { }
 
     @Override
     public void notifyObservers() {
-        board.update(ds);
+        board.update(documentSnapshot);
     }
 
     @Override

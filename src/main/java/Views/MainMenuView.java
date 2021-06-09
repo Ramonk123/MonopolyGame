@@ -35,8 +35,8 @@ public class MainMenuView implements View, Observer<MainMenuSubject>, HasStage {
         this.primaryStage = primaryStage;
         try {
             createPrimaryStage();
-        } catch(IOException e) {
-            e.printStackTrace();
+        } catch(IOException ioException) {
+            ioException.printStackTrace();
         }
     }
 

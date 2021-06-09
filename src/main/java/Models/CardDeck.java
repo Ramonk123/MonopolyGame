@@ -8,5 +8,5 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardDeck implements Model {
-    private ArrayList<Card> deck;
+    private ArrayList<Card> cardDeck;
 }

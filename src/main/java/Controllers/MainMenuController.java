@@ -14,21 +14,21 @@ import javafx.stage.Stage;
 public class MainMenuController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
     private MainMenu mainMenu;
-    private DocumentSnapshot ds;
+    private DocumentSnapshot documentSnapshot;
 
     public MainMenuController() {
         mainMenu = new MainMenu();
     }
 
     @Override
-    public void registerObserver(Observer<DocumentSnapshot> o) { }
+    public void registerObserver(Observer<DocumentSnapshot> observer) { }
 
     @Override
-    public void unregisterObserver(Observer<DocumentSnapshot> o) { }
+    public void unregisterObserver(Observer<DocumentSnapshot> observer) { }
 
     @Override
     public void notifyObservers() {
-        mainMenu.update(ds);
+        mainMenu.update(documentSnapshot);
     }
 
     @Override
@@ -38,18 +38,18 @@ public class MainMenuController implements Controller, Subject<DocumentSnapshot>
 
     //Join Lobby
     @FXML
-    private void goToJoinLobby(ActionEvent e) {
-        Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        LobbyController lc = (LobbyController) ControllerRegistry.get(LobbyController.class);
-        lc.setJoinLobbyStage(primaryStage);
+    private void goToJoinLobby(ActionEvent actionEvent) {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
+        lobbyController.setJoinLobbyStage(primaryStage);
     }
 
     //Create Lobby
     @FXML
-    private void goToCreateLobby(ActionEvent e) {
-        Stage primaryStage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        LobbyController lc = (LobbyController) ControllerRegistry.get(LobbyController.class);
-        lc.setCreateLobbyStage(primaryStage);
+    private void goToCreateLobby(ActionEvent actionEvent) {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
+        lobbyController.setCreateLobbyStage(primaryStage);
     }
 
     //Quit button

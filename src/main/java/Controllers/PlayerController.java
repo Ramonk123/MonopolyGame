@@ -20,34 +20,25 @@ public class PlayerController implements Controller {
 
     }
 
-    /*@Override
-    public void registerObserver(View v) {
-        player.registerObserver(v);
-    }
-
-    @Override
-    public void unregisterObserver(View v) {
-        player.unregisterObserver(v);
-    }
-
-    @Override
-    public void notifyObservers(DocumentSnapshot ds) {
-        player.notifyObservers(ds);
-    }*/
-
     public Optional<Player> getPlayerByName(String name) {
-        Player p = null;
-        for(Player player : players) {
+        Player player = null;
+        for(Player p : players) {
             if(player.getName().equals(name)) {
-                p = player;
+                player = p;
             }
         }
-        return Optional.ofNullable(p);
+        return Optional.ofNullable(player);
     }
 
-    public Optional<Player> getPlayerByUUID(UUID playerUUID) {
-        Player p = null;
-        return Optional.ofNullable(p);
+    public Optional<Player> getPlayerByPlayersEnum(Players playersEnum) {
+        Player correctPlayer = null;
+        for (Player player : players) {
+            if (UUID.compare(playersEnum, player)) {
+                correctPlayer = player;
+                break;
+            }
+        }
+        return Optional.ofNullable(correctPlayer);
     }
 
     public boolean nameExists(String name) {
@@ -62,6 +53,10 @@ public class PlayerController implements Controller {
     public void movePlayer(String name, int amountThrown) throws Exception {
         Player player = getPlayerByName(name).orElseThrow(Exception::new);
         player.movePlayer(amountThrown);
+    }
+
+    public void teleportTo(Player player, int position) {
+        player.setPosition(position);
     }
 
 }

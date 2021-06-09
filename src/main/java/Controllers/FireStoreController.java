@@ -21,16 +21,20 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
     private int token;
 
     public FireStoreController() {
+        try {
+            initializeFirestore();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void registerObserver(Observer<DocumentSnapshot> observer) {
 
     }
 
     @Override
-    public void registerObserver(Observer<DocumentSnapshot> o) {
-
-    }
-
-    @Override
-    public void unregisterObserver(Observer<DocumentSnapshot> o) {
+    public void unregisterObserver(Observer<DocumentSnapshot> observer) {
 
     }
 
@@ -44,24 +48,30 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     }
 
+    Firestore firestore = new Firestore();
+
+    public void initializeFirestore() throws IOException {
+        firestore.initializeFirestore();
+    }
+
     public DocumentSnapshot getSnapshot(int token) throws IOException, ExecutionException, InterruptedException {
-        com.google.cloud.firestore.Firestore db = Firestore.getFirestore();
-        DocumentReference documentReference = db.collection("Lobbies").document(String.valueOf(token));
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        DocumentReference documentReference = database.collection("Lobbies").document(String.valueOf(token));
         ApiFuture<DocumentSnapshot> documentSnapshot = documentReference.get();
 
         return documentSnapshot.get();
     }
 
     public boolean checkExistence(int token) throws ExecutionException, InterruptedException, IOException {
-        DocumentSnapshot document = getSnapshot(token);
+        DocumentSnapshot documentSnapshot = getSnapshot(token);
 
-        return document.exists();
+        return documentSnapshot.exists();
     }
 
     public int getLobbySize(int token) throws IOException, ExecutionException, InterruptedException {
-        DocumentSnapshot document = getSnapshot(token);
+        DocumentSnapshot documentSnapshot = getSnapshot(token);
 
-        ArrayList<Player> players = (ArrayList<Player>) document.get("players");
+        ArrayList<Player> players = (ArrayList<Player>) documentSnapshot.get("players");
 
         assert players != null;
         return players.size();
@@ -85,13 +95,13 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         lobbyData.put("trade", "sample");
 
 
-        com.google.cloud.firestore.Firestore db = Firestore.getFirestore();
-        ApiFuture<WriteResult> upload = db.collection("Lobbies").document(String.valueOf(token)).set(lobbyData);
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).set(lobbyData);
     }
 
     public void removePlayer(int token, Player player) throws InterruptedException, ExecutionException, IOException {
-        DocumentSnapshot document = getSnapshot(token);
-        ArrayList<Player> players = (ArrayList<Player>) document.get("players");
+        DocumentSnapshot documentSnapshot = getSnapshot(token);
+        ArrayList<Player> players = (ArrayList<Player>) documentSnapshot.get("players");
 
         for(int i = 0; Objects.requireNonNull(players).size() > i ; i++){
             if(players.get(i) == player){
@@ -99,14 +109,14 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
             }
         }
 
-        com.google.cloud.firestore.Firestore db = Firestore.getFirestore();
-        db.collection("Lobbies").document(String.valueOf(token)).update("players", players);
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        database.collection("Lobbies").document(String.valueOf(token)).update("players", players);
     }
 
     public void addPlayer(int token, Optional<Player> player) throws IOException {
-        com.google.cloud.firestore.Firestore db = Firestore.getFirestore();
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
-        ApiFuture<WriteResult> upload = db.collection("Lobbies").document(String.valueOf(token))
+        ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
                 .update("players", FieldValue.arrayUnion(player));
     }
 

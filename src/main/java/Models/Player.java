@@ -1,5 +1,6 @@
 package Models;
 
+import Controllers.Players;
 import Monopoly.Identifiable;
 import Monopoly.UUID;
 import Views.View;
@@ -15,10 +16,10 @@ public class Player implements Model, Position, Nameable, Identifiable {
     private Wallet wallet;
     private int position;
     private boolean inJail;
-    private UUID id;
+    private Players playersEnum;
 
-    public Player(UUID id, String name) {
-        this.id = id;
+    public Player(Players playersEnum, String name) {
+        this.playersEnum = playersEnum;
         this.name = name;
         wallet = new Wallet();
     }
@@ -33,6 +34,7 @@ public class Player implements Model, Position, Nameable, Identifiable {
     }
 
     public void movePlayer(int amountThrown) {
+        //TODO: 40 should not be hard coded
         int newPosition = getPosition() + amountThrown;
         if(newPosition >= 40) {
             newPosition -= 40;
@@ -55,6 +57,10 @@ public class Player implements Model, Position, Nameable, Identifiable {
 
     @Override
     public UUID getId() {
-        return id;
+        return playersEnum.getId();
+    }
+
+    public Players getPlayersEnum() {
+        return playersEnum;
     }
 }
