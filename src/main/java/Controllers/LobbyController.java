@@ -26,7 +26,9 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     private String name;
 
 
-    FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+    // Dit is niet mogelijk
+    // Redenering: Lobbycontroller is nu afhankelijk van het feit dat firestorecontroller als eerste geregistreerd is.
+    // FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
 
     public LobbyController() {
         lobby = new Lobby();
@@ -82,7 +84,9 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     }
 
     private void addPlayerToLobby(String name) throws IOException {
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         Optional<Player> player = getPlayerByName(name); // TODO: idk if this is supposed to be optional
+
         fireStoreController.addPlayer(token, player);
     }
 
@@ -127,6 +131,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
 
     private void joinLobby(ActionEvent actionEvent, String name) throws InterruptedException, ExecutionException, IOException {
         //Added some functions, thought I could write the error messages while I'm at it. Feel free to change it.
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         if(!fireStoreController.checkExistence(token)){
             JoinLobbyViewTokenTextField.setText("This lobby does not exist");
         }
@@ -148,6 +153,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     private TextField CreateLobbyViewNameTextField;
     @FXML
     private void CreateLobbySubmit(ActionEvent actionEvent) throws InterruptedException, ExecutionException, IOException {
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         generateToken();
 
         while(fireStoreController.checkExistence(token)){
