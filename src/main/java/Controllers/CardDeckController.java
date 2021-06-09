@@ -25,11 +25,11 @@ public class CardDeckController implements Controller {
 //  1. Add Actions.
     public void setCardDecks() {
 
-        Card c1 = new Card(new UUID("CARD-1"), "Advance to Boardwalk", Actions::exampleAction);
-        Card c2 = new Card(new UUID("CARD-2"), "Advance to go (collect $200)", Actions::exampleAction);
-        Card c3 = new Card(new UUID("CARD-3"), "Advance to Illinois Avenue. If you pass go, collect $200", Actions::exampleAction);
-        Card c4 = new Card(new UUID("CARD-4"), "Advance to St. Charles Place. If you pass go, collect $200", Actions::exampleAction);
-        Card c5 = new Card(new UUID("CARD-5"), "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled.", Actions::exampleAction);
+        Card c1 = new Card(new UUID("CARD-1"), "Advance to Boardwalk", Actions::teleportToBoardWalk);
+        Card c2 = new Card(new UUID("CARD-2"), "Advance to go (collect $200)", Actions::teleportToGo);
+        Card c3 = new Card(new UUID("CARD-3"), "Advance to Illinois Avenue. If you pass go, collect $200", Actions::teleportToIllinois);
+        Card c4 = new Card(new UUID("CARD-4"), "Advance to St. Charles Place. If you pass go, collect $200", Actions::teleportToStCharles);
+        Card c5 = new Card(new UUID("CARD-5"), "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled.", Actions::teleportToNearestRailroad);
         Card c6 = new Card(new UUID("CARD-6"), "Advance token to nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total of ten times amount thrown.", Actions::exampleAction);
         Card c7 = new Card(new UUID("CARD-7"), "Bank pays you dividend of $50", Actions::exampleAction);
         Card c8 = new Card(CardDeckController.CHANCE_JAIL_CARD_UUID, "Get out of jail free", Actions::exampleAction);
