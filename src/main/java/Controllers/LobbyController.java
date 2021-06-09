@@ -1,23 +1,13 @@
 package Controllers;
 
-import Models.Board;
-import Models.MainMenu;
-import Models.Lobby;
-import Models.Player;
+import Models.*;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
-import Views.LobbyView;
-import Views.MainMenuView;
-import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -25,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class LobbyController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
@@ -74,16 +65,18 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         lobby.setStage(primaryStage);
     }
 
-    private void addPlayerToLobby(String name) {
-        //Player player = getPlayerByName(name);
-        //TODO:
-        // Stuff to add the player to firebase
+    private void addPlayerToLobby(String name) throws IOException {
+        Optional<Player> player = getPlayerByName(name); // TODO: idk if this is supposed to be optional
+        FireStoreController.addPlayer(token, player);
     }
 
-    private void removePlayerFromLobby() {
+    private void removePlayerFromLobby() throws InterruptedException, ExecutionException, IOException {
         //TODO:
-        // Stuff to remove the player from firebase
         // Question is: "How do you know which player pressed the leave button?"
+
+        //Added Firebase functionality assuming var player is the player who wants to leave the game.
+        Player player = new Player("Removeme"); // TODO: remove this of course
+        FireStoreController.removePlayer(token, player);
     }
 
     private Optional<Player> getPlayerByName(String name) {
@@ -111,12 +104,23 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
             goToLobby(e);
         } catch(NumberFormatException exception) {
             JoinLobbyViewTokenTextField.setText("Numbers Only");
+        } catch (InterruptedException | ExecutionException interruptedException) {
+            interruptedException.printStackTrace();
         }
     }
 
-    private void joinLobby(ActionEvent e, String name) {
-        //TODO:
-        // Program should first check if the lobby exists or is full, and then add the player.
+    private void joinLobby(ActionEvent e, String name) throws InterruptedException, ExecutionException, IOException {
+        //Added some functions, thought I could write the error messages while I'm at it. Feel free to change it.
+        if(!FireStoreController.checkExistence(token)){
+            JoinLobbyViewTokenTextField.setText("This lobby does not exist");
+        }
+
+        if(FireStoreController.getLobbySize(token) >= 8){
+            //Lobby is full
+            //TODO:
+            // add pop up
+        }
+
         if(!playerNameExists(name)) {
             addPlayerToLobby(name);
         }
@@ -127,33 +131,36 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @FXML
     private TextField CreateLobbyViewNameTextField;
     @FXML
-    private void CreateLobbySubmit(ActionEvent e) throws IOException {
-        //TODO:
-        // Lobby should get created/checked if the token already exists in the while loop
-        boolean isCreatingLobby = true;
+    private void CreateLobbySubmit(ActionEvent e) throws InterruptedException, ExecutionException, IOException {
+        generateToken();
 
-        while(isCreatingLobby) {
-            Random random = new Random();
-            token = random.nextInt(6);
-            //TODO:
-            // if lobby token does not already exist continue to create it
-                createLobby(e);
-                isCreatingLobby = false;
-
-                name = CreateLobbyViewNameTextField.getText();
-                PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
-                pc.setPlayer(name);
-
-                //Open the lobby view
-                goToLobby(e);
+        while(FireStoreController.checkExistence(token)){
+            generateToken();
         }
+
+
+        FireStoreController.createLobby(token);
+
+        name = CreateLobbyViewNameTextField.getText();
+        PlayerController pc = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        pc.setPlayer(name);
+
+        //Open the lobby view
+        goToLobby(e);
+
     }
 
-    private void createLobby(ActionEvent e) {
-        //TODO:
-        // Fill this method with stuff to create the lobby
-
+    private void generateToken(){
+        Random random = new Random();
+        token = random.nextInt(6);
     }
+
+// TODO: Think we can delete this
+
+//    private void createLobby(ActionEvent e) throws IOException {
+//        FireStoreController.createLobby(token);
+//
+//    }
 
     //Lobby
 
@@ -166,9 +173,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         ConfirmToMenuView.setVisible(true);
     }
     @FXML
-    private void ConfirmLeaveLobby(ActionEvent e) {
-        //TODO:
-        // Method needs to remove player from lobby document in Firestore
+    private void ConfirmLeaveLobby(ActionEvent e) throws InterruptedException, ExecutionException, IOException {
         removePlayerFromLobby();
         returnToMainMenu(e);
     }
