@@ -22,7 +22,7 @@ public class StreetLocation extends OwnableLocation {
     }
 
     @Override
-    public void action(Player player) {
+    public void action(Player player) { //
 
     }
 }

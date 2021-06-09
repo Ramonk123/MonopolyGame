@@ -28,4 +28,8 @@ public class ThrowController implements Controller, DiceThrower {
     public int getTotalEyes() {
         return currentThrow.getTotalEyes();
     }
+
+    public Throw getCurrentThrow() {
+        return currentThrow;
+    }
 }
