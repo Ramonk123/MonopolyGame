@@ -1,5 +1,6 @@
 package Models;
 
+import Controllers.Players;
 import Monopoly.Identifiable;
 import Monopoly.UUID;
 import Views.View;
@@ -15,9 +16,9 @@ public class Player implements Model, Position, Nameable, Identifiable {
     private Wallet wallet;
     private int position;
     private boolean inJail;
-    private UUID id;
+    private Players id;
 
-    public Player(UUID id, String name) {
+    public Player(Players id, String name) {
         this.id = id;
         this.name = name;
         wallet = new Wallet();
@@ -56,6 +57,6 @@ public class Player implements Model, Position, Nameable, Identifiable {
 
     @Override
     public UUID getId() {
-        return id;
+        return id.getId();
     }
 }
