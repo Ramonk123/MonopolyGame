@@ -1,6 +1,7 @@
 package Monopoly;
 
 import Controllers.*;
+import Firestore.Firestore;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,7 +15,7 @@ public class Monopoly extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         ControllerRegistry.register(new MainMenuController());
         ControllerRegistry.register(new BoardController());
         ControllerRegistry.register(new LobbyController());
@@ -24,5 +25,7 @@ public class Monopoly extends Application {
 
         MainMenuController mainMenuController = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
         mainMenuController.setStage(primaryStage);
+
+
     }
 }

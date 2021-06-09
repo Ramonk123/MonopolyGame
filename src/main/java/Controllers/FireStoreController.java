@@ -21,7 +21,11 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
     private int token;
 
     public FireStoreController() {
-
+        try {
+            initializeFirestore();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -44,8 +48,14 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     }
 
+    Firestore firestore = new Firestore();
+
+    public void initializeFirestore() throws IOException {
+        firestore.initializeFirestore();
+    }
+
     public DocumentSnapshot getSnapshot(int token) throws IOException, ExecutionException, InterruptedException {
-        com.google.cloud.firestore.Firestore database = Firestore.getFirestore();
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         DocumentReference documentReference = database.collection("Lobbies").document(String.valueOf(token));
         ApiFuture<DocumentSnapshot> documentSnapshot = documentReference.get();
 
@@ -85,7 +95,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         lobbyData.put("trade", "sample");
 
 
-        com.google.cloud.firestore.Firestore database = Firestore.getFirestore();
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).set(lobbyData);
     }
 
@@ -99,12 +109,12 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
             }
         }
 
-        com.google.cloud.firestore.Firestore database = Firestore.getFirestore();
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token)).update("players", players);
     }
 
     public void addPlayer(int token, Optional<Player> player) throws IOException {
-        com.google.cloud.firestore.Firestore database = Firestore.getFirestore();
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
                 .update("players", FieldValue.arrayUnion(player));

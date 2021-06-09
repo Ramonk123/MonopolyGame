@@ -22,10 +22,13 @@ import java.util.concurrent.ExecutionException;
 
 public class Firestore {
 
-    public static com.google.cloud.firestore.Firestore getFirestore() throws IOException {
+    public com.google.cloud.firestore.Firestore database;
 
-//        FileInputStream serviceAccount =
-//                new FileInputStream("monopolyteam6-47708-firebase-adminsdk-tp5m6-9a482af7f7.json");
+    public com.google.cloud.firestore.Firestore getDatabase() {
+        return database;
+    }
+
+    public void initializeFirestore() throws IOException {
 
         String fileName = "monopolyteam6-47708-firebase-adminsdk-tp5m6-9a482af7f7.json";
 
@@ -39,12 +42,14 @@ public class Firestore {
 
         FirebaseApp.initializeApp(options);
 
-        com.google.cloud.firestore.Firestore database = FirestoreClient.getFirestore();
+        com.google.cloud.firestore.Firestore firestoreDatabase = FirestoreClient.getFirestore();
 
         Firestore firestore = new Firestore();
 
-        return database;
+        database = firestoreDatabase;
     }
+
+
 
     // methods you can use to upload data to firestore.
     //Exceptions are for the last line in this function, update time.
