@@ -30,15 +30,15 @@ public class PlayerController implements Controller {
         return Optional.ofNullable(player);
     }
 
-    public Optional<Player> getPlayerByUUID(UUID playerUUID) {
-        Player player = null;
-        for (Player p : players) {
-            if (UUID.compare(playerUUID, p)) {
-                player = p;
+    public Optional<Player> getPlayerByPlayersEnum(Players playersEnum) {
+        Player correctPlayer = null;
+        for (Player player : players) {
+            if (UUID.compare(playersEnum, player)) {
+                correctPlayer = player;
                 break;
             }
         }
-        return Optional.ofNullable(player);
+        return Optional.ofNullable(correctPlayer);
     }
 
     public boolean nameExists(String name) {
