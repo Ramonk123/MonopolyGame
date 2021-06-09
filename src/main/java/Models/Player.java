@@ -16,10 +16,10 @@ public class Player implements Model, Position, Nameable, Identifiable {
     private Wallet wallet;
     private int position;
     private boolean inJail;
-    private Players id;
+    private Players playersEnum;
 
-    public Player(Players id, String name) {
-        this.id = id;
+    public Player(Players playersEnum, String name) {
+        this.playersEnum = playersEnum;
         this.name = name;
         wallet = new Wallet();
     }
@@ -57,6 +57,10 @@ public class Player implements Model, Position, Nameable, Identifiable {
 
     @Override
     public UUID getId() {
-        return id.getId();
+        return playersEnum.getId();
+    }
+
+    public Players getPlayersEnum() {
+        return playersEnum;
     }
 }
