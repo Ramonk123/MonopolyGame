@@ -17,7 +17,7 @@ public class StreetLocation extends OwnableLocation {
         this.hotelPrice     = hotelPrice;
     }
 
-    private boolean containsProperty(){
+    private boolean containsProperty() {
         return this.houses > 0 || this.hotel;
     }
 

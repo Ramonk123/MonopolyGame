@@ -51,8 +51,8 @@ public class PlayerController implements Controller {
     }
 
     public void setPlayer(String name) {
-        Player player = new Player(name);
-        players.add(player);
+        //Player player = new Player(name);
+        //players.add(player);
     }
 
     public void movePlayer(String name, int amountThrown) throws Exception {

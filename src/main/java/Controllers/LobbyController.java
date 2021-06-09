@@ -75,8 +75,8 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         // Question is: "How do you know which player pressed the leave button?"
 
         //Added Firebase functionality assuming var player is the player who wants to leave the game.
-        Player player = new Player("Removeme"); // TODO: remove this of course
-        FireStoreController.removePlayer(token, player);
+        //Player player = new Player("Removeme"); // TODO: remove this of course
+        //FireStoreController.removePlayer(token, player);
     }
 
     private Optional<Player> getPlayerByName(String name) {
