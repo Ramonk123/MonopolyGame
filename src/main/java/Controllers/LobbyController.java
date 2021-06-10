@@ -9,11 +9,13 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
@@ -133,6 +135,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         }
     }
 
+    @FXML Pane LobbyAlreadyFullPopup;
     private void joinLobby(ActionEvent actionEvent, String name) throws Exception {
         //Added some functions, thought I could write the error messages while I'm at it. Feel free to change it.
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
@@ -142,9 +145,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         }
 
         if(fireStoreController.getLobbySize(token) >= 8){
-            //Lobby is full
-            //TODO:
-            // add pop up
+            LobbyAlreadyFullPopup.setVisible(true);
         }
 
         if(!playerNameExists(name)) {
@@ -185,11 +186,8 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         fireStoreController.createLobby(token);
 
 
-
-
         //Open the lobby view
         goToLobby(actionEvent);
-
     }
 
     private void generateToken(){
@@ -219,5 +217,34 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @Override
     public Object getFirestoreFormat() {
         return lobby.getFirestoreFormat();
+    }
+
+    public int getToken() { return token;}
+
+    @FXML Label LobbyViewUsername1Label;
+    @FXML Label LobbyViewUsername2Label;
+    @FXML Label LobbyViewUsername3Label;
+    @FXML Label LobbyViewUsername4Label;
+    @FXML Label LobbyViewUsername5Label;
+    @FXML Label LobbyViewUsername6Label;
+    @FXML Label LobbyViewUsername7Label;
+    @FXML Label LobbyViewUsername8Label;
+
+    public ArrayList<Label> getUserLabelList() {
+        ArrayList<Label> labelList = new ArrayList<>();
+        labelList.add(LobbyViewUsername1Label);
+        labelList.add(LobbyViewUsername2Label);
+        labelList.add(LobbyViewUsername3Label);
+        labelList.add(LobbyViewUsername4Label);
+        labelList.add(LobbyViewUsername5Label);
+        labelList.add(LobbyViewUsername6Label);
+        labelList.add(LobbyViewUsername7Label);
+        labelList.add(LobbyViewUsername8Label);
+
+        return labelList;
+    }
+    @FXML Label LobbyViewTokenLabel;
+    public Label getTokenLabel() {
+        return LobbyViewTokenLabel;
     }
 }

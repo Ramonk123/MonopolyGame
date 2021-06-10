@@ -1,7 +1,11 @@
 package Views;
 
+import Models.Player;
 import ObserveablePattern.Subject;
 
+import java.util.List;
+
 public interface LobbySubject extends Subject<LobbySubject> {
-    // methods van shit die je nodig hebt
+
+    List<Player> getPlayers();
 }

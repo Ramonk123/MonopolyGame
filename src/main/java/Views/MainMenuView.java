@@ -12,8 +12,8 @@ import java.io.IOException;
 
 public class MainMenuView implements View, Observer<MainMenuSubject>, HasStage {
     //Screensize
-    int WIDTH = 600;
-    int HEIGHT = 400;
+    int WIDTH = 630;
+    int HEIGHT = 600;
 
     private Stage primaryStage;
 

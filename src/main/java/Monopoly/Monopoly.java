@@ -38,10 +38,6 @@ public class Monopoly extends Application {
         });
 
         MainMenuController mainMenuController = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
-        primaryStage.setTitle("Online Monopoly");
-        primaryStage.setResizable(false);
-        primaryStage.setHeight(599);
-        primaryStage.setWidth(630);
         mainMenuController.setStage(primaryStage);
 
 
