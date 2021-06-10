@@ -143,4 +143,8 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         DocumentSnapshot documentSnapshot = getSnapshot(token);
         return (ArrayList<UUID>) documentSnapshot.get("commonFundCardDeck");
     }
+
+    public void listen(Collection<Observer<DocumentSnapshot>> collection) {
+
+    }
 }
