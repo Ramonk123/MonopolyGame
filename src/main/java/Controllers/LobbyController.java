@@ -1,5 +1,6 @@
 package Controllers;
 
+import Firestore.FirestoreFormattable;
 import Models.*;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
@@ -17,7 +18,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-public class LobbyController implements Controller, Subject<DocumentSnapshot>, HasStage {
+public class LobbyController implements Controller, Subject<DocumentSnapshot>, HasStage, FirestoreFormattable {
 
     private Lobby lobby;
     private DocumentSnapshot documentSnapshot;
@@ -189,5 +190,10 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @FXML
     private void DenyLeaveLobby(ActionEvent actionEvent) {
         ConfirmToMenuView.setVisible(false);
+    }
+
+    @Override
+    public Object getFirestoreFormat() {
+        return lobby.getFirestoreFormat();
     }
 }

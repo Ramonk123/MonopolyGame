@@ -86,28 +86,12 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         //    Subdirectories may be helpful for locations and players. Data structure still needs to be designed.
 
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
 
-        Map<String, Object> lobbyData = new HashMap<>();
-        /*lobbyData.put("players", playerController.getPlayers());
-        //lobbyData.put("commonFundCardDeck", cardDeckController.getCommonFundCardDeck());
-        lobbyData.put("commonFundCardDeck", "");
-        //lobbyData.put("chanceCardDeck", cardDeckController.getChanceCardDeck());
-        lobbyData.put("chanceCardDeck", "");
-        lobbyData.put("owner", "sample");
-        lobbyData.put("activePlayer", "sample");
-        lobbyData.put("playerBids", "sample");
-        lobbyData.put("trade", "sample");*/
-
-        lobbyData.put("auction", null); // is null when theres no auction. otherwise according to Lobby 0 on firestore.
-        lobbyData.put("hostUuid", Players.PLAYER_ONE); // is null when theres no auction. otherwise according to Lobby 0 on firestore.
-        lobbyData.put("locations", new ArrayList<Map<String, Object>>());
-        lobbyData.put("nextChanceCard", null); // host player sets this when null. data should be a String card uuid.
-        lobbyData.put("nextCommunityCard", null); // host player sets this when null. data should be a String card uuid.
-        lobbyData.put("players", new ArrayList<Map<String, Object>>()); // host player should be in this.
-        lobbyData.put("tradeInvitations", new ArrayList<Map<String, String>>());
-        lobbyData.put("tradeWindows", new ArrayList<Map<String, Object>>());
-        lobbyData.put("turn", new HashMap<String, Object>());
+        Map<String, Object> lobbyData = (Map<String, Object>) ((LobbyController) ControllerRegistry.get(LobbyController.class)).getFirestoreFormat();
+        lobbyData.put("players", playerController.getFirestoreFormat());
+        lobbyData.put("turn", turnController.getFirestoreFormat());
 
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).set(lobbyData);

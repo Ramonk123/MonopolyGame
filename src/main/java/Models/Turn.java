@@ -1,30 +1,30 @@
 package Models;
 
-import Controllers.ControllerRegistry;
-import Controllers.MainMenuController;
-import Controllers.ThrowController;
-import Controllers.TurnController;
+import Controllers.*;
+import Firestore.FirestoreFormattable;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 // still needs work
-public class Turn implements Model {
-    private Player activePlayer;
+public class Turn implements Model, FirestoreFormattable {
+    private Players activePlayer;
     private int amountOfDouble;
 
     public Turn() {
-        this.activePlayer = null;
+        this.activePlayer = Players.PLAYER_ONE;
         this.amountOfDouble = 0;
     }
 
-    public void setCurrentPlayer(Player player) {
-        this.activePlayer = player;
+    public void setCurrentPlayer(Players players) {
+        this.activePlayer = players;
     }
 
-    public Optional<Player> getCurrentPlayer()
+    public Players getCurrentPlayer()
     {
-        return Optional.ofNullable(activePlayer);
+        return activePlayer;
     }
 
     private Throw getCurrentThrow() {
@@ -42,5 +42,14 @@ public class Turn implements Model {
 
     public int getTotalEyes() {
         return getCurrentThrow().getTotalEyes();
+    }
+
+    @Override
+    public Object getFirestoreFormat() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("activePlayer", activePlayer.getId().getId());
+        map.put("amountOfDoubles", amountOfDouble);
+        map.put("eyesThrown", 0);
+        return map;
     }
 }
