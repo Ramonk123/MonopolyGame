@@ -25,6 +25,8 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, H
         board = new Board();
     }
 
+    // isn't there a way for u to store these labels in an array?
+    // and aren't these supposed to be in the Board view itself?
     @FXML
     private Label BoardViewUsername1Label;
     @FXML
@@ -61,6 +63,17 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, H
     public void setPlayersNamesToLabels() {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         ArrayList<Player> players = playerController.getPlayers();
+        // if the labels were in an array, and invisible by default you could do:
+        // with the array you'd also avoid that switch you're using right now. (getLabelByNumber).
+        // maybe this link will help.
+        // https://stackoverflow.com/questions/28587297/create-array-of-label-using-fxml-in-javafx
+        /*
+        for (int i = 0; i < players.size(); i++) {
+            // pseudo code for the label
+            labelsArray[i].setVisible()
+            labelsArray[i].setName(players.get(i).getName());
+        }
+         */
         for(int i = 0; i < 8; i++) {
             try {
                 setPlayerNameToLabel(players.get(i).getName(), i + 1);
