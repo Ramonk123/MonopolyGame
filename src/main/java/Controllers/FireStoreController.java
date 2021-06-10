@@ -84,7 +84,6 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         //TODO:
         // add the real data instead of sample.
         //    Subdirectories may be helpful for locations and players. Data structure still needs to be designed.
-
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
