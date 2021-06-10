@@ -10,8 +10,14 @@
    <children>
       <Button fx:id="ReturnToMainMenuViewButton" alignment="CENTER" layoutX="250.0" layoutY="320.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #8fbc72;" text="Return To Main Menu" wrapText="true" />
       <Button fx:id="JoinLobbyViewJoinLobbyButton" alignment="CENTER" layoutX="250.0" layoutY="260.0" mnemonicParsing="false" onAction="#JoinLobbySubmit" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #8fbc72;" text="Join Lobby" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="269.0" layoutY="116.0" text="`eny" />
-      <Label layoutX="269.0" layoutY="191.0" text="Type name:" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="237.0" layoutY="116.0" prefHeight="18.0" prefWidth="138.0" text="Enter token:">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="269.0" layoutY="191.0" text="Type name:">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
       <TextField fx:id="JoinLobbyViewTokenTextField" layoutX="225.0" layoutY="134.0" promptText="Token" />
       <TextField fx:id="JoinLobbyViewNameTextField" layoutX="225.0" layoutY="209.0" promptText="Name" />
       <Label alignment="CENTER" layoutX="1.0" layoutY="14.0" prefHeight="86.0" prefWidth="600.0" text="Join Lobby">
