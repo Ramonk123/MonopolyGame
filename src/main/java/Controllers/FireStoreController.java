@@ -90,8 +90,10 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
         Map<String, Object> lobbyData = new HashMap<>();
         lobbyData.put("players", playerController.getPlayers());
-        lobbyData.put("commonFundCardDeck", cardDeckController.getCommonFundCardDeck());
-        lobbyData.put("chanceCardDeck", cardDeckController.getChanceCardDeck());
+        //lobbyData.put("commonFundCardDeck", cardDeckController.getCommonFundCardDeck());
+        lobbyData.put("commonFundCardDeck", "");
+        //lobbyData.put("chanceCardDeck", cardDeckController.getChanceCardDeck());
+        lobbyData.put("chanceCardDeck", "");
         lobbyData.put("owner", "sample");
         lobbyData.put("activePlayer", "sample");
         lobbyData.put("playerBids", "sample");
