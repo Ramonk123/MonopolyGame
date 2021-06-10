@@ -29,6 +29,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         lobby = new Lobby();
     }
 
+    // MINE - Kadir
     public void joinLobby(int token) throws LobbyException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         int lobbySize = 0;
@@ -168,7 +169,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
 
     private void generateToken(){
         Random random = new Random();
-        token = random.nextInt(6);
+        token = random.nextInt(Integer.MAX_VALUE);
     }
 
     //Lobby
