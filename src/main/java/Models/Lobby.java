@@ -1,5 +1,7 @@
 package Models;
 
+import Controllers.ControllerRegistry;
+import Controllers.PlayerController;
 import Controllers.Players;
 import Firestore.FirestoreFormattable;
 import ObserveablePattern.Observer;
@@ -70,5 +72,11 @@ public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot>, H
         lobbyData.put("tradeWindows", new ArrayList<Map<String, Object>>());
         lobbyData.put("turn", new HashMap<String, Object>());
         return lobbyData;
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        return playerController.getPlayers();
     }
 }
