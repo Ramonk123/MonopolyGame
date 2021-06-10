@@ -1,15 +1,18 @@
 package Models;
 
 import Controllers.Players;
+import Firestore.FirestoreFormattable;
 import Monopoly.Identifiable;
 import Monopoly.UUID;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Player implements Model, Position, Nameable, Identifiable {
+public class Player implements Model, Position, Nameable, Identifiable, FirestoreFormattable {
 
     private String name;
     private String pawnIcon;
@@ -62,5 +65,16 @@ public class Player implements Model, Position, Nameable, Identifiable {
 
     public Players getPlayersEnum() {
         return playersEnum;
+    }
+
+    @Override
+    public Object getFirestoreFormat() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("inJail", inJail);
+        map.put("name", getName());
+        map.put("pawnIcon", "car.jpg");
+        map.put("position", getPosition());
+        map.put("wallet", wallet.getBalance());
+        return map;
     }
 }

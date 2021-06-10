@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Dice implements Model, DiceThrower {
-    private int eyes;
+    private int eyes = 0;
 
     @Override
     public void throwDice() {

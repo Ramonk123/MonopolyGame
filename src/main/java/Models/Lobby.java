@@ -1,14 +1,18 @@
 package Models;
 
+import Controllers.Players;
+import Firestore.FirestoreFormattable;
 import ObserveablePattern.Observer;
 import Views.*;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot>, HasStage {
+public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot>, HasStage, FirestoreFormattable {
     private List<Observer<LobbySubject>> observers = new ArrayList<>();
 
     public Lobby() {
@@ -51,5 +55,20 @@ public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot>, H
 
     public void setJoinLobbyStage(Stage primaryStage) {
         ((JoinLobbyView) observers.get(2)).setStage(primaryStage);
+    }
+
+    @Override
+    public Object getFirestoreFormat() {
+        Map<String, Object> lobbyData = new HashMap<>();
+        lobbyData.put("auction", null); // is null when theres no auction. otherwise according to Lobby 0 on firestore.
+        lobbyData.put("hostUuid", Players.PLAYER_ONE); // is null when theres no auction. otherwise according to Lobby 0 on firestore.
+        lobbyData.put("locations", new ArrayList<Map<String, Object>>());
+        lobbyData.put("nextChanceCard", null); // host player sets this when null. data should be a String card uuid.
+        lobbyData.put("nextCommunityCard", null); // host player sets this when null. data should be a String card uuid.
+        lobbyData.put("players", new HashMap<String, Object>()); // host player should be in this.
+        lobbyData.put("tradeInvitations", new ArrayList<Map<String, String>>());
+        lobbyData.put("tradeWindows", new ArrayList<Map<String, Object>>());
+        lobbyData.put("turn", new HashMap<String, Object>());
+        return lobbyData;
     }
 }
