@@ -129,6 +129,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         }
     }
 
+    @FXML Pane LobbyAlreadyFullPopup;
     private void joinLobby(ActionEvent actionEvent, String name) throws Exception {
         //Added some functions, thought I could write the error messages while I'm at it. Feel free to change it.
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
@@ -138,9 +139,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         }
 
         if(fireStoreController.getLobbySize(token) >= 8){
-            //Lobby is full
-            //TODO:
-            // add pop up
+            LobbyAlreadyFullPopup.setVisible(true);
         }
 
         if(!playerNameExists(name)) {
