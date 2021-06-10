@@ -4,15 +4,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #bfdbae;" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #bfdbae;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="ReturnToMainMenuViewButton" alignment="CENTER" layoutX="250.0" layoutY="320.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #8fbc72;" text="Return To Main Menu" wrapText="true" />
       <Button fx:id="JoinLobbyViewJoinLobbyButton" alignment="CENTER" layoutX="250.0" layoutY="260.0" mnemonicParsing="false" onAction="#JoinLobbySubmit" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #8fbc72;" text="Join Lobby" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="269.0" layoutY="116.0" text="Type token:" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="269.0" layoutY="116.0" text="`eny" />
       <Label layoutX="269.0" layoutY="191.0" text="Type name:" />
       <TextField fx:id="JoinLobbyViewTokenTextField" layoutX="225.0" layoutY="134.0" promptText="Token" />
       <TextField fx:id="JoinLobbyViewNameTextField" layoutX="225.0" layoutY="209.0" promptText="Name" />
-      <Label alignment="CENTER" layoutX="250.0" layoutY="14.0" prefHeight="45.0" prefWidth="100.0" text="Join Lobby" />
+      <Label alignment="CENTER" layoutX="1.0" layoutY="14.0" prefHeight="86.0" prefWidth="600.0" text="Join Lobby">
+         <font>
+            <Font size="45.0" />
+         </font></Label>
    </children>
 </AnchorPane>
