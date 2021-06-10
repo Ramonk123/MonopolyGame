@@ -20,6 +20,10 @@ public class MainMenuController implements Controller, Subject<DocumentSnapshot>
         mainMenu = new MainMenu();
     }
 
+    public void setDocumentSnapshot(DocumentSnapshot documentSnapshot) {
+        this.documentSnapshot = documentSnapshot;
+    }
+
     @Override
     public void registerObserver(Observer<DocumentSnapshot> observer) { }
 

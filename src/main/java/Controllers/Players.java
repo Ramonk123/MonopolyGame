@@ -36,6 +36,17 @@ public enum Players implements Identifiable {
         return this.ordinal() + 1;
     }
 
+    public static Optional<Players> getByStringUuid(String uuid) {
+        Players playersEnum = null;
+        for (Players p : Players.values()) {
+            if (UUID.compare(uuid, p)) {
+                playersEnum = p;
+                break;
+            }
+        }
+        return Optional.ofNullable(playersEnum);
+    }
+
     @Override
     public UUID getId() {
         return id;

@@ -4,6 +4,7 @@ import Controllers.Players;
 import Firestore.FirestoreFormattable;
 import Monopoly.Identifiable;
 import Monopoly.UUID;
+import ObserveablePattern.Observer;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Player implements Model, Position, Nameable, Identifiable, FirestoreFormattable {
+public class Player implements Model, Observer<DocumentSnapshot>, Position, Nameable, Identifiable, FirestoreFormattable {
 
     private String name;
     private String pawnIcon;
@@ -76,5 +77,10 @@ public class Player implements Model, Position, Nameable, Identifiable, Firestor
         map.put("position", getPosition());
         map.put("wallet", wallet.getBalance());
         return map;
+    }
+
+    @Override
+    public void update(DocumentSnapshot state) {
+        // do some updates mane
     }
 }

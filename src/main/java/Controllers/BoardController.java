@@ -19,6 +19,11 @@ import java.util.Optional;
 public class BoardController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
     private Board board;
+
+    public void setDocumentSnapshot(DocumentSnapshot documentSnapshot) {
+        this.documentSnapshot = documentSnapshot;
+    }
+
     private DocumentSnapshot documentSnapshot;
 
     public BoardController() {

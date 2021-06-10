@@ -6,20 +6,24 @@ import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.FieldValue;
-import com.google.cloud.firestore.WriteResult;
+import com.google.cloud.firestore.*;
+import com.google.cloud.firestore.EventListener;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
 import Monopoly.UUID;
+
+import javax.annotation.Nullable;
 
 public class FireStoreController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
     private int token;
+    private Consumer<DocumentSnapshot> lambda = (doc) -> {};
 
     public FireStoreController() {
         try {
@@ -144,7 +148,30 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         return (ArrayList<UUID>) documentSnapshot.get("commonFundCardDeck");
     }
 
-    public void listen(Collection<Observer<DocumentSnapshot>> collection) {
+    public void setConsumer(Consumer<DocumentSnapshot> lambda) {
+        this.lambda = lambda;
+    }
 
+    public void listen(int lobbyToken) {
+        DocumentReference docRef = firestore.getDatabase().collection("Lobbies").document(String.valueOf(lobbyToken));
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+
+
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirestoreException e) {
+                System.out.println("OMG A DOCSNAP");
+                if (e != null) {
+                    System.err.println("Listen failed: " + e);
+                    return;
+                }
+                if (snapshot != null && snapshot.exists()) {
+                    lambda.accept(snapshot);
+
+                    System.out.println("Current data: " + snapshot.getData());
+                } else {
+                    System.out.print("Current data: null");
+                }
+            }
+        });
     }
 }

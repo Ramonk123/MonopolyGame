@@ -30,6 +30,10 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         lobby = new Lobby();
     }
 
+    public void setDocumentSnapshot(DocumentSnapshot documentSnapshot) {
+        this.documentSnapshot = documentSnapshot;
+    }
+
     // MINE - Kadir
     public void joinLobby(int token) throws LobbyException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
@@ -75,6 +79,8 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     }
 
     private void goToLobby(ActionEvent actionEvent) {
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        fireStoreController.listen(token);
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         lobby.setStage(primaryStage);
     }

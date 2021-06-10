@@ -2,6 +2,8 @@ package Monopoly;
 
 import Controllers.*;
 import Firestore.Firestore;
+import ObserveablePattern.Observer;
+import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -23,6 +25,17 @@ public class Monopoly extends Application {
         ControllerRegistry.register(new PlayerController());
         ControllerRegistry.register(new FireStoreController());
         ControllerRegistry.register(new TurnController());
+
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        fireStoreController.setConsumer((doc) -> {
+            PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+            playerController.setDocumentSnapshot(doc);
+            playerController.notifyObservers();
+
+            LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
+            lobbyController.setDocumentSnapshot(doc);
+            lobbyController.notifyObservers();
+        });
 
         MainMenuController mainMenuController = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
         primaryStage.setTitle("Online Monopoly");
