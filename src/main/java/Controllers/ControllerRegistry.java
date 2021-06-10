@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class ControllerRegistry {
@@ -13,5 +14,9 @@ public class ControllerRegistry {
     public static Controller get(Class<? extends Controller> controllerClass) {
         String className = controllerClass.getSimpleName();
         return controllers.get(className);
+    }
+
+    public static Collection<Controller> getCollection() {
+        return controllers.values();
     }
 }

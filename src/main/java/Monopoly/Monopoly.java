@@ -22,8 +22,13 @@ public class Monopoly extends Application {
         ControllerRegistry.register(new CardDeckController());
         ControllerRegistry.register(new PlayerController());
         ControllerRegistry.register(new FireStoreController());
+        ControllerRegistry.register(new TurnController());
 
         MainMenuController mainMenuController = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
+        primaryStage.setTitle("Online Monopoly");
+        primaryStage.setResizable(false);
+        primaryStage.setHeight(599);
+        primaryStage.setWidth(630);
         mainMenuController.setStage(primaryStage);
 
 

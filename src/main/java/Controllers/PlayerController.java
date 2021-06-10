@@ -1,13 +1,16 @@
 package Controllers;
 
+import Firestore.FirestoreFormattable;
 import Models.Player;
 import Monopoly.UUID;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
-public class PlayerController implements Controller {
+public class PlayerController implements Controller, FirestoreFormattable {
 
     private Players clientPlayer;
     private ArrayList<Player> players = new ArrayList<>();
@@ -59,4 +62,12 @@ public class PlayerController implements Controller {
         player.setPosition(position);
     }
 
+    @Override
+    public Object getFirestoreFormat() {
+        Map<String, Object> map = new HashMap<>();
+        for (Player player : players) {
+            map.put(player.getId().getId(), player.getFirestoreFormat());
+        }
+        return map;
+    }
 }
