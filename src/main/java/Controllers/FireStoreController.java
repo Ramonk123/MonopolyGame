@@ -95,6 +95,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).set(lobbyData);
+
     }
 
     public void removePlayer(int token, Player player) throws InterruptedException, ExecutionException {

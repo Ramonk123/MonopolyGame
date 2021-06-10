@@ -166,16 +166,18 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
             }
             generateToken();
         }
-
-
-        fireStoreController.createLobby(token);
-        name = CreateLobbyViewNameTextField.getText();
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         try {
             playerController.setPlayer(name);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        System.out.println(token);
+        fireStoreController.createLobby(token);
+        name = CreateLobbyViewNameTextField.getText();
+
+
 
 
         //Open the lobby view

@@ -54,6 +54,7 @@ public class PlayerController implements Controller, FirestoreFormattable {
                 .orElseThrow( () -> new Exception("Order out of bounds")
         );
         Player player = new Player(playerEnum, name);
+        players.add(player);
         return player;
     }
 
