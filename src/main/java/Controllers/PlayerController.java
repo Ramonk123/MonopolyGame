@@ -48,10 +48,16 @@ public class PlayerController implements Controller, FirestoreFormattable {
         return getPlayerByName(name).isPresent();
     }
 
-    public void setPlayer(String name) {
-        //Player player = new Player(name);
-        //players.add(player);
+    public Player setPlayer(String name) throws Exception {
+        int arraySize = players.size();
+        Players playerEnum =  Players.getByOrder(arraySize+1)
+                .orElseThrow( () -> new Exception("Order out of bounds")
+        );
+        Player player = new Player(playerEnum, name);
+        return player;
     }
+
+
 
     public void movePlayer(String name, int amountThrown) throws Exception {
         Player player = getPlayerByName(name).orElseThrow(Exception::new);

@@ -122,12 +122,15 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
             JoinLobbyViewTokenTextField.setText("Numbers Only");
         } catch (InterruptedException | ExecutionException interruptedException) {
             interruptedException.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private void joinLobby(ActionEvent actionEvent, String name) throws InterruptedException, ExecutionException, IOException {
+    private void joinLobby(ActionEvent actionEvent, String name) throws Exception {
         //Added some functions, thought I could write the error messages while I'm at it. Feel free to change it.
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         if(!fireStoreController.checkExistence(token)){
             JoinLobbyViewTokenTextField.setText("This lobby does not exist");
         }
@@ -139,7 +142,8 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         }
 
         if(!playerNameExists(name)) {
-            addPlayerToLobby(name);
+            playerController.setPlayer(name);
+
         }
         JoinLobbyViewNameTextField.setText("Name already exists");
     }
@@ -154,14 +158,14 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
 
         while(fireStoreController.checkExistence(token)){
             generateToken();
+            System.out.println(token);
         }
 
 
         fireStoreController.createLobby(token);
-
         name = CreateLobbyViewNameTextField.getText();
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        playerController.setPlayer(name);
+        playerController.getPlayers().add(new Player(Players.PLAYER_ONE, name));
 
         //Open the lobby view
         goToLobby(actionEvent);

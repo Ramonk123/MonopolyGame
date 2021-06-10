@@ -74,6 +74,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         DocumentSnapshot documentSnapshot = getSnapshot(token);
 
         ArrayList<Player> players = (ArrayList<Player>) documentSnapshot.get("players");
+        System.out.println(players);
 
         assert players != null;
         return players.size();
