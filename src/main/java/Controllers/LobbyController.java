@@ -166,7 +166,9 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
             }
             generateToken();
         }
+
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        name = CreateLobbyViewNameTextField.getText();
         try {
             playerController.setPlayer(name);
         } catch (Exception e) {
@@ -174,8 +176,8 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         }
 
         System.out.println(token);
+        System.out.println(name);
         fireStoreController.createLobby(token);
-        name = CreateLobbyViewNameTextField.getText();
 
 
 
