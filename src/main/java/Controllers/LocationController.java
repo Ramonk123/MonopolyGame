@@ -4,12 +4,16 @@ import Models.*;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class LocationController implements Controller {
     private AuctionController auctionController = new AuctionController();
     private SpecialLocation specialLocations;
     private StreetLocation streetLocations;
+    private List<Location> locationArray;
+    private List<OwnableLocation> ownableLocationArray;
+    private List<SpecialLocation> specialLocationArray;
 
     private static LocationController locationController;
 
