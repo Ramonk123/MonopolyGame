@@ -1,23 +1,23 @@
 package Controllers;
 
 import Models.*;
-import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class LocationController implements Controller {
-    private AuctionController auctionController = new AuctionController();
-    private SpecialLocation specialLocations;
-    private StreetLocation streetLocations;
-    private List<Location> locationArray;
-    private List<OwnableLocation> ownableLocationArray;
-    private List<SpecialLocation> specialLocationArray;
-
     private static LocationController locationController;
+    private AuctionController auctionController = new AuctionController();
+    private List<Location> locationArray = new ArrayList<>();
+    private List<OwnableLocation> ownableLocationArray = new ArrayList<>();
+    private List<SpecialLocation> specialLocationArray = new ArrayList<>();
 
-
+    public LocationController(){
+        setSpecialLocations();
+        setStationLocations();
+        setStreetLocations();
+        setUtilityLocations();
+    }
 
     /*@Override
     public void registerObserver(View v) {
@@ -41,7 +41,7 @@ public class LocationController implements Controller {
         auctionController.startAuction();
     }
 
-    public void setStreetLocation(){
+    public void setStreetLocations(){
         StreetLocation dorpStraat = new StreetLocation(
                 // The Locations enum is an enum that contains all existing locations with their respective UUIDs
                 Locations.Dorpstraat,
@@ -263,6 +263,51 @@ public class LocationController implements Controller {
                 0,
                 0
         );
+        locationArray.add(dorpStraat);
+        locationArray.add(brink);
+        locationArray.add(steenStraat);
+        locationArray.add(ketelStraat);
+        locationArray.add(velperPlein);
+        locationArray.add(bartelJorisStraat);
+        locationArray.add(zijlWeg);
+        locationArray.add(houtStraat);
+        locationArray.add(neude);
+        locationArray.add(biltStraat);
+        locationArray.add(vreeBurg);
+        locationArray.add(aKerkhof);
+        locationArray.add(groteMarkt);
+        locationArray.add(hereStraat);
+        locationArray.add(spui);
+        locationArray.add(plein);
+        locationArray.add(langePoten);
+        locationArray.add(hofplein);
+        locationArray.add(blaak);
+        locationArray.add(coolSingel);
+        locationArray.add(leidseStraat);
+        locationArray.add(kalverStraat);
+        ownableLocationArray.add(dorpStraat);
+        ownableLocationArray.add(brink);
+        ownableLocationArray.add(steenStraat);
+        ownableLocationArray.add(ketelStraat);
+        ownableLocationArray.add(velperPlein);
+        ownableLocationArray.add(bartelJorisStraat);
+        ownableLocationArray.add(zijlWeg);
+        ownableLocationArray.add(houtStraat);
+        ownableLocationArray.add(neude);
+        ownableLocationArray.add(biltStraat);
+        ownableLocationArray.add(vreeBurg);
+        ownableLocationArray.add(aKerkhof);
+        ownableLocationArray.add(groteMarkt);
+        ownableLocationArray.add(hereStraat);
+        ownableLocationArray.add(spui);
+        ownableLocationArray.add(plein);
+        ownableLocationArray.add(langePoten);
+        ownableLocationArray.add(hofplein);
+        ownableLocationArray.add(blaak);
+        ownableLocationArray.add(coolSingel);
+        ownableLocationArray.add(leidseStraat);
+        ownableLocationArray.add(kalverStraat);
+
     }
 
     public void setSpecialLocations(){
@@ -373,6 +418,31 @@ public class LocationController implements Controller {
                 Actions::exampleAction
 
         );
+        locationArray.add(start);
+        locationArray.add(jail);
+        locationArray.add(goToJail);
+        locationArray.add(incomeTax);
+        locationArray.add(superTax);
+        locationArray.add(chanceOne);
+        locationArray.add(chanceTwo);
+        locationArray.add(chanceThree);
+        locationArray.add(communityChestOne);
+        locationArray.add(communityChestTwo);
+        locationArray.add(communityChestThree);
+        locationArray.add(freeParking);
+        specialLocationArray.add(start);
+        specialLocationArray.add(jail);
+        specialLocationArray.add(goToJail);
+        specialLocationArray.add(incomeTax);
+        specialLocationArray.add(superTax);
+        specialLocationArray.add(chanceOne);
+        specialLocationArray.add(chanceTwo);
+        specialLocationArray.add(chanceThree);
+        specialLocationArray.add(communityChestOne);
+        specialLocationArray.add(communityChestTwo);
+        specialLocationArray.add(communityChestThree);
+        specialLocationArray.add(freeParking);
+
     }
     public void setStationLocations(){
         StationLocation stationNorth = new StationLocation(
@@ -403,6 +473,14 @@ public class LocationController implements Controller {
                 15,
                 0
         );
+        locationArray.add(stationNorth);
+        locationArray.add(stationEast);
+        locationArray.add(stationSouth);
+        locationArray.add(stationWest);
+        ownableLocationArray.add(stationNorth);
+        ownableLocationArray.add(stationEast);
+        ownableLocationArray.add(stationSouth);
+        ownableLocationArray.add(stationWest);
     }
     public void setUtilityLocations(){
         UtilityLocation waterWorks = new UtilityLocation(
@@ -419,5 +497,9 @@ public class LocationController implements Controller {
                 12,
                 0
         );
+        locationArray.add(waterWorks);
+        locationArray.add(electricComapany);
+        ownableLocationArray.add(waterWorks);
+        ownableLocationArray.add(electricComapany);
     }
 }
