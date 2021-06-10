@@ -29,6 +29,7 @@ public class ThrowController implements Controller, DiceThrower {
         return currentThrow.getTotalEyes();
     }
 
+    // dit is niet nodig omdat de 3 methods hierboven al alle functionaliteiten van throw publiekelijk maken
     public Throw getCurrentThrow() {
         return currentThrow;
     }
