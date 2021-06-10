@@ -1,6 +1,7 @@
 package Models;
 
 import Controllers.Players;
+import Firestore.FirestoreFormattable;
 import Monopoly.Identifiable;
 import Monopoly.UUID;
 import Views.View;
@@ -9,7 +10,7 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements Model, Position, Nameable, Identifiable {
+public class Player implements Model, Position, Nameable, Identifiable, FirestoreFormattable {
 
     private String name;
     private String pawnIcon;
@@ -62,5 +63,10 @@ public class Player implements Model, Position, Nameable, Identifiable {
 
     public Players getPlayersEnum() {
         return playersEnum;
+    }
+
+    @Override
+    public Object getFirestoreFormat() {
+        return null;
     }
 }
