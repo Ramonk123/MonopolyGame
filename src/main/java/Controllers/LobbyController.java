@@ -152,20 +152,31 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @FXML
     private TextField CreateLobbyViewNameTextField;
     @FXML
-    private void CreateLobbySubmit(ActionEvent actionEvent) throws InterruptedException, ExecutionException {
+    private void CreateLobbySubmit(ActionEvent actionEvent)  {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         generateToken();
 
-        while(fireStoreController.checkExistence(token)){
+        while(true){
+            try {
+                if (!fireStoreController.checkExistence(token)) break;
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             generateToken();
-            System.out.println(token);
         }
 
 
         fireStoreController.createLobby(token);
         name = CreateLobbyViewNameTextField.getText();
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        playerController.getPlayers().add(new Player(Players.PLAYER_ONE, name));
+        try {
+            playerController.setPlayer(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         //Open the lobby view
         goToLobby(actionEvent);
