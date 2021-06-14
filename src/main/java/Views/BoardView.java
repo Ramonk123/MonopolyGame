@@ -63,11 +63,7 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
         Platform.runLater(() -> {
             for (Label label : labelList) {
                 label.setText("");
-                System.out.println(label.getText());
-            }
 
-            for (Player player : state.getPlayers()) {
-                System.out.println(player.getName());
             }
 
             List<Player> players = state.getPlayers();
