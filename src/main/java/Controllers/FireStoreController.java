@@ -80,15 +80,14 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         return documentSnapshot.exists();
     }
 
-    /*public int getLobbySize(int token) throws ExecutionException, InterruptedException {
+    public int getLobbySize(int token) throws ExecutionException, InterruptedException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
 
-        ArrayList<Player> players = (ArrayList<Player>) documentSnapshot.get("players");
+        HashMap<String, Players> players = (HashMap<String, Players>) documentSnapshot.get("players");
         System.out.println(players);
-
         assert players != null;
         return players.size();
-    }*/
+    }
 
     public void createLobby(int token) {
 

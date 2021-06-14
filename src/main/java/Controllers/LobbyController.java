@@ -151,11 +151,11 @@ public class LobbyController
             LobbyAlreadyFullPopup.setVisible(true);
         }
 
-        if(!playerNameExists(name)) {
+        /*if(!playerNameExists(name)) {
             playerController.setPlayer(name);
 
         }
-        JoinLobbyViewNameTextField.setText("Name already exists");
+        JoinLobbyViewNameTextField.setText("Name already exists");*/
     }
 
     //Create Lobby
