@@ -20,12 +20,12 @@ public class CardDeckController implements Controller {
     private final static UUID CHANCE_JAIL_CARD_UUID = new UUID("CARD-8");
     private final static UUID COMMUNITY_JAIL_CARD_UUID = new UUID("CARD-20");
 
+    CardDeck chanceCardDeck = new CardDeck(new ArrayList());
+    CardDeck commonFundCardDeck = new CardDeck(new ArrayList<>());
+
     public CardDeckController() {
 //        setCardDecks();
     }
-
-    CardDeck chanceCardDeck;
-    CardDeck commonFundCardDeck;
 
 // TODO:
 //  1. Update index on .teleportToLocation()
@@ -77,14 +77,12 @@ public class CardDeckController implements Controller {
     // In this function the player grabs the card.
     public Card grabChanceCard() throws ExecutionException, InterruptedException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        Card takenCard = fireStoreController.getChanceCard();
-        return takenCard;
+        return fireStoreController.getChanceCard();
     }
 
     public Card grabCommonFundCard() throws ExecutionException, InterruptedException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        Card takenCard = fireStoreController.getCommonFundCard();
-        return takenCard;
+        return fireStoreController.getCommonFundCard();
     }
 
     public void returnCard(Card card) {

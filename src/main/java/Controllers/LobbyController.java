@@ -145,12 +145,8 @@ public class LobbyController
             fireStoreController.addPlayer(token, player);
         } catch(NumberFormatException numberFormatException) {
             JoinLobbyViewTokenTextField.setText("Numbers Only");
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
-        } catch (ExecutionException executionException) {
+        } catch (Exception executionException) {
             executionException.printStackTrace();
-        } catch (Exception exception) {
-            exception.printStackTrace();
         }
     }
 
@@ -191,12 +187,10 @@ public class LobbyController
         //while(true){
             try {
                 if (!fireStoreController.checkExistence(token)) {}//break;
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
-            generateToken();
+        generateToken();
         //}
 
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
@@ -207,8 +201,8 @@ public class LobbyController
             e.printStackTrace();
         }
 
-//        CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
-//        cardDeckController.setCardDecks();
+        CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
+        cardDeckController.setCardDecks();
 
         System.out.println(token);
         fireStoreController.createLobby(token);
