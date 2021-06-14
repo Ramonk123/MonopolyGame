@@ -5,6 +5,7 @@ import Models.*;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Resetter.GameResetter;
+import Resetter.Resettable;
 import Views.HasStage;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.event.ActionEvent;
@@ -34,16 +35,18 @@ public class LobbyController
             Subject<DocumentSnapshot>,
             HasStage,
             FirestoreFormattable,
-            Observer<DocumentSnapshot> {
+            Observer<DocumentSnapshot>,
+            Resettable {
 
     private Lobby lobby;
     private DocumentSnapshot documentSnapshot;
 
     private int token;
     private String name;
+    private boolean gameHasStarted;
 
     public LobbyController() {
-        lobby = new Lobby();
+        reset();
     }
 
     @Override
@@ -283,8 +286,14 @@ public class LobbyController
         return labelList;
     }
     @FXML
-    private void goToGameView(ActionEvent event) {
-        Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    private void goToGameViewFxml(ActionEvent event) {
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        fireStoreController.startGame();
+    }
+
+
+    private void goToGameView() {
+        Stage primaryStage = lobby.getStage();
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         boardController.setStage(primaryStage);
     }
@@ -296,6 +305,19 @@ public class LobbyController
     @Override
     public void update(DocumentSnapshot state) {
         documentSnapshot = state;
+        System.out.println("asser");
+        boolean boolBeforeUpdate = gameHasStarted;
+        boolean boolAfterUpdate = (boolean) documentSnapshot.get("gameHasStarted");
+        if (boolBeforeUpdate != boolAfterUpdate && !boolAfterUpdate) {
+            gameHasStarted = boolAfterUpdate;
+            goToGameView();
+        }
         notifyObservers();
+    }
+
+    @Override
+    public void reset() {
+        lobby = new Lobby();
+        gameHasStarted = false;
     }
 }

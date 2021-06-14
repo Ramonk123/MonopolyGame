@@ -40,7 +40,7 @@
       </VBox>
       <HBox alignment="CENTER" layoutX="150.0" layoutY="132.0" prefWidth="600.0" spacing="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
          <children>
-            <Button fx:id="LobbyViewStartGameButton" mnemonicParsing="false" onAction="#goToGameView" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #93d28f;" text="Start game" />
+            <Button fx:id="LobbyViewStartGameButton" mnemonicParsing="false" onAction="#goToGameViewFxml" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #93d28f;" text="Start game" />
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutY="192.0" prefWidth="600.0" spacing="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">

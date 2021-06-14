@@ -27,9 +27,6 @@ public class CardDeckController implements Controller {
     CardDeck chanceCardDeck = new CardDeck(null);
     CardDeck commonFundCardDeck = new CardDeck(null);
 
-    // this sucks
-    ArrayList<UUID> firestoreChanceDeck = new ArrayList<>(), firestoreCommonFundDeck = new ArrayList<>();
-
 // TODO:
 //  1. Update index on .teleportToLocation()
 //  2. create TP to station and utility methods in Actions.java
@@ -75,26 +72,18 @@ public class CardDeckController implements Controller {
         commonFundCardDeck.shuffle();
     }
 
-    // Nieuwe methode, de speler pakt een kaart, kaart is null in firebase, host update kaart.
-    public Card grabChanceCard() {
+    // New method, player grabs card directly, host updates from his deck.
+
+    // In this function the player grabs the card.
+    public Card grabChanceCard() throws ExecutionException, InterruptedException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        Card takenCard = chanceCardDeck.getCardDeck().get(0);
-        chanceCardDeck.getCardDeck().remove(0);
-        if(!UUID.compare("CARD-8", takenCard.getId())) {
-            chanceCardDeck.getCardDeck().add(takenCard);
-        }
-        fireStoreController.updateChanceCard();
+        Card takenCard = fireStoreController.getChanceCard();
         return takenCard;
     }
 
-    public Card grabCommonFundCard() {
+    public Card grabCommonFundCard() throws ExecutionException, InterruptedException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        Card takenCard = commonFundCardDeck.getCardDeck().get(0);
-        commonFundCardDeck.getCardDeck().remove(0);
-        if(!UUID.compare("CARD-20", takenCard.getId())) {
-            commonFundCardDeck.add(takenCard);
-        }
-        fireStoreController.updateCommonFundCard();
+        Card takenCard = fireStoreController.getCommonFundCard();
         return takenCard;
     }
 
@@ -107,31 +96,18 @@ public class CardDeckController implements Controller {
         }
     }
 
-    public ArrayList<UUID> getChanceCardDeck(){
-        firestoreChanceDeck = returnUUID(chanceCardDeck);
-        return firestoreChanceDeck;
+    //Only meant for host.
+    public Card getNextChanceCard() {
+        Card firestoreCard = chanceCardDeck.getCardDeck().get(0);
+        return firestoreCard;
     }
 
-    public void setChanceCardDeck() throws InterruptedException, ExecutionException {
-        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        firestoreChanceDeck = fireStoreController.getChanceCard();
-        //TODO:
-        // 1. implement this in the right way, Arraylist<UUID> is stored in firestore.
-        // 2. add method to add this to the model
+    public Card getNextCommonFundCard() {
+        Card firestoreCard = commonFundCardDeck.getCardDeck().get(0);
+        return firestoreCard;
     }
 
-    public ArrayList<UUID> getCommonFundCardDeck(){
-        firestoreCommonFundDeck = returnUUID(commonFundCardDeck);
-        return firestoreCommonFundDeck;
-    }
-
-    public void setCommonFundCardDeck() throws InterruptedException, ExecutionException {
-        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        firestoreCommonFundDeck = fireStoreController.getCommonFundCard();
-        //TODO:
-        // same as with setChanceCardDeck()
-    }
-
+    // Not in use moght be deleted later.
     public ArrayList<UUID> returnUUID(CardDeck arrayListCard) {
         ArrayList<UUID> arrayListUUID = new ArrayList<>();
         for(int i = 0; arrayListCard.getCardDeck().size() >= i; i++){

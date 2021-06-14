@@ -1,6 +1,7 @@
 package Controllers;
 
 import Firestore.Firestore;
+import Models.Card;
 import Models.Player;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
@@ -20,9 +21,6 @@ import Monopoly.UUID;
 
 import javax.annotation.Nullable;
 
-/**
- * Controller for the Firestore model
- */
 public class FireStoreController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
     private int token;
@@ -62,20 +60,13 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     }
 
-    private Firestore firestore = new Firestore();
+    Firestore firestore = new Firestore();
 
 
     public void initializeFirestore() throws IOException {
         firestore.initializeFirestore();
     }
 
-    /**
-     * Gets and returns all the data of a certain lobby.
-     * @param token Token is an unique identifier for a lobby.
-     * @return Returns all data of a certain lobby.
-     * @throws ExecutionException
-     * @throws InterruptedException
-     */
     public DocumentSnapshot getSnapshot(int token) throws ExecutionException, InterruptedException {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         DocumentReference documentReference = database.collection("Lobbies").document(String.valueOf(token));
@@ -84,26 +75,17 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         return documentSnapshot.get();
     }
 
-    /**
-     *
-     * @param token Token is an unique identifier for a lobby.
-     * @return Returns a boolean value; true if the token param given already exists, and false if the token parma doesn't exist.
-     * @throws ExecutionException
-     * @throws InterruptedException
-     */
     public boolean checkExistence(int token) throws ExecutionException, InterruptedException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
 
         return documentSnapshot.exists();
     }
 
-    /**
-     * Returns the size of a lobby as an int.
-     * @param token Token is an unique identifier for a lobby.
-     * @return Returns an int that represents the size of the lobby. The size is the amount of players in the lobby.
-     * @throws ExecutionException
-     * @throws InterruptedException
-     */
+    public void startGame() {
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).update("gameHasStarted", true);
+    }
+
     public int getLobbySize(int token) throws ExecutionException, InterruptedException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
 
@@ -113,10 +95,6 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         return players.size();
     }
 
-    /**
-     * Creates an new subdirectory for a lobby with all default values.
-     * @param token Token is an unique identifier for a lobby.
-     */
     public void createLobby(int token) {
 
         //TODO:
@@ -129,20 +107,15 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         Map<String, Object> lobbyData = (Map<String, Object>) ((LobbyController) ControllerRegistry.get(LobbyController.class)).getFirestoreFormat();
         lobbyData.put("players", playerController.getFirestoreFormat());
         lobbyData.put("turn", turnController.getFirestoreFormat());
-        
+        lobbyData.put("chanceCardDeck", cardDeckController.getNextChanceCard());
+        lobbyData.put("commonFundCardDeck", cardDeckController.getNextCommonFundCard());
+
 
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).set(lobbyData);
 
     }
 
-    /**
-     * Removes a player from the database.
-     * @param token Token is an unique identifier for a lobby.
-     * @param player Player is an object that contains all data of a player.
-     * @throws InterruptedException
-     * @throws ExecutionException
-     */
     public void removePlayer(int token, Player player) throws InterruptedException, ExecutionException {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         DocumentSnapshot documentSnapshot = getSnapshot(token);
@@ -152,13 +125,6 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         database.collection("Lobbies").document(String.valueOf(token)).update("players", map);
     }
 
-    /**
-     * Adds a player to the database.
-     * @param token Token is an unique identifier for a lobby.
-     * @param player Player is an object that contains all data of a player.
-     * @throws ExecutionException
-     * @throws InterruptedException
-     */
     public void addPlayer(int token, Player player) throws ExecutionException, InterruptedException {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         DocumentSnapshot documentSnapshot = getSnapshot(token);
@@ -168,48 +134,45 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
                 .update("players", map);
     }
 
-    public void updateChanceCard(){
+    public void updateChanceCard() {
         CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
-                .update("chanceCardDeck", cardDeckController.getChanceCardDeck());
+                .update("chanceCardDeck", cardDeckController.getNextChanceCard());
     }
 
-    public void updateCommonFundCard(){
+    public void updateCommonFundCard() {
         CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
-                .update("commonFundCardDeck", cardDeckController.getCommonFundCardDeck());
+                .update("commonFundCardDeck", cardDeckController.getNextCommonFundCard());
     }
-    public ArrayList<UUID> getChanceCard() throws InterruptedException, ExecutionException {
+
+    public Card getChanceCard() throws InterruptedException, ExecutionException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))
                 .update("chanceCardDeck", null);
-        return (ArrayList<UUID>) documentSnapshot.get("chanceCardDeck");
+        return (Card) documentSnapshot.get("chanceCardDeck");
     }
 
-    public ArrayList<UUID> getCommonFundCard() throws InterruptedException, ExecutionException {
+    public Card getCommonFundCard() throws InterruptedException, ExecutionException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))
                 .update("commonFundCardDeck", null);
-        return (ArrayList<UUID>) documentSnapshot.get("commonFundCardDeck");
+        return (Card) documentSnapshot.get("commonFundCardDeck");
     }
 
     public void setConsumer(Consumer<DocumentSnapshot> lambda) {
         this.lambda = lambda;
     }
 
-    /**
-     * Creates an onEvent listener for the database.
-     * @param token Token is an unique identifier for a lobby.
-     */
-    public void listen(int token) {
-        DocumentReference documentReference = firestore.getDatabase().collection("Lobbies").document(String.valueOf(token));
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+    public void listen(int lobbyToken) {
+        DocumentReference docRef = firestore.getDatabase().collection("Lobbies").document(String.valueOf(lobbyToken));
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
 
 
             public void onEvent(@Nullable DocumentSnapshot snapshot,
