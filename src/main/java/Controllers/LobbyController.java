@@ -133,7 +133,7 @@ public class LobbyController
             joinLobby(actionEvent, name);
             goToLobby(actionEvent);
             int order = fireStoreController.getLobbySize(token);
-            Players playerEnum = Players.getByOrder(order)
+            Players playerEnum = Players.getByOrder(order + 1)
                     .orElseThrow( () -> new Exception("Order out of bounds"));
 
             Player player = playerController.setPlayerWithPlayersEnum(playerEnum, name);
