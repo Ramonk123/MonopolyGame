@@ -8,6 +8,7 @@ import Resetter.GameResetter;
 import Resetter.Resettable;
 import Views.HasStage;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -206,6 +207,9 @@ public class LobbyController
             e.printStackTrace();
         }
 
+//        CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
+//        cardDeckController.setCardDecks();
+
         System.out.println(token);
         fireStoreController.createLobby(token);
 
@@ -287,15 +291,20 @@ public class LobbyController
     }
     @FXML
     private void goToGameViewFxml(ActionEvent event) {
+        System.out.println("fxml ass");
+        //System.out.println((Stage) ((Node) event.getSource()).getScene().getWindow());
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        fireStoreController.startGame();
+        fireStoreController.startGame(token);
     }
 
 
     private void goToGameView() {
         Stage primaryStage = lobby.getStage();
-        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        boardController.setStage(primaryStage);
+        System.out.println(primaryStage);
+        Platform.runLater(() -> {
+            BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+            boardController.setStage(primaryStage);
+        });
     }
     @FXML Label LobbyViewTokenLabel;
     public Label getTokenLabel() {
@@ -305,10 +314,11 @@ public class LobbyController
     @Override
     public void update(DocumentSnapshot state) {
         documentSnapshot = state;
-        System.out.println("asser");
-        boolean boolBeforeUpdate = gameHasStarted;
+        System.out.println(state.get("gameHasStarted"));
+        System.out.println("update");
         boolean boolAfterUpdate = (boolean) documentSnapshot.get("gameHasStarted");
-        if (boolBeforeUpdate != boolAfterUpdate && !boolAfterUpdate) {
+        if (!gameHasStarted && boolAfterUpdate) {
+            System.out.println("if statement");
             gameHasStarted = boolAfterUpdate;
             goToGameView();
         }
