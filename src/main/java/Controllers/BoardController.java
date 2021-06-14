@@ -35,25 +35,6 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, H
         board = new Board();
     }
 
-    // isn't there a way for u to store these labels in an array?
-    // and aren't these supposed to be in the Board view itself?
-    @FXML
-    private Label BoardViewUsername1Label;
-    @FXML
-    private Label BoardViewUsername2Label;
-    @FXML
-    private Label BoardViewUsername3Label;
-    @FXML
-    private Label BoardViewUsername4Label;
-    @FXML
-    private Label BoardViewUsername5Label;
-    @FXML
-    private Label BoardViewUsername6Label;
-    @FXML
-    private Label BoardViewUsername7Label;
-    @FXML
-    private Label BoardViewUsername8Label;
-
     @FXML
     private Pane BackgroundImageView;
 
@@ -80,63 +61,29 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, H
         board.setStage(primaryStage);
     }
 
-    public void setPlayersNamesToLabels() {
-        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        ArrayList<Player> players = playerController.getPlayers();
-        // if the labels were in an array, and invisible by default you could do:
-        // with the array you'd also avoid that switch you're using right now. (getLabelByNumber).
-        // maybe this link will help.
-        // https://stackoverflow.com/questions/28587297/create-array-of-label-using-fxml-in-javafx
-        /*
-        for (int i = 0; i < players.size(); i++) {
-            // pseudo code for the label
-            labelsArray[i].setVisible()
-            labelsArray[i].setName(players.get(i).getName());
-        }
-         */
-        for(int i = 0; i < 8; i++) {
-            try {
-                setPlayerNameToLabel(players.get(i).getName(), i + 1);
-            } catch(IndexOutOfBoundsException indexOutOfBoundsException) {
-                setVisibilityLabel(i + 1);
-            }
-        }
+    @FXML Label BoardViewUsername1Label;
+    @FXML Label BoardViewUsername2Label;
+    @FXML Label BoardViewUsername3Label;
+    @FXML Label BoardViewUsername4Label;
+    @FXML Label BoardViewUsername5Label;
+    @FXML Label BoardViewUsername6Label;
+    @FXML Label BoardViewUsername7Label;
+    @FXML Label BoardViewUsername8Label;
+
+    public ArrayList<Label> getUsernameArray() {
+        ArrayList<Label> labelList = new ArrayList<>();
+        labelList.add(BoardViewUsername1Label);
+        labelList.add(BoardViewUsername2Label);
+        labelList.add(BoardViewUsername3Label);
+        labelList.add(BoardViewUsername4Label);
+        labelList.add(BoardViewUsername5Label);
+        labelList.add(BoardViewUsername6Label);
+        labelList.add(BoardViewUsername7Label);
+        labelList.add(BoardViewUsername8Label);
+        return labelList;
+
     }
 
-    private void setPlayerNameToLabel(String name, int labelNumber) {
-        Label label = getLabelByNumber(labelNumber);
-        assert label != null;
-        label.setText(name);
-    }
 
-    private void setVisibilityLabel(int labelNumber) {
-        Label label = getLabelByNumber(labelNumber);
-        assert label != null;
-        label.setVisible(false);
-    }
 
-    @Nullable
-    private Label getLabelByNumber(int labelNumber) {
-        Label label = null;
-
-        switch(labelNumber) {
-            case 1:
-                label = BoardViewUsername1Label;
-            case 2:
-                label = BoardViewUsername2Label;
-            case 3:
-                label = BoardViewUsername3Label;
-            case 4:
-                label = BoardViewUsername4Label;
-            case 5:
-                label = BoardViewUsername5Label;
-            case 6:
-                label = BoardViewUsername6Label;
-            case 7:
-                label = BoardViewUsername7Label;
-            case 8:
-                label = BoardViewUsername8Label;
-        }
-        return label;
-    }
 }
