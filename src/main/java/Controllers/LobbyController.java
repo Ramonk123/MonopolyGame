@@ -258,6 +258,12 @@ public class LobbyController
 
         return labelList;
     }
+    @FXML
+    private void goToGameView(ActionEvent event) {
+        Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        boardController.setStage(primaryStage);
+    }
     @FXML Label LobbyViewTokenLabel;
     public Label getTokenLabel() {
         return LobbyViewTokenLabel;
