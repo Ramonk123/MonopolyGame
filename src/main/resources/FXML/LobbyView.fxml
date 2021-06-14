@@ -28,17 +28,19 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <Label fx:id="LobbyViewTokenLabel" alignment="CENTER" prefHeight="45.0" prefWidth="100.0" text="0123456">
+            <Label fx:id="LobbyViewTokenLabel" alignment="CENTER" prefHeight="45.0" prefWidth="200.0" text="0123456">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
+               <graphic>
+                  <Button fx:id="LobbyViewCopy" mnemonicParsing="false" onAction="#CopyToClipboard" text="Copy" />
+               </graphic>
             </Label>
          </children>
       </VBox>
       <HBox alignment="CENTER" layoutX="150.0" layoutY="132.0" prefWidth="600.0" spacing="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
          <children>
             <Button fx:id="LobbyViewStartGameButton" mnemonicParsing="false" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #93d28f;" text="Start game" />
-            <Button fx:id="LobbyViewLeaveLobbyButton" mnemonicParsing="false" onAction="#LeaveLobby" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #f04747;" text="Leave lobby" />
          </children>
       </HBox>
       <HBox alignment="CENTER" layoutY="192.0" prefWidth="600.0" spacing="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
