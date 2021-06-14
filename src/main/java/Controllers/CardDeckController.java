@@ -24,7 +24,7 @@ public class CardDeckController implements Controller {
     CardDeck commonFundCardDeck = new CardDeck(new ArrayList<>());
 
     public CardDeckController() {
-        setCardDecks();
+//        setCardDecks();
     }
 
 // TODO:
