@@ -55,10 +55,10 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, H
     private Pane BackgroundImageView;
 
     public void setBackgroundImageView() {
-        BackgroundImage myBI= new BackgroundImage(new Image("/FXML/IMG/background.png",600,400,false,true),
+        BackgroundImage backgroundImage= new BackgroundImage(new Image("/FXML/IMG/background.png",600,400,false,true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
-        BackgroundImageView.setBackground(new Background(myBI));
+        BackgroundImageView.setBackground(new Background(backgroundImage));
     }
 
     @Override
