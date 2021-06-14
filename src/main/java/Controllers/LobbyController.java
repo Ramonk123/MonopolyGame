@@ -78,6 +78,7 @@ public class LobbyController
 
     @FXML
     private void returnToMainMenu(ActionEvent actionEvent) {
+        GameResetter.reset();
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         MainMenuController mainMenuController = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
         mainMenuController.setStage(primaryStage);
@@ -133,10 +134,10 @@ public class LobbyController
             joinLobby(actionEvent, name);
             goToLobby(actionEvent);
             int order = fireStoreController.getLobbySize(token);
-            Players playerEnum = Players.getByOrder(order + 1)
+            Players playersEnum = Players.getByOrder(order + 1)
                     .orElseThrow( () -> new Exception("Order out of bounds"));
-
-            Player player = playerController.setPlayerWithPlayersEnum(playerEnum, name);
+            playerController.setClientPlayersEnum(playersEnum);
+            Player player = playerController.setPlayerWithPlayersEnum(playersEnum, name);
             fireStoreController.addPlayer(token, player);
         } catch(NumberFormatException exception) {
             JoinLobbyViewTokenTextField.setText("Numbers Only");
@@ -219,7 +220,8 @@ public class LobbyController
     }
     @FXML
     private void ConfirmLeaveLobby(ActionEvent actionEvent) throws InterruptedException, ExecutionException, IOException {
-        GameResetter.reset();
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        playerController.removeByPlayersEnum(playerController.getClientPlayersEnum());
         returnToMainMenu(actionEvent);
     }
     @FXML

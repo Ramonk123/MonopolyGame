@@ -34,6 +34,10 @@ public class PlayerController
         reset();
     }
 
+    public Players getClientPlayersEnum() {
+        return clientPlayer;
+    }
+
     public Optional<Player> getPlayerByName(String name) {
         Player player = null;
         for(Player p : players) {
@@ -57,6 +61,19 @@ public class PlayerController
 
     public boolean nameExists(String name) {
         return getPlayerByName(name).isPresent();
+    }
+
+    public void setClientPlayersEnum(Players playersEnum) {
+        clientPlayer = playersEnum;
+    }
+
+    public void removeByPlayersEnum(Players playersEnum) {
+        for (Player player : players) {
+            if (UUID.compare(playersEnum, player.getPlayersEnum())) {
+                players.remove(player);
+                break;
+            }
+        }
     }
 
     public Player setPlayer(String name) throws Exception {
@@ -140,6 +157,7 @@ public class PlayerController
 
     @Override
     public void reset() {
+        clientPlayer = Players.PLAYER_ONE;
         players = new ArrayList<>();
     }
 }
