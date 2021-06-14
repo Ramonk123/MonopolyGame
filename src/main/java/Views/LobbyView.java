@@ -7,6 +7,7 @@ import Controllers.PlayerController;
 import Models.Player;
 import ObserveablePattern.Observer;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -51,23 +52,25 @@ public class LobbyView implements View, Observer<LobbySubject>, HasStage {
 
     @Override
     public void update(LobbySubject state) {
-        List<Player> players = state.getPlayers();
-        updateLobbyView();
-
+        updateLobbyView(state);
     }
     //This function will check for new players joining lobby and updating player names
-    public void updateLobbyView() {
+    public void updateLobbyView(LobbySubject state) {
 
         LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
 
         ArrayList<Label> labelList = lobbyController.getUserLabelList();
-        lobbyController.getTokenLabel().setText(String.valueOf(lobbyController.getToken()));
+        Platform.runLater(() -> {
+            lobbyController.getTokenLabel().setText(String.valueOf(lobbyController.getToken()));
 
-        int playersJoined = playerController.getPlayers().size();
-        for(int i = 0; i < playersJoined; i++) {
-            labelList.get(i).setText(playerController.getPlayers().get(i).getName());
-        }
+            List<Player> players = state.getPlayers();
+            int playersJoined = players.size();
+            System.out.println(playersJoined);
+            for(int i = 0; i < playersJoined; i++) {
+                labelList.get(i).setText(players.get(i).getName());
+            }
+        });
     }
 
 

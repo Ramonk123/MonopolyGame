@@ -20,7 +20,13 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-public class LobbyController implements Controller, Subject<DocumentSnapshot>, HasStage, FirestoreFormattable {
+public class LobbyController
+        implements
+            Controller,
+            Subject<DocumentSnapshot>,
+            HasStage,
+            FirestoreFormattable,
+            Observer<DocumentSnapshot> {
 
     private Lobby lobby;
     private DocumentSnapshot documentSnapshot;
@@ -30,10 +36,6 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
 
     public LobbyController() {
         lobby = new Lobby();
-    }
-
-    public void setDocumentSnapshot(DocumentSnapshot documentSnapshot) {
-        this.documentSnapshot = documentSnapshot;
     }
 
     // MINE - Kadir
@@ -149,11 +151,11 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
             LobbyAlreadyFullPopup.setVisible(true);
         }
 
-        if(!playerNameExists(name)) {
+        /*if(!playerNameExists(name)) {
             playerController.setPlayer(name);
 
         }
-        JoinLobbyViewNameTextField.setText("Name already exists");
+        JoinLobbyViewNameTextField.setText("Name already exists");*/
     }
 
     //Create Lobby
@@ -247,5 +249,11 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
     @FXML Label LobbyViewTokenLabel;
     public Label getTokenLabel() {
         return LobbyViewTokenLabel;
+    }
+
+    @Override
+    public void update(DocumentSnapshot state) {
+        documentSnapshot = state;
+        notifyObservers();
     }
 }

@@ -13,7 +13,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class PlayerController implements Controller, FirestoreFormattable, Subject<DocumentSnapshot> {
+public class PlayerController
+        implements
+            Controller,
+            FirestoreFormattable,
+            Subject<DocumentSnapshot>,
+            Observer<DocumentSnapshot> {
 
     private Players clientPlayer;
     private ArrayList<Player> players = new ArrayList<>();
@@ -62,7 +67,7 @@ public class PlayerController implements Controller, FirestoreFormattable, Subje
         return player;
     }
 
-    public Player setPlayerWithPlayersEnum(String name, Players playersEnum) throws Exception {
+    public Player setPlayerWithPlayersEnum(Players playersEnum, String name) throws Exception {
         Player player = new Player(playersEnum, name);
         players.add(player);
         return player;
@@ -95,12 +100,16 @@ public class PlayerController implements Controller, FirestoreFormattable, Subje
     protected void updatePlayersSize(Map<String, Object> map) {
         Players playersEnum;
         Optional<Player> player;
+        System.out.println("time for enum run");
         try {
             for (Map.Entry<String, Object> entry : map.entrySet()) {
+                System.out.println(entry.getKey());
+                System.out.println(entry.getValue());
                 playersEnum = Players.getByStringUuid(entry.getKey()).orElseThrow(() -> new Exception("invalid PlayersEnum UUID."));
                 player = getPlayerByPlayersEnum(playersEnum);
                 if (player.isEmpty()) {
-                    setPlayer((String) ((Map<String, Object>) entry.getValue()).get("name"));
+                    System.out.println("WHOA setplayer");
+                    setPlayerWithPlayersEnum(playersEnum, (String) ((Map<String, Object>) entry.getValue()).get("name"));
                 }
             }
         } catch (Exception e) {
@@ -110,16 +119,20 @@ public class PlayerController implements Controller, FirestoreFormattable, Subje
 
     @Override
     public void notifyObservers() {
-        Map<String, Object> map = (Map<String, Object>) documentSnapshot.get("players");
-        if (map.size() > players.size()) {
-            updatePlayersSize(map);
-        }
         for (Player player : players) {
             player.update(documentSnapshot);
         }
     }
 
-    public void setDocumentSnapshot(DocumentSnapshot documentSnapshot) {
-        this.documentSnapshot = documentSnapshot;
+    @Override
+    public void update(DocumentSnapshot state) {
+        documentSnapshot = state;
+        Map<String, Object> map = (Map<String, Object>) documentSnapshot.get("players");
+        System.out.println(map.size());
+        System.out.println(players.size());
+        if (map.size() > players.size()) {
+            updatePlayersSize(map);
+        }
+        notifyObservers();
     }
 }

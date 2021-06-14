@@ -24,6 +24,10 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     private int token;
     private Consumer<DocumentSnapshot> lambda = (doc) -> {};
+    private List<Observer<DocumentSnapshot>> observers = new ArrayList<>();
+    private DocumentSnapshot documentSnapshot;
+
+
 
     public FireStoreController() {
         try {
@@ -35,17 +39,19 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     @Override
     public void registerObserver(Observer<DocumentSnapshot> observer) {
-
+        observers.add(observer);
     }
 
     @Override
     public void unregisterObserver(Observer<DocumentSnapshot> observer) {
-
+        observers.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
-
+        for (Observer<DocumentSnapshot> observer : observers) {
+            observer.update(documentSnapshot);
+        }
     }
 
     @Override
@@ -77,9 +83,8 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
     public int getLobbySize(int token) throws ExecutionException, InterruptedException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
 
-        ArrayList<Player> players = (ArrayList<Player>) documentSnapshot.get("players");
+        HashMap<String, Players> players = (HashMap<String, Players>) documentSnapshot.get("players");
         System.out.println(players);
-
         assert players != null;
         return players.size();
     }
@@ -96,6 +101,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         Map<String, Object> lobbyData = (Map<String, Object>) ((LobbyController) ControllerRegistry.get(LobbyController.class)).getFirestoreFormat();
         lobbyData.put("players", playerController.getFirestoreFormat());
         lobbyData.put("turn", turnController.getFirestoreFormat());
+        
 
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).set(lobbyData);
@@ -165,7 +171,8 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
                     return;
                 }
                 if (snapshot != null && snapshot.exists()) {
-                    lambda.accept(snapshot);
+                    documentSnapshot = snapshot;
+                    notifyObservers();
 
                     System.out.println("Current data: " + snapshot.getData());
                 } else {
