@@ -24,9 +24,6 @@ public class CardDeckController implements Controller {
     CardDeck chanceCardDeck = new CardDeck(null);
     CardDeck commonFundCardDeck = new CardDeck(null);
 
-    // this sucks
-    ArrayList<UUID> firestoreChanceDeck = new ArrayList<>(), firestoreCommonFundDeck = new ArrayList<>();
-
 // TODO:
 //  1. Update index on .teleportToLocation()
 //  2. create TP to station and utility methods in Actions.java
@@ -72,7 +69,7 @@ public class CardDeckController implements Controller {
         commonFundCardDeck.shuffle();
     }
 
-    // Nieuwe methode, de speler pakt een kaart, kaart is null in firebase, host update kaart.
+    // New method, player grabs card directly, host updates from his deck.
 
     // In this function the player grabs the card.
     public Card grabChanceCard() throws ExecutionException, InterruptedException {
@@ -107,6 +104,7 @@ public class CardDeckController implements Controller {
         return firestoreCard;
     }
 
+    // Not in use moght be deleted later.
     public ArrayList<UUID> returnUUID(CardDeck arrayListCard) {
         ArrayList<UUID> arrayListUUID = new ArrayList<>();
         for(int i = 0; arrayListCard.getCardDeck().size() >= i; i++){
