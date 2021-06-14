@@ -81,8 +81,10 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         return documentSnapshot.exists();
     }
 
-    public void startGame() {
+    public void startGame(int token) {
+        System.out.println("huoewdfuhuoqewfhuoewf");
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        System.out.println(token);
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).update("gameHasStarted", true);
     }
 
