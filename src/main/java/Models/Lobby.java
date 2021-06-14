@@ -51,6 +51,10 @@ public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot>, H
         ((LobbyView) observers.get(0)).setStage(primaryStage);
     }
 
+    public Stage getStage() {
+        return ((LobbyView) observers.get(0)).getStage();
+    }
+
     public void setCreateLobbyStage(Stage primaryStage) {
         ((CreateLobbyView) observers.get(1)).setStage(primaryStage);
     }
