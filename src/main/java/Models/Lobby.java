@@ -71,6 +71,7 @@ public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot>, H
         lobbyData.put("tradeInvitations", new ArrayList<Map<String, String>>());
         lobbyData.put("tradeWindows", new ArrayList<Map<String, Object>>());
         lobbyData.put("turn", new HashMap<String, Object>());
+        lobbyData.put("gameHasStarted", false);
         return lobbyData;
     }
 
