@@ -24,7 +24,7 @@ public class CardDeckController implements Controller {
     CardDeck commonFundCardDeck = new CardDeck(new ArrayList<>());
 
     public CardDeckController() {
-//        setCardDecks();
+        setCardDecks();
     }
 
 // TODO:
@@ -95,12 +95,12 @@ public class CardDeckController implements Controller {
     }
 
     //Only meant for host.
-    public Card getNextChanceCard() {
-        return chanceCardDeck.getCardDeck().get(0);
+    public UUID getNextChanceCard() {
+        return chanceCardDeck.getCardDeck().get(0).getId();
     }
 
-    public Card getNextCommonFundCard() {
-        return commonFundCardDeck.getCardDeck().get(0);
+    public UUID getNextCommonFundCard() {
+        return commonFundCardDeck.getCardDeck().get(0).getId();
     }
 
     // Not in use moght be deleted later.
