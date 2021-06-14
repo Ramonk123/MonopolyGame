@@ -23,6 +23,7 @@ public class Monopoly extends Application {
         ControllerRegistry.register(new MainMenuController());
         ControllerRegistry.register(new BoardController());
         ControllerRegistry.register(new LobbyController());
+        ControllerRegistry.register(new LocationController());
         ControllerRegistry.register(new CardDeckController());
         ControllerRegistry.register(new PlayerController());
         ControllerRegistry.register(new FireStoreController());
@@ -30,10 +31,14 @@ public class Monopoly extends Application {
 
         GameResetter.attachResettable((Resettable) ControllerRegistry.get(PlayerController.class));
         GameResetter.attachResettable((Resettable) ControllerRegistry.get(LobbyController.class));
+        GameResetter.attachResettable((Resettable) ControllerRegistry.get(TurnController.class));
 
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+
         fireStoreController.registerObserver((Observer<DocumentSnapshot>) ControllerRegistry.get(PlayerController.class));
         fireStoreController.registerObserver((Observer<DocumentSnapshot>) ControllerRegistry.get(LobbyController.class));
+        fireStoreController.registerObserver((Observer<DocumentSnapshot>) ControllerRegistry.get(TurnController.class));
+        fireStoreController.registerObserver((Observer<DocumentSnapshot>) ControllerRegistry.get(BoardController.class));
 
         MainMenuController mainMenuController = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
         mainMenuController.setStage(primaryStage);
