@@ -207,8 +207,8 @@ public class LobbyController
             e.printStackTrace();
         }
 
-        //CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
-        //cardDeckController.setCardDecks();
+//        CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
+//        cardDeckController.setCardDecks();
 
         System.out.println(token);
         fireStoreController.createLobby(token);

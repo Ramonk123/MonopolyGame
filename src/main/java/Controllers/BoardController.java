@@ -21,7 +21,7 @@ import java.util.Optional;
 /**
  * Controller for the Board model & BoardView view.
  */
-public class BoardController implements Controller, Subject<DocumentSnapshot>, HasStage {
+public class BoardController implements Controller, Subject<DocumentSnapshot>, Observer<DocumentSnapshot>, HasStage {
 
     private Board board;
 
@@ -83,7 +83,11 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, H
         return labelList;
 
     }
-
+    @Override
+    public void update(DocumentSnapshot state) {
+        documentSnapshot = state;
+        notifyObservers();
+    }
 
 
 }

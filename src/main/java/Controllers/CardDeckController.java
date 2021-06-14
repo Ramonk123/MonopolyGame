@@ -21,11 +21,11 @@ public class CardDeckController implements Controller {
     private final static UUID COMMUNITY_JAIL_CARD_UUID = new UUID("CARD-20");
 
     public CardDeckController() {
-//        cardDeck = new CardDeck();
+//        setCardDecks();
     }
 
-    CardDeck chanceCardDeck = new CardDeck(null);
-    CardDeck commonFundCardDeck = new CardDeck(null);
+    CardDeck chanceCardDeck;
+    CardDeck commonFundCardDeck;
 
 // TODO:
 //  1. Update index on .teleportToLocation()
@@ -98,13 +98,11 @@ public class CardDeckController implements Controller {
 
     //Only meant for host.
     public Card getNextChanceCard() {
-        Card firestoreCard = chanceCardDeck.getCardDeck().get(0);
-        return firestoreCard;
+        return chanceCardDeck.getCardDeck().get(0);
     }
 
     public Card getNextCommonFundCard() {
-        Card firestoreCard = commonFundCardDeck.getCardDeck().get(0);
-        return firestoreCard;
+        return commonFundCardDeck.getCardDeck().get(0);
     }
 
     // Not in use moght be deleted later.
