@@ -50,9 +50,12 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     @Override
     public void notifyObservers() {
+        System.out.println(observers);
         for (Observer<DocumentSnapshot> observer : observers) {
+            System.out.println(observer);
             observer.update(documentSnapshot);
         }
+        System.out.println("WHOA HIOFUIGWRFUIG");
     }
 
     @Override
@@ -109,8 +112,8 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         Map<String, Object> lobbyData = (Map<String, Object>) ((LobbyController) ControllerRegistry.get(LobbyController.class)).getFirestoreFormat();
         lobbyData.put("players", playerController.getFirestoreFormat());
         lobbyData.put("turn", turnController.getFirestoreFormat());
-        lobbyData.put("chanceCardDeck", cardDeckController.getNextChanceCard());
-        lobbyData.put("commonFundCardDeck", cardDeckController.getNextCommonFundCard());
+//        lobbyData.put("chanceCardDeck", cardDeckController.getNextChanceCard());
+//        lobbyData.put("commonFundCardDeck", cardDeckController.getNextCommonFundCard());
 
 
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
