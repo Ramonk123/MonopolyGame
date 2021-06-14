@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
+<?import javafx.geometry.Insets?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <FlowPane prefHeight="400.0" prefWidth="100.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -365,11 +364,7 @@
                   <Font name="System Bold" size="62.0" />
                </font>
             </Label>
-            <Label fx:id="cardPlaceholder" prefHeight="116.0" prefWidth="268.0" text="Placeholder Card" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Label>
+            <Label fx:id="cardPlaceholder" alignment="CENTER" prefHeight="116.0" prefWidth="268.0" text="Placeholder Card" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
             <TextArea fx:id="bidTextArea" prefHeight="28.0" prefWidth="123.0" promptText="Enter amount" style="-fx-border: 50; -fx-border-color: #93d28f;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                <font>
                   <Font size="22.0" />
@@ -404,32 +399,64 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label prefHeight="90.0" prefWidth="266.0" text="Trade" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="200.0" text="Trade" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="62.0" />
                </font>
             </Label>
-            <Label fx:id="cardCheckPlaceholder" alignment="CENTER" prefHeight="62.0" prefWidth="201.0" text="Card check placeholder" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </Label>
-            <TextArea fx:id="tradeCashArea" prefHeight="74.0" prefWidth="200.0" promptText="Enter amount" style="-fx-border: 50; -fx-border-color: #93d28f;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <TextArea fx:id="tradeCashArea" prefHeight="80.0" prefWidth="0.0" promptText="Enter amount:" style="-fx-border: 50; -fx-border-color: #93d28f;" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font size="22.0" />
                </font>
             </TextArea>
-            <Label prefHeight="60.0" prefWidth="260.0" text="They receive:" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <TextArea fx:id="tradeCashArea1" prefHeight="80.0" prefWidth="0.0" promptText="Their offer:" style="-fx-border: 50; -fx-border-color: #93d28f;" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
                <font>
-                  <Font size="28.0" />
+                  <Font size="22.0" />
+               </font>
+            </TextArea>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="175.0" prefWidth="200.0" text="They receive:" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="20.0" />
                </font>
             </Label>
-            <Button fx:id="completeTradeButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" style="-fx-background-color: #93d28f;" text="Complete Trade" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-            <Label fx:id="NoValidTradeInput" prefHeight="85.0" prefWidth="100.0" text="Make sure to only use numbers and sufficient balance!" textFill="RED" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="2">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="272.0" prefWidth="200.0" text="You receive:" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="completeTradeButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" style="-fx-background-color: #93d28f;" text="Complete Trade" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding></Button>
+            <Button fx:id="completeTradeButton1" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" style="-fx-background-color: #e74c3a;" text="Cancel Trade" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </Button>
+            <Label fx:id="NoValidTradeInput" prefHeight="85.0" prefWidth="100.0" text=" Only use numbers and enough balance!" textFill="RED" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
                   <Font size="12.0" />
                </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
             </Label>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="19.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="134.0" prefWidth="200.0" />
+               </content>
+            </ScrollPane>
+            <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="134.0" prefWidth="200.0" />
+               </content>
+            </ScrollPane>
          </children>
 
       </GridPane>
