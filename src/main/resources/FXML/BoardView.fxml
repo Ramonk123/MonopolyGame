@@ -376,7 +376,7 @@
                   <Font size="32.0" />
                </font>
             </Label>
-            <Button fx:id="placeBidButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" style="-fx-background-color: #93d28f;" text="Place Bid" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Button fx:id="placeBidButton" mnemonicParsing="false" onAction="#placeBid" prefHeight="26.0" prefWidth="171.0" style="-fx-background-color: #93d28f;" text="Place Bid" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Label fx:id="NoNumberOnInputError" prefHeight="85.0" prefWidth="100.0" text="Make sure to only use numbers and sufficient balance!" textFill="RED" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="2">
                <font>
                   <Font size="12.0" />
@@ -450,7 +450,38 @@
             </Label>
             <ScrollPane hbarPolicy="NEVER" prefHeight="19.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="134.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="285.0" prefWidth="200.0">
+                     <children>
+                        <CheckBox layoutX="100.0" layoutY="14.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="14.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="33.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="33.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="52.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="52.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="71.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="71.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="90.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="90.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="109.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="109.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="128.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="128.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="147.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="147.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="166.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="166.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="185.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="185.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="204.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="204.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="223.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="223.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="242.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="251.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="101.0" layoutY="242.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="101.0" layoutY="251.0" mnemonicParsing="false" text="CheckBox" />
+                     </children>
+                  </AnchorPane>
                </content>
             </ScrollPane>
             <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">

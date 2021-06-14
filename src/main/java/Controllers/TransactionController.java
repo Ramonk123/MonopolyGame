@@ -5,6 +5,7 @@ import Models.Wallet;
 import Monopoly.UUID;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.fxml.FXML;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -41,6 +42,13 @@ public class TransactionController implements Controller {
         Player receiver = getPlayerByPlayersEnum(receiverEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
         payer.getWallet().subtractBalance(value);
         receiver.getWallet().addBalance(value);
+    }
+
+    public boolean checkBalance(Players playersEnum, int bidValue) throws TransactionException{
+        Player player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
+        boolean transactionComplete;
+        transactionComplete= player.getWallet().getBalance() >= bidValue;
+        return transactionComplete;
     }
 
 }
