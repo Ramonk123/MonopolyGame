@@ -5,6 +5,9 @@ import Models.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Controller for the Location, OwnableLocation and SpecialLocation model.
+ */
 public class LocationController implements Controller {
     private static LocationController locationController;
     private AuctionController auctionController = new AuctionController();
