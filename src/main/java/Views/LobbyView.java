@@ -50,6 +50,10 @@ public class LobbyView implements View, Observer<LobbySubject>, HasStage {
         }
     }
 
+    public Stage getStage() {
+        return primaryStage;
+    }
+
     @Override
     public void update(LobbySubject state) {
         updateLobbyView(state);

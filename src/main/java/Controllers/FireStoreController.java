@@ -80,6 +80,11 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         return documentSnapshot.exists();
     }
 
+    public void startGame() {
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).update("gameHasStarted", true);
+    }
+
     public int getLobbySize(int token) throws ExecutionException, InterruptedException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
 
