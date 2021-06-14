@@ -37,6 +37,5 @@ public class Monopoly extends Application {
         MainMenuController mainMenuController = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
         mainMenuController.setStage(primaryStage);
 
-
     }
 }
