@@ -5,6 +5,7 @@ import Models.Player;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
+import Resetter.Resettable;
 import com.google.cloud.firestore.DocumentSnapshot;
 
 import javax.annotation.Nullable;
@@ -18,10 +19,11 @@ public class PlayerController
             Controller,
             FirestoreFormattable,
             Subject<DocumentSnapshot>,
-            Observer<DocumentSnapshot> {
+            Observer<DocumentSnapshot>,
+            Resettable {
 
     private Players clientPlayer;
-    private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> players;
     private DocumentSnapshot documentSnapshot;
 
     public ArrayList<Player> getPlayers() {
@@ -29,7 +31,11 @@ public class PlayerController
     }
 
     public PlayerController() {
+        reset();
+    }
 
+    public Players getClientPlayersEnum() {
+        return clientPlayer;
     }
 
     public Optional<Player> getPlayerByName(String name) {
@@ -57,9 +63,22 @@ public class PlayerController
         return getPlayerByName(name).isPresent();
     }
 
+    public void setClientPlayersEnum(Players playersEnum) {
+        clientPlayer = playersEnum;
+    }
+
+    public void removeByPlayersEnum(Players playersEnum) {
+        for (Player player : players) {
+            if (UUID.compare(playersEnum, player.getPlayersEnum())) {
+                players.remove(player);
+                break;
+            }
+        }
+    }
+
     public Player setPlayer(String name) throws Exception {
         int arraySize = players.size();
-        Players playerEnum =  Players.getByOrder(arraySize+1)
+        Players playerEnum = Players.getByOrder(arraySize+1)
                 .orElseThrow( () -> new Exception("Order out of bounds")
         );
         Player player = new Player(playerEnum, name);
@@ -134,5 +153,11 @@ public class PlayerController
             updatePlayersSize(map);
         }
         notifyObservers();
+    }
+
+    @Override
+    public void reset() {
+        clientPlayer = Players.PLAYER_ONE;
+        players = new ArrayList<>();
     }
 }

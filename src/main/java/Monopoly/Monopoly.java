@@ -3,6 +3,8 @@ package Monopoly;
 import Controllers.*;
 import Firestore.Firestore;
 import ObserveablePattern.Observer;
+import Resetter.GameResetter;
+import Resetter.Resettable;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -26,13 +28,15 @@ public class Monopoly extends Application {
         ControllerRegistry.register(new FireStoreController());
         ControllerRegistry.register(new TurnController());
 
+        GameResetter.attachResettable((Resettable) ControllerRegistry.get(PlayerController.class));
+        GameResetter.attachResettable((Resettable) ControllerRegistry.get(LobbyController.class));
+
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         fireStoreController.registerObserver((Observer<DocumentSnapshot>) ControllerRegistry.get(PlayerController.class));
         fireStoreController.registerObserver((Observer<DocumentSnapshot>) ControllerRegistry.get(LobbyController.class));
 
         MainMenuController mainMenuController = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
         mainMenuController.setStage(primaryStage);
-
 
     }
 }

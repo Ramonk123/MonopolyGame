@@ -14,8 +14,8 @@ import java.io.IOException;
 
 public class BoardView implements View, Observer<BoardSubject>, HasStage {
     //Screensize
-    int WIDTH = 1920;
-    int HEIGHT = 1080;
+    int WIDTH = 1080;
+    int HEIGHT = 720;
 
     private Stage primaryStage;
 
@@ -27,6 +27,8 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/BoardView.fxml"));
         loader.setController(ControllerRegistry.get(BoardController.class));
         Parent root = loader.load();
+
+        ((BoardController) ControllerRegistry.get(BoardController.class)).setBackgroundImageView();
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
         primaryStage.show();

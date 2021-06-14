@@ -12,7 +12,7 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
     private List<Observer<BoardSubject>> observers = new ArrayList<>();
 
     public Board() {
-        //this.observers.add(new BoardView());
+        registerObserver(new BoardView());
     }
 
     @Override

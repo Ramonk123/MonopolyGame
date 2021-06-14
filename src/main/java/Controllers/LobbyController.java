@@ -4,51 +4,49 @@ import Firestore.FirestoreFormattable;
 import Models.*;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
+import Resetter.GameResetter;
+import Resetter.Resettable;
 import Views.HasStage;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Controller for the Lobby model & LobbyView, CreateLobbyView and JoinLobbyView views.
+ */
 public class LobbyController
         implements
             Controller,
             Subject<DocumentSnapshot>,
             HasStage,
             FirestoreFormattable,
-            Observer<DocumentSnapshot> {
+            Observer<DocumentSnapshot>,
+            Resettable {
 
     private Lobby lobby;
     private DocumentSnapshot documentSnapshot;
 
     private int token;
     private String name;
+    private boolean gameHasStarted;
 
     public LobbyController() {
-        lobby = new Lobby();
-    }
-
-    // MINE - Kadir
-    public void joinLobby(int token) throws LobbyException {
-        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        int lobbySize = 0;
-        try {
-            lobbySize = fireStoreController.getLobbySize(token);
-        } catch (Throwable e) {
-            throw new LobbyException("Exception at LobbyController@joinLobby", e);
-        }
-        Players playersEnum = Players.getByOrder(lobbySize + 1)
-                .orElseThrow(() -> new LobbyException("Exception at LobbyController@joinLobby: The lobby is full.", null));
+        reset();
     }
 
     @Override
@@ -77,6 +75,7 @@ public class LobbyController
 
     @FXML
     private void returnToMainMenu(ActionEvent actionEvent) {
+        GameResetter.reset();
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         MainMenuController mainMenuController = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
         mainMenuController.setStage(primaryStage);
@@ -89,12 +88,12 @@ public class LobbyController
         lobby.setStage(primaryStage);
     }
 
-    private void addPlayerToLobby(String name) {
+    /*private void addPlayerToLobby(String name) {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         Optional<Player> player = getPlayerByName(name); // TODO: idk if this is supposed to be optional
 
         fireStoreController.addPlayer(token, player);
-    }
+    }*/
 
     private void removePlayerFromLobby() throws InterruptedException, ExecutionException {
         //TODO:
@@ -120,26 +119,43 @@ public class LobbyController
     private TextField JoinLobbyViewTokenTextField;
     @FXML
     private TextField JoinLobbyViewNameTextField;
+
+    /**
+     * Submits the data in the textfields to the LobbyController.
+     * @param actionEvent ActionEvent contains all the data about the event.
+     * @throws IOException
+     */
     @FXML
     private void JoinLobbySubmit(ActionEvent actionEvent) throws IOException {
         try {
             token = Integer.parseInt(JoinLobbyViewTokenTextField.getText());
             name = JoinLobbyViewNameTextField.getText();
 
+            FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+            PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+
             joinLobby(actionEvent, name);
             goToLobby(actionEvent);
-        } catch(NumberFormatException exception) {
+            int order = fireStoreController.getLobbySize(token);
+            Players playersEnum = Players.getByOrder(order + 1)
+                    .orElseThrow( () -> new Exception("Order out of bounds"));
+            playerController.setClientPlayersEnum(playersEnum);
+            Player player = playerController.setPlayerWithPlayersEnum(playersEnum, name);
+            fireStoreController.addPlayer(token, player);
+        } catch(NumberFormatException numberFormatException) {
             JoinLobbyViewTokenTextField.setText("Numbers Only");
-        } catch (InterruptedException | ExecutionException interruptedException) {
+        } catch (InterruptedException interruptedException) {
             interruptedException.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ExecutionException executionException) {
+            executionException.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 
     @FXML
     private Pane LobbyAlreadyFullPopup;
-    private void joinLobby(ActionEvent actionEvent, String name) throws Exception {
+    private void joinLobby(ActionEvent actionEvent, String name) throws ExecutionException, InterruptedException {
         //Added some functions, thought I could write the error messages while I'm at it. Feel free to change it.
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
@@ -161,6 +177,11 @@ public class LobbyController
     //Create Lobby
     @FXML
     private TextField CreateLobbyViewNameTextField;
+
+    /**
+     * Submits the data in the textfields to the LobbyController.
+     * @param actionEvent ActionEvent contains all the data about the event.
+     */
     @FXML
     private void CreateLobbySubmit(ActionEvent actionEvent)  {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
@@ -199,6 +220,12 @@ public class LobbyController
     }
 
     //Lobby
+    @FXML
+    private void CopyToClipboard(ActionEvent actionEvent) {
+        StringSelection selection = new StringSelection(Integer.toString(token));
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, null);
+    }
 
     // Leave Lobby button functionality
     @FXML
@@ -207,9 +234,21 @@ public class LobbyController
     private void LeaveLobby(ActionEvent actionEvent) {
         ConfirmToMenuView.setVisible(true);
     }
+
+    /**
+     * Removes player from database.
+     * @param actionEvent ActionEvent contains all the data about the event.
+     * @throws InterruptedException
+     * @throws ExecutionException
+     * @throws LobbyException
+     */
     @FXML
-    private void ConfirmLeaveLobby(ActionEvent actionEvent) throws InterruptedException, ExecutionException, IOException {
-        removePlayerFromLobby();
+    private void ConfirmLeaveLobby(ActionEvent actionEvent) throws InterruptedException, ExecutionException, LobbyException {
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+
+        fireStoreController.removePlayer(token, playerController.getPlayerByPlayersEnum(playerController.getClientPlayersEnum())
+                .orElseThrow(() -> new LobbyException("PLAYERS NOT HERE HELP", null)));
         returnToMainMenu(actionEvent);
     }
     @FXML
@@ -246,6 +285,18 @@ public class LobbyController
 
         return labelList;
     }
+    @FXML
+    private void goToGameViewFxml(ActionEvent event) {
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        fireStoreController.startGame();
+    }
+
+
+    private void goToGameView() {
+        Stage primaryStage = lobby.getStage();
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        boardController.setStage(primaryStage);
+    }
     @FXML Label LobbyViewTokenLabel;
     public Label getTokenLabel() {
         return LobbyViewTokenLabel;
@@ -254,6 +305,19 @@ public class LobbyController
     @Override
     public void update(DocumentSnapshot state) {
         documentSnapshot = state;
+        System.out.println("asser");
+        boolean boolBeforeUpdate = gameHasStarted;
+        boolean boolAfterUpdate = (boolean) documentSnapshot.get("gameHasStarted");
+        if (boolBeforeUpdate != boolAfterUpdate && !boolAfterUpdate) {
+            gameHasStarted = boolAfterUpdate;
+            goToGameView();
+        }
         notifyObservers();
+    }
+
+    @Override
+    public void reset() {
+        lobby = new Lobby();
+        gameHasStarted = false;
     }
 }

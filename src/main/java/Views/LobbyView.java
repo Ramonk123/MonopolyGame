@@ -50,6 +50,10 @@ public class LobbyView implements View, Observer<LobbySubject>, HasStage {
         }
     }
 
+    public Stage getStage() {
+        return primaryStage;
+    }
+
     @Override
     public void update(LobbySubject state) {
         updateLobbyView(state);
@@ -62,6 +66,10 @@ public class LobbyView implements View, Observer<LobbySubject>, HasStage {
 
         ArrayList<Label> labelList = lobbyController.getUserLabelList();
         Platform.runLater(() -> {
+            for (Label label : labelList) {
+                label.setText("");
+            }
+
             lobbyController.getTokenLabel().setText(String.valueOf(lobbyController.getToken()));
 
             List<Player> players = state.getPlayers();
