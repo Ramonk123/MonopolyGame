@@ -10,11 +10,15 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -37,19 +41,6 @@ public class LobbyController
 
     public LobbyController() {
         lobby = new Lobby();
-    }
-
-    // MINE - Kadir
-    public void joinLobby(int token) throws LobbyException {
-        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        int lobbySize = 0;
-        try {
-            lobbySize = fireStoreController.getLobbySize(token);
-        } catch (Throwable e) {
-            throw new LobbyException("Exception at LobbyController@joinLobby", e);
-        }
-        Players playersEnum = Players.getByOrder(lobbySize + 1)
-                .orElseThrow(() -> new LobbyException("Exception at LobbyController@joinLobby: The lobby is full.", null));
     }
 
     @Override
@@ -210,6 +201,12 @@ public class LobbyController
     }
 
     //Lobby
+    @FXML
+    private void CopyToClipboard(ActionEvent actionEvent) {
+        StringSelection selection = new StringSelection(Integer.toString(token));
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, null);
+    }
 
     // Leave Lobby button functionality
     @FXML
@@ -260,6 +257,12 @@ public class LobbyController
         labelList.add(LobbyViewUsername8Label);
 
         return labelList;
+    }
+    @FXML
+    private void goToGameView(ActionEvent event) {
+        Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        boardController.setStage(primaryStage);
     }
     @FXML Label LobbyViewTokenLabel;
     public Label getTokenLabel() {
