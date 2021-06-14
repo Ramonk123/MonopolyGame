@@ -76,12 +76,7 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.google.api</groupId>
-            <artifactId>api-common</artifactId>
-            <version>1.9.2</version>
-        </dependency>
 
     </dependencies>
-    
+
 </project>
