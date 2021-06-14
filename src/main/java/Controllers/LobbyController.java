@@ -135,7 +135,8 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
         }
     }
 
-    @FXML Pane LobbyAlreadyFullPopup;
+    @FXML
+    private Pane LobbyAlreadyFullPopup;
     private void joinLobby(ActionEvent actionEvent, String name) throws Exception {
         //Added some functions, thought I could write the error messages while I'm at it. Feel free to change it.
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
@@ -199,7 +200,7 @@ public class LobbyController implements Controller, Subject<DocumentSnapshot>, H
 
     // Leave Lobby button functionality
     @FXML
-    Pane ConfirmToMenuView;
+    private Pane ConfirmToMenuView;
     @FXML
     private void LeaveLobby(ActionEvent actionEvent) {
         ConfirmToMenuView.setVisible(true);
