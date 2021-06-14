@@ -4,6 +4,7 @@ import Firestore.FirestoreFormattable;
 import Models.*;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
+import Resetter.GameResetter;
 import Views.HasStage;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.event.ActionEvent;
@@ -209,7 +210,7 @@ public class LobbyController
     }
     @FXML
     private void ConfirmLeaveLobby(ActionEvent actionEvent) throws InterruptedException, ExecutionException, IOException {
-        removePlayerFromLobby();
+        GameResetter.reset();
         returnToMainMenu(actionEvent);
     }
     @FXML

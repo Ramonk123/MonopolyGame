@@ -5,6 +5,7 @@ import Models.Player;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
+import Resetter.Resettable;
 import com.google.cloud.firestore.DocumentSnapshot;
 
 import javax.annotation.Nullable;
@@ -18,10 +19,11 @@ public class PlayerController
             Controller,
             FirestoreFormattable,
             Subject<DocumentSnapshot>,
-            Observer<DocumentSnapshot> {
+            Observer<DocumentSnapshot>,
+            Resettable {
 
     private Players clientPlayer;
-    private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> players;
     private DocumentSnapshot documentSnapshot;
 
     public ArrayList<Player> getPlayers() {
@@ -29,7 +31,7 @@ public class PlayerController
     }
 
     public PlayerController() {
-
+        reset();
     }
 
     public Optional<Player> getPlayerByName(String name) {
@@ -134,5 +136,10 @@ public class PlayerController
             updatePlayersSize(map);
         }
         notifyObservers();
+    }
+
+    @Override
+    public void reset() {
+        players = new ArrayList<>();
     }
 }
