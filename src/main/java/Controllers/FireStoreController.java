@@ -148,11 +148,17 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
     }
     public ArrayList<UUID> getChanceCard() throws InterruptedException, ExecutionException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        database.collection("Lobbies").document(String.valueOf(token))
+                .update("chanceCardDeck", null);
         return (ArrayList<UUID>) documentSnapshot.get("chanceCardDeck");
     }
 
     public ArrayList<UUID> getCommonFundCard() throws InterruptedException, ExecutionException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        database.collection("Lobbies").document(String.valueOf(token))
+                .update("commonFundCardDeck", null);
         return (ArrayList<UUID>) documentSnapshot.get("commonFundCardDeck");
     }
 

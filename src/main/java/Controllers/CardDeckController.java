@@ -72,6 +72,7 @@ public class CardDeckController implements Controller {
         commonFundCardDeck.shuffle();
     }
 
+    // Nieuwe methode, de speler pakt een kaart, kaart is null in firebase, host update kaart.
     public Card grabChanceCard() {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         Card takenCard = chanceCardDeck.getCardDeck().get(0);
@@ -108,7 +109,7 @@ public class CardDeckController implements Controller {
         return firestoreChanceDeck;
     }
 
-    public void setChanceCardDeck() throws InterruptedException, ExecutionException, IOException {
+    public void setChanceCardDeck() throws InterruptedException, ExecutionException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         firestoreChanceDeck = fireStoreController.getChanceCard();
         //TODO:
@@ -121,7 +122,7 @@ public class CardDeckController implements Controller {
         return firestoreCommonFundDeck;
     }
 
-    public void setCommonFundCardDeck() throws InterruptedException, ExecutionException, IOException {
+    public void setCommonFundCardDeck() throws InterruptedException, ExecutionException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         firestoreCommonFundDeck = fireStoreController.getCommonFundCard();
         //TODO:
