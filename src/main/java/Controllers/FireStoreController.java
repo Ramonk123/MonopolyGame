@@ -24,6 +24,10 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     private int token;
     private Consumer<DocumentSnapshot> lambda = (doc) -> {};
+    private List<Observer<DocumentSnapshot>> observers = new ArrayList<>();
+    private DocumentSnapshot documentSnapshot;
+
+
 
     public FireStoreController() {
         try {
@@ -35,17 +39,19 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     @Override
     public void registerObserver(Observer<DocumentSnapshot> observer) {
-
+        observers.add(observer);
     }
 
     @Override
     public void unregisterObserver(Observer<DocumentSnapshot> observer) {
-
+        observers.remove(observer);
     }
 
     @Override
     public void notifyObservers() {
-
+        for (Observer<DocumentSnapshot> observer : observers) {
+            observer.update(documentSnapshot);
+        }
     }
 
     @Override
@@ -74,7 +80,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         return documentSnapshot.exists();
     }
 
-    public int getLobbySize(int token) throws ExecutionException, InterruptedException {
+    /*public int getLobbySize(int token) throws ExecutionException, InterruptedException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
 
         ArrayList<Player> players = (ArrayList<Player>) documentSnapshot.get("players");
@@ -82,7 +88,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
         assert players != null;
         return players.size();
-    }
+    }*/
 
     public void createLobby(int token) {
 
@@ -165,7 +171,8 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
                     return;
                 }
                 if (snapshot != null && snapshot.exists()) {
-                    lambda.accept(snapshot);
+                    documentSnapshot = snapshot;
+                    notifyObservers();
 
                     System.out.println("Current data: " + snapshot.getData());
                 } else {

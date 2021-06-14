@@ -13,7 +13,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class PlayerController implements Controller, FirestoreFormattable, Subject<DocumentSnapshot> {
+public class PlayerController
+        implements
+            Controller,
+            FirestoreFormattable,
+            Subject<DocumentSnapshot>,
+            Observer<DocumentSnapshot> {
 
     private Players clientPlayer;
     private ArrayList<Player> players = new ArrayList<>();
@@ -119,7 +124,9 @@ public class PlayerController implements Controller, FirestoreFormattable, Subje
         }
     }
 
-    public void setDocumentSnapshot(DocumentSnapshot documentSnapshot) {
-        this.documentSnapshot = documentSnapshot;
+    @Override
+    public void update(DocumentSnapshot state) {
+        documentSnapshot = state;
+        notifyObservers();
     }
 }
