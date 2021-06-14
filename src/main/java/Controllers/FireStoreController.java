@@ -101,6 +101,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         Map<String, Object> lobbyData = (Map<String, Object>) ((LobbyController) ControllerRegistry.get(LobbyController.class)).getFirestoreFormat();
         lobbyData.put("players", playerController.getFirestoreFormat());
         lobbyData.put("turn", turnController.getFirestoreFormat());
+        
 
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).set(lobbyData);

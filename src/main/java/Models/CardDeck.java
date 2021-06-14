@@ -5,6 +5,7 @@ import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CardDeck implements Model {
@@ -21,4 +22,13 @@ public class CardDeck implements Model {
     public CardDeck(ArrayList<Card> cardDeck) {
         this.cardDeck = cardDeck;
     }
+
+    public void add(Card card){
+        this.cardDeck.add(card);
+    }
+
+    public void shuffle(){
+        Collections.shuffle(this.cardDeck);
+    }
+
 }
