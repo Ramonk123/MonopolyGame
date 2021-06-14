@@ -9,10 +9,12 @@ import Views.HasStage;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -56,6 +58,15 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, H
 
     @FXML
     private Pane BackgroundImageView;
+
+    @FXML
+    private GridPane BoardViewBoardPane;
+
+    public Pair<Double, Double> getBoardViewBoardPanePosition(Pair<Integer, Integer> positionPair) {
+        double x = BoardViewBoardPane.getCellBounds(positionPair.getKey(), positionPair.getValue()).getMinX();
+        double y = BoardViewBoardPane.getCellBounds(positionPair.getKey(), positionPair.getValue()).getMinY();
+        return new Pair<Double, Double>(x, y);
+    }
 
     public void setBackgroundImageView() {
         BackgroundImage backgroundImage= new BackgroundImage(new Image("/FXML/IMG/background.png",600,400,false,true),
