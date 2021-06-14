@@ -122,11 +122,13 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         database.collection("Lobbies").document(String.valueOf(token)).update("players", players);
     }
 
-    public void addPlayer(int token, Optional<Player> player) {
+    public void addPlayer(int token, Player player) {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
+        Map<String, Object> map = new HashMap<>();
+        map.put(player.getPlayersEnum().getId().getId(), player.getFirestoreFormat());
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
-                .update("players", FieldValue.arrayUnion(player));
+                .update("players", map);
     }
 
     public void updateChanceCard(){

@@ -90,12 +90,12 @@ public class LobbyController
         lobby.setStage(primaryStage);
     }
 
-    private void addPlayerToLobby(String name) {
+    /*private void addPlayerToLobby(String name) {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         Optional<Player> player = getPlayerByName(name); // TODO: idk if this is supposed to be optional
 
         fireStoreController.addPlayer(token, player);
-    }
+    }*/
 
     private void removePlayerFromLobby() throws InterruptedException, ExecutionException {
         //TODO:
@@ -129,6 +129,9 @@ public class LobbyController
 
             joinLobby(actionEvent, name);
             goToLobby(actionEvent);
+            Player player = ((PlayerController) ControllerRegistry.get(PlayerController.class)).setPlayer(name);
+            FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+            fireStoreController.addPlayer(token, player);
         } catch(NumberFormatException exception) {
             JoinLobbyViewTokenTextField.setText("Numbers Only");
         } catch (InterruptedException | ExecutionException interruptedException) {
