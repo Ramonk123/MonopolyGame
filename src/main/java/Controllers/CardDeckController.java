@@ -21,7 +21,7 @@ public class CardDeckController implements Controller {
     private final static UUID COMMUNITY_JAIL_CARD_UUID = new UUID("CARD-20");
 
     public CardDeckController() {
-        setCardDecks();
+//        setCardDecks();
     }
 
     CardDeck chanceCardDeck;
