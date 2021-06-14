@@ -43,10 +43,24 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @FXML
     private GridPane BoardViewBoardPane;
 
-    public Pair<Double, Double> getBoardViewBoardPanePosition(Pair<Integer, Integer> positionPair) {
-        double x = BoardViewBoardPane.getCellBounds(positionPair.getKey(), positionPair.getValue()).getMinX();
-        double y = BoardViewBoardPane.getCellBounds(positionPair.getKey(), positionPair.getValue()).getMinY();
+    public Pair<Double, Double> getBoardViewBoardPanePosition(Pair<Integer, Integer> gridPositionPair) {
+        double x = BoardViewBoardPane.getCellBounds(gridPositionPair.getKey(), gridPositionPair.getValue()).getMinX();
+        double y = BoardViewBoardPane.getCellBounds(gridPositionPair.getKey(), gridPositionPair.getValue()).getMinY();
         return new Pair<Double, Double>(x, y);
+    }
+
+    public Pair<Double, Double> getGridSize(Pair<Integer, Integer> gridPositionPair) {
+        double width = BoardViewBoardPane.getWidth();
+        double height = BoardViewBoardPane.getHeight();
+        return new Pair<Double, Double>(width, height);
+    }
+
+    public void movePlayerOnBoard(Pair<Double, Double> playerPositionPair, Pair<Double, Double> gridSize) {
+        //iconX & iconY moeten worden opgehaald uit FXML, maar de iconen bestaan nog niet dus dat komt later.
+        double iconX = 0;
+        double iconY = 0;
+        double newX = (playerPositionPair.getKey() * gridSize.getKey()) + iconX;
+        double newY = (playerPositionPair.getValue() * gridSize.getValue()) + iconY;
     }
 
     public void setBackgroundImageView() {
