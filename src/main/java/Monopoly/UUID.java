@@ -22,7 +22,7 @@ public class UUID {
     }
 
     public static boolean compare(String idOne, UUID idTwo) {
-        return idOne == idTwo.getId();
+        return idOne.equals(idTwo.getId());
     }
 
     public static boolean compare(UUID idOne, Identifiable idTwo) {
@@ -34,6 +34,6 @@ public class UUID {
     }
 
     public static boolean compare(String idOne, Identifiable idTwo) {
-        return idOne == idTwo.getId().getId();
+        return idOne.equals(idTwo.getId().getId());
     }
 }
