@@ -94,12 +94,12 @@ public class CardDeckController implements Controller {
     }
 
     //Only meant for host.
-    public Card getNextChanceCard() throws InterruptedException, ExecutionException {
+    public Card getNextChanceCard() {
         Card firestoreCard = chanceCardDeck.getCardDeck().get(0);
         return firestoreCard;
     }
 
-    public Card getNextCommonFundCard() throws InterruptedException, ExecutionException {
+    public Card getNextCommonFundCard() {
         Card firestoreCard = commonFundCardDeck.getCardDeck().get(0);
         return firestoreCard;
     }
