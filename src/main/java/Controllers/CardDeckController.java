@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Controller for the CardDeck model.
+ */
 public class CardDeckController implements Controller {
 
     private CardDeck cardDeck;

@@ -18,6 +18,9 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Optional;
 
+/**
+ * Controller for the Board model & BoardView view.
+ */
 public class BoardController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
     private Board board;
