@@ -27,10 +27,6 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
     private Board board;
 
-    public void setDocumentSnapshot(DocumentSnapshot documentSnapshot) {
-        this.documentSnapshot = documentSnapshot;
-    }
-
     private DocumentSnapshot documentSnapshot;
 
     public BoardController() {
@@ -97,6 +93,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @Override
     public void update(DocumentSnapshot state) {
         documentSnapshot = state;
+        System.out.println("platte asser");
         notifyObservers();
     }
 

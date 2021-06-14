@@ -50,9 +50,12 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     @Override
     public void notifyObservers() {
+        System.out.println(observers);
         for (Observer<DocumentSnapshot> observer : observers) {
+            System.out.println(observer);
             observer.update(documentSnapshot);
         }
+        System.out.println("WHOA HIOFUIGWRFUIG");
     }
 
     @Override
