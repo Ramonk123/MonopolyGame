@@ -134,7 +134,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
                 .update("players", map);
     }
 
-    public void updateChanceCard() throws ExecutionException, InterruptedException {
+    public void updateChanceCard() {
         CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
@@ -142,7 +142,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
                 .update("chanceCardDeck", cardDeckController.getNextChanceCard());
     }
 
-    public void updateCommonFundCard() throws ExecutionException, InterruptedException {
+    public void updateCommonFundCard() {
         CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
