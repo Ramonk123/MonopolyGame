@@ -127,10 +127,16 @@ public class LobbyController
             token = Integer.parseInt(JoinLobbyViewTokenTextField.getText());
             name = JoinLobbyViewNameTextField.getText();
 
+            FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+            PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+
             joinLobby(actionEvent, name);
             goToLobby(actionEvent);
-            Player player = ((PlayerController) ControllerRegistry.get(PlayerController.class)).setPlayer(name);
-            FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+            int order = fireStoreController.getLobbySize(token);
+            Players playerEnum = Players.getByOrder(order)
+                    .orElseThrow( () -> new Exception("Order out of bounds"));
+
+            Player player = playerController.setPlayerWithPlayersEnum(playerEnum, name);
             fireStoreController.addPlayer(token, player);
         } catch(NumberFormatException exception) {
             JoinLobbyViewTokenTextField.setText("Numbers Only");

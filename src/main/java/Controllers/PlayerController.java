@@ -61,7 +61,7 @@ public class PlayerController
 
     public Player setPlayer(String name) throws Exception {
         int arraySize = players.size();
-        Players playerEnum =  Players.getByOrder(arraySize+1)
+        Players playerEnum = Players.getByOrder(arraySize+1)
                 .orElseThrow( () -> new Exception("Order out of bounds")
         );
         Player player = new Player(playerEnum, name);
