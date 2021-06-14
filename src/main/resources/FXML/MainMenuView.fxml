@@ -93,7 +93,7 @@
                   <Font size="20.0" />
                </font>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="125.0" prefWidth="365.0" text=" Are you sure you want to quit?" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="125.0" prefWidth="365.0" text=" Are you sure you want to quit?" textAlignment="CENTER" wrapText="true" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
