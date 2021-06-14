@@ -47,18 +47,18 @@
          <children>
             <VBox spacing="5.0">
                <children>
-                  <Label fx:id="LobbyViewUsername1Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username1" />
-                  <Label fx:id="LobbyViewUsername3Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username3" />
-                  <Label fx:id="LobbyViewUsername5Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username5" />
-                  <Label fx:id="LobbyViewUsername7Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username7" />
+                  <Label fx:id="LobbyViewUsername1Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" />
+                  <Label fx:id="LobbyViewUsername3Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" />
+                  <Label fx:id="LobbyViewUsername5Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" />
+                  <Label fx:id="LobbyViewUsername7Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" />
                </children>
             </VBox>
             <VBox spacing="5.0">
                <children>
-                  <Label fx:id="LobbyViewUsername2Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username2" />
-                  <Label fx:id="LobbyViewUsername4Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username4" />
-                  <Label fx:id="LobbyViewUsername6Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username6" />
-                  <Label fx:id="LobbyViewUsername8Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" text="Username8" />
+                  <Label fx:id="LobbyViewUsername2Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" />
+                  <Label fx:id="LobbyViewUsername4Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" />
+                  <Label fx:id="LobbyViewUsername6Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" />
+                  <Label fx:id="LobbyViewUsername8Label" prefHeight="45.0" prefWidth="100.0" style="-fx-background-color: #398273;" />
                </children>
             </VBox>
          </children>
