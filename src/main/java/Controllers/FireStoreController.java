@@ -122,10 +122,10 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         database.collection("Lobbies").document(String.valueOf(token)).update("players", players);
     }
 
-    public void addPlayer(int token, Player player) {
+    public void addPlayer(int token, Player player) throws ExecutionException, InterruptedException {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
-
-        Map<String, Object> map = new HashMap<>();
+        DocumentSnapshot documentSnapshot = getSnapshot(token);
+        Map<String, Object> map = (Map<String, Object>) documentSnapshot.get("players");
         map.put(player.getPlayersEnum().getId().getId(), player.getFirestoreFormat());
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
                 .update("players", map);
