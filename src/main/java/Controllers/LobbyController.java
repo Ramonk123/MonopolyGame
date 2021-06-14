@@ -219,9 +219,12 @@ public class LobbyController
         ConfirmToMenuView.setVisible(true);
     }
     @FXML
-    private void ConfirmLeaveLobby(ActionEvent actionEvent) throws InterruptedException, ExecutionException, IOException {
+    private void ConfirmLeaveLobby(ActionEvent actionEvent) throws InterruptedException, ExecutionException, IOException, LobbyException {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        playerController.removeByPlayersEnum(playerController.getClientPlayersEnum());
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+
+        fireStoreController.removePlayer(token, playerController.getPlayerByPlayersEnum(playerController.getClientPlayersEnum())
+                .orElseThrow(() -> new LobbyException("PLAYERS NOT HERE HELP", null)));
         returnToMainMenu(actionEvent);
     }
     @FXML

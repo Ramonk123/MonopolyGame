@@ -109,17 +109,12 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
     }
 
     public void removePlayer(int token, Player player) throws InterruptedException, ExecutionException {
-        DocumentSnapshot documentSnapshot = getSnapshot(token);
-        ArrayList<Player> players = (ArrayList<Player>) documentSnapshot.get("players");
-
-        for(int i = 0; Objects.requireNonNull(players).size() > i ; i++){
-            if(players.get(i) == player){
-                players.remove(i);
-            }
-        }
-
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
-        database.collection("Lobbies").document(String.valueOf(token)).update("players", players);
+        DocumentSnapshot documentSnapshot = getSnapshot(token);
+        Map<String, Object> map = (Map<String, Object>) documentSnapshot.get("players");
+        map.remove(player.getPlayersEnum().getId().getId());
+
+        database.collection("Lobbies").document(String.valueOf(token)).update("players", map);
     }
 
     public void addPlayer(int token, Player player) throws ExecutionException, InterruptedException {
