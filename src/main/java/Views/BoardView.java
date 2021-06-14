@@ -56,6 +56,7 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
     }
 
     public void updateBoardPlayers(BoardSubject state) {
+        System.out.println("dikke asser");
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         ArrayList<Label> labelList = boardController.getUsernameArray();
 
