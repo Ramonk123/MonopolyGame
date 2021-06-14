@@ -8,6 +8,7 @@ import Resetter.GameResetter;
 import Resetter.Resettable;
 import Views.HasStage;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -206,8 +207,8 @@ public class LobbyController
             e.printStackTrace();
         }
 
-        CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
-        cardDeckController.setCardDecks();
+        //CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
+        //cardDeckController.setCardDecks();
 
         System.out.println(token);
         fireStoreController.createLobby(token);
@@ -300,8 +301,10 @@ public class LobbyController
     private void goToGameView() {
         Stage primaryStage = lobby.getStage();
         System.out.println(primaryStage);
-        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        boardController.setStage(primaryStage);
+        Platform.runLater(() -> {
+            BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+            boardController.setStage(primaryStage);
+        });
     }
     @FXML Label LobbyViewTokenLabel;
     public Label getTokenLabel() {
