@@ -26,6 +26,9 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Controller for the Lobby model & LobbyView, CreateLobbyView and JoinLobbyView views.
+ */
 public class LobbyController
         implements
             Controller,
@@ -116,6 +119,12 @@ public class LobbyController
     private TextField JoinLobbyViewTokenTextField;
     @FXML
     private TextField JoinLobbyViewNameTextField;
+
+    /**
+     * Submits the data in the textfields to the LobbyController.
+     * @param actionEvent ActionEvent contains all the data about the event.
+     * @throws IOException
+     */
     @FXML
     private void JoinLobbySubmit(ActionEvent actionEvent) throws IOException {
         try {
@@ -133,18 +142,20 @@ public class LobbyController
             playerController.setClientPlayersEnum(playersEnum);
             Player player = playerController.setPlayerWithPlayersEnum(playersEnum, name);
             fireStoreController.addPlayer(token, player);
-        } catch(NumberFormatException exception) {
+        } catch(NumberFormatException numberFormatException) {
             JoinLobbyViewTokenTextField.setText("Numbers Only");
-        } catch (InterruptedException | ExecutionException interruptedException) {
+        } catch (InterruptedException interruptedException) {
             interruptedException.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ExecutionException executionException) {
+            executionException.printStackTrace();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 
     @FXML
     private Pane LobbyAlreadyFullPopup;
-    private void joinLobby(ActionEvent actionEvent, String name) throws Exception {
+    private void joinLobby(ActionEvent actionEvent, String name) throws ExecutionException, InterruptedException {
         //Added some functions, thought I could write the error messages while I'm at it. Feel free to change it.
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
@@ -166,6 +177,11 @@ public class LobbyController
     //Create Lobby
     @FXML
     private TextField CreateLobbyViewNameTextField;
+
+    /**
+     * Submits the data in the textfields to the LobbyController.
+     * @param actionEvent ActionEvent contains all the data about the event.
+     */
     @FXML
     private void CreateLobbySubmit(ActionEvent actionEvent)  {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
@@ -189,6 +205,9 @@ public class LobbyController
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
+        cardDeckController.setCardDecks();
 
         System.out.println(token);
         fireStoreController.createLobby(token);
@@ -218,8 +237,16 @@ public class LobbyController
     private void LeaveLobby(ActionEvent actionEvent) {
         ConfirmToMenuView.setVisible(true);
     }
+
+    /**
+     * Removes player from database.
+     * @param actionEvent ActionEvent contains all the data about the event.
+     * @throws InterruptedException
+     * @throws ExecutionException
+     * @throws LobbyException
+     */
     @FXML
-    private void ConfirmLeaveLobby(ActionEvent actionEvent) throws InterruptedException, ExecutionException, IOException, LobbyException {
+    private void ConfirmLeaveLobby(ActionEvent actionEvent) throws InterruptedException, ExecutionException, LobbyException {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
 
