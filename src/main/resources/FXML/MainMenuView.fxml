@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="MainMenuViewBackground" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="599.0" prefWidth="630.0" style="-fx-background-color: #bfdbae;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="MainMenuViewBackground" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="599.0" prefWidth="630.0" style="-fx-background-color: #bfdbae;" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="631.0" fitWidth="631.0" pickOnBounds="true">
          <image>
