@@ -64,11 +64,11 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         int oldPosition = 0; //Maybe save the old position of the player or do a for loop to find a specific playerIcon on the board.
         int newPosition = 11; //This would be the player new player position. Player.getPosition() I guess.
 
-        ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren();
-        ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get(oldPosition)).getChildren();
-        Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber);
+        ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren(); //Sets the whole board in an array/list
+        ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get(oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
+        Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber); //Gets the playerIcon out of the array/list
         currentPlayerGrid.remove(playerNumber);
-        ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get(newPosition)).getChildren();
+        ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get(newPosition)).getChildren(); //Gets the grid where the player moved to
         newPlayerGrid.add(playerNumber, playerIcon);
     }
 
