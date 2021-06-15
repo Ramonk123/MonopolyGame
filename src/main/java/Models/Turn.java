@@ -1,14 +1,13 @@
 package Models;
 
 import Controllers.*;
+import Exceptions.PlayerException;
 import Firestore.FirestoreFormattable;
 import ObserveablePattern.Observer;
 import com.google.cloud.firestore.DocumentSnapshot;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 // still needs work
 public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnapshot> {

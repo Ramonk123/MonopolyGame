@@ -1,12 +1,8 @@
 package Controllers;
 
+import Exceptions.TransactionException;
 import Models.Player;
-import Models.Wallet;
-import Monopoly.UUID;
-import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 public class TransactionController implements Controller {

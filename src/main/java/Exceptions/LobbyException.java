@@ -1,4 +1,4 @@
-package Controllers;
+package Exceptions;
 
 public class LobbyException extends Exception {
     protected final Throwable throwable;

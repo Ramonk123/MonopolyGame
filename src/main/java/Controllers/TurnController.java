@@ -1,17 +1,15 @@
 package Controllers;
 
+import Exceptions.PlayerException;
 import Firestore.FirestoreFormattable;
 import Models.Player;
-import Models.Throw;
 import Models.Turn;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Resetter.Resettable;
-import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class TurnController
