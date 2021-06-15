@@ -13,7 +13,7 @@ import java.util.Optional;
 // still needs work
 public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnapshot> {
     private Players activePlayer;
-    private int amountOfDouble;
+    private int amountOfDouble; // Not used so could be deleted I think - Vincent
 
     public Turn() {
         this.activePlayer = Players.PLAYER_ONE;
