@@ -148,6 +148,10 @@ public class PlayerController
         documentSnapshot = state;
         Map<String, Object> map = (Map<String, Object>) documentSnapshot.get("players");
         System.out.println(map.size());
+        System.out.println(documentSnapshot.getData());
+
+        Map<String, Object> test = (Map<String, Object>) map.get("PLAYER-ONE");
+
         System.out.println(players.size());
         if (map.size() > players.size()) {
             updatePlayersSize(map);

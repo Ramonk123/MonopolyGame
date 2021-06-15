@@ -23,10 +23,11 @@ public class TurnController
 
     private Turn turn;
     private DocumentSnapshot documentSnapshot;
-    private int eyesThrown;
+    private long eyesThrown;
 
     public TurnController() {
         turn = new Turn();
+        eyesThrown = 0;
     }
 
     public Throw getCurrentThrow() {
@@ -44,8 +45,11 @@ public class TurnController
     public void update(DocumentSnapshot state) {
         documentSnapshot = state;
         Map<String, Object> map = (Map<String, Object>) state.get("turn");
-        eyesThrown = (int) map.get("eyesThrown");
-        notifyObservers();
+        System.out.println(map);
+        System.out.println(map.containsKey("eyesThrown"));
+        eyesThrown = (long) map.get("eyesThrown");
+        System.out.println("testerst");
+        //notifyObservers();
     }
 
     @Override
