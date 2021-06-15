@@ -44,6 +44,7 @@ public class TurnController
         documentSnapshot = state;
         Map<String, Object> map = (Map<String, Object>) state.get("turn");
         System.out.println(map);
+        assert map != null;
         System.out.println(map.containsKey("eyesThrown"));
         eyesThrown = (long) map.get("eyesThrown");
         System.out.println("testerst");
