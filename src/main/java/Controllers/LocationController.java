@@ -43,6 +43,9 @@ public class LocationController implements Controller {
 
     }*/
 
+    public List<Location> getLocationArray() {
+        return locationArray;
+    }
 
     //TODO: Create onEvent function when refusing to buy location
     private void refuseToBuyLocation() {
