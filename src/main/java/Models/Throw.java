@@ -8,8 +8,8 @@ import java.util.List;
 
 public class Throw implements Model, DiceThrower {
     private final List<View> observers = new ArrayList<>();
-    private Dice diceOne;
-    private Dice diceTwo;
+    private Dice diceOne = new Dice();
+    private Dice diceTwo = new Dice();
 
 
     @Override
