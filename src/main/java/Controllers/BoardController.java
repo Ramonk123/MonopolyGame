@@ -63,7 +63,8 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
     @FXML
     private void RollDiceAction(ActionEvent actionEvent) throws BoardException {
-        /* Sample code that should be mostly done in the turnController
+        //TODO:
+        /* Sample code that should be mostly done in the TurnController
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         Players currentPlayerEnum = turnController.getCurrentPlayer();
 
