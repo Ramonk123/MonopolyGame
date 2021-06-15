@@ -29,23 +29,6 @@ public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnaps
         return activePlayer;
     }
 
-    private Throw getCurrentThrow() {
-        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
-        return turnController.getCurrentThrow();
-    }
-
-    public void throwDice() {
-        getCurrentThrow().throwDice();
-    }
-
-    public boolean isDouble() {
-        return getCurrentThrow().isDouble();
-    }
-
-    public int getTotalEyes() {
-        return getCurrentThrow().getTotalEyes();
-    }
-
     @Override
     public Object getFirestoreFormat() {
         Map<String, Object> map = new HashMap<>();
