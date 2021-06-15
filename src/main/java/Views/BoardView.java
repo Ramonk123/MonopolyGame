@@ -1,9 +1,6 @@
 package Views;
 
-import Controllers.BoardController;
-import Controllers.ControllerRegistry;
-import Controllers.MainMenuController;
-import Controllers.PlayerController;
+import Controllers.*;
 import Models.Player;
 import ObserveablePattern.Observer;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -56,23 +53,22 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
     }
 
     public void updateBoardPlayers(BoardSubject state) {
-        System.out.println("dikke asser");
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        ArrayList<Label> labelList = boardController.getUsernameArray();
+        PlayerController playerController = (PlayerController)  ControllerRegistry.get(PlayerController.class);
+        Platform.runLater( () -> {
+            ArrayList<Label> labelList = boardController.getUserLabelList();
 
-
-        Platform.runLater(() -> {
             for (Label label : labelList) {
                 label.setText("");
-
             }
-
-            List<Player> players = state.getPlayers();
+            ArrayList<Player> players = playerController.getPlayers();
             int playersJoined = players.size();
-            for (int i = 0; i < playersJoined; i++) {
+
+            for(int i = 0; i < playersJoined; i++) {
                 labelList.get(i).setText(players.get(i).getName());
             }
         });
+
     }
 }
 

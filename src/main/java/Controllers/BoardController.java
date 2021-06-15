@@ -111,7 +111,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @FXML Label BoardViewUsername7Label;
     @FXML Label BoardViewUsername8Label;
 
-    public ArrayList<Label> getUsernameArray() {
+    public ArrayList<Label> getUserLabelList() {
         ArrayList<Label> labelList = new ArrayList<>();
         labelList.add(BoardViewUsername1Label);
         labelList.add(BoardViewUsername2Label);
