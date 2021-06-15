@@ -30,6 +30,10 @@ public class TurnController
         eyesThrown = 0;
     }
 
+    public Players getCurrentPlayer() {
+        return turn.getCurrentPlayer();
+    }
+
     public Throw getCurrentThrow() {
         ThrowController throwController = (ThrowController) ControllerRegistry.get(ThrowController.class);
         return throwController.getCurrentThrow();
