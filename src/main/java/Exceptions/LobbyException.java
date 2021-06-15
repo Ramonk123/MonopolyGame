@@ -1,7 +1,7 @@
 package Exceptions;
 
 public class LobbyException extends Exception {
-    protected final Throwable throwable;
+    private final Throwable throwable;
     public LobbyException(String errorMessage, Throwable throwable) {
         super(errorMessage);
         this.throwable = throwable;
