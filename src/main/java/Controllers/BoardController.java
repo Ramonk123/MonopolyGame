@@ -19,11 +19,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Pair;
+import jdk.jshell.EvalException;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Controller for the Board model & BoardView view.
@@ -122,6 +124,21 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         labelList.add(BoardViewUsername7Label);
         labelList.add(BoardViewUsername8Label);
         return labelList;
+
+    }
+
+    public boolean checkGameHasStarted() {
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        try {
+            LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
+            int token = lobbyController.getToken();
+            boolean value = fireStoreController.gameHasStarted(token);
+            return value;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } return false;
 
     }
     @Override

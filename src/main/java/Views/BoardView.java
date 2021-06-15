@@ -55,19 +55,21 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
     public void updateBoardPlayers(BoardSubject state) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         PlayerController playerController = (PlayerController)  ControllerRegistry.get(PlayerController.class);
-        Platform.runLater( () -> {
-            ArrayList<Label> labelList = boardController.getUserLabelList();
+        if(boardController.checkGameHasStarted()) {
+            Platform.runLater(() -> {
+                ArrayList<Label> labelList = boardController.getUserLabelList();
 
-            for (Label label : labelList) {
-                label.setText("");
-            }
-            ArrayList<Player> players = playerController.getPlayers();
-            int playersJoined = players.size();
+                for (Label label : labelList) {
+                    label.setText("");
+                }
+                ArrayList<Player> players = playerController.getPlayers();
+                int playersJoined = players.size();
 
-            for(int i = 0; i < playersJoined; i++) {
-                labelList.get(i).setText(players.get(i).getName());
-            }
-        });
+                for (int i = 0; i < playersJoined; i++) {
+                    labelList.get(i).setText(players.get(i).getName());
+                }
+            });
+        }
 
     }
 }

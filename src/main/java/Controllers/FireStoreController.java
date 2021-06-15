@@ -84,6 +84,14 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         return documentSnapshot.exists();
     }
 
+    public boolean gameHasStarted(int token) throws ExecutionException, InterruptedException {
+        DocumentSnapshot documentSnapshot = getSnapshot(token);
+        return (boolean) documentSnapshot.get("gameHasStarted");
+
+
+
+    }
+
     public void startGame(int token) {
         System.out.println("huoewdfuhuoqewfhuoewf");
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
