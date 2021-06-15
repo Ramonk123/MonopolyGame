@@ -40,14 +40,13 @@ public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnaps
 
     @Override
     public void update(DocumentSnapshot state) {
-        Map<String, Object> map = (Map<String, Object>) state.get("turn");
         try {
-            Players playersEnum = Players.getByStringUuid((String) map.get("activePlayer"))
-                    .orElseThrow(() -> new Exception("Player Id doesn't exist."));
-            activePlayer = playersEnum;
-        } catch (Exception e) {
-            e.printStackTrace();
+            Map<String, Object> map = (Map<String, Object>) state.get("turn");
+            activePlayer = Players.getByStringUuid((String) map.get("activePlayer"))
+                    .orElseThrow(() -> new PlayerException("Player Id doesn't exist."));
+            amountOfDouble = (int) map.get("amountOfDoubles"); //Shouldn't this cast to (long) instead of (int)? -Vincent
+        } catch(PlayerException playerException) {
+            playerException.printStackTrace();
         }
-        amountOfDouble = (int) map.get("amountOfDoubles");
     }
 }
