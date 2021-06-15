@@ -3,31 +3,23 @@ package Controllers;
 import Models.Board;
 import Models.Location;
 import Models.Player;
-import Models.Wallet;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
-import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Pair;
-import jdk.jshell.EvalException;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -62,40 +54,9 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     }
 
     @FXML
-    private void RollDiceAction(ActionEvent actionEvent) throws BoardException {
-        //TODO:
-        /* Sample code that should be mostly done in the TurnController
+    private void RollDiceAction(ActionEvent actionEvent) throws PlayerException {
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
-        Players currentPlayerEnum = turnController.getCurrentPlayer();
-
-        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        Players clientPlayerEnum = playerController.getClientPlayersEnum();
-
-        if(UUID.compare(currentPlayerEnum, clientPlayerEnum)) {
-            ThrowController throwController = (ThrowController) ControllerRegistry.get(ThrowController.class);
-            throwController.throwDice();
-            int amountThrown = throwController.getTotalEyes();
-            int thrownDouble = 0;
-            if (throwController.isDouble()) {
-                thrownDouble++;
-                while (throwController.isDouble()) {
-                    if (thrownDouble >= 3) {
-                        //TODO: Go to Jail
-                    }
-                    throwController.throwDice();
-                    amountThrown += throwController.getTotalEyes();
-                    thrownDouble++;
-                }
-            }
-
-            Player currentPlayer = playerController.getPlayerByPlayersEnum(currentPlayerEnum).orElseThrow(() -> new BoardException("Player NOT Found"));
-
-            int currentPlayerPosition = currentPlayer.getPosition();
-            currentPlayer.movePlayer(amountThrown);
-            int newPlayerPosition = currentPlayer.getPosition();
-            movePlayerOnBoard(currentPlayerEnum, currentPlayerPosition, newPlayerPosition);
-        }
-        */
+        turnController.RollDice();
     }
 
     @FXML
