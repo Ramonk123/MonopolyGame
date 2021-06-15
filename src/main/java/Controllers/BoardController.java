@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Board;
+import Models.Location;
 import Models.Player;
 import Models.Wallet;
 import ObserveablePattern.Observer;
@@ -58,8 +59,8 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @FXML
     private GridPane BoardViewPlayerPane;
 
-    public void movePlayerOnBoard() {
-        int playerNumber = 0; //PLAYER-ONE would be 0 in the grid
+    public void movePlayerOnBoard(Players player) {
+        int playerNumber = player.ordinal();
         int oldPosition = 0; //Maybe save the old position of the player or do a for loop to find a specific playerIcon on the board.
         int newPosition = 11; //This would be the player new player position. Player.getPosition() I guess.
 
@@ -69,6 +70,13 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         currentPlayerGrid.remove(playerNumber);
         ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get(newPosition)).getChildren();
         newPlayerGrid.add(playerNumber, playerIcon);
+    }
+
+    public Location playerStandsOn(Player player) { //Player prob gets changed to Players
+        int playerPosition = player.getPosition();
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        List<Location> locationArray = locationController.getLocationArray();
+        return locationArray.get(playerPosition);
     }
 
     public void setBackgroundImageView() {
@@ -92,7 +100,6 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @Override
     public void setStage(Stage primaryStage) {
         board.setStage(primaryStage);
-        movePlayerOnBoard();
     }
 
     @FXML Label BoardViewUsername1Label;
