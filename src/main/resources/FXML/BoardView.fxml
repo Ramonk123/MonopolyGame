@@ -864,7 +864,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
-            <Button fx:id="BoardViewRollDiceButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Roll Dice" />
+            <Button fx:id="BoardViewRollDiceButton" mnemonicParsing="false" onAction="#RollDiceAction" prefHeight="100.0" prefWidth="100.0" text="Roll Dice" />
          </children>
       </VBox>
       <GridPane fx:id="auctionPane" layoutX="100.0" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #bfdbae;" visible="false">
