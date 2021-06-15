@@ -8,8 +8,11 @@ import ObserveablePattern.Subject;
 import Views.HasStage;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.beans.Observable;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -18,6 +21,7 @@ import javafx.util.Pair;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -51,12 +55,20 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         return new Pair<Double, Double>(width, height);
     }
 
-    public void movePlayerOnBoard(Pair<Double, Double> playerPositionPair, Pair<Double, Double> gridSize) {
-        //iconX & iconY moeten worden opgehaald uit FXML, maar de iconen bestaan nog niet dus dat komt later.
-        double iconX = 0;
-        double iconY = 0;
-        double newX = (playerPositionPair.getKey() * gridSize.getKey()) + iconX;
-        double newY = (playerPositionPair.getValue() * gridSize.getValue()) + iconY;
+    @FXML
+    private GridPane BoardViewPlayerPane;
+
+    public void movePlayerOnBoard() {
+        int playerNumber = 0; //PLAYER-ONE would be 0 in the grid
+        int oldPosition = 0; //Maybe save the old position of the player or do a for loop to find a specific playerIcon on the board.
+        int newPosition = 11; //This would be the player new player position. Player.getPosition() I guess.
+
+        ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren();
+        ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get(oldPosition)).getChildren();
+        Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber);
+        currentPlayerGrid.remove(playerNumber);
+        ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get(newPosition)).getChildren();
+        newPlayerGrid.add(playerNumber, playerIcon);
     }
 
     public void setBackgroundImageView() {
@@ -80,6 +92,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @Override
     public void setStage(Stage primaryStage) {
         board.setStage(primaryStage);
+        movePlayerOnBoard();
     }
 
     @FXML Label BoardViewUsername1Label;
