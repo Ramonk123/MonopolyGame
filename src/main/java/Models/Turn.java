@@ -42,6 +42,7 @@ public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnaps
     public void update(DocumentSnapshot state) {
         try {
             Map<String, Object> map = (Map<String, Object>) state.get("turn");
+            assert map != null;
             activePlayer = Players.getByStringUuid((String) map.get("activePlayer"))
                     .orElseThrow(() -> new PlayerException("Player Id doesn't exist."));
             amountOfDouble = (int) map.get("amountOfDoubles"); //Shouldn't this cast to (long) instead of (int)? -Vincent
