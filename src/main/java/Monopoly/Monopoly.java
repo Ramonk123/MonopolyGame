@@ -28,6 +28,7 @@ public class Monopoly extends Application {
         ControllerRegistry.register(new PlayerController());
         ControllerRegistry.register(new FireStoreController());
         ControllerRegistry.register(new TurnController());
+        ControllerRegistry.register(new ThrowController());
 
         GameResetter.attachResettable((Resettable) ControllerRegistry.get(PlayerController.class));
         GameResetter.attachResettable((Resettable) ControllerRegistry.get(LobbyController.class));
