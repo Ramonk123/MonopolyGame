@@ -4,6 +4,7 @@ import Models.Board;
 import Models.Location;
 import Models.Player;
 import Models.Wallet;
+import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
@@ -11,9 +12,11 @@ import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -59,12 +62,46 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     }
 
     @FXML
+    private void RollDiceAction(ActionEvent actionEvent) throws BoardException {
+        /* Sample code that should be mostly done in the turnController
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
+        Players currentPlayerEnum = turnController.getCurrentPlayer();
+
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        Players clientPlayerEnum = playerController.getClientPlayersEnum();
+
+        if(UUID.compare(currentPlayerEnum, clientPlayerEnum)) {
+            ThrowController throwController = (ThrowController) ControllerRegistry.get(ThrowController.class);
+            throwController.throwDice();
+            int amountThrown = throwController.getTotalEyes();
+            int thrownDouble = 0;
+            if (throwController.isDouble()) {
+                thrownDouble++;
+                while (throwController.isDouble()) {
+                    if (thrownDouble >= 3) {
+                        //TODO: Go to Jail
+                    }
+                    throwController.throwDice();
+                    amountThrown += throwController.getTotalEyes();
+                    thrownDouble++;
+                }
+            }
+
+            Player currentPlayer = playerController.getPlayerByPlayersEnum(currentPlayerEnum).orElseThrow(() -> new BoardException("Player NOT Found"));
+
+            int currentPlayerPosition = currentPlayer.getPosition();
+            currentPlayer.movePlayer(amountThrown);
+            int newPlayerPosition = currentPlayer.getPosition();
+            movePlayerOnBoard(currentPlayerEnum, currentPlayerPosition, newPlayerPosition);
+        }
+        */
+    }
+
+    @FXML
     private GridPane BoardViewPlayerPane;
 
-    public void movePlayerOnBoard(Players player) {
+    public void movePlayerOnBoard(Players player, int oldPosition, int newPosition) {
         int playerNumber = player.ordinal();
-        int oldPosition = 0; //Maybe save the old position of the player or do a for loop to find a specific playerIcon on the board.
-        int newPosition = 11; //This would be the player new player position. Player.getPosition() I guess.
 
         ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren(); //Sets the whole board in an array/list
         ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get(oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
