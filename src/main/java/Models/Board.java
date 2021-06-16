@@ -73,15 +73,17 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
         List<OwnableLocation> ownableLocations = locationController.getOwnableLocations();
 
 
+
         for (Pane label : labelList) {
             label.setVisible(false);
         }
-        int amountOfLocationsOwnedByPlayer = locationsOwnedByPlayer.size();
         for (OwnableLocation location : ownableLocations) {
             if (location.getOwner().equals(playerController.getClientPlayersEnum())) {
                 locationsOwnedByPlayer.add(location);
             }
         }
+        int amountOfLocationsOwnedByPlayer = locationsOwnedByPlayer.size();
+
         if (amountOfLocationsOwnedByPlayer == 0) {
             boardController.showNoLocationsToMortgagePopup();
         } else {
