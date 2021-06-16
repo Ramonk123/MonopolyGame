@@ -97,7 +97,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
     private void setPlayerIcon(Pane playerPane, int playerNumber) {
         String URL = "/FXML/Icons/player"+playerNumber+".png";
-        BackgroundImage backgroundImage= new BackgroundImage(new Image(URL,10,10,false,true),
+        BackgroundImage backgroundImage= new BackgroundImage(new Image(URL,playerPane.getHeight(),playerPane.getHeight(),false,true),
                 BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         playerPane.setBackground(new Background(backgroundImage));
