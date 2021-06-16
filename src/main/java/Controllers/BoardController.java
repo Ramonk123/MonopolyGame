@@ -32,7 +32,6 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     private DocumentSnapshot documentSnapshot;
 
     public BoardController() {
-
     }
 
     @FXML
@@ -87,6 +86,23 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         BackgroundImageView.setBackground(new Background(backgroundImage));
     }
 
+    public void setPlayerIcons() {
+        ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren();
+        ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get(0)).getChildren();
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        for(int i = 0; i < playerController.getPlayers().size(); i++) {
+            setPlayerIcon((Pane) currentPlayerGrid.get(i), i+1);
+        }
+    }
+
+    private void setPlayerIcon(Pane playerPane, int playerNumber) {
+        String URL = "/FXML/Icons/player"+playerNumber+".png";
+        BackgroundImage backgroundImage= new BackgroundImage(new Image(URL,10,10,false,true),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        playerPane.setBackground(new Background(backgroundImage));
+    }
+
     @Override
     public void registerObserver(Observer<DocumentSnapshot> observer) { }
 
@@ -101,6 +117,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @Override
     public void setStage(Stage primaryStage) {
         board.setStage(primaryStage);
+        setPlayerIcons();
     }
 
     @FXML Label BoardViewUsername1Label;
@@ -131,13 +148,11 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         try {
             LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
             int token = lobbyController.getToken();
-            boolean value = fireStoreController.gameHasStarted(token);
-            return value;
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } return false;
+            return fireStoreController.gameHasStarted(token);
+        } catch (ExecutionException | InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return false;
 
     }
     @Override
