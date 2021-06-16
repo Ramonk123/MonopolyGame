@@ -50,9 +50,12 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     @Override
     public void notifyObservers() {
+        System.out.println(observers);
         for (Observer<DocumentSnapshot> observer : observers) {
+            System.out.println(observer);
             observer.update(documentSnapshot);
         }
+        System.out.println("WHOA HIOFUIGWRFUIG");
     }
 
     @Override
@@ -79,6 +82,14 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         DocumentSnapshot documentSnapshot = getSnapshot(token);
 
         return documentSnapshot.exists();
+    }
+
+    public boolean gameHasStarted(int token) throws ExecutionException, InterruptedException {
+        DocumentSnapshot documentSnapshot = getSnapshot(token);
+        return (boolean) documentSnapshot.get("gameHasStarted");
+
+
+
     }
 
     public void startGame(int token) {
@@ -109,8 +120,8 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         Map<String, Object> lobbyData = (Map<String, Object>) ((LobbyController) ControllerRegistry.get(LobbyController.class)).getFirestoreFormat();
         lobbyData.put("players", playerController.getFirestoreFormat());
         lobbyData.put("turn", turnController.getFirestoreFormat());
-//        lobbyData.put("chanceCardDeck", cardDeckController.getNextChanceCard());
-//        lobbyData.put("commonFundCardDeck", cardDeckController.getNextCommonFundCard());
+        lobbyData.put("nextChanceCard", cardDeckController.getNextChanceCard());
+        lobbyData.put("nextCommonFundCard", cardDeckController.getNextCommonFundCard());
 
 
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
@@ -141,7 +152,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
-                .update("chanceCardDeck", cardDeckController.getNextChanceCard());
+                .update("nextChanceCard", cardDeckController.getNextChanceCard());
     }
 
     public void updateCommonFundCard() {
@@ -149,23 +160,23 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
-                .update("commonFundCardDeck", cardDeckController.getNextCommonFundCard());
+                .update("nextCommonFundCard", cardDeckController.getNextCommonFundCard());
     }
 
-    public Card getChanceCard() throws InterruptedException, ExecutionException {
+    public String getChanceCard() throws InterruptedException, ExecutionException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))
-                .update("chanceCardDeck", null);
-        return (Card) documentSnapshot.get("chanceCardDeck");
+                .update("nextChanceCard", null);
+        return (String) documentSnapshot.get("nextChanceCard");
     }
 
-    public Card getCommonFundCard() throws InterruptedException, ExecutionException {
+    public String getCommonFundCard() throws InterruptedException, ExecutionException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))
-                .update("commonFundCardDeck", null);
-        return (Card) documentSnapshot.get("commonFundCardDeck");
+                .update("nextCommonFundCard", null);
+        return (String) documentSnapshot.get("nextCommonFundCard");
     }
 
     public void setConsumer(Consumer<DocumentSnapshot> lambda) {

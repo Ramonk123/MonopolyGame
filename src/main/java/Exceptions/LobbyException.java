@@ -1,10 +1,10 @@
-package Controllers;
+package Exceptions;
 
 public class LobbyException extends Exception {
-    protected final Throwable throwable;
-    public LobbyException(String msg, Throwable e) {
-        super(msg);
-        this.throwable = e;
+    private final Throwable throwable;
+    public LobbyException(String errorMessage, Throwable throwable) {
+        super(errorMessage);
+        this.throwable = throwable;
     }
 
     @Override

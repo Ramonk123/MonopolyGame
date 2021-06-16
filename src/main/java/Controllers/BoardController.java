@@ -1,33 +1,33 @@
 package Controllers;
 
+import Exceptions.PlayerException;
 import Models.Board;
+import Models.Location;
 import Models.Player;
-import Models.Wallet;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
-import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Controller for the Board model & BoardView view.
  */
-public class BoardController implements Controller, Subject<DocumentSnapshot>, HasStage {
+public class BoardController implements Controller, Subject<DocumentSnapshot>, Observer<DocumentSnapshot>, HasStage {
 
     private Board board;
-
-    public void setDocumentSnapshot(DocumentSnapshot documentSnapshot) {
-        this.documentSnapshot = documentSnapshot;
-    }
 
     private DocumentSnapshot documentSnapshot;
 
@@ -35,27 +35,50 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, H
         board = new Board();
     }
 
-    // isn't there a way for u to store these labels in an array?
-    // and aren't these supposed to be in the Board view itself?
-    @FXML
-    private Label BoardViewUsername1Label;
-    @FXML
-    private Label BoardViewUsername2Label;
-    @FXML
-    private Label BoardViewUsername3Label;
-    @FXML
-    private Label BoardViewUsername4Label;
-    @FXML
-    private Label BoardViewUsername5Label;
-    @FXML
-    private Label BoardViewUsername6Label;
-    @FXML
-    private Label BoardViewUsername7Label;
-    @FXML
-    private Label BoardViewUsername8Label;
-
     @FXML
     private Pane BackgroundImageView;
+
+    @FXML
+    private GridPane BoardViewBoardPane;
+
+    public Pair<Double, Double> getBoardViewBoardPanePosition(Pair<Integer, Integer> gridPositionPair) {
+        double x = BoardViewBoardPane.getCellBounds(gridPositionPair.getKey(), gridPositionPair.getValue()).getMinX();
+        double y = BoardViewBoardPane.getCellBounds(gridPositionPair.getKey(), gridPositionPair.getValue()).getMinY();
+        return new Pair<Double, Double>(x, y);
+    }
+
+    public Pair<Double, Double> getGridSize(Pair<Integer, Integer> gridPositionPair) {
+        double width = BoardViewBoardPane.getWidth();
+        double height = BoardViewBoardPane.getHeight();
+        return new Pair<Double, Double>(width, height);
+    }
+
+    @FXML
+    private void RollDiceAction(ActionEvent actionEvent) throws PlayerException {
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
+        turnController.RollDice();
+    }
+
+    @FXML
+    private GridPane BoardViewPlayerPane;
+
+    public void movePlayerOnBoard(Players player, int oldPosition, int newPosition) {
+        int playerNumber = player.ordinal();
+
+        ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren(); //Sets the whole board in an array/list
+        ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get(oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
+        Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber); //Gets the playerIcon out of the array/list
+        currentPlayerGrid.remove(playerNumber);
+        ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get(newPosition)).getChildren(); //Gets the grid where the player moved to
+        newPlayerGrid.add(playerNumber, playerIcon);
+    }
+
+    public Location playerStandsOn(Player player) { //Player prob gets changed to Players
+        int playerPosition = player.getPosition();
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        List<Location> locationArray = locationController.getLocationArray();
+        return locationArray.get(playerPosition);
+    }
 
     public void setBackgroundImageView() {
         BackgroundImage backgroundImage= new BackgroundImage(new Image("/FXML/IMG/background.png",600,400,false,true),
@@ -80,63 +103,49 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, H
         board.setStage(primaryStage);
     }
 
-    public void setPlayersNamesToLabels() {
-        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        ArrayList<Player> players = playerController.getPlayers();
-        // if the labels were in an array, and invisible by default you could do:
-        // with the array you'd also avoid that switch you're using right now. (getLabelByNumber).
-        // maybe this link will help.
-        // https://stackoverflow.com/questions/28587297/create-array-of-label-using-fxml-in-javafx
-        /*
-        for (int i = 0; i < players.size(); i++) {
-            // pseudo code for the label
-            labelsArray[i].setVisible()
-            labelsArray[i].setName(players.get(i).getName());
-        }
-         */
-        for(int i = 0; i < 8; i++) {
-            try {
-                setPlayerNameToLabel(players.get(i).getName(), i + 1);
-            } catch(IndexOutOfBoundsException indexOutOfBoundsException) {
-                setVisibilityLabel(i + 1);
-            }
-        }
+    @FXML Label BoardViewUsername1Label;
+    @FXML Label BoardViewUsername2Label;
+    @FXML Label BoardViewUsername3Label;
+    @FXML Label BoardViewUsername4Label;
+    @FXML Label BoardViewUsername5Label;
+    @FXML Label BoardViewUsername6Label;
+    @FXML Label BoardViewUsername7Label;
+    @FXML Label BoardViewUsername8Label;
+
+    public ArrayList<Label> getUserLabelList() {
+        ArrayList<Label> labelList = new ArrayList<>();
+        labelList.add(BoardViewUsername1Label);
+        labelList.add(BoardViewUsername2Label);
+        labelList.add(BoardViewUsername3Label);
+        labelList.add(BoardViewUsername4Label);
+        labelList.add(BoardViewUsername5Label);
+        labelList.add(BoardViewUsername6Label);
+        labelList.add(BoardViewUsername7Label);
+        labelList.add(BoardViewUsername8Label);
+        return labelList;
+
     }
 
-    private void setPlayerNameToLabel(String name, int labelNumber) {
-        Label label = getLabelByNumber(labelNumber);
-        assert label != null;
-        label.setText(name);
+    public boolean checkGameHasStarted() {
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        try {
+            LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
+            int token = lobbyController.getToken();
+            boolean value = fireStoreController.gameHasStarted(token);
+            return value;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } return false;
+
+    }
+    @Override
+    public void update(DocumentSnapshot state) {
+        documentSnapshot = state;
+        System.out.println("platte asser");
+        notifyObservers();
     }
 
-    private void setVisibilityLabel(int labelNumber) {
-        Label label = getLabelByNumber(labelNumber);
-        assert label != null;
-        label.setVisible(false);
-    }
 
-    @Nullable
-    private Label getLabelByNumber(int labelNumber) {
-        Label label = null;
-
-        switch(labelNumber) {
-            case 1:
-                label = BoardViewUsername1Label;
-            case 2:
-                label = BoardViewUsername2Label;
-            case 3:
-                label = BoardViewUsername3Label;
-            case 4:
-                label = BoardViewUsername4Label;
-            case 5:
-                label = BoardViewUsername5Label;
-            case 6:
-                label = BoardViewUsername6Label;
-            case 7:
-                label = BoardViewUsername7Label;
-            case 8:
-                label = BoardViewUsername8Label;
-        }
-        return label;
-    }
 }

@@ -55,7 +55,7 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
         ((BoardView) observers.get(0)).setStage(primaryStage);
     }
 
-    public void setGridpanePositions() {
+    public void setGridpanePositions() { // Maybe not needed
         gridpanePositions.add(new Pair<>(10, 10));
         gridpanePositions.add(new Pair<>(9, 10));
         gridpanePositions.add(new Pair<>(8, 10));

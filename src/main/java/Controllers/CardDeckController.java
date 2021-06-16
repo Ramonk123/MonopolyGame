@@ -3,29 +3,41 @@ package Controllers;
 import Models.Actions;
 import Models.Card;
 import Models.CardDeck;
+import Models.Player;
 import Monopoly.UUID;
+import ObserveablePattern.Observer;
+import ObserveablePattern.Subject;
+import Resetter.Resettable;
+import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 /**
  * Controller for the CardDeck model.
  */
-public class CardDeckController implements Controller {
+public class CardDeckController
+        implements
+            Controller,
+            Observer<DocumentSnapshot>,
+            Subject<DocumentSnapshot>,
+            Resettable {
 
     private CardDeck cardDeck;
 
     private final static UUID CHANCE_JAIL_CARD_UUID = new UUID("CARD-8");
     private final static UUID COMMUNITY_JAIL_CARD_UUID = new UUID("CARD-20");
 
-    public CardDeckController() {
-//        setCardDecks();
-    }
+    CardDeck chanceCardDeck = new CardDeck(new ArrayList());
+    CardDeck commonFundCardDeck = new CardDeck(new ArrayList<>());
+    private DocumentSnapshot documentSnapshot;
 
-    CardDeck chanceCardDeck;
-    CardDeck commonFundCardDeck;
+    public CardDeckController() {
+        setCardDecks();
+    }
 
 // TODO:
 //  1. Update index on .teleportToLocation()
@@ -77,14 +89,24 @@ public class CardDeckController implements Controller {
     // In this function the player grabs the card.
     public Card grabChanceCard() throws ExecutionException, InterruptedException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        Card takenCard = fireStoreController.getChanceCard();
-        return takenCard;
+        String CardUUIDString = fireStoreController.getChanceCard();
+        for(int i = 0; chanceCardDeck.size() > i; i++){
+            if(UUID.compare(CardUUIDString, chanceCardDeck.getCardDeck().get(i).getId())){
+                return chanceCardDeck.getCardDeck().get(i);
+            }
+        }
+        return null;
     }
 
     public Card grabCommonFundCard() throws ExecutionException, InterruptedException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        Card takenCard = fireStoreController.getCommonFundCard();
-        return takenCard;
+        String CardUUIDString = fireStoreController.getCommonFundCard();
+        for(int i = 0; commonFundCardDeck.size() > i; i++){
+            if(UUID.compare(CardUUIDString, commonFundCardDeck.getCardDeck().get(i).getId())){
+                return commonFundCardDeck.getCardDeck().get(i);
+            }
+        }
+        return null;
     }
 
     public void returnCard(Card card) {
@@ -97,13 +119,51 @@ public class CardDeckController implements Controller {
     }
 
     //Only meant for host.
-    public Card getNextChanceCard() {
-        return chanceCardDeck.getCardDeck().get(0);
+    public String getNextChanceCard() {
+        String nextCard = chanceCardDeck.getCardDeck().get(0).getId().getId();
+        chanceCardDeck.take(0, chanceCardDeck.getCardDeck().get(0));
+        return nextCard;
     }
 
-    public Card getNextCommonFundCard() {
-        return commonFundCardDeck.getCardDeck().get(0);
+    public String getNextCommonFundCard() {
+        String nextCard = commonFundCardDeck.getCardDeck().get(0).getId().getId();
+        commonFundCardDeck.take(0, commonFundCardDeck.getCardDeck().get(0));
+        return nextCard;
     }
+
+
+    @Override
+    public void registerObserver(Observer<DocumentSnapshot> observer) { }
+
+    @Override
+    public void unregisterObserver(Observer<DocumentSnapshot> observer) { }
+
+
+    @Override
+    public void notifyObservers() { }
+
+    @Override
+    public void update(DocumentSnapshot state) {
+        documentSnapshot = state;
+        String ChanceCard = (String) documentSnapshot.get("nextChanceCard");
+        String CommonFundCard = (String) documentSnapshot.get("nextCommonFundCard");
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        if (playerController.getClientPlayersEnum() == Players.PLAYER_ONE) {
+            if(ChanceCard == null){
+                fireStoreController.updateChanceCard();
+            }
+            if(CommonFundCard == null){
+                fireStoreController.updateCommonFundCard();
+            }
+        }
+    }
+
+    @Override
+    public void reset() {
+
+    }
+
 
     // Not in use moght be deleted later.
     public ArrayList<UUID> returnUUID(CardDeck arrayListCard) {

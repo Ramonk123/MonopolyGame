@@ -1,5 +1,6 @@
 package Controllers;
 
+import Exceptions.LobbyException;
 import Firestore.FirestoreFormattable;
 import Models.*;
 import ObserveablePattern.Observer;
@@ -12,7 +13,6 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -145,12 +145,8 @@ public class LobbyController
             fireStoreController.addPlayer(token, player);
         } catch(NumberFormatException numberFormatException) {
             JoinLobbyViewTokenTextField.setText("Numbers Only");
-        } catch (InterruptedException interruptedException) {
-            interruptedException.printStackTrace();
-        } catch (ExecutionException executionException) {
+        } catch (Exception executionException) {
             executionException.printStackTrace();
-        } catch (Exception exception) {
-            exception.printStackTrace();
         }
     }
 
@@ -191,12 +187,10 @@ public class LobbyController
         //while(true){
             try {
                 if (!fireStoreController.checkExistence(token)) {}//break;
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
-            generateToken();
+        generateToken();
         //}
 
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
@@ -206,9 +200,6 @@ public class LobbyController
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//        CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
-//        cardDeckController.setCardDecks();
 
         System.out.println(token);
         fireStoreController.createLobby(token);
