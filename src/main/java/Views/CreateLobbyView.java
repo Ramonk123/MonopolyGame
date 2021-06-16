@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Sets the Stage/Scene for the CreateLobbyView.fxml and has additional methods that add things to the view.
+ */
 public class CreateLobbyView implements View, Observer<LobbySubject>, HasStage {
     //Screensize
     int WIDTH = 600;

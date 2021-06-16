@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Sets the Stage/Scene for the MainMenuView.fxml and has additional methods that add things to the view.
+ */
 public class MainMenuView implements View, Observer<MainMenuSubject>, HasStage {
     //Screensize
     int WIDTH = 630;

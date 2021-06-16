@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Sets the Stage/Scene for the BoardView.fxml and has additional methods that add things to the view.
+ */
 public class BoardView implements View, Observer<BoardSubject>, HasStage {
     //Screensize
     int WIDTH = 1080;
