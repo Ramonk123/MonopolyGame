@@ -20,6 +20,9 @@ import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * The model that makes an instance of the database.
+ */
 public class Firestore {
 
     public com.google.cloud.firestore.Firestore database;
@@ -28,6 +31,10 @@ public class Firestore {
         return database;
     }
 
+    /**
+     * Makes an instance of the firestore database.
+     * @throws IOException
+     */
     public void initializeFirestore() throws IOException {
 
         String fileName = "monopolyteam6-47708-firebase-adminsdk-tp5m6-9a482af7f7.json";
