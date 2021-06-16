@@ -874,7 +874,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#showMortagePopup" prefHeight="26.0" prefWidth="105.0" text="Mortgage" wrapText="true" GridPane.columnSpan="2" />
+                  <Button mnemonicParsing="false" onAction="#showMortgagePopup" prefHeight="26.0" prefWidth="105.0" text="Mortgage" wrapText="true" GridPane.columnSpan="2" />
                </children>
             </GridPane>
             <Button fx:id="BoardViewRollDiceButton" mnemonicParsing="false" onAction="#RollDiceAction" prefHeight="100.0" prefWidth="100.0" text="Roll Dice" />

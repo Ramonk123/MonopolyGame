@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Sets the Stage/Scene for the LobbyView.fxml and has additional methods that add things to the view.
+ */
 public class LobbyView implements View, Observer<LobbySubject>, HasStage {
     //Screensize
     int WIDTH = 600;

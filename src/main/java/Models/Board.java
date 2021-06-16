@@ -2,6 +2,7 @@ package Models;
 
 import Controllers.*;
 import Exceptions.TransactionException;
+import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import Views.*;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -63,7 +64,7 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
         ((BoardView) observers.get(0)).setStage(primaryStage);
     }
 
-    public void displayMortgageMenuLocations() {
+    public void displayMortgageMenuLocations() throws Exception {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
@@ -73,17 +74,17 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
         List<OwnableLocation> ownableLocations = locationController.getOwnableLocations();
 
 
-
         for (Pane label : labelList) {
             label.setVisible(false);
         }
+
         for (OwnableLocation location : ownableLocations) {
-            if (location.getOwner().equals(playerController.getClientPlayersEnum())) {
+            if (UUID.compare(location.getOwner().orElseThrow(() -> new Exception()), playerController.getClientPlayersEnum())) {
                 locationsOwnedByPlayer.add(location);
             }
+
         }
         int amountOfLocationsOwnedByPlayer = locationsOwnedByPlayer.size();
-
         if (amountOfLocationsOwnedByPlayer == 0) {
             boardController.showNoLocationsToMortgagePopup();
         } else {

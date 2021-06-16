@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Sets the Stage/Scene for the JoinLobbyView.fxml and has additional methods that add things to the view.
+ */
 public class JoinLobbyView implements View, Observer<LobbySubject>, HasStage {
     //Screensize
     int WIDTH = 600;
