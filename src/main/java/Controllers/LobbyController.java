@@ -258,14 +258,22 @@ public class LobbyController
 
     public int getToken() { return token;}
 
-    @FXML Label LobbyViewUsername1Label;
-    @FXML Label LobbyViewUsername2Label;
-    @FXML Label LobbyViewUsername3Label;
-    @FXML Label LobbyViewUsername4Label;
-    @FXML Label LobbyViewUsername5Label;
-    @FXML Label LobbyViewUsername6Label;
-    @FXML Label LobbyViewUsername7Label;
-    @FXML Label LobbyViewUsername8Label;
+    @FXML
+    private Label LobbyViewUsername1Label;
+    @FXML
+    private Label LobbyViewUsername2Label;
+    @FXML
+    private Label LobbyViewUsername3Label;
+    @FXML
+    private Label LobbyViewUsername4Label;
+    @FXML
+    private Label LobbyViewUsername5Label;
+    @FXML
+    private Label LobbyViewUsername6Label;
+    @FXML
+    private Label LobbyViewUsername7Label;
+    @FXML
+    private Label LobbyViewUsername8Label;
 
     public ArrayList<Label> getUserLabelList() {
         ArrayList<Label> labelList = new ArrayList<>();
@@ -281,7 +289,7 @@ public class LobbyController
         return labelList;
     }
     @FXML
-    private void goToGameViewFxml(ActionEvent event) {
+    private void goToGameViewFxml(ActionEvent actionEvent) {
         System.out.println("fxml ass");
         //System.out.println((Stage) ((Node) event.getSource()).getScene().getWindow());
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
