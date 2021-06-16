@@ -72,9 +72,6 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
         ArrayList<OwnableLocation> locationsOwnedByPlayer = new ArrayList<>();
         List<OwnableLocation> ownableLocations = locationController.getOwnableLocations();
 
-        locationsOwnedByPlayer.add(ownableLocations.get(3));
-        locationsOwnedByPlayer.add(ownableLocations.get(4));
-        locationsOwnedByPlayer.add(ownableLocations.get(6));
 
         for (Pane label : labelList) {
             label.setVisible(false);
