@@ -166,7 +166,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     }
     @FXML private Pane MortgagePopup;
     @FXML
-    private void showMortagePopup() {
+    private void showMortagePopup() throws Exception {
         if(!MortgagePopup.isVisible()) {
             MortgagePopup.setVisible(true);
             board.displayMortgageMenuLocations();

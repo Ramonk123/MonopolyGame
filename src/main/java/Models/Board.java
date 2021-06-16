@@ -64,7 +64,7 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
         ((BoardView) observers.get(0)).setStage(primaryStage);
     }
 
-    public void displayMortgageMenuLocations() {
+    public void displayMortgageMenuLocations() throws Exception {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
@@ -79,7 +79,7 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
         }
         int amountOfLocationsOwnedByPlayer = locationsOwnedByPlayer.size(); // This is always 0 because nothing is ever added to the ArrayList
         for (OwnableLocation location : ownableLocations) {
-            if (UUID.compare(location.getOwner().orElseThrow(), playerController.getClientPlayersEnum())) {
+            if (UUID.compare(location.getOwner().orElseThrow(() -> new Exception()), playerController.getClientPlayersEnum())) {
                 locationsOwnedByPlayer.add(location);
             }
         }
