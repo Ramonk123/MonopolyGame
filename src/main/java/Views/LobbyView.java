@@ -22,8 +22,8 @@ import java.util.Map;
 
 public class LobbyView implements View, Observer<LobbySubject>, HasStage {
     //Screensize
-    int WIDTH = 630;
-    int HEIGHT = 600;
+    int WIDTH = 600;
+    int HEIGHT = 400;
     private Stage primaryStage;
 
     public LobbyView() {

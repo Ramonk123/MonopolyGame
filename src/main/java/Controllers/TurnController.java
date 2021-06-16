@@ -20,13 +20,12 @@ public class TurnController
             Resettable,
             Subject<DocumentSnapshot> {
 
-    private Turn turn;
+    private Turn turn = new Turn();
     private DocumentSnapshot documentSnapshot;
-    private long eyesThrown;
+    private long eyesThrown = 0;
 
     public TurnController() {
-        turn = new Turn();
-        eyesThrown = 0;
+
     }
 
     public Players getCurrentPlayer() {

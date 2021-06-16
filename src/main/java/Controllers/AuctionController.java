@@ -19,10 +19,9 @@ import javafx.scene.layout.Pane;
 public class AuctionController implements Controller, Subject<DocumentSnapshot> {
 
     private Player player;
-    private Auction auction;
+    private Auction auction =  new Auction();
 
     public AuctionController() {
-        auction = new Auction();
     }
 
     @Override

@@ -27,12 +27,12 @@ import java.util.concurrent.ExecutionException;
  */
 public class BoardController implements Controller, Subject<DocumentSnapshot>, Observer<DocumentSnapshot>, HasStage {
 
-    private Board board;
+    private Board board = new Board();
 
     private DocumentSnapshot documentSnapshot;
 
     public BoardController() {
-        board = new Board();
+
     }
 
     @FXML

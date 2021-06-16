@@ -7,10 +7,10 @@ import com.google.cloud.firestore.DocumentSnapshot;
 
 public class TradeController implements Controller {
 
-    private Trade trade;
+    private Trade trade = new Trade();
 
     private TradeController() {
-        trade = new Trade();
+
     }
 
 }
