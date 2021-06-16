@@ -544,8 +544,8 @@ public class LocationController implements Controller {
             transactionController.addBalance(playerController.getClientPlayersEnum(), (location.getPrice()/ 2));
             location.setMortgage(true);
             System.out.println(transactionController.getBalance(playerController.getClientPlayersEnum()));
-        } catch (TransactionException e) {
-            e.printStackTrace();
+        } catch (TransactionException transactionException) {
+            transactionException.printStackTrace();
         }
 
 
@@ -558,8 +558,8 @@ public class LocationController implements Controller {
         try {
             transactionController.subtractBalance(playerController.getClientPlayersEnum(),(location.getPrice()/ 2));
             location.setMortgage(false);
-        } catch (TransactionException e) {
-            e.printStackTrace();
+        } catch (TransactionException transactionException) {
+            transactionException.printStackTrace();
         }
     }
 }
