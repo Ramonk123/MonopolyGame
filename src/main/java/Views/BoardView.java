@@ -34,6 +34,7 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
         ((BoardController) ControllerRegistry.get(BoardController.class)).setBackgroundImageView();
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
