@@ -95,12 +95,12 @@ public class CardDeckController implements Controller {
     }
 
     //Only meant for host.
-    public Card getNextChanceCard() {
-        return chanceCardDeck.getCardDeck().get(0);
+    public String getNextChanceCard() {
+        return chanceCardDeck.getCardDeck().get(0).getId().getId();
     }
 
-    public Card getNextCommonFundCard() {
-        return commonFundCardDeck.getCardDeck().get(0);
+    public String getNextCommonFundCard() {
+        return commonFundCardDeck.getCardDeck().get(0).getId().getId();
     }
 
     // Not in use moght be deleted later.
