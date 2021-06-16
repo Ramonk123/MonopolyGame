@@ -4,6 +4,9 @@ import Monopoly.Identifiable;
 import Monopoly.UUID;
 import java.util.function.Consumer;
 
+/**
+ * Model which is used by the CardDeck model to create a deck of different kind of cards.
+ */
 public class Card implements Model, Action, Identifiable {
 
     private final UUID id;

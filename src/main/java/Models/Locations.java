@@ -3,6 +3,9 @@ package Models;
 import Monopoly.Identifiable;
 import Monopoly.UUID;
 
+/**
+ * Enum which creates new UUIDs for all locations.
+ */
 public enum Locations implements Identifiable {
     Dorpstraat(new UUID("LOCATION-DORPSTRAAT")),
     Brink(new UUID("LOCATION-Brink")),

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Abstract model for all ownable locations.
+ */
 public abstract class OwnableLocation extends Location {
     private final int price;
     private Player owner = null;

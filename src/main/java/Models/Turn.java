@@ -10,6 +10,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 // still needs work
+
+/**
+ * Model that contains all rules and information of a turn.
+ * The player that is "active" is the Player that can roll dice and do other actions that inactive players can't do.
+ */
 public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnapshot> {
     private Players activePlayer = Players.PLAYER_ONE;
     private int amountOfDouble = 0;

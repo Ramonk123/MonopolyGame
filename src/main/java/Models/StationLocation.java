@@ -1,5 +1,8 @@
 package Models;
 
+/**
+ * Model that contains everything that a station location needs.
+ */
 public class StationLocation extends OwnableLocation{
 
 

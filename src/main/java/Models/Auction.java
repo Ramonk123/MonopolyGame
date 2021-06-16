@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Model for the Auction.
+ */
 public class Auction implements Model {
     private Player player;
     private boolean startedAuction = false;

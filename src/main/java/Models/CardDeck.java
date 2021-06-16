@@ -7,6 +7,9 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ *
+ */
 public class CardDeck implements Model {
     private ArrayList<Card> cardDeck;
 

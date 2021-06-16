@@ -6,6 +6,10 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Model for the Wallet of a Player.
+ * Wallet has a Payer interface and a Receiver interface implemented to control what can and can't be used.
+ */
 public class Wallet implements Model, Payer, Receiver {
     private int balance = 1500;
 
