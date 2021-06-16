@@ -68,6 +68,7 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
 
                 for (int i = 0; i < playersJoined; i++) {
                     labelList.get(i).setText(players.get(i).getName());
+                    labelList.get(i).setVisible(true);
                 }
             });
         }
