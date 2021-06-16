@@ -2,6 +2,7 @@ package Models;
 
 import Controllers.*;
 import Exceptions.TransactionException;
+import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import Views.*;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -78,7 +79,7 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
         }
         int amountOfLocationsOwnedByPlayer = locationsOwnedByPlayer.size();
         for (OwnableLocation location : ownableLocations) {
-            if (location.getOwner().equals(playerController.getClientPlayersEnum())) {
+            if (UUID.compare(location.getOwner().orElseThrow(), playerController.getClientPlayersEnum())) {
                 locationsOwnedByPlayer.add(location);
             }
         }
