@@ -77,12 +77,24 @@ public class CardDeckController implements Controller {
     // In this function the player grabs the card.
     public Card grabChanceCard() throws ExecutionException, InterruptedException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        return fireStoreController.getChanceCard();
+        String CardUUIDString = fireStoreController.getChanceCard();
+        for(int i = 0; chanceCardDeck.size() > i; i++){
+            if(UUID.compare(CardUUIDString, chanceCardDeck.getCardDeck().get(i).getId())){
+                return chanceCardDeck.getCardDeck().get(i);
+            }
+        }
+        return null;
     }
 
     public Card grabCommonFundCard() throws ExecutionException, InterruptedException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        return fireStoreController.getCommonFundCard();
+        String CardUUIDString = fireStoreController.getCommonFundCard();
+        for(int i = 0; commonFundCardDeck.size() > i; i++){
+            if(UUID.compare(CardUUIDString, commonFundCardDeck.getCardDeck().get(i).getId())){
+                return commonFundCardDeck.getCardDeck().get(i);
+            }
+        }
+        return null;
     }
 
     public void returnCard(Card card) {

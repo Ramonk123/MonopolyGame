@@ -34,4 +34,8 @@ public class CardDeck implements Model {
         this.cardDeck.add(card);
         this.cardDeck.remove(i);
     }
+
+    public int size() {
+        return  this.cardDeck.size();
+    }
 }

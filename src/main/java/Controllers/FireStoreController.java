@@ -163,20 +163,20 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
                 .update("nextCommonFundCard", cardDeckController.getNextCommonFundCard());
     }
 
-    public Card getChanceCard() throws InterruptedException, ExecutionException {
+    public String getChanceCard() throws InterruptedException, ExecutionException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))
-                .update("chanceCardDeck", null);
-        return (Card) documentSnapshot.get("chanceCardDeck");
+                .update("nextChanceCard", null);
+        return (String) documentSnapshot.get("nextChanceCard");
     }
 
-    public Card getCommonFundCard() throws InterruptedException, ExecutionException {
+    public String getCommonFundCard() throws InterruptedException, ExecutionException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))
-                .update("commonFundCardDeck", null);
-        return (Card) documentSnapshot.get("commonFundCardDeck");
+                .update("nextCommonFundCard", null);
+        return (String) documentSnapshot.get("nextCommonFundCard");
     }
 
     public void setConsumer(Consumer<DocumentSnapshot> lambda) {
