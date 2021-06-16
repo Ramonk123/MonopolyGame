@@ -176,14 +176,21 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
             MortgagePopup.setVisible(false);
         }
     }
-    @FXML  Pane Location1Pane;
-    @FXML  Pane Location2Pane;
-    @FXML  Pane Location3Pane;
-    @FXML  Pane Location4Pane;
-    @FXML  Pane Location5Pane;
-    @FXML  Pane Location6Pane;
+    @FXML
+    private Pane Location1Pane;
+    @FXML
+    private Pane Location2Pane;
+    @FXML
+    private Pane Location3Pane;
+    @FXML
+    private Pane Location4Pane;
+    @FXML
+    private Pane Location5Pane;
+    @FXML
+    private Pane Location6Pane;
 
-    @FXML public ArrayList<Pane> getMortgageLabelList() {
+    @FXML
+    private ArrayList<Pane> getMortgageLabelList() {
         ArrayList<Pane> mortgageLabelList = new ArrayList<>();
         mortgageLabelList.add(Location1Pane);
         mortgageLabelList.add(Location2Pane);
@@ -194,7 +201,8 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         return mortgageLabelList;
     }
 
-    @FXML Label NoLocationsToMortgagePopup;
+    @FXML
+    private Label NoLocationsToMortgagePopup;
 
     public void showNoLocationsToMortgagePopup() {
         NoLocationsToMortgagePopup.setVisible(true);
