@@ -189,8 +189,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @FXML
     private Pane Location6Pane;
 
-    @FXML
-    private ArrayList<Pane> getMortgageLabelList() {
+    public ArrayList<Pane> getMortgageLabelList() {
         ArrayList<Pane> mortgageLabelList = new ArrayList<>();
         mortgageLabelList.add(Location1Pane);
         mortgageLabelList.add(Location2Pane);
