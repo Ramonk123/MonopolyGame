@@ -6,32 +6,35 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Wallet implements Model {
-    private int balance;
-    private boolean sufficientBalance;
+public class Wallet implements Model, Payer, Receiver {
+    private int balance = 1500;
 
     public Wallet() {
-        balance = 1500;
+
     }
 
     public void setBalance(int balance) {
         this.balance = balance;
     }
 
+    @Override
     public int getBalance() {
         return balance;
     }
 
+    @Override
     public void addBalance(int value) {
         this.balance += value;
     }
 
+    @Override
     public void subtractBalance(int value) {
         this.balance -= value;
     }
 
+    @Override
     public boolean checkBalance(int value){
-        sufficientBalance = getBalance() >= value;
+        boolean sufficientBalance = getBalance() >= value;
         return sufficientBalance;
     }
 }
