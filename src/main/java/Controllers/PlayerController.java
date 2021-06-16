@@ -164,4 +164,8 @@ public class PlayerController
         clientPlayer = Players.PLAYER_ONE;
         players = new ArrayList<>();
     }
+
+    public LocationController getLocationController() {
+        return (LocationController) ControllerRegistry.get(LocationController.class);
+    }
 }
