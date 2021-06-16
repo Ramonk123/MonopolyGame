@@ -77,7 +77,7 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
         for (Pane label : labelList) {
             label.setVisible(false);
         }
-        int amountOfLocationsOwnedByPlayer = locationsOwnedByPlayer.size();
+        int amountOfLocationsOwnedByPlayer = locationsOwnedByPlayer.size(); // This is always 0 because nothing is ever added to the ArrayList
         for (OwnableLocation location : ownableLocations) {
             if (UUID.compare(location.getOwner().orElseThrow(), playerController.getClientPlayersEnum())) {
                 locationsOwnedByPlayer.add(location);
