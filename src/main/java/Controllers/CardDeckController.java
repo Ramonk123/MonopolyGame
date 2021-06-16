@@ -36,7 +36,7 @@ public class CardDeckController
     private DocumentSnapshot documentSnapshot;
 
     public CardDeckController() {
-        reset();
+        setCardDecks();
     }
 
 // TODO:
@@ -157,12 +157,11 @@ public class CardDeckController
                 fireStoreController.updateCommonFundCard();
             }
         }
-        notifyObservers();
     }
 
     @Override
     public void reset() {
-        setCardDecks();
+
     }
 
 
