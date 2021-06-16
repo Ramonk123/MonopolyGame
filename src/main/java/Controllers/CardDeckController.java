@@ -3,17 +3,28 @@ package Controllers;
 import Models.Actions;
 import Models.Card;
 import Models.CardDeck;
+import Models.Player;
 import Monopoly.UUID;
+import ObserveablePattern.Observer;
+import ObserveablePattern.Subject;
+import Resetter.Resettable;
+import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 /**
  * Controller for the CardDeck model.
  */
-public class CardDeckController implements Controller {
+public class CardDeckController
+        implements
+            Controller,
+            Observer<DocumentSnapshot>,
+            Subject<DocumentSnapshot>,
+            Resettable {
 
     private CardDeck cardDeck;
 
@@ -22,9 +33,10 @@ public class CardDeckController implements Controller {
 
     CardDeck chanceCardDeck = new CardDeck(new ArrayList());
     CardDeck commonFundCardDeck = new CardDeck(new ArrayList<>());
+    private DocumentSnapshot documentSnapshot;
 
     public CardDeckController() {
-        setCardDecks();
+        reset();
     }
 
 // TODO:
@@ -118,6 +130,41 @@ public class CardDeckController implements Controller {
         commonFundCardDeck.take(0, commonFundCardDeck.getCardDeck().get(0));
         return nextCard;
     }
+
+
+    @Override
+    public void registerObserver(Observer<DocumentSnapshot> observer) { }
+
+    @Override
+    public void unregisterObserver(Observer<DocumentSnapshot> observer) { }
+
+
+    @Override
+    public void notifyObservers() { }
+
+    @Override
+    public void update(DocumentSnapshot state) {
+        documentSnapshot = state;
+        String ChanceCard = (String) documentSnapshot.get("nextChanceCard");
+        String CommonFundCard = (String) documentSnapshot.get("nextCommonFundCard");
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        if (playerController.getClientPlayersEnum() == Players.PLAYER_ONE) {
+            if(ChanceCard == null){
+                fireStoreController.updateChanceCard();
+            }
+            if(CommonFundCard == null){
+                fireStoreController.updateCommonFundCard();
+            }
+        }
+        notifyObservers();
+    }
+
+    @Override
+    public void reset() {
+        setCardDecks();
+    }
+
 
     // Not in use moght be deleted later.
     public ArrayList<UUID> returnUUID(CardDeck arrayListCard) {
