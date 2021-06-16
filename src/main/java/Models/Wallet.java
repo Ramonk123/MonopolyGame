@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Wallet implements Model {
     private int balance;
+    private boolean sufficientBalance;
 
     public Wallet() {
         balance = 1500;
@@ -27,5 +28,10 @@ public class Wallet implements Model {
 
     public void subtractBalance(int value) {
         this.balance -= value;
+    }
+
+    public boolean checkBalance(int value){
+        sufficientBalance = getBalance() >= value;
+        return sufficientBalance;
     }
 }

@@ -44,11 +44,9 @@ public class TransactionController implements Controller {
         receiver.getWallet().addBalance(value);
     }
 
-    public boolean checkBalance(Players playersEnum, int bidValue) throws TransactionException{
+    public boolean checkBalance(Players playersEnum, int value) throws TransactionException{
         Player player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
-        boolean transactionComplete;
-        transactionComplete= player.getWallet().getBalance() >= bidValue;
-        return transactionComplete;
+        return player.getWallet().getBalance() >= value;
     }
 
 }
