@@ -141,11 +141,15 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
     }
     @Override
-    public void update(DocumentSnapshot state) {
-        documentSnapshot = state;
+    public void update(DocumentSnapshot documentSnapshot) {
+        this.documentSnapshot = documentSnapshot;
         System.out.println("platte asser");
         notifyObservers();
     }
 
+    @FXML
+    private void placeBid(ActionEvent actionEvent) {
+        //Do shit
+    }
 
 }
