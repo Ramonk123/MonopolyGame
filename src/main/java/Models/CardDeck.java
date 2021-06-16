@@ -30,4 +30,8 @@ public class CardDeck implements Model {
         Collections.shuffle(this.cardDeck);
     }
 
+    public void take(int i, Card card) {
+        this.cardDeck.add(card);
+        this.cardDeck.remove(i);
+    }
 }
