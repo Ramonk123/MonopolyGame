@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -163,6 +164,42 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         return false;
 
     }
+    @FXML private Pane MortgagePopup;
+    @FXML
+    private void showMortagePopup() {
+        if(!MortgagePopup.isVisible()) {
+            MortgagePopup.setVisible(true);
+            board.displayMortgageMenuLocations();
+
+
+        } else {
+            MortgagePopup.setVisible(false);
+        }
+    }
+    @FXML  Pane Location1Pane;
+    @FXML  Pane Location2Pane;
+    @FXML  Pane Location3Pane;
+    @FXML  Pane Location4Pane;
+    @FXML  Pane Location5Pane;
+    @FXML  Pane Location6Pane;
+
+    @FXML public ArrayList<Pane> getMortgageLabelList() {
+        ArrayList<Pane> mortgageLabelList = new ArrayList<>();
+        mortgageLabelList.add(Location1Pane);
+        mortgageLabelList.add(Location2Pane);
+        mortgageLabelList.add(Location3Pane);
+        mortgageLabelList.add(Location4Pane);
+        mortgageLabelList.add(Location5Pane);
+        mortgageLabelList.add(Location6Pane);
+        return mortgageLabelList;
+    }
+
+    @FXML Label NoLocationsToMortgagePopup;
+
+    public void showNoLocationsToMortgagePopup() {
+        NoLocationsToMortgagePopup.setVisible(true);
+    }
+
     @Override
     public void update(DocumentSnapshot documentSnapshot) {
         this.documentSnapshot = documentSnapshot;

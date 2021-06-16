@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.*;
+import Monopoly.UUID;
 import javafx.geometry.Pos;
 
 import java.util.ArrayList;
@@ -528,5 +529,9 @@ public class LocationController implements Controller {
         locationArray.add(electricComapany);
         ownableLocationArray.add(waterWorks);
         ownableLocationArray.add(electricComapany);
+    }
+
+    public List<OwnableLocation> getOwnableLocations() {
+        return ownableLocationArray;
     }
 }

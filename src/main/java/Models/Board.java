@@ -1,8 +1,16 @@
 package Models;
 
+import Controllers.BoardController;
+import Controllers.ControllerRegistry;
+import Controllers.LocationController;
+import Controllers.PlayerController;
 import ObserveablePattern.Observer;
 import Views.*;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
@@ -97,5 +105,48 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
         gridpanePositions.add(new Pair<>(10, 8));
         gridpanePositions.add(new Pair<>(10, 9));
 
+    }
+
+    public void displayMortgageMenuLocations() {
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+
+        ArrayList<Pane> labelList = boardController.getMortgageLabelList();
+        ArrayList<OwnableLocation> locationsOwnedByPlayer = new ArrayList<>();
+        List<OwnableLocation> ownableLocations = locationController.getOwnableLocations();
+
+        locationsOwnedByPlayer.add(ownableLocations.get(3));
+        locationsOwnedByPlayer.add(ownableLocations.get(4));
+        locationsOwnedByPlayer.add(ownableLocations.get(6));
+
+        for (Pane label : labelList) {
+            label.setVisible(false);
+        }
+        int amountOfLocationsOwnedByPlayer = locationsOwnedByPlayer.size();
+        for (OwnableLocation location : ownableLocations) {
+            if (location.getOwner().equals(playerController.getClientPlayersEnum())) {
+                locationsOwnedByPlayer.add(location);
+            }
+        }
+        if (amountOfLocationsOwnedByPlayer == 0) {
+            boardController.showNoLocationsToMortgagePopup();
+        } else {
+            for (int i = 0; i < amountOfLocationsOwnedByPlayer; i++) {
+                System.out.println(labelList.get(i).getChildren());
+                labelList.get(i).setVisible(true);
+                Label locationName = (Label) labelList.get(i).getChildren().get(0);
+                Label locationPrice = (Label) labelList.get(i).getChildren().get(1);
+                Button locationButton = (Button) labelList.get(i).getChildren().get(3);
+                boolean hasMortgage = locationsOwnedByPlayer.get(i).getMortgage();
+                locationName.setText("");
+                locationPrice.setText("");
+
+
+
+                locationName.setText(locationsOwnedByPlayer.get(i).getName());
+                locationPrice.setText(String.valueOf(locationsOwnedByPlayer.get(i).getPrice()));
+            }
+        }
     }
 }
