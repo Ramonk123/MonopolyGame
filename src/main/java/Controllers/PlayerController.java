@@ -147,6 +147,7 @@ public class PlayerController
     public void update(DocumentSnapshot state) {
         documentSnapshot = state;
         Map<String, Object> map = (Map<String, Object>) documentSnapshot.get("players");
+        assert map != null;
         System.out.println(map.size());
         System.out.println(documentSnapshot.getData());
 
