@@ -62,22 +62,22 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @FXML
     private GridPane BoardViewPlayerPane;
 
-    public void movePlayerOnBoard(Players player, int oldPosition, int newPosition) {
+    public void movePlayerOnBoard(Players player, long oldPosition, long newPosition) {
         int playerNumber = player.ordinal();
 
         ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren(); //Sets the whole board in an array/list
-        ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get(oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
+        ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get((int) oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
         Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber); //Gets the playerIcon out of the array/list
         currentPlayerGrid.remove(playerNumber);
-        ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get(newPosition)).getChildren(); //Gets the grid where the player moved to
+        ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get((int) newPosition)).getChildren(); //Gets the grid where the player moved to
         newPlayerGrid.add(playerNumber, playerIcon);
     }
 
     public Location playerStandsOn(Player player) { //Player prob gets changed to Players
-        int playerPosition = player.getPosition();
+        long playerPosition = player.getPosition();
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         List<Location> locationArray = locationController.getLocationArray();
-        return locationArray.get(playerPosition);
+        return locationArray.get((int) playerPosition);
     }
 
     public void setBackgroundImageView() {

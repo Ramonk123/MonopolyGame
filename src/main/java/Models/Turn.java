@@ -12,7 +12,8 @@ import java.util.Map;
 // still needs work
 public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnapshot> {
     private Players activePlayer = Players.PLAYER_ONE;
-    private int amountOfDouble = 0; // Not used so could be deleted I think - Vincent
+    private int amountOfDouble = 0;
+    private long eyesThrown = 0;
 
     public Turn() {
     }
@@ -46,5 +47,17 @@ public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnaps
         } catch(PlayerException playerException) {
             playerException.printStackTrace();
         }
+    }
+
+    public void setEyesThrown(long eyesThrown) {
+        this.eyesThrown = eyesThrown;
+    }
+
+    public void addEyesThrown(long eyesThrown) {
+        this.eyesThrown += eyesThrown;
+    }
+
+    public long getEyesThrown() {
+        return eyesThrown;
     }
 }

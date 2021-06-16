@@ -2,11 +2,6 @@ package Models;
 
 import Monopoly.Identifiable;
 import Monopoly.UUID;
-import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Location implements Model, Position, Action, Nameable, Identifiable {
     private UUID id;
@@ -22,7 +17,7 @@ public abstract class Location implements Model, Position, Action, Nameable, Ide
     }
 
     @Override
-    public int getPosition() {
+    public long getPosition() {
         return position;
     }
 

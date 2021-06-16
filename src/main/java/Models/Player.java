@@ -8,12 +8,9 @@ import Firestore.FirestoreFormattable;
 import Monopoly.Identifiable;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
-import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Player implements Model, Observer<DocumentSnapshot>, Position, Nameable, Identifiable, FirestoreFormattable, Payer, Receiver {
@@ -21,7 +18,7 @@ public class Player implements Model, Observer<DocumentSnapshot>, Position, Name
     private String name;
     private String pawnIcon;
     private Wallet wallet = new Wallet();
-    private int position;
+    private long position;
     private boolean inJail;
     private Players playersEnum;
 
@@ -31,18 +28,18 @@ public class Player implements Model, Observer<DocumentSnapshot>, Position, Name
     }
 
     @Override
-    public int getPosition() {
+    public long getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(long position) {
         this.position = position;
     }
 
-    public void movePlayer(int amountThrown) {
+    public void movePlayer(long amountThrown) {
         LocationController locationController = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getLocationController();
-        int amountOfLocations = locationController.getLocationArray().size();
-        int newPosition = getPosition() + amountThrown;
+        long amountOfLocations = locationController.getLocationArray().size();
+        long newPosition = getPosition() + amountThrown;
         if(newPosition >= amountOfLocations) {
             newPosition -= amountOfLocations;
         }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 /**
  * Controller for the Location, OwnableLocation and SpecialLocation model.
@@ -24,7 +25,7 @@ public class LocationController implements Controller {
         setStreetLocations();
         setUtilityLocations();
         locationArray.sort(
-                Comparator.comparingInt((ToIntFunction<Position>) Position::getPosition)
+                Comparator.comparingLong((ToLongFunction<Position>) Position::getPosition)
         );
     }
 
