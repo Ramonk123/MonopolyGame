@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * Controller for the Player model, controls everything of the player expect the Wallet.
+ */
 public class PlayerController
         implements
             Controller,
@@ -38,6 +41,7 @@ public class PlayerController
         return clientPlayer;
     }
 
+    //TODO: Should delete this method and use getPlyaerByPlayersEnum
     public Optional<Player> getPlayerByName(String name) {
         Player player = null;
         for(Player p : players) {
@@ -48,6 +52,11 @@ public class PlayerController
         return Optional.ofNullable(player);
     }
 
+    /**
+     * Gets the Player object by its PlayersEnum if it exists.
+     * @param playersEnum PlayerEnum is an identifier for the player.
+     * @return Returns the Player object or null if the player was not found.
+     */
     public Optional<Player> getPlayerByPlayersEnum(Players playersEnum) {
         Player correctPlayer = null;
         for (Player player : players) {
@@ -67,6 +76,7 @@ public class PlayerController
         clientPlayer = playersEnum;
     }
 
+
     public void removeByPlayersEnum(Players playersEnum) {
         for (Player player : players) {
             if (UUID.compare(playersEnum, player.getPlayersEnum())) {
@@ -76,6 +86,12 @@ public class PlayerController
         }
     }
 
+    /**
+     * Sets a new Player object and returns the Player that is created.
+     * @param name Name that the user gave itself.
+     * @return Returns the new Player object that got created in the method.
+     * @throws Exception
+     */
     public Player setPlayer(String name) throws Exception {
         int arraySize = players.size();
         Players playerEnum = Players.getByOrder(arraySize+1)
@@ -86,7 +102,7 @@ public class PlayerController
         return player;
     }
 
-    public Player setPlayerWithPlayersEnum(Players playersEnum, String name) throws Exception {
+    public Player setPlayerWithPlayersEnum(Players playersEnum, String name) {
         Player player = new Player(playersEnum, name);
         players.add(player);
         return player;
@@ -144,8 +160,8 @@ public class PlayerController
     }
 
     @Override
-    public void update(DocumentSnapshot state) {
-        documentSnapshot = state;
+    public void update(DocumentSnapshot documentSnapshot) {
+        this.documentSnapshot = documentSnapshot;
         Map<String, Object> map = (Map<String, Object>) documentSnapshot.get("players");
         assert map != null;
         System.out.println(map.size());

@@ -12,6 +12,9 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import java.util.ArrayList;
 import java.util.Optional;
 
+/**
+ * Controller for the Wallet model with different methods to alter the balance of players.
+ */
 public class TransactionController implements Controller {
 
     private Optional<Player> getPlayerByPlayersEnum(Players playersEnum) {
