@@ -10,12 +10,12 @@ import java.util.Optional;
 public abstract class OwnableLocation extends Location {
     private final int price;
     private Player owner = null;
-    private boolean hasMortgage;
+    private boolean containsMortgage;
 
     public OwnableLocation(Locations locationEnum, String name, Set set, int position, int price) {
         super(locationEnum, name, set, position);
         this.price = price;
-        this.hasMortgage = false;
+        this.containsMortgage = false;
     }
 
     public Optional<Player> getOwner() {
@@ -26,7 +26,11 @@ public abstract class OwnableLocation extends Location {
         return price;
     }
 
-    public boolean getMortgage() {
-        return hasMortgage;
+    public boolean hasMortgage() {
+        return containsMortgage;
+    }
+
+    public void setMortgage(boolean value) {
+        containsMortgage = value;
     }
 }

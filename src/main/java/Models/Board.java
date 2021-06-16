@@ -1,9 +1,7 @@
 package Models;
 
-import Controllers.BoardController;
-import Controllers.ControllerRegistry;
-import Controllers.LocationController;
-import Controllers.PlayerController;
+import Controllers.*;
+import Exceptions.TransactionException;
 import ObserveablePattern.Observer;
 import Views.*;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -133,19 +131,27 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
             boardController.showNoLocationsToMortgagePopup();
         } else {
             for (int i = 0; i < amountOfLocationsOwnedByPlayer; i++) {
-                System.out.println(labelList.get(i).getChildren());
                 labelList.get(i).setVisible(true);
+                OwnableLocation location = locationsOwnedByPlayer.get(i);
                 Label locationName = (Label) labelList.get(i).getChildren().get(0);
                 Label locationPrice = (Label) labelList.get(i).getChildren().get(1);
-                Button locationButton = (Button) labelList.get(i).getChildren().get(3);
-                boolean hasMortgage = locationsOwnedByPlayer.get(i).getMortgage();
+                Button locationButton = (Button) labelList.get(i).getChildren().get(2);
+
                 locationName.setText("");
                 locationPrice.setText("");
 
+                locationName.setText(location.getName());
+                locationPrice.setText(String.valueOf((location.getPrice() / 2)));
 
-
-                locationName.setText(locationsOwnedByPlayer.get(i).getName());
-                locationPrice.setText(String.valueOf(locationsOwnedByPlayer.get(i).getPrice()));
+                locationButton.setOnAction(event -> {
+                    if(!location.hasMortgage()) {
+                        locationController.getMortgageOnLocation(location);
+                        locationButton.setText("Unmortgage");
+                    }else {
+                        locationButton.setText("Mortgage");
+                        locationController.payMortgage(location);
+                    }
+                });
             }
         }
     }

@@ -1,8 +1,10 @@
 package Controllers;
 
+import Exceptions.TransactionException;
 import Models.*;
 import Monopoly.UUID;
 import javafx.geometry.Pos;
+import javafx.scene.input.TransferMode;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -62,7 +64,7 @@ public class LocationController implements Controller {
                 "Dorpstraat",
                 Set.BROWN,
                 1,
-                0,
+                100,
                 0,
                 0,
                 0
@@ -82,7 +84,7 @@ public class LocationController implements Controller {
                 "Steenstraat",
                 Set.LIGHTBLUE,
                 6,
-                0,
+                125,
                 0,
                 0,
                 0
@@ -485,7 +487,7 @@ public class LocationController implements Controller {
                 "Station West",
                 Set.TRAINSTATION,
                 15,
-                0
+                250
         );
         locationArray.add(stationNorth);
         locationArray.add(stationEast);
@@ -519,5 +521,32 @@ public class LocationController implements Controller {
 
     public List<OwnableLocation> getOwnableLocations() {
         return ownableLocationArray;
+    }
+
+    public void getMortgageOnLocation(OwnableLocation location) {
+        TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        try {
+            transactionController.addBalance(playerController.getClientPlayersEnum(), (location.getPrice()/ 2));
+            location.setMortgage(true);
+            System.out.println(transactionController.getBalance(playerController.getClientPlayersEnum()));
+        } catch (TransactionException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void payMortgage(OwnableLocation location) {
+        TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+
+        try {
+            transactionController.subtractBalance(playerController.getClientPlayersEnum(),(location.getPrice()/ 2));
+            location.setMortgage(false);
+            System.out.println(transactionController.getBalance(playerController.getClientPlayersEnum()));
+        } catch (TransactionException e) {
+            e.printStackTrace();
+        }
     }
 }
