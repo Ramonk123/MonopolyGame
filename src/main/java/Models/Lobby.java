@@ -70,7 +70,7 @@ public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot>, H
         lobbyData.put("hostUuid", Players.PLAYER_ONE); // is null when theres no auction. otherwise according to Lobby 0 on firestore.
         lobbyData.put("locations", new ArrayList<Map<String, Object>>());
         lobbyData.put("nextChanceCard", null); // host player sets this when null. data should be a String card uuid.
-        lobbyData.put("nextCommunityCard", null); // host player sets this when null. data should be a String card uuid.
+        lobbyData.put("nextCommonFundCard", null); // host player sets this when null. data should be a String card uuid.
         lobbyData.put("players", new HashMap<String, Object>()); // host player should be in this.
         lobbyData.put("tradeInvitations", new ArrayList<Map<String, String>>());
         lobbyData.put("tradeWindows", new ArrayList<Map<String, Object>>());

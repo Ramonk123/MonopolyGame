@@ -121,7 +121,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         lobbyData.put("players", playerController.getFirestoreFormat());
         lobbyData.put("turn", turnController.getFirestoreFormat());
         lobbyData.put("nextChanceCard", cardDeckController.getNextChanceCard());
-        lobbyData.put("nextCommunityCard", cardDeckController.getNextCommonFundCard());
+        lobbyData.put("nextCommonFundCard", cardDeckController.getNextCommonFundCard());
 
 
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
@@ -152,7 +152,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
-                .update("chanceCardDeck", cardDeckController.getNextChanceCard());
+                .update("nextChanceCard", cardDeckController.getNextChanceCard());
     }
 
     public void updateCommonFundCard() {
@@ -160,7 +160,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
 
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
-                .update("commonFundCardDeck", cardDeckController.getNextCommonFundCard());
+                .update("nextCommonFundCard", cardDeckController.getNextCommonFundCard());
     }
 
     public Card getChanceCard() throws InterruptedException, ExecutionException {
