@@ -36,7 +36,12 @@ public class TransactionController implements Controller {
 
     public void subtractBalance(Players playersEnum, int value) throws TransactionException {
         Payer player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
-        player.subtractBalance(value);
+        if(player.getBalance() >= value) {
+            player.subtractBalance(value);
+        } else {
+            //Do shit
+        }
+
     }
 
     public void payBalance(Players payerEnum, Players receiverEnum, int value) throws TransactionException {
