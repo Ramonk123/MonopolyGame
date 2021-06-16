@@ -120,14 +120,22 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         setPlayerIcons();
     }
 
-    @FXML Label BoardViewUsername1Label;
-    @FXML Label BoardViewUsername2Label;
-    @FXML Label BoardViewUsername3Label;
-    @FXML Label BoardViewUsername4Label;
-    @FXML Label BoardViewUsername5Label;
-    @FXML Label BoardViewUsername6Label;
-    @FXML Label BoardViewUsername7Label;
-    @FXML Label BoardViewUsername8Label;
+    @FXML
+    private Label BoardViewUsername1Label;
+    @FXML
+    private Label BoardViewUsername2Label;
+    @FXML
+    private Label BoardViewUsername3Label;
+    @FXML
+    private Label BoardViewUsername4Label;
+    @FXML
+    private Label BoardViewUsername5Label;
+    @FXML
+    private Label BoardViewUsername6Label;
+    @FXML
+    private Label BoardViewUsername7Label;
+    @FXML
+    private Label BoardViewUsername8Label;
 
     public ArrayList<Label> getUserLabelList() {
         ArrayList<Label> labelList = new ArrayList<>();
