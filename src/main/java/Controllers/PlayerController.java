@@ -147,6 +147,7 @@ public class PlayerController
     public void update(DocumentSnapshot state) {
         documentSnapshot = state;
         Map<String, Object> map = (Map<String, Object>) documentSnapshot.get("players");
+        assert map != null;
         System.out.println(map.size());
         System.out.println(documentSnapshot.getData());
 
@@ -163,5 +164,9 @@ public class PlayerController
     public void reset() {
         clientPlayer = Players.PLAYER_ONE;
         players = new ArrayList<>();
+    }
+
+    public LocationController getLocationController() {
+        return (LocationController) ControllerRegistry.get(LocationController.class);
     }
 }

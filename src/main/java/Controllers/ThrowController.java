@@ -8,10 +8,9 @@ import com.google.cloud.firestore.DocumentSnapshot;
 
 public class ThrowController implements Controller, DiceThrower {
 
-    private Throw currentThrow;
+    private Throw currentThrow = new Throw();
 
     public ThrowController() {
-        currentThrow  = new Throw();
     }
 
     @Override

@@ -2,7 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -15,18 +17,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="704.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Pane fx:id="BackgroundImageView" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <FlowPane prefHeight="400.0" prefWidth="100.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="BoardViewUsername1Label" prefHeight="45.0" prefWidth="100.0" text="Username1" />
-            <Label fx:id="BoardViewUsername2Label" prefHeight="45.0" prefWidth="80.0" text="Username2" />
-            <Label fx:id="BoardViewUsername3Label" prefHeight="45.0" prefWidth="80.0" text="Username3" />
-            <Label fx:id="BoardViewUsername4Label" prefHeight="45.0" prefWidth="80.0" text="Username4" />
-            <Label fx:id="BoardViewUsername5Label" prefHeight="45.0" prefWidth="80.0" text="Username5" />
-            <Label fx:id="BoardViewUsername6Label" prefHeight="45.0" prefWidth="80.0" text="Username6" />
-            <Label fx:id="BoardViewUsername7Label" prefHeight="45.0" prefWidth="80.0" text="Username7" />
-            <Label fx:id="BoardViewUsername8Label" prefHeight="45.0" prefWidth="80.0" text="Username8" />
+            <Label fx:id="BoardViewUsername1Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #7ed6df;" text="Username1" visible="false" wrapText="true" />
+            <Label fx:id="BoardViewUsername2Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #ff7979;" text="Username2" visible="false" wrapText="true" />
+            <Label fx:id="BoardViewUsername3Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #f6e58d;" text="Username3" visible="false" wrapText="true" />
+            <Label fx:id="BoardViewUsername4Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #686de0;" text="Username4" visible="false" wrapText="true" />
+            <Label fx:id="BoardViewUsername5Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #badc58;" text="Username5" visible="false" wrapText="true" />
+            <Label fx:id="BoardViewUsername6Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #f0932b;" text="Username6" visible="false" wrapText="true" />
+            <Label fx:id="BoardViewUsername7Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #eb4d4b;" text="Username7" visible="false" wrapText="true" />
+            <Label fx:id="BoardViewUsername8Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #4834d4;" text="Username8" visible="false" wrapText="true" />
          </children>
       </FlowPane>
       <GridPane fx:id="BoardViewBoardPane" layoutX="100.0" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #BFDBAE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0">
@@ -1013,11 +1016,7 @@
                   <Font name="System Bold" size="62.0" />
                </font>
             </Label>
-            <Label fx:id="cardPlaceholder" prefHeight="116.0" prefWidth="268.0" text="Placeholder Card" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1">
-               <padding>
-                  <Insets left="50.0" />
-               </padding>
-            </Label>
+            <Label fx:id="cardPlaceholder" alignment="CENTER" prefHeight="116.0" prefWidth="268.0" text="Placeholder Card" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
             <TextArea fx:id="bidTextArea" prefHeight="28.0" prefWidth="123.0" promptText="Enter amount" style="-fx-border: 50; -fx-border-color: #93d28f;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="3" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                <font>
                   <Font size="22.0" />
@@ -1028,13 +1027,121 @@
                   <Font size="32.0" />
                </font>
             </Label>
-            <Button fx:id="placeBidButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" style="-fx-background-color: #93d28f;" text="Place Bid" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Button fx:id="placeBidButton" mnemonicParsing="false" onAction="#placeBid" prefHeight="26.0" prefWidth="171.0" style="-fx-background-color: #93d28f;" text="Place Bid" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             <Label fx:id="NoNumberOnInputError" prefHeight="85.0" prefWidth="100.0" text="Make sure to only use numbers and sufficient balance!" textFill="RED" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="4" GridPane.rowSpan="2">
                <font>
                   <Font size="12.0" />
                </font>
             </Label>
          </children>
+      </GridPane>
+      <GridPane fx:id="tradeRequest" layoutX="100.0" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #bfdbae;" visible="false">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="200.0" text="Trade" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="62.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="tradeCashArea" prefHeight="80.0" prefWidth="0.0" promptText="Enter amount:" style="-fx-border: 50; -fx-border-color: #93d28f;" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextArea>
+            <TextArea fx:id="tradeCashArea1" prefHeight="80.0" prefWidth="0.0" promptText="Their offer:" style="-fx-border: 50; -fx-border-color: #93d28f;" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </TextArea>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="175.0" prefWidth="200.0" text="They receive:" textFill="WHITE" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="272.0" prefWidth="200.0" text="You receive:" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="completeTradeButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" style="-fx-background-color: #93d28f;" text="Complete Trade" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding></Button>
+            <Button fx:id="completeTradeButton1" mnemonicParsing="false" prefHeight="26.0" prefWidth="171.0" style="-fx-background-color: #e74c3a;" text="Cancel Trade" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+            </Button>
+            <Label fx:id="NoValidTradeInput" prefHeight="85.0" prefWidth="100.0" text=" Only use numbers and enough balance!" textFill="RED" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </GridPane.margin>
+            </Label>
+            <ScrollPane hbarPolicy="NEVER" prefHeight="19.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="285.0" prefWidth="200.0">
+                     <children>
+                        <CheckBox layoutX="100.0" layoutY="14.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="14.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="33.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="33.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="52.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="52.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="71.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="71.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="90.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="90.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="109.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="109.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="128.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="128.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="147.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="147.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="166.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="166.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="185.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="185.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="204.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="204.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="223.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="100.0" layoutY="223.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="242.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="7.0" layoutY="251.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="101.0" layoutY="242.0" mnemonicParsing="false" text="CheckBox" />
+                        <CheckBox layoutX="101.0" layoutY="251.0" mnemonicParsing="false" text="CheckBox" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <ScrollPane hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="134.0" prefWidth="200.0" />
+               </content>
+            </ScrollPane>
+         </children>
+
       </GridPane>
    </children>
 </AnchorPane>

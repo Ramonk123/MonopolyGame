@@ -1,8 +1,15 @@
 package Controllers;
 
 import Exceptions.TransactionException;
+import Models.Payer;
 import Models.Player;
+import Models.Receiver;
+import Models.Wallet;
+import Monopoly.UUID;
+import Views.View;
+import com.google.cloud.firestore.DocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 public class TransactionController implements Controller {
@@ -23,20 +30,30 @@ public class TransactionController implements Controller {
     }
 
     public void addBalance(Players playersEnum, int value) throws TransactionException {
-        Player player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
-        player.getWallet().addBalance(value);
+        Receiver player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
+        player.addBalance(value);
     }
 
     public void subtractBalance(Players playersEnum, int value) throws TransactionException {
-        Player player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
-        player.getWallet().subtractBalance(value);
+        Payer player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
+        if(player.getBalance() >= value) {
+            player.subtractBalance(value);
+        } else {
+            //Do shit
+        }
+
     }
 
     public void payBalance(Players payerEnum, Players receiverEnum, int value) throws TransactionException {
-        Player payer = getPlayerByPlayersEnum(payerEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
-        Player receiver = getPlayerByPlayersEnum(receiverEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
-        payer.getWallet().subtractBalance(value);
-        receiver.getWallet().addBalance(value);
+        Payer payer = getPlayerByPlayersEnum(payerEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
+        Receiver receiver = getPlayerByPlayersEnum(receiverEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
+        payer.subtractBalance(value);
+        receiver.addBalance(value);
+    }
+
+    public boolean checkBalance(Players playersEnum, int value) throws TransactionException{
+        Payer player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
+        return player.getBalance() >= value;
     }
 
 }

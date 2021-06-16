@@ -34,6 +34,7 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
         ((BoardController) ControllerRegistry.get(BoardController.class)).setBackgroundImageView();
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
@@ -66,7 +67,9 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
                 int playersJoined = players.size();
 
                 for (int i = 0; i < playersJoined; i++) {
-                    labelList.get(i).setText(players.get(i).getName());
+                    String text = String.format("%s - $%s", players.get(i).getName(), players.get(i).getBalance());
+                    labelList.get(i).setText(text);
+                    labelList.get(i).setVisible(true);
                 }
             });
         }

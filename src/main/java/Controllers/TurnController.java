@@ -20,13 +20,11 @@ public class TurnController
             Resettable,
             Subject<DocumentSnapshot> {
 
-    private Turn turn;
+    private Turn turn = new Turn();
     private DocumentSnapshot documentSnapshot;
-    private long eyesThrown;
 
     public TurnController() {
-        turn = new Turn();
-        eyesThrown = 0;
+
     }
 
     public Players getCurrentPlayer() {
@@ -46,7 +44,7 @@ public class TurnController
         System.out.println(map);
         assert map != null;
         System.out.println(map.containsKey("eyesThrown"));
-        eyesThrown = (long) map.get("eyesThrown");
+        turn.setEyesThrown((long) map.get("eyesThrown"));
         System.out.println("testerst");
         //notifyObservers();
     }
@@ -78,7 +76,7 @@ public class TurnController
         if(UUID.compare(currentPlayerEnum, clientPlayerEnum)) {
             ThrowController throwController = (ThrowController) ControllerRegistry.get(ThrowController.class);
             throwController.throwDice();
-            int amountThrown = throwController.getTotalEyes();
+            turn.setEyesThrown(throwController.getTotalEyes());
             int thrownDouble = 0;
             if(throwController.isDouble()) {
                 thrownDouble++;
@@ -88,21 +86,21 @@ public class TurnController
                         break;
                     }
                     throwController.throwDice();
-                    amountThrown += throwController.getTotalEyes();
+                    turn.addEyesThrown(throwController.getTotalEyes());
                     thrownDouble++;
                 }
             }
-            movePlayer(currentPlayerEnum, amountThrown);
+            movePlayer(currentPlayerEnum, turn.getEyesThrown());
         }
 
     }
 
-    public void movePlayer(Players currentPlayerEnum, int amountThrown) throws PlayerException {
+    public void movePlayer(Players currentPlayerEnum, long eyesThrown) throws PlayerException {
         Player currentPlayer = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getPlayerByPlayersEnum(currentPlayerEnum).orElseThrow(() -> new PlayerException("Player NOT Found"));
 
-        int oldPlayerPosition = currentPlayer.getPosition();
-        currentPlayer.movePlayer(amountThrown);
-        int newPlayerPosition = currentPlayer.getPosition();
+        long oldPlayerPosition = currentPlayer.getPosition();
+        currentPlayer.movePlayer(eyesThrown);
+        long newPlayerPosition = currentPlayer.getPosition();
 
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         boardController.movePlayerOnBoard(currentPlayerEnum, oldPlayerPosition, newPlayerPosition);

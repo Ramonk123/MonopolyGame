@@ -28,12 +28,11 @@ import java.util.concurrent.ExecutionException;
  */
 public class BoardController implements Controller, Subject<DocumentSnapshot>, Observer<DocumentSnapshot>, HasStage {
 
-    private Board board;
+    private Board board = new Board();
 
     private DocumentSnapshot documentSnapshot;
 
     public BoardController() {
-        board = new Board();
     }
 
     @FXML
@@ -63,22 +62,22 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @FXML
     private GridPane BoardViewPlayerPane;
 
-    public void movePlayerOnBoard(Players player, int oldPosition, int newPosition) {
+    public void movePlayerOnBoard(Players player, long oldPosition, long newPosition) {
         int playerNumber = player.ordinal();
 
         ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren(); //Sets the whole board in an array/list
-        ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get(oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
+        ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get((int) oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
         Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber); //Gets the playerIcon out of the array/list
         currentPlayerGrid.remove(playerNumber);
-        ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get(newPosition)).getChildren(); //Gets the grid where the player moved to
+        ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get((int) newPosition)).getChildren(); //Gets the grid where the player moved to
         newPlayerGrid.add(playerNumber, playerIcon);
     }
 
     public Location playerStandsOn(Player player) { //Player prob gets changed to Players
-        int playerPosition = player.getPosition();
+        long playerPosition = player.getPosition();
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         List<Location> locationArray = locationController.getLocationArray();
-        return locationArray.get(playerPosition);
+        return locationArray.get((int) playerPosition);
     }
 
     public void setBackgroundImageView() {
@@ -86,6 +85,23 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
                 BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
         BackgroundImageView.setBackground(new Background(backgroundImage));
+    }
+
+    public void setPlayerIcons() {
+        ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren();
+        ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get(0)).getChildren();
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        for(int i = 0; i < playerController.getPlayers().size(); i++) {
+            setPlayerIcon((Pane) currentPlayerGrid.get(i), i+1);
+        }
+    }
+
+    private void setPlayerIcon(Pane playerPane, int playerNumber) {
+        String URL = "/FXML/Icons/player"+playerNumber+".png";
+        BackgroundImage backgroundImage= new BackgroundImage(new Image(URL,playerPane.getWidth(),playerPane.getHeight(),false,true),
+                BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        playerPane.setBackground(new Background(backgroundImage));
     }
 
     @Override
@@ -102,16 +118,25 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @Override
     public void setStage(Stage primaryStage) {
         board.setStage(primaryStage);
+        setPlayerIcons();
     }
 
-    @FXML Label BoardViewUsername1Label;
-    @FXML Label BoardViewUsername2Label;
-    @FXML Label BoardViewUsername3Label;
-    @FXML Label BoardViewUsername4Label;
-    @FXML Label BoardViewUsername5Label;
-    @FXML Label BoardViewUsername6Label;
-    @FXML Label BoardViewUsername7Label;
-    @FXML Label BoardViewUsername8Label;
+    @FXML
+    private Label BoardViewUsername1Label;
+    @FXML
+    private Label BoardViewUsername2Label;
+    @FXML
+    private Label BoardViewUsername3Label;
+    @FXML
+    private Label BoardViewUsername4Label;
+    @FXML
+    private Label BoardViewUsername5Label;
+    @FXML
+    private Label BoardViewUsername6Label;
+    @FXML
+    private Label BoardViewUsername7Label;
+    @FXML
+    private Label BoardViewUsername8Label;
 
     public ArrayList<Label> getUserLabelList() {
         ArrayList<Label> labelList = new ArrayList<>();
@@ -132,13 +157,11 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         try {
             LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
             int token = lobbyController.getToken();
-            boolean value = fireStoreController.gameHasStarted(token);
-            return value;
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } return false;
+            return fireStoreController.gameHasStarted(token);
+        } catch (ExecutionException | InterruptedException exception) {
+            exception.printStackTrace();
+        }
+        return false;
 
     }
     @FXML private Pane MortgagePopup;
@@ -178,11 +201,15 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     }
 
     @Override
-    public void update(DocumentSnapshot state) {
-        documentSnapshot = state;
+    public void update(DocumentSnapshot documentSnapshot) {
+        this.documentSnapshot = documentSnapshot;
         System.out.println("platte asser");
         notifyObservers();
     }
 
+    @FXML
+    private void placeBid(ActionEvent actionEvent) {
+        //Do shit
+    }
 
 }

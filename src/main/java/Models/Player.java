@@ -1,47 +1,47 @@
 package Models;
 
+import Controllers.ControllerRegistry;
+import Controllers.LocationController;
+import Controllers.PlayerController;
 import Controllers.Players;
 import Firestore.FirestoreFormattable;
 import Monopoly.Identifiable;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
-import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Player implements Model, Observer<DocumentSnapshot>, Position, Nameable, Identifiable, FirestoreFormattable {
+public class Player implements Model, Observer<DocumentSnapshot>, Position, Nameable, Identifiable, FirestoreFormattable, Payer, Receiver {
 
     private String name;
     private String pawnIcon;
-    private Wallet wallet;
-    private int position;
+    private Wallet wallet = new Wallet();
+    private long position;
     private boolean inJail;
     private Players playersEnum;
 
     public Player(Players playersEnum, String name) {
         this.playersEnum = playersEnum;
-        this.name = name;
-        wallet = new Wallet();
+        this.name = name;;
     }
 
     @Override
-    public int getPosition() {
+    public long getPosition() {
         return position;
     }
 
-    public void setPosition(int position) {
+    public void setPosition(long position) {
         this.position = position;
     }
 
-    public void movePlayer(int amountThrown) {
-        //TODO: 40 should not be hard coded
-        int newPosition = getPosition() + amountThrown;
-        if(newPosition >= 40) {
-            newPosition -= 40;
+    public void movePlayer(long amountThrown) {
+        LocationController locationController = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getLocationController();
+        long amountOfLocations = locationController.getLocationArray().size();
+        long newPosition = getPosition() + amountThrown;
+        if(newPosition >= amountOfLocations) {
+            newPosition -= amountOfLocations;
         }
         setPosition(newPosition);
     }
@@ -82,5 +82,29 @@ public class Player implements Model, Observer<DocumentSnapshot>, Position, Name
     @Override
     public void update(DocumentSnapshot state) {
         // do some updates mane
+    }
+
+    @Override
+    public void subtractBalance(int value) {
+        Payer wallet = this.wallet;
+        wallet.subtractBalance(value);
+    }
+
+    @Override
+    public int getBalance() {
+        Payer wallet = this.wallet;
+        return wallet.getBalance();
+    }
+
+    @Override
+    public boolean checkBalance(int value) {
+        Payer wallet = this.wallet;
+        return wallet.checkBalance(value);
+    }
+
+    @Override
+    public void addBalance(int value) {
+        Receiver wallet = this.wallet;
+        wallet.addBalance(value);
     }
 }
