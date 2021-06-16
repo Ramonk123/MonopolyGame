@@ -1,5 +1,8 @@
 package Models;
 
+import Controllers.ControllerRegistry;
+import Controllers.LocationController;
+import Controllers.PlayerController;
 import Controllers.Players;
 import Firestore.FirestoreFormattable;
 import Monopoly.Identifiable;
@@ -37,10 +40,11 @@ public class Player implements Model, Observer<DocumentSnapshot>, Position, Name
     }
 
     public void movePlayer(int amountThrown) {
-        //TODO: 40 should not be hard coded
+        LocationController locationController = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getLocationController();
+        int amountOfLocations = locationController.getLocationArray().size();
         int newPosition = getPosition() + amountThrown;
-        if(newPosition >= 40) {
-            newPosition -= 40;
+        if(newPosition >= amountOfLocations) {
+            newPosition -= amountOfLocations;
         }
         setPosition(newPosition);
     }
