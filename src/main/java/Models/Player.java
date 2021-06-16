@@ -13,19 +13,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Player implements Model, Observer<DocumentSnapshot>, Position, Nameable, Identifiable, FirestoreFormattable {
+public class Player implements Model, Observer<DocumentSnapshot>, Position, Nameable, Identifiable, FirestoreFormattable, Payer, Receiver {
 
     private String name;
     private String pawnIcon;
-    private Wallet wallet;
+    private Wallet wallet = new Wallet();
     private int position;
     private boolean inJail;
     private Players playersEnum;
 
     public Player(Players playersEnum, String name) {
         this.playersEnum = playersEnum;
-        this.name = name;
-        wallet = new Wallet();
+        this.name = name;;
     }
 
     @Override
@@ -82,5 +81,29 @@ public class Player implements Model, Observer<DocumentSnapshot>, Position, Name
     @Override
     public void update(DocumentSnapshot state) {
         // do some updates mane
+    }
+
+    @Override
+    public void subtractBalance(int value) {
+        Payer wallet = this.wallet;
+        wallet.subtractBalance(value);
+    }
+
+    @Override
+    public int getBalance() {
+        Payer wallet = this.wallet;
+        return wallet.getBalance();
+    }
+
+    @Override
+    public boolean checkBalance(int value) {
+        Payer wallet = this.wallet;
+        return wallet.checkBalance(value);
+    }
+
+    @Override
+    public void addBalance(int value) {
+        Receiver wallet = this.wallet;
+        wallet.addBalance(value);
     }
 }
