@@ -11,12 +11,10 @@ import java.util.Map;
 
 // still needs work
 public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnapshot> {
-    private Players activePlayer;
-    private int amountOfDouble; // Not used so could be deleted I think - Vincent
+    private Players activePlayer = Players.PLAYER_ONE;
+    private int amountOfDouble = 0; // Not used so could be deleted I think - Vincent
 
     public Turn() {
-        this.activePlayer = Players.PLAYER_ONE;
-        this.amountOfDouble = 0;
     }
 
     public void setCurrentPlayer(Players players) {
