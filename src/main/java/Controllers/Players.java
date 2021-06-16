@@ -5,6 +5,9 @@ import Monopoly.UUID;
 
 import java.util.Optional;
 
+/**
+ * Contains enums for all 8 possible players with different getter methods.
+ */
 public enum Players implements Identifiable {
     PLAYER_ONE(new UUID("PLAYER-ONE")),
     PLAYER_TWO(new UUID("PLAYER-TWO")),

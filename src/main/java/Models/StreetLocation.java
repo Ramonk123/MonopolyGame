@@ -1,5 +1,8 @@
 package Models;
 
+/**
+ * Model that contains everything that a street location needs.
+ */
 public class StreetLocation extends OwnableLocation {
     private int houses;
     private boolean hotel;

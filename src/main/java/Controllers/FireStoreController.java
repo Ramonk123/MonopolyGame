@@ -21,6 +21,9 @@ import Monopoly.UUID;
 
 import javax.annotation.Nullable;
 
+/**
+ * Controller for the Firestore model, this controller is the gateway to the database.
+ */
 public class FireStoreController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
     private int token;

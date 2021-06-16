@@ -368,7 +368,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Pane fx:id="playerONE" prefHeight="10.0" prefWidth="10.0" style="-fx-background-color: #FF0000;" />
+                  <Pane fx:id="playerONE" prefHeight="10.0" prefWidth="10.0" />
+                  <Pane fx:id="playerTWO" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" />
+                  <Pane fx:id="playerTHREE" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="1" />
+                  <Pane fx:id="playerFOUR" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Pane fx:id="playerFIVE" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="2" />
+                  <Pane fx:id="playerSIX" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Pane fx:id="playerSEVEN" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="3" />
+                  <Pane fx:id="playerEIGHT" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <GridPane GridPane.columnIndex="9" GridPane.rowIndex="10">

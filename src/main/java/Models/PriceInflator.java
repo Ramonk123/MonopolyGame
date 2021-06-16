@@ -1,5 +1,8 @@
 package Models;
 
+/**
+ * Model that calculates the price of streets when there are properties on them.
+ */
 public class PriceInflator {
     private int inflation;
     private double ratio;

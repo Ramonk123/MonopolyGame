@@ -13,6 +13,9 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Model which contains everything about the player.
+ */
 public class Player implements Model, Observer<DocumentSnapshot>, Position, Nameable, Identifiable, FirestoreFormattable, Payer, Receiver {
 
     private String name;

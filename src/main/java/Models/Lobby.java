@@ -14,6 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Model which contains methods for the creation of the lobby and setting different lobby stages.
+ */
 public class Lobby implements Model, LobbySubject, Observer<DocumentSnapshot>, HasStage, FirestoreFormattable {
     private List<Observer<LobbySubject>> observers = new ArrayList<>();
 

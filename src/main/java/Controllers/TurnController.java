@@ -12,6 +12,9 @@ import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.Map;
 
+/**
+ * Controller for the Turn model, mainly controls the flow of actions that the player can do.
+ */
 public class TurnController
         implements
             Controller,

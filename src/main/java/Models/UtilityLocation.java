@@ -1,5 +1,8 @@
 package Models;
 
+/**
+ * Model that contains everything that a utility location needs.
+ */
 public class UtilityLocation extends OwnableLocation{
 
 

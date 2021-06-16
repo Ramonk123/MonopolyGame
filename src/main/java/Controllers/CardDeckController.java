@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Controller for the CardDeck model.
+ * Controller for the CardDeck model which creates all cards and puts them in
  */
 public class CardDeckController
         implements
@@ -31,8 +31,8 @@ public class CardDeckController
     private final static UUID CHANCE_JAIL_CARD_UUID = new UUID("CARD-8");
     private final static UUID COMMUNITY_JAIL_CARD_UUID = new UUID("CARD-20");
 
-    CardDeck chanceCardDeck = new CardDeck(new ArrayList());
-    CardDeck commonFundCardDeck = new CardDeck(new ArrayList<>());
+    private CardDeck chanceCardDeck = new CardDeck(new ArrayList());
+    private CardDeck commonFundCardDeck = new CardDeck(new ArrayList<>());
     private DocumentSnapshot documentSnapshot;
 
     public CardDeckController() {

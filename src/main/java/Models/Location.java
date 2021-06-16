@@ -3,6 +3,9 @@ package Models;
 import Monopoly.Identifiable;
 import Monopoly.UUID;
 
+/**
+ * Abstract model that is a blueprint for all locations.
+ */
 public abstract class Location implements Model, Position, Action, Nameable, Identifiable {
     private UUID id;
     private String name;

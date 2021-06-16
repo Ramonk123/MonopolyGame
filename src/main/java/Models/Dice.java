@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Model that creates random number and is used by the Throw model.
+ */
 public class Dice implements Model, DiceThrower {
     private int eyes = 0;
 

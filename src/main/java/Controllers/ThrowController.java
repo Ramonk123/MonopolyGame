@@ -6,6 +6,9 @@ import Models.Throw;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
+/**
+ * Controller for the Throw and Dice model.
+ */
 public class ThrowController implements Controller, DiceThrower {
 
     private Throw currentThrow = new Throw();

@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
+/**
+ * Model that contains everything that a special location needs.
+ */
 public class SpecialLocation extends Location {
     private final List<View> observers = new ArrayList<>();
     private Consumer<Player> action;

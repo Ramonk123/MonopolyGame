@@ -6,6 +6,9 @@ import Controllers.PlayerController;
 import Controllers.TransactionController;
 import Monopoly.UUID;
 
+/**
+ * Model for all actions of cards and locations.
+ */
 public class Actions {
 
     public static void exampleAction(Player player) {

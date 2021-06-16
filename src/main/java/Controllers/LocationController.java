@@ -13,7 +13,7 @@ import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
 /**
- * Controller for the Location, OwnableLocation and SpecialLocation model.
+ * Controller for the Location, OwnableLocation and SpecialLocation model, mainly to create Lists with (all) Locations in them.
  */
 public class LocationController implements Controller {
     private static LocationController locationController;
@@ -57,6 +57,9 @@ public class LocationController implements Controller {
         auctionController.startAuction();
     }
 
+    /**
+     * Creates and adds all street locations to the locationArray and ownableLocationArray.
+     */
     public void setStreetLocations(){
         StreetLocation dorpStraat = new StreetLocation(
                 // The Locations enum is an enum that contains all existing locations with their respective UUIDs
@@ -326,6 +329,9 @@ public class LocationController implements Controller {
 
     }
 
+    /**
+     * Creates and adds all special locations to the locationArray and specialLocationArray.
+     */
     public void setSpecialLocations(){
         SpecialLocation start = new SpecialLocation(
                 // The Locations enum is an enum that contains all existing locations with their respective UUIDs
@@ -460,6 +466,10 @@ public class LocationController implements Controller {
         specialLocationArray.add(freeParking);
 
     }
+
+    /**
+     * Creates and adds all stations locations to the locationArray and ownableLocationArray.
+     */
     public void setStationLocations(){
         StationLocation stationNorth = new StationLocation(
                 Locations.StationNorth,
@@ -498,6 +508,10 @@ public class LocationController implements Controller {
         ownableLocationArray.add(stationSouth);
         ownableLocationArray.add(stationWest);
     }
+
+    /**
+     * Creates and adds all utility locations to the locationArray and ownableLocationArray.
+     */
     public void setUtilityLocations(){
         UtilityLocation waterWorks = new UtilityLocation(
                 Locations.WaterWorks,

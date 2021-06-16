@@ -1,5 +1,8 @@
 package Exceptions;
 
+/**
+ * Exception for when things are going wrong in the lobby.
+ */
 public class LobbyException extends Exception {
     private final Throwable throwable;
     public LobbyException(String errorMessage, Throwable throwable) {

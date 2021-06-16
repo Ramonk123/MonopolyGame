@@ -1,5 +1,8 @@
 package Models;
 
+/**
+ * Enum to group different locations together.
+ */
 public enum Set {
     BROWN(2),
     LIGHTBLUE(3),

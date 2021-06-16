@@ -12,6 +12,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the MainMenu model & MainMenuView view.
+ */
 public class MainMenuController implements Controller, Subject<DocumentSnapshot>, HasStage {
 
     private MainMenu mainMenu = new MainMenu();
