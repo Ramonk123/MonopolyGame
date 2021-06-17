@@ -1,11 +1,8 @@
 package Models;
 
 import ObserveablePattern.Observer;
-import ObserveablePattern.Subject;
 import Views.BoardSubject;
 import Views.BoardView;
-import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +54,7 @@ public class Wallet implements Model, Payer, Receiver, BoardSubject {
 
     @Override
     public void notifyObservers() {
-        for(Observer<BoardSubject> observer : observers) {
-            observer.update(this);
-        }
+        observers.get(0).update(this);
     }
 
     @Override
