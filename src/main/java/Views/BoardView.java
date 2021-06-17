@@ -61,6 +61,7 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
     public void updatePlayerLabels(BoardSubject state) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         PlayerController playerController = (PlayerController)  ControllerRegistry.get(PlayerController.class);
+
         if(boardController.checkGameHasStarted()) {
             Platform.runLater(() -> {
                 ArrayList<Player> players = playerController.getPlayers();
@@ -75,19 +76,24 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
     }
 
     public void updatePlayerPosition(BoardSubject state) {
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         PlayerController playerController = (PlayerController)  ControllerRegistry.get(PlayerController.class);
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
 
-        for (Player player : playerController.getPlayers()) {
-            long oldPosition = player.getOldPosition();
-            long currentPosition = player.getPosition();
-            long eyesThrown = currentPosition - oldPosition;
+        if(boardController.checkGameHasStarted()) {
+            Platform.runLater(() -> {
+                for (Player player : playerController.getPlayers()) {
+                    long oldPosition = player.getOldPosition();
+                    long currentPosition = player.getPosition();
+                    long eyesThrown = currentPosition - oldPosition;
 
-            try {
-                turnController.movePlayer(player.getPlayersEnum(), eyesThrown);
-            } catch (PlayerException playerException) {
-                playerException.printStackTrace();
-            }
+                    try {
+                        turnController.movePlayer(player.getPlayersEnum(), eyesThrown);
+                    } catch (PlayerException playerException) {
+                        playerException.printStackTrace();
+                    }
+                }
+            });
         }
     }
 
