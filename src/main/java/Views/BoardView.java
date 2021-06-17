@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.*;
+import Exceptions.PlayerException;
 import Models.Player;
 import ObserveablePattern.Observer;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -59,13 +60,11 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
     public void updateBoardPlayers(BoardSubject state) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         PlayerController playerController = (PlayerController)  ControllerRegistry.get(PlayerController.class);
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         if(boardController.checkGameHasStarted()) {
             Platform.runLater(() -> {
                 ArrayList<Label> labelList = boardController.getUserLabelList();
 
-                for (Label label : labelList) {
-                    label.setText("");
-                }
                 ArrayList<Player> players = playerController.getPlayers();
                 int playersJoined = players.size();
 
@@ -73,7 +72,19 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
                     String text = String.format("%s - $%s", players.get(i).getName(), players.get(i).getBalance());
                     labelList.get(i).setText(text);
                     labelList.get(i).setVisible(true);
+
+                    long oldPosition = players.get(i).getOldPosition();
+                    long currentPosition = players.get(i).getPosition();
+                    long eyesThrown = currentPosition - oldPosition;
+
+                    try {
+                        turnController.movePlayer(players.get(i).getPlayersEnum(), eyesThrown);
+                    } catch (PlayerException playerException) {
+                        playerException.printStackTrace();
+                    }
                 }
+
+
             });
         }
 
