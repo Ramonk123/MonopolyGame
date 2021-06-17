@@ -32,11 +32,6 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
     }
 
     @Override
-    public void unregisterObserver(Observer<BoardSubject> observer) {
-
-    }
-
-    @Override
     public void notifyObservers() {
         for (Observer<BoardSubject> observer : observers) {
             observer.update(this);

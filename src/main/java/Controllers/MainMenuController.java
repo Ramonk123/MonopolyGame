@@ -32,9 +32,6 @@ public class MainMenuController implements Controller, Subject<DocumentSnapshot>
     public void registerObserver(Observer<DocumentSnapshot> observer) { }
 
     @Override
-    public void unregisterObserver(Observer<DocumentSnapshot> observer) { }
-
-    @Override
     public void notifyObservers() {
         mainMenu.update(documentSnapshot);
     }

@@ -62,10 +62,6 @@ public class TurnController
     }
 
     @Override
-    public void unregisterObserver(Observer<DocumentSnapshot> observer) {
-    }
-
-    @Override
     public void notifyObservers() {
         turn.update(documentSnapshot);
     }

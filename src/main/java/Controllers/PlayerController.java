@@ -129,9 +129,6 @@ public class PlayerController
     @Override
     public void registerObserver(Observer<DocumentSnapshot> observer) { }
 
-    @Override
-    public void unregisterObserver(Observer<DocumentSnapshot> observer) { }
-
     protected void updatePlayersSize(Map<String, Object> map) {
         Players playersEnum;
         Optional<Player> player;

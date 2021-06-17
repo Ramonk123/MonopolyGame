@@ -136,10 +136,6 @@ public class CardDeckController
     public void registerObserver(Observer<DocumentSnapshot> observer) { }
 
     @Override
-    public void unregisterObserver(Observer<DocumentSnapshot> observer) { }
-
-
-    @Override
     public void notifyObservers() { }
 
     @Override

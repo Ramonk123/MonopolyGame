@@ -56,11 +56,6 @@ public class Wallet implements Model, Payer, Receiver, BoardSubject {
     }
 
     @Override
-    public void unregisterObserver(Observer<BoardSubject> observer) {
-
-    }
-
-    @Override
     public void notifyObservers() {
         for(Observer<BoardSubject> observer : observers) {
             observer.update(this);

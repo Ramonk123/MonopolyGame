@@ -34,11 +34,6 @@ public class MainMenu implements Model, MainMenuSubject, Observer<DocumentSnapsh
     }
 
     @Override
-    public void unregisterObserver(Observer<MainMenuSubject> observer) {
-        observers.remove(observer);
-    }
-
-    @Override
     public void notifyObservers() {
         for (Observer<MainMenuSubject> observer : observers) {
             observer.update(this);

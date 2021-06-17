@@ -30,11 +30,6 @@ public class AuctionController implements Controller, Subject<DocumentSnapshot> 
     }
 
     @Override
-    public void unregisterObserver(Observer<DocumentSnapshot> observer) {
-
-    }
-
-    @Override
     public void notifyObservers() {
 
     }

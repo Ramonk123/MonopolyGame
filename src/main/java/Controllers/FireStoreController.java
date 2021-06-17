@@ -47,11 +47,6 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
     }
 
     @Override
-    public void unregisterObserver(Observer<DocumentSnapshot> observer) {
-        observers.remove(observer);
-    }
-
-    @Override
     public void notifyObservers() {
         System.out.println(observers);
         for (Observer<DocumentSnapshot> observer : observers) {
