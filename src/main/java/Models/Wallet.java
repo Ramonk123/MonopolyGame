@@ -1,5 +1,9 @@
 package Models;
 
+import ObserveablePattern.Observer;
+import ObserveablePattern.Subject;
+import Views.BoardSubject;
+import Views.BoardView;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
@@ -10,15 +14,18 @@ import java.util.List;
  * Model for the Wallet of a Player.
  * Wallet has a Payer interface and a Receiver interface implemented to control what can and can't be used.
  */
-public class Wallet implements Model, Payer, Receiver {
+public class Wallet implements Model, Payer, Receiver, BoardSubject {
+    private ArrayList<Observer<BoardSubject>> observers = new ArrayList<>();
+
     private int balance = 1500;
 
     public Wallet() {
-
+        registerObserver(new BoardView());
     }
 
     public void setBalance(int balance) {
         this.balance = balance;
+        notifyObservers();
     }
 
     @Override
@@ -29,16 +36,44 @@ public class Wallet implements Model, Payer, Receiver {
     @Override
     public void addBalance(int value) {
         this.balance += value;
+        notifyObservers();
     }
 
     @Override
     public void subtractBalance(int value) {
         this.balance -= value;
+        notifyObservers();
     }
 
     @Override
     public boolean checkBalance(int value){
-        boolean sufficientBalance = getBalance() >= value;
-        return sufficientBalance;
+        return getBalance() >= value;
+    }
+
+    @Override
+    public void registerObserver(Observer<BoardSubject> observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void unregisterObserver(Observer<BoardSubject> observer) {
+
+    }
+
+    @Override
+    public void notifyObservers() {
+        for(Observer<BoardSubject> observer : observers) {
+            observer.update(this);
+        }
+    }
+
+    @Override
+    public List<Location> getLocations() {
+        return null;
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+        return null;
     }
 }
