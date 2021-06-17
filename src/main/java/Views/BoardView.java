@@ -54,40 +54,42 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
 
     @Override
     public void update(BoardSubject state) {
-        updateBoardPlayers(state);
+        updatePlayerLabels(state);
+        updatePlayerPosition(state);
     }
 
-    public void updateBoardPlayers(BoardSubject state) {
+    public void updatePlayerLabels(BoardSubject state) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         PlayerController playerController = (PlayerController)  ControllerRegistry.get(PlayerController.class);
-        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         if(boardController.checkGameHasStarted()) {
             Platform.runLater(() -> {
-                ArrayList<Label> labelList = boardController.getUserLabelList();
-
                 ArrayList<Player> players = playerController.getPlayers();
-                int playersJoined = players.size();
-
-                for (int i = 0; i < playersJoined; i++) {
+                ArrayList<Label> labelList = boardController.getUserLabelList();
+                for (int i = 0; i < players.size(); i++) {
                     String text = String.format("%s - $%s", players.get(i).getName(), players.get(i).getBalance());
                     labelList.get(i).setText(text);
                     labelList.get(i).setVisible(true);
-
-                    long oldPosition = players.get(i).getOldPosition();
-                    long currentPosition = players.get(i).getPosition();
-                    long eyesThrown = currentPosition - oldPosition;
-
-                    try {
-                        turnController.movePlayer(players.get(i).getPlayersEnum(), eyesThrown);
-                    } catch (PlayerException playerException) {
-                        playerException.printStackTrace();
-                    }
                 }
-
-
             });
         }
-
     }
+
+    public void updatePlayerPosition(BoardSubject state) {
+        PlayerController playerController = (PlayerController)  ControllerRegistry.get(PlayerController.class);
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
+
+        for (Player player : playerController.getPlayers()) {
+            long oldPosition = player.getOldPosition();
+            long currentPosition = player.getPosition();
+            long eyesThrown = currentPosition - oldPosition;
+
+            try {
+                turnController.movePlayer(player.getPlayersEnum(), eyesThrown);
+            } catch (PlayerException playerException) {
+                playerException.printStackTrace();
+            }
+        }
+    }
+
 }
 
