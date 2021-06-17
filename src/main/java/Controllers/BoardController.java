@@ -3,6 +3,7 @@ package Controllers;
 import Exceptions.PlayerException;
 import Models.Board;
 import Models.Location;
+import Models.OwnableLocation;
 import Models.Player;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
@@ -12,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -161,14 +163,13 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         return false;
 
     }
-    @FXML private Pane MortgagePopup;
+    @FXML
+    private Pane MortgagePopup;
     @FXML
     private void showMortgagePopup() throws Exception {
         if(!MortgagePopup.isVisible()) {
             MortgagePopup.setVisible(true);
-            board.displayMortgageMenuLocations();
-
-
+            displayMortgageMenuLocations();
         } else {
             MortgagePopup.setVisible(false);
         }
@@ -202,6 +203,63 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
     public void showNoLocationsToMortgagePopup() {
         NoLocationsToMortgagePopup.setVisible(true);
+    }
+
+    public void displayMortgageMenuLocations() {
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+
+        ArrayList<Pane> labelList = setLabelListVisibility(getMortgageLabelList(), false);
+
+        ArrayList<OwnableLocation> locationsOwnedByPlayer = addOwnedLocations(new ArrayList<>());
+
+        int amountLocationsOwnedByPlayer = locationsOwnedByPlayer.size();
+
+        if(amountLocationsOwnedByPlayer > 0) {
+            for (int i = 0; i < amountLocationsOwnedByPlayer; i++) {
+                labelList.get(i).setVisible(true);
+                OwnableLocation location = locationsOwnedByPlayer.get(i);
+                Label locationName = (Label) labelList.get(i).getChildren().get(0);
+                Label locationPrice = (Label) labelList.get(i).getChildren().get(1);
+                Button locationButton = (Button) labelList.get(i).getChildren().get(2);
+
+                locationName.setText("");
+                locationPrice.setText("");
+
+                locationName.setText(location.getName());
+                locationPrice.setText(String.valueOf((location.getPrice() / 2)));
+
+                locationButton.setOnAction(event -> {
+                    if(!location.hasMortgage()) {
+                        locationButton.setText("Unmortgage");
+                        locationController.getMortgageOnLocation(location);
+                    }else {
+                        locationButton.setText("Mortgage");
+                        locationController.payMortgage(location);
+                    }
+                });
+            }
+        } else {
+            showNoLocationsToMortgagePopup();
+        }
+    }
+
+    public ArrayList<Pane> setLabelListVisibility(ArrayList<Pane> labelList, boolean state) {
+        for (Pane label : labelList) {
+            label.setVisible(state);
+        }
+        return labelList;
+    }
+
+    public ArrayList<OwnableLocation> addOwnedLocations(ArrayList<OwnableLocation> ownedLocationsByPlayer) {
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+
+        for (OwnableLocation location : locationController.getOwnableLocations()) {
+            if (location.getId().equals(playerController.getClientPlayersEnum().getId())) {
+                ownedLocationsByPlayer.add(location);
+            }
+        }
+        return ownedLocationsByPlayer;
     }
 
     @Override
