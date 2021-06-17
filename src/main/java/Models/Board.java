@@ -73,7 +73,7 @@ public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, H
             label.setVisible(false);
         }
         for (OwnableLocation location : ownableLocations) {
-            if (UUID.compare(location.getOwner().orElseThrow(Exception::new), playerController.getClientPlayersEnum())) {
+            if (location.getId().equals(playerController.getClientPlayersEnum().getId())) {
                 locationsOwnedByPlayer.add(location);
             }
         }
