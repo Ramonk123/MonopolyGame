@@ -58,7 +58,7 @@ public class CardDeckController
         chanceCardDeck.add(new Card(new UUID("CARD-10"), "Go to Jail. Go directly to Jail, do not pass Go, do not collect $200", Actions::goToJail));
         chanceCardDeck.add(new Card(new UUID("CARD-11"), "Make general repairs on all your property. For each house pay $25. For each hotel pay $100", (player -> {Actions.makeRepairs(player,100,25);})));
         chanceCardDeck.add(new Card(new UUID("CARD-12"), "Speeding fine $15", (player -> { Actions.payFunds(player, 15); })));
-        chanceCardDeck.add(new Card(new UUID("CARD-13"), "Take a trip to Reading Railroad. If you pass Go, collect $200", (player -> { Actions.teleportToLocation(player,0, true); })));
+        chanceCardDeck.add(new Card(new UUID("CARD-13"), "Take a trip to Station Zuid. If you pass Go, collect $200", (player -> { Actions.teleportToLocation(player,5, true); })));
         chanceCardDeck.add(new Card(new UUID("CARD-14"), "You have been elected Chairman of the Board. Pay each player $50", Actions::payEachPlayer));
         chanceCardDeck.add(new Card(new UUID("CARD-15"), "Your building loan matures. Collect $150", (player -> { Actions.receiveFunds(player, 150);})));
 
