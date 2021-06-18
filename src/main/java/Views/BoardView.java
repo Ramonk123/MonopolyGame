@@ -15,8 +15,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +98,7 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
     public void updatePlayerLabels(BoardSubject state) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         PlayerController playerController = (PlayerController)  ControllerRegistry.get(PlayerController.class);
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
 
         if(boardController.checkGameHasStarted()) {
             Platform.runLater(() -> {
@@ -103,6 +106,9 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
                 ArrayList<Label> labelList = boardController.getUserLabelList();
                 for (int i = 0; i < players.size(); i++) {
                     String text = String.format("%s - $%s", players.get(i).getName(), players.get(i).getBalance());
+                    if(UUID.compare(turnController.getCurrentPlayer(), players.get(i).getPlayersEnum())) {
+                        text = "Active: " + text;
+                    }
                     labelList.get(i).setText(text);
                     labelList.get(i).setVisible(true);
                 }
