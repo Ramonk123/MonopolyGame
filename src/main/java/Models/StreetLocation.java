@@ -28,4 +28,12 @@ public class StreetLocation extends OwnableLocation {
     public void action(Player player) { //
 
     }
+
+    public int getHouses() {
+        return houses;
+    }
+
+    public boolean getHotel() {
+        return hotel;
+    }
 }
