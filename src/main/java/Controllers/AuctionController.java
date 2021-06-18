@@ -41,9 +41,17 @@ public class AuctionController implements Controller, Subject<DocumentSnapshot> 
 
 
 
-    public void startAuction() {
+    public void startAuction(String positionId) {
         //TODO:  add card to FX:ID cardPlaceHolder
+
+        //TODO: 2. Ik (Brandon) fix de fxml en view voor de nieuwe auction later.
         auctionPane.setVisible(!auctionPane.isVisible());
+
+
+
+
+
+
 
         placeBidButton.setOnAction(actionEvent -> {
 
@@ -62,11 +70,6 @@ public class AuctionController implements Controller, Subject<DocumentSnapshot> 
 
             }
         });
-
-    }
-
-    public void  setAuctionStarter() {
-        auction.setStartedAuction();
 
     }
 

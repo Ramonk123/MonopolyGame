@@ -53,8 +53,14 @@ public class LocationController implements Controller {
 
     //TODO: Create onEvent function when refusing to buy location
     private void refuseToBuyLocation() {
-        auctionController.setAuctionStarter();
-        auctionController.startAuction();
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        for(Player player : playerController.getPlayers()){
+            if(UUID.compare(playerController.getClientPlayersEnum().getId(), player.getId())){
+                long position = player.getPosition();
+                String positionId = locationArray.get((int) position).getId().getId();
+                auctionController.startAuction(positionId);
+            }
+        }
     }
 
     /**

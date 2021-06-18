@@ -54,12 +54,10 @@ public class Auction implements Model, Observer<DocumentSnapshot>, FirestoreForm
 
     @Override
     public void update(DocumentSnapshot documentSnapshot) {
-        System.out.println("AUCTIONwow");
         HashMap<String, Object> firestoreAuction = (HashMap<String, Object>) documentSnapshot.get("auction");
         if(firestoreAuction == null){
             startedAuction = false;
         }else{
-            System.out.println(firestoreAuction);
             startedAuction = true;
             playerBids = (HashMap<String, Object>) firestoreAuction.get("playerBids");
             locationID = (String) firestoreAuction.get("location");

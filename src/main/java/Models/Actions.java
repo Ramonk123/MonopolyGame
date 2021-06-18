@@ -151,12 +151,12 @@ public class Actions {
 
 
 
-
+//    positionId added
     public static void startAuction(OwnableLocation ownableLocation, Player player){
         AuctionController auctionController = (AuctionController) ControllerRegistry.get(AuctionController.class);
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         if (player.getPosition() == ownableLocation.getPosition() && ownableLocation.isOwned()==false){
-            auctionController.startAuction();
+            auctionController.startAuction(ownableLocation.getId().getId());
         }
     }
 
