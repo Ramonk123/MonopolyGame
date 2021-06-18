@@ -1,5 +1,6 @@
 package Controllers;
 
+import Firestore.FirestoreFormattable;
 import Models.Auction;
 import Models.OwnableLocation;
 import Models.Player;
@@ -13,10 +14,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Controller for the Auction model.
  */
-public class AuctionController implements Controller, Subject<DocumentSnapshot> {
+public class AuctionController implements Controller, Subject<DocumentSnapshot>, FirestoreFormattable {
 
     private Player player;
     private Auction auction =  new Auction();
@@ -74,4 +78,11 @@ public class AuctionController implements Controller, Subject<DocumentSnapshot> 
     }
 
     //TODO create functions that gets Auction bidding results
+
+
+    @Override
+    public Object getFirestoreFormat() {
+        return auction.getFirestoreFormat();
+    }
+
 }

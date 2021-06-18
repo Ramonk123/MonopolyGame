@@ -115,12 +115,14 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
+        AuctionController auctionController = (AuctionController) ControllerRegistry.get(AuctionController.class);
 
         Map<String, Object> lobbyData = (Map<String, Object>) ((LobbyController) ControllerRegistry.get(LobbyController.class)).getFirestoreFormat();
         lobbyData.put("players", playerController.getFirestoreFormat());
         lobbyData.put("turn", turnController.getFirestoreFormat());
         lobbyData.put("nextChanceCard", cardDeckController.getNextChanceCard());
         lobbyData.put("nextCommonFundCard", cardDeckController.getNextCommonFundCard());
+        lobbyData.put("Auction", auctionController.getFirestoreFormat());
 
 
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
