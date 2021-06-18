@@ -34,6 +34,7 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
         this.currentPosition = 0;
         this.oldPosition = 0;
         registerObserver(new BoardView());
+
     }
 
     @Override
@@ -110,7 +111,21 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
 
     @Override
     public void update(DocumentSnapshot state) {
-        // do some updates mane
+        System.out.println("wow");
+        Map<String, Object> playerMap = (Map<String, Object>) state.get("players");
+        System.out.println(playerMap);
+        for (Map.Entry<String, Object> entry : playerMap.entrySet()) {
+            if (!UUID.compare(entry.getKey(), playersEnum)) {
+                continue;
+            }
+            System.out.println("wowwow");
+            Map<String, Object> map = (Map<String, Object>) entry.getValue();
+            inJail = (boolean) map.get("inJail");
+            name = (String) map.get("name");
+            currentPosition = (long) map.get("currentPosition");
+            oldPosition = (long) map.get("oldPosition");
+            //wallet.setBalance((int) (long) map.get("wallet"));
+        }
     }
 
     @Override

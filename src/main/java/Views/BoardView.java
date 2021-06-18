@@ -105,12 +105,16 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
                 ArrayList<Player> players = playerController.getPlayers();
                 ArrayList<Label> labelList = boardController.getUserLabelList();
                 for (int i = 0; i < players.size(); i++) {
-                    String text = String.format("%s - $%s", players.get(i).getName(), players.get(i).getBalance());
+                    String text = String.format("%s - $%d", players.get(i).getName(), players.get(i).getBalance());
                     if(UUID.compare(turnController.getCurrentPlayer(), players.get(i).getPlayersEnum())) {
                         text = "Active: " + text;
                     }
-                    labelList.get(i).setText(text);
-                    labelList.get(i).setVisible(true);
+                    try {
+                        labelList.get(i).setText(text);
+                        labelList.get(i).setVisible(true);
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         }
@@ -124,14 +128,17 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
         if(boardController.checkGameHasStarted()) {
             Platform.runLater(() -> {
                 for (Player player : playerController.getPlayers()) {
+                    if (UUID.compare(playerController.getClientPlayersEnum(), player.getPlayersEnum())) {
+                        System.out.println(playerController.getClientPlayersEnum());
+                        System.out.println("haha");
+                        continue;
+                    }
                     long oldPosition = player.getOldPosition();
                     long currentPosition = player.getPosition();
                     long eyesThrown = currentPosition - oldPosition;
 
                     try {
-                        if (!UUID.compare(playerController.getClientPlayersEnum(), player.getPlayersEnum())) {
-                            turnController.movePlayer(player.getPlayersEnum(), eyesThrown);
-                        }
+                        turnController.movePlayer(player.getPlayersEnum(), eyesThrown);
                     } catch (PlayerException playerException) {
                         playerException.printStackTrace();
                     }
