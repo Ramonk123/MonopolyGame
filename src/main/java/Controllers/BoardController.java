@@ -59,6 +59,11 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     }
 
     @FXML
+    private void EndTurnPlayer() {
+        //TODO: End the turn of the player and set it on the next player.
+    }
+
+    @FXML
     private void RollDiceAction(ActionEvent actionEvent) throws PlayerException {
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         turnController.RollDice();
@@ -68,6 +73,16 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     private FlowPane DiceLabelPane;
 
     public void setDiceLabelPane() {
+        ThrowController throwController = (ThrowController) ControllerRegistry.get(ThrowController.class);
+
+        if(throwController.getEyesDiceOne() != 0 && throwController.getEyesDiceTwo() != 0) {
+            String DiceOneValue = String.format("%s", throwController.getEyesDiceOne());
+            String DiceTwoValue = String.format("%s", throwController.getEyesDiceTwo());
+
+            ((Label) DiceLabelPane.getChildren().get(0)).setText(DiceOneValue);
+            ((Label) DiceLabelPane.getChildren().get(1)).setText(DiceTwoValue);
+            DiceLabelPane.getChildren().get(2).setVisible(throwController.isDouble());
+        }
 
     }
 
@@ -84,6 +99,9 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
         ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren(); //Sets the whole board in an array/list
         ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get((int) oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
+        System.out.println("dikke asser");
+        System.out.println(currentPlayerGrid);
+        System.out.println(playerNumber);
         Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber); //Gets the playerIcon out of the array/list
         currentPlayerGrid.remove(playerNumber);
         ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get((int) newPosition)).getChildren(); //Gets the grid where the player moved to

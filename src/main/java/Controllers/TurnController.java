@@ -85,14 +85,22 @@ public class TurnController
             ThrowController throwController = (ThrowController) ControllerRegistry.get(ThrowController.class);
             throwController.throwDice();
             turn.setEyesThrown(throwController.getTotalEyes());
-            System.out.println(throwController.getEyesDiceOne());
-            System.out.println(throwController.getEyesDiceTwo());
+
             if(!throwController.isDouble()) {
                 boardController.setRollDiceVisibility(false);
             } else {
+                turn.addOneToAmountOfDouble();
                 boardController.setRollDiceVisibility(true);
             } // Don't simplify this yet.
-            movePlayer(currentPlayerEnum, turn.getEyesThrown());
+
+            if(turn.getAmountOfDouble() >= 3) {
+                boardController.setRollDiceVisibility(false);
+                //TODO: Go to Jail
+            } else {
+                movePlayer(currentPlayerEnum, turn.getEyesThrown());
+            }
+
+            boardController.setDiceLabelPane();
 
             LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
             FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
@@ -116,6 +124,15 @@ public class TurnController
 
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         boardController.movePlayerOnBoard(currentPlayerEnum, oldPlayerPosition, newPlayerPosition);
+    }
 
+    public void movePlayerOnBoard(Players currentPlayerEnum, long eyesThrown) throws PlayerException {
+        Player currentPlayer = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getPlayerByPlayersEnum(currentPlayerEnum).orElseThrow(() -> new PlayerException("Player NOT Found"));
+
+        long oldPlayerPosition = currentPlayer.getOldPosition();
+        long newPlayerPosition = currentPlayer.getPosition();
+
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        boardController.movePlayerOnBoard(currentPlayerEnum, oldPlayerPosition, newPlayerPosition);
     }
 }

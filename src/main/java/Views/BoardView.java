@@ -15,8 +15,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,18 +92,23 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
     public void update(BoardSubject state) {
         updatePlayerLabels(state);
         updatePlayerPosition(state);
+
     }
 
     public void updatePlayerLabels(BoardSubject state) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         PlayerController playerController = (PlayerController)  ControllerRegistry.get(PlayerController.class);
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
 
         if(boardController.checkGameHasStarted()) {
             Platform.runLater(() -> {
                 ArrayList<Player> players = playerController.getPlayers();
                 ArrayList<Label> labelList = boardController.getUserLabelList();
                 for (int i = 0; i < players.size(); i++) {
-                    String text = String.format("%s - $%s", players.get(i).getName(), players.get(i).getBalance());
+                    String text = String.format("%s - $%d", players.get(i).getName(), players.get(i).getBalance());
+                    if(UUID.compare(turnController.getCurrentPlayer(), players.get(i).getPlayersEnum())) {
+                        text = "X - " + text;
+                    }
                     labelList.get(i).setText(text);
                     labelList.get(i).setVisible(true);
                 }
@@ -117,16 +124,19 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
         if(boardController.checkGameHasStarted()) {
             Platform.runLater(() -> {
                 for (Player player : playerController.getPlayers()) {
+                    if (UUID.compare(playerController.getClientPlayersEnum(), player.getPlayersEnum())) {
+                        System.out.println(playerController.getClientPlayersEnum());
+                        System.out.println("haha");
+                        continue;
+                    }
                     long oldPosition = player.getOldPosition();
                     long currentPosition = player.getPosition();
                     long eyesThrown = currentPosition - oldPosition;
 
                     try {
-                        if (!UUID.compare(playerController.getClientPlayersEnum(), player.getPlayersEnum())) {
-                            turnController.movePlayer(player.getPlayersEnum(), eyesThrown);
-                        }
-                    } catch (PlayerException playerException) {
-                        playerException.printStackTrace();
+                        turnController.movePlayerOnBoard(player.getPlayersEnum(), eyesThrown);
+                    } catch (PlayerException e) {
+                        e.printStackTrace();
                     }
                 }
             });

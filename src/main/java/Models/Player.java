@@ -1,9 +1,7 @@
 package Models;
 
-import Controllers.ControllerRegistry;
-import Controllers.LocationController;
-import Controllers.PlayerController;
-import Controllers.Players;
+import Controllers.*;
+import Exceptions.TransactionException;
 import Firestore.FirestoreFormattable;
 import Monopoly.Identifiable;
 import Monopoly.UUID;
@@ -36,6 +34,7 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
         this.currentPosition = 0;
         this.oldPosition = 0;
         registerObserver(new BoardView());
+
     }
 
     @Override
@@ -62,9 +61,22 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
         long newPosition = getPosition() + amountThrown;
         if(newPosition >= amountOfLocations) {
             newPosition -= amountOfLocations;
-            // This means the player is standing on or went over Start/Go.
+
+            TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
+            try {
+                transactionController.addBalance(playersEnum, 200);
+            } catch (TransactionException transactionException) {
+                transactionException.printStackTrace();
+            }
         }
         setPosition(newPosition);
+    }
+
+    public boolean wentPastGo() {
+        if(currentPosition == 0) {
+            return false;
+        }
+        return oldPosition > currentPosition;
     }
 
     @Override
@@ -99,7 +111,21 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
 
     @Override
     public void update(DocumentSnapshot state) {
-        // do some updates mane
+        System.out.println("wow");
+        Map<String, Object> playerMap = (Map<String, Object>) state.get("players");
+        System.out.println(playerMap);
+        for (Map.Entry<String, Object> entry : playerMap.entrySet()) {
+            if (!UUID.compare(entry.getKey(), playersEnum)) {
+                continue;
+            }
+            System.out.println("wowwow");
+            Map<String, Object> map = (Map<String, Object>) entry.getValue();
+            inJail = (boolean) map.get("inJail");
+            name = (String) map.get("name");
+            currentPosition = (long) map.get("currentPosition");
+            oldPosition = (long) map.get("oldPosition");
+            //wallet.setBalance((int) (long) map.get("wallet"));
+        }
     }
 
     @Override

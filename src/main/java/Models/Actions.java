@@ -18,9 +18,13 @@ public class Actions {
     }
 
 
-    public static void teleportToLocation(Player player, long position) {
+    public static void teleportToLocation(Player player, long position, boolean entitledToSalary) {
         PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
         playerController.teleportTo(player, position);
+
+        if(player.wentPastGo() && entitledToSalary) {
+            //TODO: Activate Go Action
+        }
     }
 
     public static void teleportToNearestRailroad(Player player) {
