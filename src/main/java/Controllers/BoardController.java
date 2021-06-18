@@ -68,7 +68,14 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     private FlowPane DiceLabelPane;
 
     public void setDiceLabelPane() {
+        ThrowController throwController = (ThrowController) ControllerRegistry.get(ThrowController.class);
 
+        String DiceOneValue = String.format("%s", throwController.getEyesDiceOne());
+        String DiceTwoValue = String.format("%s", throwController.getEyesDiceTwo());
+
+        ((Label) DiceLabelPane.getChildren().get(0)).setText(DiceOneValue);
+        ((Label) DiceLabelPane.getChildren().get(1)).setText(DiceTwoValue);
+        DiceLabelPane.getChildren().get(2).setVisible(throwController.isDouble());
     }
 
 

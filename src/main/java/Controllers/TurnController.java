@@ -85,14 +85,15 @@ public class TurnController
             ThrowController throwController = (ThrowController) ControllerRegistry.get(ThrowController.class);
             throwController.throwDice();
             turn.setEyesThrown(throwController.getTotalEyes());
-            System.out.println(throwController.getEyesDiceOne());
-            System.out.println(throwController.getEyesDiceTwo());
+
             if(!throwController.isDouble()) {
                 boardController.setRollDiceVisibility(false);
             } else {
                 boardController.setRollDiceVisibility(true);
             } // Don't simplify this yet.
             movePlayer(currentPlayerEnum, turn.getEyesThrown());
+
+            boardController.setDiceLabelPane();
 
             LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
             FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);

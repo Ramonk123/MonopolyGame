@@ -90,6 +90,7 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
     public void update(BoardSubject state) {
         updatePlayerLabels(state);
         updatePlayerPosition(state);
+
     }
 
     public void updatePlayerLabels(BoardSubject state) {
