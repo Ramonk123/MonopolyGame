@@ -121,6 +121,13 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         BoardViewRollDiceButton.setVisible(state);
     }
 
+    @FXML
+    private Button EndTurnButton;
+
+    public void setEndTurnVisibility(boolean state) {
+        EndTurnButton.setVisible(state);
+    }
+
     @Override
     public void registerObserver(Observer<DocumentSnapshot> observer) { }
 
