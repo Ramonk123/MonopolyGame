@@ -113,7 +113,7 @@ public class PlayerController
         player.movePlayer(amountThrown);
     }
 
-    public void teleportTo(Player player, int position) {
+    public void teleportTo(Player player, long position) {
         player.setPosition(position);
     }
 
