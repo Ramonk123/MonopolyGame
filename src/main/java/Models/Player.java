@@ -124,7 +124,7 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
             name = (String) map.get("name");
             currentPosition = (long) map.get("currentPosition");
             oldPosition = (long) map.get("oldPosition");
-            //wallet.setBalance((int) (long) map.get("wallet"));
+            wallet.setBalance((int) (long) map.get("wallet"));
         }
     }
 

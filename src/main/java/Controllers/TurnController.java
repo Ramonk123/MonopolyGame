@@ -10,6 +10,7 @@ import ObserveablePattern.Subject;
 import Resetter.Resettable;
 import com.google.cloud.firestore.DocumentSnapshot;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -34,6 +35,39 @@ public class TurnController
     public Players getCurrentPlayer() {
         return turn.getCurrentPlayer();
     }
+    public void setCurrentPlayer(Players playersEnum) {
+        turn.setCurrentPlayer(playersEnum);
+    }
+
+    public void nextPlayerTurn() {
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        Players playersEnum = playerController.getClientPlayersEnum();
+        Player player = null;
+        try {
+            player = playerController.getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new Exception("no player found"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<Player> list = playerController.getPlayers();
+        int index = list.indexOf(player);
+        int size = list.size();
+        Player nextPlayer;
+        if (index >= size) {
+            nextPlayer = list.get(0);
+        } else {
+            nextPlayer = list.get(index);
+        }
+        setCurrentPlayer(nextPlayer.getPlayersEnum());
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
+        try {
+            fireStoreController.updateTurn(lobbyController.getToken(), turn);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public Object getFirestoreFormat() {
@@ -50,7 +84,7 @@ public class TurnController
         System.out.println(map.containsKey("eyesThrown"));
         turn.setEyesThrown((long) map.get("eyesThrown"));
         System.out.println("testerst");
-        //notifyObservers();
+        notifyObservers();
     }
 
     @Override

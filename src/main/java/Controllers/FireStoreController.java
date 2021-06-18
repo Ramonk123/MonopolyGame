@@ -1,6 +1,7 @@
 package Controllers;
 
 import Firestore.Firestore;
+import Firestore.FirestoreFormattable;
 import Models.Card;
 import Models.Player;
 import ObserveablePattern.Observer;
@@ -184,6 +185,12 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         map.put(player.getPlayersEnum().getId().getId(), player.getFirestoreFormat());
         database.collection("Lobbies").document(String.valueOf(token))
                 .update("players", map);
+    }
+
+    public void updateTurn(int token, FirestoreFormattable turn) throws ExecutionException, InterruptedException {
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        database.collection("Lobbies").document(String.valueOf(token))
+                .update("turn", turn.getFirestoreFormat());
     }
 
     public void setConsumer(Consumer<DocumentSnapshot> lambda) {

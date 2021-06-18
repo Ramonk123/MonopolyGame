@@ -61,6 +61,8 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @FXML
     private void EndTurnPlayer() {
         //TODO: End the turn of the player and set it on the next player.
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
+        turnController.nextPlayerTurn();
     }
 
     @FXML
@@ -99,6 +101,8 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         System.out.println("dikke asser");
         System.out.println(currentPlayerGrid);
         System.out.println(playerNumber);
+        System.out.println(oldPosition);
+        System.out.println(newPosition);
         Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber); //Gets the playerIcon out of the array/list
         currentPlayerGrid.remove(playerNumber);
         ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get((int) newPosition)).getChildren(); //Gets the grid where the player moved to
