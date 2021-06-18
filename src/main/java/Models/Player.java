@@ -1,9 +1,7 @@
 package Models;
 
-import Controllers.ControllerRegistry;
-import Controllers.LocationController;
-import Controllers.PlayerController;
-import Controllers.Players;
+import Controllers.*;
+import Exceptions.TransactionException;
 import Firestore.FirestoreFormattable;
 import Monopoly.Identifiable;
 import Monopoly.UUID;
@@ -29,6 +27,7 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
     private long currentPosition;
     private boolean inJail;
     private Players playersEnum;
+    private boolean entitledToSalary = true;
 
     public Player(Players playersEnum, String name) {
         this.playersEnum = playersEnum;
@@ -62,7 +61,16 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
         long newPosition = getPosition() + amountThrown;
         if(newPosition >= amountOfLocations) {
             newPosition -= amountOfLocations;
-            // This means the player is standing on or went over Start/Go.
+            if(entitledToSalary) {
+                TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
+                try {
+                    transactionController.addBalance(playersEnum, 200);
+                } catch (TransactionException transactionException) {
+                    transactionException.printStackTrace();
+                }
+            } else {
+                entitledToSalary = true;
+            }
         }
         setPosition(newPosition);
     }
