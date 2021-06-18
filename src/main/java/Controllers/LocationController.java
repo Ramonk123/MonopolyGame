@@ -546,6 +546,15 @@ public class LocationController implements Controller {
         }return railRoadLocationsArray;
     }
 
+    public List<OwnableLocation> getUtilityLocations() {
+        List<OwnableLocation> utilityLocationsArray = new ArrayList<>();
+        for(OwnableLocation location : ownableLocationArray) {
+            if(location.getSet().equals(Set.UTILITY)) {
+                utilityLocationsArray.add(location);
+            }
+        }return utilityLocationsArray;
+    }
+
 
     public void getMortgageOnLocation(OwnableLocation location) {
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
