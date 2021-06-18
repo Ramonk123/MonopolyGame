@@ -73,6 +73,13 @@ public class TurnController
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         Players clientPlayerEnum = playerController.getClientPlayersEnum();
 
+        Player currentPlayer = null;
+        try {
+            currentPlayer = playerController.getPlayerByPlayersEnum(currentPlayerEnum).orElseThrow(() -> new Exception("Player doesn't exist."));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         if(UUID.compare(currentPlayerEnum, clientPlayerEnum)) {
             ThrowController throwController = (ThrowController) ControllerRegistry.get(ThrowController.class);
             throwController.throwDice();
@@ -91,6 +98,16 @@ public class TurnController
                 }
             }
             movePlayer(currentPlayerEnum, turn.getEyesThrown());
+
+            LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
+            FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+            try {
+                fireStoreController.updatePlayer(lobbyController.getToken(), currentPlayer);
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -105,13 +122,5 @@ public class TurnController
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         boardController.movePlayerOnBoard(currentPlayerEnum, oldPlayerPosition, newPlayerPosition);
 
-        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        try {
-            fireStoreController.updatePlayer(currentPlayer);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -3,6 +3,7 @@ package Views;
 import Controllers.*;
 import Exceptions.PlayerException;
 import Models.Player;
+import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.application.Platform;
@@ -121,7 +122,9 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
                     long eyesThrown = currentPosition - oldPosition;
 
                     try {
-                        turnController.movePlayer(player.getPlayersEnum(), eyesThrown);
+                        if (!UUID.compare(playerController.getClientPlayersEnum(), player.getPlayersEnum())) {
+                            turnController.movePlayer(player.getPlayersEnum(), eyesThrown);
+                        }
                     } catch (PlayerException playerException) {
                         playerException.printStackTrace();
                     }
