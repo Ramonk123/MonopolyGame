@@ -81,22 +81,17 @@ public class TurnController
         }
 
         if(UUID.compare(currentPlayerEnum, clientPlayerEnum)) {
+            BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
             ThrowController throwController = (ThrowController) ControllerRegistry.get(ThrowController.class);
             throwController.throwDice();
             turn.setEyesThrown(throwController.getTotalEyes());
-            int thrownDouble = 0;
-            if(throwController.isDouble()) {
-                thrownDouble++;
-                while(throwController.isDouble()) {
-                    if(thrownDouble >= 3) {
-                        //TODO: Go to Jail
-                        break;
-                    }
-                    throwController.throwDice();
-                    turn.addEyesThrown(throwController.getTotalEyes());
-                    thrownDouble++;
-                }
-            }
+            System.out.println(throwController.getEyesDiceOne());
+            System.out.println(throwController.getEyesDiceTwo());
+            if(!throwController.isDouble()) {
+                boardController.setRollDiceVisibility(false);
+            } else {
+                boardController.setRollDiceVisibility(true);
+            } // Don't simplify this yet.
             movePlayer(currentPlayerEnum, turn.getEyesThrown());
 
             LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);

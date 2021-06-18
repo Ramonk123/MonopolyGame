@@ -1150,5 +1150,12 @@
          </children>
 
       </GridPane>
+      <FlowPane fx:id="DiceLabelPane" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <Label alignment="CENTER" prefWidth="100.0" />
+            <Label alignment="CENTER" prefWidth="100.0" />
+            <Label alignment="CENTER" prefWidth="200.0" text="You have thrown double, roll again." />
+         </children>
+      </FlowPane>
    </children>
 </AnchorPane>

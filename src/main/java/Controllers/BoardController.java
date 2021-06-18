@@ -65,6 +65,14 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     }
 
     @FXML
+    private FlowPane DiceLabelPane;
+
+    public void setDiceLabelPane() {
+
+    }
+
+
+    @FXML
     private GridPane BoardViewPlayerPane;
 
     public GridPane getBoardViewPlayerPane() {
@@ -87,6 +95,12 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         List<Location> locationArray = locationController.getLocationArray();
         return locationArray.get((int) playerPosition);
+    }
+    @FXML
+    private Button BoardViewRollDiceButton;
+
+    public void setRollDiceVisibility(boolean state) {
+        BoardViewRollDiceButton.setVisible(state);
     }
 
     @Override

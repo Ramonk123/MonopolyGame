@@ -31,4 +31,11 @@ public class ThrowController implements Controller, DiceThrower {
         return currentThrow.getTotalEyes();
     }
 
+    public int getEyesDiceOne() {
+        return currentThrow.getEyesDiceOne();
+    }
+
+    public int getEyesDiceTwo() {
+        return currentThrow.getEyesDiceTwo();
+    }
 }
