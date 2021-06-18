@@ -59,10 +59,35 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     }
 
     @FXML
+    private void EndTurnPlayer() {
+        System.out.println("COME ON MAN");
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
+        turnController.nextPlayerTurn();
+    }
+
+    @FXML
     private void RollDiceAction(ActionEvent actionEvent) throws PlayerException {
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         turnController.RollDice();
     }
+
+    @FXML
+    private FlowPane DiceLabelPane;
+
+    public void setDiceLabelPane() {
+        ThrowController throwController = (ThrowController) ControllerRegistry.get(ThrowController.class);
+
+        if(throwController.getEyesDiceOne() != 0 && throwController.getEyesDiceTwo() != 0) {
+            String DiceOneValue = String.format("%s", throwController.getEyesDiceOne());
+            String DiceTwoValue = String.format("%s", throwController.getEyesDiceTwo());
+
+            ((Label) DiceLabelPane.getChildren().get(0)).setText(DiceOneValue);
+            ((Label) DiceLabelPane.getChildren().get(1)).setText(DiceTwoValue);
+            DiceLabelPane.getChildren().get(2).setVisible(throwController.isDouble());
+        }
+
+    }
+
 
     @FXML
     private GridPane BoardViewPlayerPane;
@@ -70,11 +95,17 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     public GridPane getBoardViewPlayerPane() {
         return BoardViewPlayerPane;
     }
+
     public void movePlayerOnBoard(Players player, long oldPosition, long newPosition) {
         int playerNumber = player.ordinal();
 
         ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren(); //Sets the whole board in an array/list
         ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get((int) oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
+        System.out.println("dikke asser");
+        System.out.println(currentPlayerGrid);
+        System.out.println(playerNumber);
+        System.out.println(oldPosition);
+        System.out.println(newPosition);
         Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber); //Gets the playerIcon out of the array/list
         currentPlayerGrid.remove(playerNumber);
         ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get((int) newPosition)).getChildren(); //Gets the grid where the player moved to
@@ -86,6 +117,19 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         List<Location> locationArray = locationController.getLocationArray();
         return locationArray.get((int) playerPosition);
+    }
+    @FXML
+    private Button BoardViewRollDiceButton;
+
+    public void setRollDiceVisibility(boolean state) {
+        BoardViewRollDiceButton.setVisible(state);
+    }
+
+    @FXML
+    private Button EndTurnButton;
+
+    public void setEndTurnVisibility(boolean state) {
+        EndTurnButton.setVisible(state);
     }
 
     @Override

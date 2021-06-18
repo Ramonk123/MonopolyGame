@@ -33,4 +33,12 @@ public class Throw implements Model, DiceThrower {
     public int getTotalEyes() {
         return (diceOne.getTotalEyes() + diceTwo.getTotalEyes());
     }
+
+    public int getEyesDiceOne() {
+        return diceOne.getTotalEyes();
+    }
+
+    public int getEyesDiceTwo() {
+        return diceTwo.getTotalEyes();
+    }
 }

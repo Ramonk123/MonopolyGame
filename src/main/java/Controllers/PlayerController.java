@@ -113,7 +113,7 @@ public class PlayerController
         player.movePlayer(amountThrown);
     }
 
-    public void teleportTo(Player player, int position) {
+    public void teleportTo(Player player, long position) {
         player.setPosition(position);
     }
 
@@ -161,12 +161,18 @@ public class PlayerController
         this.documentSnapshot = documentSnapshot;
         Map<String, Object> map = (Map<String, Object>) documentSnapshot.get("players");
         assert map != null;
-        System.out.println(map.size());
-        System.out.println(documentSnapshot.getData());
 
-        Map<String, Object> test = (Map<String, Object>) map.get("PLAYER-ONE");
+        /*for (Map.Entry<String, Object> entry : map.entrySet()) {
+            Players playersEnum = null;
+            Player player = null;
+            try {
+                playersEnum = Players.getByStringUuid(entry.getKey()).orElseThrow(() -> new Exception("Player doesn't exist."));
+                player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new Exception("Player doesn't exist."));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }*/
 
-        System.out.println(players.size());
         if (map.size() > players.size()) {
             updatePlayersSize(map);
         }

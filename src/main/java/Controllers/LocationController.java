@@ -537,6 +537,44 @@ public class LocationController implements Controller {
         return ownableLocationArray;
     }
 
+    public List<StreetLocation> getStreetLocationsOwnedByPlayer(UUID uuid) {
+        List<OwnableLocation> streetLocations = new ArrayList<>();
+        List<StreetLocation> playerOwnedStreetLocations = new ArrayList<>();
+
+        for(OwnableLocation location : ownableLocationArray) {
+            Set locationSet = location.getSet();
+            if(!UUID.compare(locationSet,Set.TRAINSTATION) && UUID.compare(locationSet,Set.UTILITY) && UUID.compare(locationSet,Set.NONE)){
+                streetLocations.add(location);
+            }
+        }
+
+        for(OwnableLocation location : streetLocations) {
+            if (location.getOwner().equals(uuid)){
+                playerOwnedStreetLocations.add((StreetLocation) location);
+            }
+        }
+        return playerOwnedStreetLocations;
+    }
+
+    public List<OwnableLocation> getRailroadLocations() {
+        List<OwnableLocation> railRoadLocationsArray = new ArrayList<>();
+        for(OwnableLocation location : ownableLocationArray) {
+            if(location.getSet().equals(Set.TRAINSTATION)) {
+                railRoadLocationsArray.add(location);
+            }
+        }return railRoadLocationsArray;
+    }
+
+    public List<OwnableLocation> getUtilityLocations() {
+        List<OwnableLocation> utilityLocationsArray = new ArrayList<>();
+        for(OwnableLocation location : ownableLocationArray) {
+            if(location.getSet().equals(Set.UTILITY)) {
+                utilityLocationsArray.add(location);
+            }
+        }return utilityLocationsArray;
+    }
+
+
     public void getMortgageOnLocation(OwnableLocation location) {
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);

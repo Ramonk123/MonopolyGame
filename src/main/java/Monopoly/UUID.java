@@ -1,5 +1,7 @@
 package Monopoly;
 
+import Models.Set;
+
 import java.util.HashMap;
 
 /**
@@ -38,5 +40,9 @@ public class UUID {
 
     public static boolean compare(String idOne, Identifiable idTwo) {
         return idOne.equals(idTwo.getId().getId());
+    }
+
+    public static boolean compare(Set setOne, Set setTwo) {
+        return setOne.equals(setTwo);
     }
 }
