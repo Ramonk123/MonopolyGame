@@ -107,7 +107,7 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
                 for (int i = 0; i < players.size(); i++) {
                     String text = String.format("%s - $%d", players.get(i).getName(), players.get(i).getBalance());
                     if(UUID.compare(turnController.getCurrentPlayer(), players.get(i).getPlayersEnum())) {
-                        text = "Active: " + text;
+                        text = "T: " + text;
                     }
                     labelList.get(i).setText(text);
                     labelList.get(i).setVisible(true);
