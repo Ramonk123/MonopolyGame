@@ -22,7 +22,7 @@ public class Wallet implements Model, Payer, Receiver, BoardSubject {
 
     public void setBalance(int balance) {
         this.balance = balance;
-        notifyObservers();
+        //notifyObservers();
     }
 
     @Override

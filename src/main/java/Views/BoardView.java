@@ -109,12 +109,8 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
                     if(UUID.compare(turnController.getCurrentPlayer(), players.get(i).getPlayersEnum())) {
                         text = "Active: " + text;
                     }
-                    try {
-                        labelList.get(i).setText(text);
-                        labelList.get(i).setVisible(true);
-                    } catch (NullPointerException e) {
-                        e.printStackTrace();
-                    }
+                    labelList.get(i).setText(text);
+                    labelList.get(i).setVisible(true);
                 }
             });
         }
