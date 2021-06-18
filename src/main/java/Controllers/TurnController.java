@@ -55,7 +55,7 @@ public class TurnController
         if (index >= size) {
             nextPlayer = list.get(0);
         } else {
-            nextPlayer = list.get(index);
+            nextPlayer = list.get(index + 1);
         }
         setCurrentPlayer(nextPlayer.getPlayersEnum());
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
