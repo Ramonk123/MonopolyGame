@@ -60,7 +60,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
     @FXML
     private void EndTurnPlayer() {
-        //TODO: End the turn of the player and set it on the next player.
+        System.out.println("COME ON MAN");
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         turnController.nextPlayerTurn();
     }
