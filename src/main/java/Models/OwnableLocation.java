@@ -14,6 +14,7 @@ public abstract class OwnableLocation extends Location {
     private final int price;
     private Optional<Player> owner = Optional.empty();
     private boolean containsMortgage = false;
+    private boolean isOwned = false;
 
     public OwnableLocation(Locations locationEnum, String name, Set set, int position, int price) {
         super(locationEnum, name, set, position);
@@ -35,4 +36,6 @@ public abstract class OwnableLocation extends Location {
     public void setMortgage(boolean value) {
         containsMortgage = value;
     }
+
+    public boolean isOwned(){ return isOwned;}
 }

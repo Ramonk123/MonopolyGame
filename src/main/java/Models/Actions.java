@@ -1,9 +1,6 @@
 package Models;
 
-import Controllers.ControllerRegistry;
-import Controllers.MainMenuController;
-import Controllers.PlayerController;
-import Controllers.TransactionController;
+import Controllers.*;
 import Monopoly.UUID;
 
 /**
@@ -85,4 +82,132 @@ public class Actions {
             }
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static void startAuction(OwnableLocation ownableLocation, Player player){
+        AuctionController auctionController = (AuctionController) ControllerRegistry.get(AuctionController.class);
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        if (player.getPosition() == ownableLocation.getPosition() && ownableLocation.isOwned()==false){
+            auctionController.startAuction();
+        }
+    }
+
+    public static void buyLocationPopup(Player player){
+            //TODO show popup
+    }
+
+    public static void goToJail(Player player){
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        try{playerController.teleportTo(player, 10);}
+        catch(Exception e) {System.out.println(e);
+        }
+    }
+
 }

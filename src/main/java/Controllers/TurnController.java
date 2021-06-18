@@ -2,6 +2,7 @@ package Controllers;
 
 import Exceptions.PlayerException;
 import Firestore.FirestoreFormattable;
+import Models.Actions;
 import Models.Player;
 import Models.Turn;
 import Monopoly.UUID;
@@ -24,6 +25,7 @@ public class TurnController
             Subject<DocumentSnapshot> {
 
     private Turn turn = new Turn();
+    private Player player = new Player(getCurrentPlayer(), getCurrentPlayer().name());
     private DocumentSnapshot documentSnapshot;
 
     public TurnController() {
@@ -82,6 +84,7 @@ public class TurnController
                 while(throwController.isDouble()) {
                     if(thrownDouble >= 3) {
                         //TODO: Go to Jail
+                        Actions.goToJail(player);
                         break;
                     }
                     throwController.throwDice();
