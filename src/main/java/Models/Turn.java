@@ -41,6 +41,18 @@ public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnaps
         return map;
     }
 
+    public void addOneToAmountOfDouble() {
+        amountOfDouble += 1;
+    }
+
+    public void resetAmountOfDouble() {
+        amountOfDouble = 0;
+    }
+
+    public int getAmountOfDouble() {
+        return amountOfDouble;
+    }
+
     @Override
     public void update(DocumentSnapshot state) {
         try {

@@ -89,9 +89,16 @@ public class TurnController
             if(!throwController.isDouble()) {
                 boardController.setRollDiceVisibility(false);
             } else {
+                turn.addOneToAmountOfDouble();
                 boardController.setRollDiceVisibility(true);
             } // Don't simplify this yet.
-            movePlayer(currentPlayerEnum, turn.getEyesThrown());
+
+            if(turn.getAmountOfDouble() >= 3) {
+                boardController.setRollDiceVisibility(false);
+                //TODO: Go to Jail
+            } else {
+                movePlayer(currentPlayerEnum, turn.getEyesThrown());
+            }
 
             boardController.setDiceLabelPane();
 
