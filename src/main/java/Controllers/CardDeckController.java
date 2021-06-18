@@ -39,13 +39,6 @@ public class CardDeckController
         setCardDecks();
     }
 
-// TODO:
-//  1. Update index on .teleportToLocation()
-//  2. create TP to station and utility methods in Actions.java
-//  3. implement get out of jail free card
-//  4. implement go to jail card
-//  5. implement make general repairs for property
-//  6. Initialize
     public void setCardDecks() {
         chanceCardDeck.add(new Card(new UUID("CARD-1"), "Advance to Steenstraat", (player -> { Actions.teleportToLocation(player,6, false); })));
         chanceCardDeck.add(new Card(new UUID("CARD-2"), "Advance to go (collect $200)", (player -> { Actions.teleportToLocation(player,0, true); })));
