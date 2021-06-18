@@ -4,6 +4,7 @@ import Controllers.*;
 import Monopoly.UUID;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -16,7 +17,7 @@ public class Actions {
     }
 
 
-    public static void teleportToLocation(Player player, int position) {
+    public static void teleportToLocation(Player player, long position) {
         PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
         playerController.teleportTo(player, position);
     }
@@ -25,7 +26,16 @@ public class Actions {
         PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         long playerPosition = player.getPosition();
-        List<OwnableLocation> railRoadLocations = locationController.getOwnableLocations();
+        List<OwnableLocation> railRoadLocations = locationController.getRailroadLocations();
+        ArrayList<Long> stepsToRailroad = new ArrayList<>();
+
+        for(OwnableLocation location : railRoadLocations) {
+            long railRoadPosition = location.getPosition();
+            stepsToRailroad.add((railRoadPosition - playerPosition));
+        }
+        long nearestRailroad = (stepsToRailroad.indexOf(Collections.min(stepsToRailroad)) + playerPosition);
+        playerController.teleportTo(player, nearestRailroad);
+
 
 
 
