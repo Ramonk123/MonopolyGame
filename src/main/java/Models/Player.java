@@ -24,7 +24,6 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
     ArrayList<Observer<BoardSubject>> observers = new ArrayList<>();
 
     private String name;
-    private String pawnIcon;
     private Wallet wallet = new Wallet();
     private long oldPosition;
     private long currentPosition;
@@ -33,7 +32,9 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
 
     public Player(Players playersEnum, String name) {
         this.playersEnum = playersEnum;
-        this.name = name;;
+        this.name = name;
+        this.currentPosition = 0;
+        this.oldPosition = 0;
         registerObserver(new BoardView());
     }
 
@@ -71,9 +72,6 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
         return name;
     }
 
-    public String getPawnIcon() {
-        return pawnIcon;
-    }
 
     public Wallet getWallet() {
         return wallet;
@@ -93,8 +91,8 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
         Map<String, Object> map = new HashMap<>();
         map.put("inJail", inJail);
         map.put("name", getName());
-        map.put("pawnIcon", "car.jpg");
-        map.put("position", getPosition());
+        map.put("oldPosition", getOldPosition());
+        map.put("currentPosition", getPosition());
         map.put("wallet", wallet.getBalance());
         return map;
     }

@@ -177,6 +177,15 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         return (String) documentSnapshot.get("nextCommonFundCard");
     }
 
+    public void updatePlayer(Player player) throws ExecutionException, InterruptedException {
+        DocumentSnapshot documentSnapshot = getSnapshot(token);
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        Map<String, Object> map = (Map<String, Object>) documentSnapshot.get("players");
+        map.put(player.getPlayersEnum().getId().getId(), player.getFirestoreFormat());
+        database.collection("Lobbies").document(String.valueOf(token))
+                .update("players", map);
+    }
+
     public void setConsumer(Consumer<DocumentSnapshot> lambda) {
         this.lambda = lambda;
     }
