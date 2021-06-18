@@ -121,14 +121,14 @@ public class TurnController
             turn.setEyesThrown(throwController.getTotalEyes());
 
             if(!throwController.isDouble()) {
-                boardController.setRollDiceVisibility(false);
+                boardController.setRollDiceVisibility(true);
             } else {
                 turn.addOneToAmountOfDouble();
                 boardController.setRollDiceVisibility(true);
             } // Don't simplify this yet.
 
             if(turn.getAmountOfDouble() >= 3) {
-                boardController.setRollDiceVisibility(false);
+                boardController.setRollDiceVisibility(true);
                 //TODO: Go to Jail
             } else {
                 movePlayer(currentPlayerEnum, turn.getEyesThrown());
