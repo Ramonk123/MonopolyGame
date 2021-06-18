@@ -27,7 +27,6 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
     private long currentPosition;
     private boolean inJail;
     private Players playersEnum;
-    private boolean entitledToSalary = true;
 
     public Player(Players playersEnum, String name) {
         this.playersEnum = playersEnum;
@@ -61,18 +60,22 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
         long newPosition = getPosition() + amountThrown;
         if(newPosition >= amountOfLocations) {
             newPosition -= amountOfLocations;
-            if(entitledToSalary) {
-                TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
-                try {
-                    transactionController.addBalance(playersEnum, 200);
-                } catch (TransactionException transactionException) {
-                    transactionException.printStackTrace();
-                }
-            } else {
-                entitledToSalary = true;
+
+            TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
+            try {
+                transactionController.addBalance(playersEnum, 200);
+            } catch (TransactionException transactionException) {
+                transactionException.printStackTrace();
             }
         }
         setPosition(newPosition);
+    }
+
+    public boolean wentPastGo() {
+        if(currentPosition == 0) {
+            return false;
+        }
+        return oldPosition > currentPosition;
     }
 
     @Override

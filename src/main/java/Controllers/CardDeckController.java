@@ -47,10 +47,10 @@ public class CardDeckController
 //  5. implement make general repairs for property
 //  6. Initialize
     public void setCardDecks() {
-        chanceCardDeck.add(new Card(new UUID("CARD-1"), "Advance to Steenstraat", (player -> { Actions.teleportToLocation(player,6); })));
-        chanceCardDeck.add(new Card(new UUID("CARD-2"), "Advance to go (collect $200)", (player -> { Actions.teleportToLocation(player,0); })));
-        chanceCardDeck.add(new Card(new UUID("CARD-3"), "Advance to Grote markt. If you pass go, collect $200", (player -> { Actions.teleportToLocation(player,23); })));
-        chanceCardDeck.add(new Card(new UUID("CARD-4"), "Advance to Zijlweg. If you pass go, collect $200", (player -> { Actions.teleportToLocation(player,13); })));
+        chanceCardDeck.add(new Card(new UUID("CARD-1"), "Advance to Steenstraat", (player -> { Actions.teleportToLocation(player,6, false); })));
+        chanceCardDeck.add(new Card(new UUID("CARD-2"), "Advance to go (collect $200)", (player -> { Actions.teleportToLocation(player,0, true); })));
+        chanceCardDeck.add(new Card(new UUID("CARD-3"), "Advance to Grote markt. If you pass go, collect $200", (player -> { Actions.teleportToLocation(player,23, true); })));
+        chanceCardDeck.add(new Card(new UUID("CARD-4"), "Advance to Zijlweg. If you pass go, collect $200", (player -> { Actions.teleportToLocation(player,13, true); })));
         chanceCardDeck.add(new Card(new UUID("CARD-5"), "Advance to the nearest Railroad. If unowned, you may buy it from the Bank. If owned, pay wonder twice the rental to which they are otherwise entitled.", Actions::teleportToNearestRailroad));
         chanceCardDeck.add(new Card(new UUID("CARD-6"), "Advance to the nearest Utility. If unowned, you may buy it from the Bank. If owned, throw dice and pay owner a total of ten times amount thrown.", Actions::teleportToNearestUtility));
         chanceCardDeck.add(new Card(new UUID("CARD-7"), "Bank pays you dividend of $50", (player -> { Actions.receiveFunds(player, 50); })));
@@ -59,11 +59,11 @@ public class CardDeckController
         chanceCardDeck.add(new Card(new UUID("CARD-10"), "Go to Jail. Go directly to Jail, do not pass Go, do not collect $200", Actions::exampleAction));
         chanceCardDeck.add(new Card(new UUID("CARD-11"), "Make general repairs on all your property. For each house pay $25. For each hotel pay $100", Actions::exampleAction));
         chanceCardDeck.add(new Card(new UUID("CARD-12"), "Speeding fine $15", (player -> { Actions.payFunds(player, 15); })));
-        chanceCardDeck.add(new Card(new UUID("CARD-13"), "Take a trip to Reading Railroad. If you pass Go, collect $200", (player -> { Actions.teleportToLocation(player,0); })));
+        chanceCardDeck.add(new Card(new UUID("CARD-13"), "Take a trip to Reading Railroad. If you pass Go, collect $200", (player -> { Actions.teleportToLocation(player,0, true); })));
         chanceCardDeck.add(new Card(new UUID("CARD-14"), "You have been elected Chairman of the Board. Pay each player $50", Actions::payEachPlayer));
         chanceCardDeck.add(new Card(new UUID("CARD-15"), "Your building loan matures. Collect $150", (player -> { Actions.receiveFunds(player, 150);})));
 
-        commonFundCardDeck.add(new Card(new UUID("CARD-16"), "Advance to Go (Collect $200)", (player -> { Actions.teleportToLocation(player, 0); })));
+        commonFundCardDeck.add(new Card(new UUID("CARD-16"), "Advance to Go (Collect $200)", (player -> { Actions.teleportToLocation(player, 0, true); })));
         commonFundCardDeck.add(new Card(new UUID("CARD-17"), "Bank error in your favor. Collect $200", (player -> { Actions.receiveFunds(player, 200);})));
         commonFundCardDeck.add(new Card(new UUID("CARD-18"), "Doctor’s fee. Pay $50", (player -> {Actions.payFunds(player, 50);})));
         commonFundCardDeck.add(new Card(new UUID("CARD-19"), "From sale of stock you get $50", (player -> {Actions.receiveFunds(player, 50);})));
