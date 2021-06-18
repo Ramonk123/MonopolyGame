@@ -1,6 +1,7 @@
 package Models;
 
 import Controllers.*;
+import Exceptions.TransactionException;
 import Monopoly.UUID;
 
 import java.util.ArrayList;
@@ -76,19 +77,22 @@ public class Actions {
 
     public static void goBackThreeSpaces(Player player) {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        try{playerController.movePlayer(player.getName(),-3);}
-        catch(Exception e) {System.out.println(e);
-        }
+        player.movePlayer(-3);
     }
 
     public static void payEachPlayer(Player player) {
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-
+        int amount = 50;
         for(Player eachPlayer: playerController.getPlayers()) {
             try {
-                if(!UUID.compare(player,eachPlayer))
-                transactionController.payBalance(player.getPlayersEnum(), eachPlayer.getPlayersEnum(), 50);
+                if(!UUID.compare(player,eachPlayer)) {
+                    if(player.checkBalance(amount)){
+                        transactionController.payBalance(player.getPlayersEnum(), eachPlayer.getPlayersEnum(), amount);
+                    } else {break;}
+
+                }
+
             } catch(Exception e) {
                 e.printStackTrace();
             }
@@ -99,14 +103,46 @@ public class Actions {
     public static void receiveFromEachPlayer(Player player) {
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-
+        int amount= 10;
         for(Player eachPlayer: playerController.getPlayers()) {
             try {
                 if(!UUID.compare(player,eachPlayer))
-                    transactionController.payBalance(eachPlayer.getPlayersEnum(),player.getPlayersEnum(),10);
+                    if(eachPlayer.checkBalance(amount)) {
+                        transactionController.payBalance(eachPlayer.getPlayersEnum(),player.getPlayersEnum(),amount);
+                    } else {break;}
+
             } catch(Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
+    public static void goToJail(Player player) {
+        player.setPosition(30);
+    }
+
+    public static void makeRepairs(Player player, int hotelCost, int houseCost) {
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
+        List<StreetLocation> locations = locationController.getStreetLocationsOwnedByPlayer(player.getId());
+        int total = 0;
+
+        if(locations.size() != 0) {
+            for (StreetLocation location : locations) {
+                if(location.getHotel()) {
+                    total += hotelCost;
+                }
+                else if(location.getHouses() > 0) {
+                    total += (location.getHouses() * houseCost );
+                }
+            }
+            try {
+                transactionController.subtractBalance(player.getPlayersEnum(), total);
+            } catch (TransactionException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }
