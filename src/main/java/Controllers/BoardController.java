@@ -93,8 +93,9 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get((int) oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
         System.out.println("dikke asser");
         System.out.println(currentPlayerGrid);
+        System.out.println(playerNumber);
         Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber); //Gets the playerIcon out of the array/list
-        //currentPlayerGrid.remove(playerNumber);
+        currentPlayerGrid.remove(playerNumber);
         ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get((int) newPosition)).getChildren(); //Gets the grid where the player moved to
         newPlayerGrid.add(playerNumber, playerIcon);
     }
