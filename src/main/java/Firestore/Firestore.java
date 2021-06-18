@@ -56,8 +56,6 @@ public class Firestore {
         database = firestoreDatabase;
     }
 
-
-
     // methods you can use to upload data to firestore.
     //Exceptions are for the last line in this function, update time.
     public void exampleUpload(com.google.cloud.firestore.Firestore db) throws ExecutionException, InterruptedException {
