@@ -1155,7 +1155,7 @@
          <children>
             <Label alignment="CENTER" prefWidth="100.0" />
             <Label alignment="CENTER" prefWidth="100.0" />
-            <Label alignment="CENTER" prefWidth="200.0" text="You have thrown double, roll again." />
+            <Label alignment="CENTER" prefWidth="200.0" text="You have thrown double, roll again." visible="false" />
          </children>
       </FlowPane>
    </children>
