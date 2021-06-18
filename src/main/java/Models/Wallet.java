@@ -33,13 +33,11 @@ public class Wallet implements Model, Payer, Receiver, BoardSubject {
     @Override
     public void addBalance(int value) {
         this.balance += value;
-        notifyObservers();
     }
 
     @Override
     public void subtractBalance(int value) {
         this.balance -= value;
-        notifyObservers();
     }
 
     @Override
