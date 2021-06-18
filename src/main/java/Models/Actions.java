@@ -1,10 +1,11 @@
 package Models;
 
-import Controllers.ControllerRegistry;
-import Controllers.MainMenuController;
-import Controllers.PlayerController;
-import Controllers.TransactionController;
+import Controllers.*;
 import Monopoly.UUID;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Model for all actions of cards and locations.
@@ -15,21 +16,44 @@ public class Actions {
         System.out.println("An example action has been performed.");
     }
 
-    public static void teleportToLocation(Player player, int index) {
-        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        playerController.teleportTo(player, index);
+
+    public static void teleportToLocation(Player player, long position) {
+        PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
+        playerController.teleportTo(player, position);
     }
 
     public static void teleportToNearestRailroad(Player player) {
-        //TODO:
-        // add functionality to method.
-        // Unable to do so now because location array not implemented
+        PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        long playerPosition = player.getPosition();
+        List<OwnableLocation> railRoadLocations = locationController.getRailroadLocations();
+        ArrayList<Long> stepsToRailroad = new ArrayList<>();
+
+        for(OwnableLocation location : railRoadLocations) {
+            long railRoadPosition = location.getPosition();
+            stepsToRailroad.add((railRoadPosition - playerPosition));
+        }
+        long nearestRailroad = (stepsToRailroad.indexOf(Collections.min(stepsToRailroad)) + playerPosition);
+        playerController.teleportTo(player, nearestRailroad);
+
+
+
+
     }
 
     public static void teleportToNearestUtility(Player player) {
-        //TODO:
-        // add functionality to method.
-        // Unable to do so now because location array not implemented
+        PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        long playerPosition = player.getPosition();
+        List<OwnableLocation> utilityLocations = locationController.getUtilityLocations();
+        ArrayList<Long> stepsToUtility = new ArrayList<>();
+
+        for(OwnableLocation location : utilityLocations) {
+            long utilityPosition = location.getPosition();
+            stepsToUtility.add((utilityPosition - playerPosition));
+        }
+        long nearestUtility = (stepsToUtility.indexOf(Collections.min(stepsToUtility)) + playerPosition);
+        playerController.teleportTo(player, nearestUtility);
     }
 
     public static void receiveFunds(Player player, int amount) {
