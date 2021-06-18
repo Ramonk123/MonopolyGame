@@ -42,9 +42,18 @@ public class Actions {
     }
 
     public static void teleportToNearestUtility(Player player) {
-        //TODO:
-        // add functionality to method.
-        // Unable to do so now because location array not implemented
+        PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        long playerPosition = player.getPosition();
+        List<OwnableLocation> utilityLocations = locationController.getUtilityLocations();
+        ArrayList<Long> stepsToUtility = new ArrayList<>();
+
+        for(OwnableLocation location : utilityLocations) {
+            long utilityPosition = location.getPosition();
+            stepsToUtility.add((utilityPosition - playerPosition));
+        }
+        long nearestUtility = (stepsToUtility.indexOf(Collections.min(stepsToUtility)) + playerPosition);
+        playerController.teleportTo(player, nearestUtility);
     }
 
     public static void receiveFunds(Player player, int amount) {
