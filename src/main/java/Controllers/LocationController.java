@@ -537,6 +537,8 @@ public class LocationController implements Controller {
         return ownableLocationArray;
     }
 
+
+
     public void getMortgageOnLocation(OwnableLocation location) {
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
