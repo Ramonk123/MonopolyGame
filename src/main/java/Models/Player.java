@@ -33,7 +33,9 @@ public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, 
 
     public Player(Players playersEnum, String name) {
         this.playersEnum = playersEnum;
-        this.name = name;;
+        this.name = name;
+        this.currentPosition = 0;
+        this.oldPosition = 0;
         registerObserver(new BoardView());
     }
 

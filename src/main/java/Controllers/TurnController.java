@@ -11,6 +11,7 @@ import Resetter.Resettable;
 import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Controller for the Turn model, mainly controls the flow of actions that the player can do.
@@ -104,5 +105,13 @@ public class TurnController
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         boardController.movePlayerOnBoard(currentPlayerEnum, oldPlayerPosition, newPlayerPosition);
 
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+        try {
+            fireStoreController.updatePlayer(currentPlayer);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

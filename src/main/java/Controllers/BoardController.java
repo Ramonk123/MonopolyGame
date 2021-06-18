@@ -70,6 +70,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     public GridPane getBoardViewPlayerPane() {
         return BoardViewPlayerPane;
     }
+
     public void movePlayerOnBoard(Players player, long oldPosition, long newPosition) {
         int playerNumber = player.ordinal();
 
