@@ -59,6 +59,11 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     }
 
     @FXML
+    private void EndTurnPlayer() {
+        //TODO: End the turn of the player and set it on the next player.
+    }
+
+    @FXML
     private void RollDiceAction(ActionEvent actionEvent) throws PlayerException {
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         turnController.RollDice();
