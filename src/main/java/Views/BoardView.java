@@ -134,9 +134,9 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
                     long eyesThrown = currentPosition - oldPosition;
 
                     try {
-                        turnController.movePlayer(player.getPlayersEnum(), eyesThrown);
-                    } catch (PlayerException playerException) {
-                        playerException.printStackTrace();
+                        turnController.movePlayerOnBoard(player.getPlayersEnum(), eyesThrown);
+                    } catch (PlayerException e) {
+                        e.printStackTrace();
                     }
                 }
             });
