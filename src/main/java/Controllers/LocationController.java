@@ -666,4 +666,14 @@ public class LocationController implements Controller {
         }
     }
 
+    public Optional<Location> getLocationByEnum(UUID locationId) {
+        Location location = null;
+        for (Location l : locationArray) {
+            if (UUID.compare(l.getId(), locationId)) {
+                location = l;
+                break;
+            }
+        }
+        return Optional.ofNullable(location);
+    }
 }
