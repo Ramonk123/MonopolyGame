@@ -191,6 +191,20 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         this.lambda = lambda;
     }
 
+    public void createAuction(HashMap auction){
+        AuctionController auctionController = (AuctionController) ControllerRegistry.get(AuctionController.class);
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        database.collection("Lobbies").document(String.valueOf(token))
+                .update("auction", auctionController.getFirestoreFormat());
+    }
+
+    public void endAuction(){
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        database.collection("Lobbies").document(String.valueOf(token))
+                .update("auction", null);
+
+    }
+
     public void listen(int lobbyToken) {
         DocumentReference docRef = firestore.getDatabase().collection("Lobbies").document(String.valueOf(lobbyToken));
         docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
