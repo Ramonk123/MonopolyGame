@@ -16,8 +16,8 @@ public class Dice implements Model, DiceThrower {
     @Override
     public void throwDice() {
         Random random = new Random();
-        //eyes = random.nextInt(6) + 1;
-        eyes = 11; //Always land on Chance
+        eyes = random.nextInt(6) + 1;
+        //eyes = 11; //Always land on Chance
     }
 
     @Override

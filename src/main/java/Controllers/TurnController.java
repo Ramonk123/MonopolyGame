@@ -152,7 +152,7 @@ public class TurnController
             standingOnLocation(currentPlayer);
         }
 
-        standingOnLocation(player);
+        //standingOnLocation(player);
 
     }
 
