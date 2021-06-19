@@ -82,7 +82,6 @@ public class TurnController
         Map<String, Object> map = (Map<String, Object>) state.get("turn");
         System.out.println(map);
         assert map != null;
-        //Why set eyesThrown and after that reset it to 0 in turn.update()?
         System.out.println(map.containsKey("eyesThrown"));
         turn.setEyesThrown((long) map.get("eyesThrown"));
         notifyObservers();
