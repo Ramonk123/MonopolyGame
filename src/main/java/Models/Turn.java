@@ -3,9 +3,11 @@ package Models;
 import Controllers.*;
 import Exceptions.PlayerException;
 import Firestore.FirestoreFormattable;
+import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import com.google.cloud.firestore.DocumentSnapshot;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +26,16 @@ public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnaps
     }
 
     public void setCurrentPlayer(Players players) {
+        // players == client player && players != activePlayer
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+
+        System.out.println("Check if client player is players: " + UUID.compare(playerController.getClientPlayersEnum(), players));
+        System.out.println("Check if active player is already active player: " + UUID.compare(activePlayer, players));
+        if(!UUID.compare(playerController.getClientPlayersEnum(), players) && !UUID.compare(activePlayer, players)) {
+            boardController.toggleRollDiceButton(false);
+            boardController.toggleEndTurnButton(false);
+        }
         this.activePlayer = players;
     }
 
@@ -58,10 +70,11 @@ public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnaps
         try {
             Map<String, Object> map = (Map<String, Object>) state.get("turn");
             assert map != null;
-            activePlayer = Players.getByStringUuid((String) map.get("activePlayer"))
-                    .orElseThrow(() -> new PlayerException("Player Id doesn't exist."));
+            setCurrentPlayer(Players.getByStringUuid((String) map.get("activePlayer"))
+                    .orElseThrow(() -> new PlayerException("Player Id doesn't exist.")));
             amountOfDouble = (int) (long) map.get("amountOfDoubles");
             eyesThrown = (long) map.get("eyesThrown");
+
         } catch(PlayerException playerException) {
             playerException.printStackTrace();
         }
