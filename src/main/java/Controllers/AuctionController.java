@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * Controller for the Auction model.
  */
-public class AuctionController implements Subject<DocumentSnapshot>, FirestoreFormattable {
+public class AuctionController implements Subject<DocumentSnapshot>, FirestoreFormattable, Controller {
 
     private Player player;
     private Auction auction =  new Auction();

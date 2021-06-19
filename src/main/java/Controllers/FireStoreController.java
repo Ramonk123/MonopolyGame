@@ -21,7 +21,7 @@ import javax.annotation.Nullable;
 /**
  * Controller for the Firestore model, this controller is the gateway to the database.
  */
-public class FireStoreController implements Subject<DocumentSnapshot>, HasStage {
+public class FireStoreController implements Subject<DocumentSnapshot>, HasStage, Controller {
 
     private int token;
     private Consumer<DocumentSnapshot> lambda = (doc) -> {};

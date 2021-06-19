@@ -5,7 +5,7 @@ import Models.Trade;
 /**
  * Controller for the Trade model.
  */
-public class TradeController {
+public class TradeController implements Controller {
 
     private Trade trade = new Trade();
 

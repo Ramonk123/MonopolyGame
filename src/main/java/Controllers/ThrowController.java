@@ -6,7 +6,7 @@ import Models.Throw;
 /**
  * Controller for the Throw and Dice model.
  */
-public class ThrowController implements DiceThrower {
+public class ThrowController implements DiceThrower, Controller {
 
     private Throw currentThrow = new Throw();
 

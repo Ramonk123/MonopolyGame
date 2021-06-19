@@ -25,7 +25,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * Controller for the Board model & BoardView view.
  */
-public class BoardController implements Subject<DocumentSnapshot>, Observer<DocumentSnapshot>, HasStage {
+public class BoardController implements Subject<DocumentSnapshot>, Observer<DocumentSnapshot>, HasStage, Controller {
 
     private Board board = new Board();
 

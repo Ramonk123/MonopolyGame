@@ -17,7 +17,7 @@ public class CardDeckController
         implements
         Observer<DocumentSnapshot>,
             Subject<DocumentSnapshot>,
-            Resettable {
+            Resettable, Controller {
 
     private CardDeck cardDeck;
 

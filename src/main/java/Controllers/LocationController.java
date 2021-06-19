@@ -12,7 +12,7 @@ import java.util.function.ToLongFunction;
 /**
  * Controller for the Location, OwnableLocation and SpecialLocation model, mainly to create Lists with (all) Locations in them.
  */
-public class LocationController {
+public class LocationController implements Controller {
     private static LocationController locationController;
     private AuctionController auctionController = new AuctionController();
     private List<Location> locationArray = new ArrayList<>();

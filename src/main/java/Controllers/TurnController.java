@@ -23,7 +23,7 @@ public class TurnController
         FirestoreFormattable,
             Observer<DocumentSnapshot>,
             Resettable,
-            Subject<DocumentSnapshot> {
+            Subject<DocumentSnapshot>, Controller {
 
     private Turn turn = new Turn();
     private Player player = new Player(getCurrentPlayer(), getCurrentPlayer().name());

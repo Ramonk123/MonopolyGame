@@ -18,7 +18,7 @@ public class PlayerController
         FirestoreFormattable,
             Subject<DocumentSnapshot>,
             Observer<DocumentSnapshot>,
-            Resettable {
+            Resettable, Controller {
 
     private Players clientPlayer;
     private ArrayList<Player> players;

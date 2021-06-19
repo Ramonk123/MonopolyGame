@@ -36,7 +36,7 @@ public class LobbyController
             HasStage,
             FirestoreFormattable,
             Observer<DocumentSnapshot>,
-            Resettable {
+            Resettable, Controller {
 
     private Lobby lobby;
     private DocumentSnapshot documentSnapshot;
