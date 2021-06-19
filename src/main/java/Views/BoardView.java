@@ -124,19 +124,25 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
         if(boardController.checkGameHasStarted()) {
             Platform.runLater(() -> {
                 for (Player player : playerController.getPlayers()) {
-                    if (UUID.compare(playerController.getClientPlayersEnum(), player.getPlayersEnum())) {
+                    if (UUID.compare(playerController.getClientPlayersEnum(), player) || UUID.compare(playerController.getClientPlayersEnum(), turnController.getCurrentPlayer())) {
                         System.out.println(playerController.getClientPlayersEnum());
-                        System.out.println("haha");
                         continue;
                     }
+
                     long oldPosition = player.getOldPosition();
                     long currentPosition = player.getPosition();
                     long eyesThrown = currentPosition - oldPosition;
 
-                    try {
-                        turnController.movePlayerOnBoard(player.getPlayersEnum(), eyesThrown);
-                    } catch (PlayerException e) {
-                        e.printStackTrace();
+                    System.out.println(oldPosition);
+                    System.out.println(currentPosition);
+                    System.out.println(eyesThrown);
+                    if(eyesThrown != 0) {
+                        System.out.println("Move player");
+                        try {
+                            turnController.movePlayerOnBoard(player.getPlayersEnum(), eyesThrown);
+                        } catch (PlayerException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             });

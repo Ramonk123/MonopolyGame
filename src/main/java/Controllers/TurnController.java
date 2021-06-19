@@ -54,7 +54,7 @@ public class TurnController
         int index = list.indexOf(player);
         int size = list.size();
         Player nextPlayer;
-        if (index >= size) {
+        if (index + 1 >= size) {
             nextPlayer = list.get(0);
         } else {
             nextPlayer = list.get(index + 1);
@@ -85,7 +85,6 @@ public class TurnController
         assert map != null;
         System.out.println(map.containsKey("eyesThrown"));
         turn.setEyesThrown((long) map.get("eyesThrown"));
-        System.out.println("testerst");
         notifyObservers();
     }
 

@@ -60,7 +60,6 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
     @FXML
     private void EndTurnPlayer() {
-        System.out.println("COME ON MAN");
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         turnController.nextPlayerTurn();
     }
@@ -98,16 +97,23 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
     public void movePlayerOnBoard(Players player, long oldPosition, long newPosition) {
         int playerNumber = player.ordinal();
+        System.out.println("player number: " + playerNumber);
+
+        System.out.println(oldPosition);
+        System.out.println(newPosition);
 
         ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren(); //Sets the whole board in an array/list
         ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get((int) oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
-        System.out.println("dikke asser");
-        System.out.println(currentPlayerGrid);
-        System.out.println(playerNumber);
-        System.out.println(oldPosition);
-        System.out.println(newPosition);
+
+        System.out.println("current player grid: " + currentPlayerGrid);
+
         Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber); //Gets the playerIcon out of the array/list
-        currentPlayerGrid.remove(playerNumber);
+
+        //currentPlayerGrid.remove(playerNumber);
+        currentPlayerGrid.set(playerNumber, new Pane());
+
+        System.out.println("current player grid: " + currentPlayerGrid);
+
         ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get((int) newPosition)).getChildren(); //Gets the grid where the player moved to
         newPlayerGrid.add(playerNumber, playerIcon);
     }
@@ -290,7 +296,6 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @Override
     public void update(DocumentSnapshot documentSnapshot) {
         this.documentSnapshot = documentSnapshot;
-        System.out.println("platte asser");
         notifyObservers();
     }
 
