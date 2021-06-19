@@ -219,9 +219,17 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     }
 
     @FXML Pane buyLocationPane;
+    @FXML Label locationForSaleName;
+    @FXML Label locationForSalePrice;
+    @FXML Label locationForSaleHouse;
+    @FXML Label locationForSaleMortgage;
+
+    public void updateBuyLocationPane(){
+
+    }
 
     public void showBuyLocationPopup(Player player) {
-            buyLocationPane.setVisible(!buyLocationPane.isVisible());
+            buyLocationPane.setVisible(true);
     }
 
     public void buyLocation(Player player, OwnableLocation location) {
@@ -232,6 +240,13 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     public void sellLocation(Player player, OwnableLocation location) {
         location.setOwnerNull();
         player.addBalance(location.getPrice());
+    }
+
+
+    @FXML Pane notEnoughBalancePane;
+
+    public void showNotEnoughBalance(){
+        notEnoughBalancePane.setVisible(true);
     }
 
     @FXML
