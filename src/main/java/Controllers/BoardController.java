@@ -115,7 +115,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         System.out.println("current player grid: " + currentPlayerGrid);
 
         ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get((int) newPosition)).getChildren(); //Gets the grid where the player moved to
-        newPlayerGrid.add(playerNumber, playerIcon);
+        newPlayerGrid.set(playerNumber, playerIcon);
     }
 
     public Location playerStandsOn(Player player) { //Player prob gets changed to Players
