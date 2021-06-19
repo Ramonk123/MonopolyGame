@@ -53,12 +53,18 @@ public class AuctionController implements Controller, Subject<DocumentSnapshot>,
         //TODO: 2. Ik (Brandon) fix de fxml en view voor de nieuwe auction later.
         auctionPane.setVisible(!auctionPane.isVisible());
 
+        //begin boring stuff
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        String sellerUUID = playerController.getClientPlayersEnum().getId().getId();
 
+        auction.startAuction(positionId, sellerUUID);
 
+        //TODO: turn functions
 
+    }
 
-
-
+    //TODO: needs to be used when its the players turn. Extra thread for the timer. that needs to be added. of course.
+    public void placeBid(){
         placeBidButton.setOnAction(actionEvent -> {
 
             if (!auction.hasStartedAuction()){
@@ -76,7 +82,6 @@ public class AuctionController implements Controller, Subject<DocumentSnapshot>,
 
             }
         });
-
     }
 
     public Pair<String, Integer> getHighestBid(){
