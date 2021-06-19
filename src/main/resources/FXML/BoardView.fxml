@@ -368,14 +368,14 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Pane fx:id="playerONE" prefHeight="10.0" prefWidth="10.0" />
-                  <Pane fx:id="playerTWO" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" />
-                  <Pane fx:id="playerTHREE" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="1" />
-                  <Pane fx:id="playerFOUR" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Pane fx:id="playerFIVE" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="2" />
-                  <Pane fx:id="playerSIX" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Pane fx:id="playerSEVEN" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="3" />
-                  <Pane fx:id="playerEIGHT" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Pane fx:id="ONE" prefHeight="10.0" prefWidth="10.0" />
+                  <Pane fx:id="TWO" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" />
+                  <Pane fx:id="THREE" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="1" />
+                  <Pane fx:id="FOUR" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Pane fx:id="FIVE" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="2" />
+                  <Pane fx:id="SIX" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Pane fx:id="SEVEN" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="3" />
+                  <Pane fx:id="EIGHT" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <GridPane GridPane.columnIndex="9" GridPane.rowIndex="10">
@@ -434,14 +434,14 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Pane fx:id="playerONE1" prefHeight="10.0" prefWidth="10.0" />
-                  <Pane fx:id="playerTWO1" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" />
-                  <Pane fx:id="playerTHREE1" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="1" />
-                  <Pane fx:id="playerFOUR1" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Pane fx:id="playerFIVE1" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="2" />
-                  <Pane fx:id="playerSIX1" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Pane fx:id="playerSEVEN1" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="3" />
-                  <Pane fx:id="playerEIGHT1" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="1" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="2" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="3" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <GridPane GridPane.columnIndex="6" GridPane.rowIndex="10">
@@ -456,14 +456,14 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Pane fx:id="playerONE2" prefHeight="10.0" prefWidth="10.0" />
-                  <Pane fx:id="playerTWO2" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" />
-                  <Pane fx:id="playerTHREE2" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="1" />
-                  <Pane fx:id="playerFOUR2" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Pane fx:id="playerFIVE2" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="2" />
-                  <Pane fx:id="playerSIX2" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Pane fx:id="playerSEVEN2" prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="3" />
-                  <Pane fx:id="playerEIGHT2" prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="1" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="2" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.rowIndex="3" />
+                  <Pane prefHeight="10.0" prefWidth="10.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <GridPane GridPane.columnIndex="5" GridPane.rowIndex="10">

@@ -152,11 +152,13 @@ public class TurnController
         Player currentPlayer = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getPlayerByPlayersEnum(currentPlayerEnum).orElseThrow(() -> new PlayerException("Player NOT Found"));
 
         currentPlayer.movePlayer(eyesThrown);
+        /*
         long oldPlayerPosition = currentPlayer.getOldPosition();
         long newPlayerPosition = currentPlayer.getPosition();
 
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         boardController.movePlayerOnBoard(currentPlayerEnum, oldPlayerPosition, newPlayerPosition);
+         */
     }
 
     public void movePlayerOnBoard(Players currentPlayerEnum) throws PlayerException {

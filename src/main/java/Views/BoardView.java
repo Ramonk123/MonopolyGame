@@ -127,32 +127,36 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
                 updateCount += 1;
                 System.out.println("UpdateCount" + updateCount);
 
-                for (Player player : playerController.getPlayers()) {
+                System.out.println("Current player: " + turnController.getCurrentPlayer());
+                System.out.println("Client player: " + playerController.getClientPlayersEnum());
 
-                    if (UUID.compare(playerController.getClientPlayersEnum(), player) || UUID.compare(playerController.getClientPlayersEnum(), turnController.getCurrentPlayer())) {
-                        continue;
-                    }
+                Player player = null;
+                try {
+                    player = playerController.getPlayerByPlayersEnum(turnController.getCurrentPlayer()).orElseThrow(Exception::new);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return;
+                }
 
-                    System.out.println("Current player: " + turnController.getCurrentPlayer());
-                    System.out.println("Client player: " + playerController.getClientPlayersEnum());
-                    /*
-                    long oldPosition = player.getOldPosition();
-                    long currentPosition = player.getPosition();
-                    long eyesThrown = currentPosition - oldPosition;
-                     */
+                long oldPosition = player.getOldPosition();
+                long currentPosition = player.getPosition();
+                long eyesThrownOld = currentPosition - oldPosition;
 
-                    long eyesThrown = turnController.getEyesThrown();
-                    System.out.println("Updated eyesthrown " + eyesThrown);
+                System.out.println("eyesthrown old " + eyesThrownOld);
 
-                    if (eyesThrown != 0) {
-                        System.out.println("Move player");
-                        try {
-                            turnController.movePlayerOnBoard(player.getPlayersEnum());
-                        } catch (PlayerException e) {
-                            e.printStackTrace();
-                        }
+
+                long eyesThrown = turnController.getEyesThrown();
+                System.out.println("Updated eyesthrown " + eyesThrown);
+
+                if (eyesThrown != 0) {
+                    System.out.println("Move player");
+                    try {
+                        turnController.movePlayerOnBoard(player.getPlayersEnum());
+                    } catch (PlayerException e) {
+                        e.printStackTrace();
                     }
                 }
+
 
             });
         }

@@ -5,6 +5,7 @@ import Models.Board;
 import Models.Location;
 import Models.OwnableLocation;
 import Models.Player;
+import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
@@ -97,6 +98,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
     public void movePlayerOnBoard(Players player, long oldPosition, long newPosition) {
         int playerNumber = player.ordinal();
+
         System.out.println("player number: " + playerNumber);
 
         System.out.println(oldPosition);
@@ -108,14 +110,21 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         System.out.println("current player grid: " + currentPlayerGrid);
 
         Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber); //Gets the playerIcon out of the array/list
+        if(UUID.compare("PLAYER-" + playerIcon.getId(), player)) {
 
-        //currentPlayerGrid.remove(playerNumber);
-        currentPlayerGrid.set(playerNumber, new Pane());
+            //currentPlayerGrid.remove(playerNumber);
+            currentPlayerGrid.set(playerNumber, new Pane());
 
-        System.out.println("current player grid: " + currentPlayerGrid);
+            System.out.println("current player grid: " + currentPlayerGrid);
 
-        ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get((int) newPosition)).getChildren(); //Gets the grid where the player moved to
-        newPlayerGrid.set(playerNumber, playerIcon);
+            ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get((int) newPosition)).getChildren(); //Gets the grid where the player moved to
+
+            System.out.println("new player grid: " + newPlayerGrid);
+
+            newPlayerGrid.set(playerNumber, playerIcon);
+
+            System.out.println("new player grid: " + newPlayerGrid);
+        }
     }
 
     public Location playerStandsOn(Player player) { //Player prob gets changed to Players
