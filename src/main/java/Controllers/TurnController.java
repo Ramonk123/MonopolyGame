@@ -150,8 +150,16 @@ public class TurnController
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
+
+            standingOnLocation(currentPlayer);
         }
 
+    }
+
+    public void standingOnLocation(Player player) {
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        Location location = boardController.playerStandsOn(player);
+        location.action(player);
     }
 
     public void movePlayer(Players currentPlayerEnum, long eyesThrown) throws PlayerException {
