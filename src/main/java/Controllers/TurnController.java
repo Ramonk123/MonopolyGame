@@ -56,13 +56,14 @@ public class TurnController
             e.printStackTrace();
         }
         List<Player> list = playerController.getPlayers();
-        int index = list.indexOf(player);
+        int index = 0;
         int size = list.size();
         System.out.println("Index: " + index);
         System.out.println("Size: " + size);
         Player nextPlayer;
         try {
-            nextPlayer = list.get(index + 1);
+            nextPlayer = list.get(index);
+            index ++;
         } catch(Exception e) {
             nextPlayer = list.get(0);
         }
