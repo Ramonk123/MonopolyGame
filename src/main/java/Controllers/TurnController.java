@@ -180,23 +180,17 @@ public class TurnController
                 assert currentPlayer != null;
                 fireStoreController.updateAllPlayers(lobbyController.getToken(), playerController.getPlayers());
                 fireStoreController.updateTurn(lobbyController.getToken(), turn);
-                System.out.println("value of chancecarsued");
-                System.out.println(chanceCardUsed);
-                /*if (chanceCardUsed) {
-                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHH");
-                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHH");
-                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHH");
-                    fireStoreController.setChanceCardNull(lobbyController.getToken());
-                }*/
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
-            }
+            }standingOnLocation(player);
         }
     }
 
     public void standingOnLocation(Player player) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        Location location = boardController.playerStandsOn(player);
+        Player currentPlayer = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getPlayerByPlayersEnum(getCurrentPlayer()).orElseThrow();
+        Location location = boardController.playerStandsOn(currentPlayer);
+        System.out.println(location.getName() + "location hier");
         location.action(player);
     }
 

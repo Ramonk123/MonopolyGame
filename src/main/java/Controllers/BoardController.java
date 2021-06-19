@@ -131,6 +131,7 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         long playerPosition = player.getPosition();
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         List<Location> locationArray = locationController.getLocationArray();
+        System.out.println(playerPosition + "yeshello");
         return locationArray.get((int) playerPosition);
     }
 
@@ -224,15 +225,25 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     @FXML Label locationForSalePrice;
     @FXML Label locationForSaleHouse;
     @FXML Label locationForSaleMortgage;
+    @FXML Button buyLocationButton;
 
-    public void updateBuyLocationPane(){
-
+    public void updateBuyLocationPane(Player player, OwnableLocation location){
+        locationForSaleName.setText(location.getName());
+        locationForSalePrice.setText(location.getName());
+        locationForSaleHouse.setText(location.getName());
+        locationForSaleMortgage.setText(location.getName());
     }
 
-    public void showBuyLocationPopup(Player player) {
+    public void showBuyLocationPopup(Player player, OwnableLocation location) {
+        System.out.println("boardcontroller popup method");
             buyLocationPane.setVisible(true);
+            //TODO Fix event on button (Koop straat/locatie)
+            buyLocationButton.setOnAction(event -> {
+                buyLocation(player,location);
+            });
     }
 
+    @FXML
     public void buyLocation(Player player, OwnableLocation location) {
         location.setOwner(player, true);
         player.subtractBalance(location.getPrice());
