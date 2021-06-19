@@ -1,5 +1,10 @@
 package Models;
 
+import Controllers.ControllerRegistry;
+import Controllers.LocationController;
+
+import java.util.List;
+
 /**
  * Model that contains everything that a street location needs.
  */
@@ -26,8 +31,13 @@ public class StreetLocation extends OwnableLocation {
 
     @Override
     public void action(Player player) {
+        System.out.println(getOwner().isEmpty());
+        System.out.println("begin van action");
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        OwnableLocation location = (OwnableLocation) locationController.getLocationByEnum(getId()).orElseThrow();
             if (getOwner().isEmpty()){
-                Actions.buyLocationPopup(player, getPrice());
+                System.out.println("streetlocation popup");
+                Actions.buyLocationPopup(player, getPrice(), location);
             }
     }
 

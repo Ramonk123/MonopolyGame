@@ -157,7 +157,7 @@ public class Actions {
 
 
 
-//    positionId added
+//    TODO change method to startAuctionButton, add startActionButton in BoardController
     public static void startAuction(OwnableLocation ownableLocation, Player player){
         AuctionController auctionController = (AuctionController) ControllerRegistry.get(AuctionController.class);
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
@@ -166,23 +166,24 @@ public class Actions {
         }
     }
 
-    public static void buyLocationPopup(Player player, int price){
+    public static void buyLocationPopup(Player player, int price, OwnableLocation location){
         TransactionController transactionController = (TransactionController) ControllerRegistry.get((TransactionController.class));
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        System.out.println("popup reached");
         try {
             if (transactionController.checkBalance(player.getPlayersEnum(), price)==true){
-                boardController.showBuyLocationPopup(player);
+                boardController.showBuyLocationPopup(player, location);
             } else {boardController.showNotEnoughBalance();}
         } catch (TransactionException e) {
             e.printStackTrace();
         }
     }
 
-    public static void sellLocationPopup(Player player) {
+    public static void sellLocationPopup(Player player, OwnableLocation location) {
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
 
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        boardController.showBuyLocationPopup(player);
+        boardController.showBuyLocationPopup(player, location);
     }
 
     public static void goToJail(Player player){

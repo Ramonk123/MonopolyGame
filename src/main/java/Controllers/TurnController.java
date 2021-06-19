@@ -151,17 +151,18 @@ public class TurnController
                 assert currentPlayer != null;
                 fireStoreController.updatePlayer(lobbyController.getToken(), player);
                 fireStoreController.updateTurn(lobbyController.getToken(), turn);
-                standingOnLocation(player);
                 fireStoreController.updateAllPlayers(lobbyController.getToken(), playerController.getPlayers());
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
-            }
+            }standingOnLocation(player);
         }
     }
 
     public void standingOnLocation(Player player) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        Location location = boardController.playerStandsOn(player);
+        Player currentPlayer = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getPlayerByPlayersEnum(getCurrentPlayer()).orElseThrow();
+        Location location = boardController.playerStandsOn(currentPlayer);
+        System.out.println(location.getName() + "location hier");
         location.action(player);
     }
 

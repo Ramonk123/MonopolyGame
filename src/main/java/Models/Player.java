@@ -51,8 +51,10 @@ public class Player implements Observer<DocumentSnapshot>, BoardSubject, Positio
     }
 
     public void setPosition(long position) {
+        System.out.println(position + "playerpositionhierzo");
         setOldPosition(this.currentPosition);
         this.currentPosition = position;
+        System.out.println(currentPosition + "currentpositionhier");
     }
 
     public void movePlayer(long amountThrown) {
