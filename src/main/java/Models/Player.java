@@ -46,7 +46,7 @@ public class Player implements Observer<DocumentSnapshot>, BoardSubject, Positio
         return oldPosition;
     }
 
-    private void setOldPosition(long position) {
+    public void setOldPosition(long position) {
         oldPosition = position;
     }
 

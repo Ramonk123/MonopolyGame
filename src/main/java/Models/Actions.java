@@ -20,13 +20,13 @@ public class Actions {
 
 
     public static void teleportToLocation(Player player, long position, boolean entitledToSalary) {
-        System.out.println("IM ALIVEEE");
+        System.out.println("IM ALIVEEE1");
         PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
         playerController.teleportTo(player, position);
 
-        if(player.wentPastGo() && entitledToSalary) {
+        /*if(player.wentPastGo() && entitledToSalary) {
             //TODO: Activate Go Action
-        }
+        }*/
     }
 
     public static void teleportToNearestRailroad(Player player) {
@@ -61,7 +61,8 @@ public class Actions {
             long utilityPosition = location.getPosition();
             stepsToUtility.add((utilityPosition - playerPosition));
         }
-        long nearestUtility = (stepsToUtility.indexOf(Collections.min(stepsToUtility)) + playerPosition);
+        //long nearestUtility = (stepsToUtility.indexOf(Collections.min(stepsToUtility)) + playerPosition);
+        long nearestUtility = 3;
         playerController.teleportTo(player, nearestUtility);
     }
 
@@ -200,6 +201,7 @@ public class Actions {
         boardController.setChancePopupVisible(player);
 
     }
+
     public void payRent(Player payer, OwnableLocation location) {
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         Player receiver = location.getOwner().orElseThrow();

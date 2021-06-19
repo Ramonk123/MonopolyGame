@@ -154,10 +154,13 @@ public class FireStoreController implements Subject<DocumentSnapshot>, HasStage,
 
     public String getChanceCard(int token) throws InterruptedException, ExecutionException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
+        return (String) documentSnapshot.get("nextChanceCard");
+    }
+
+    public void setChanceCardNull(int token) throws InterruptedException, ExecutionException {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))
                 .update("nextChanceCard", null);
-        return (String) documentSnapshot.get("nextChanceCard");
     }
 
     public String getCommonFundCard() throws InterruptedException, ExecutionException {

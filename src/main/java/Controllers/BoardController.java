@@ -8,6 +8,7 @@ import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -355,17 +356,20 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
         if(!ChancePopup.isVisible()) {
             ChancePopup.setVisible(true);
-            try {
+            //try {
 
-                Card card = cardDeckController.grabChanceCard();
-                chanceCardText.setText(card.getDescription());
+                //Card card = cardDeckController.grabChanceCard();
+                Card card = cardDeckController.getRandomChanceCard();
+                Platform.runLater(() -> {
+                    chanceCardText.setText(card.getDescription());
+                });
                 card.action(player);
 
-            } catch (ExecutionException e) {
+            /*} catch (ExecutionException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
             chanceCardButton.setOnAction((e) -> {
 
                 ChancePopup.setVisible(false);

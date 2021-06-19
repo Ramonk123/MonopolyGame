@@ -48,7 +48,7 @@ public class CardDeckController
         chanceCardDeck.add(new Card(new UUID("CARD-14"), "You have been elected Chairman of the Board. Pay each player $50", Actions::payEachPlayer));
         chanceCardDeck.add(new Card(new UUID("CARD-15"), "Your building loan matures. Collect $150", (player -> { Actions.receiveFunds(player, 150);})));
 
-        commonFundCardDeck.add(new Card(new UUID("CARD-16"), "Advance to Go (Collect $200)", (player -> { Actions.teleportToLocation(player, 0, true); })));
+        /*commonFundCardDeck.add(new Card(new UUID("CARD-16"), "Advance to Go (Collect $200)", (player -> { Actions.teleportToLocation(player, 0, true); })));
         commonFundCardDeck.add(new Card(new UUID("CARD-17"), "Bank error in your favor. Collect $200", (player -> { Actions.receiveFunds(player, 200);})));
         commonFundCardDeck.add(new Card(new UUID("CARD-18"), "Doctor’s fee. Pay $50", (player -> {Actions.payFunds(player, 50);})));
         commonFundCardDeck.add(new Card(new UUID("CARD-19"), "From sale of stock you get $50", (player -> {Actions.receiveFunds(player, 50);})));
@@ -61,7 +61,7 @@ public class CardDeckController
         commonFundCardDeck.add(new Card(new UUID("CARD-27"), "Pay school fees of $50", (player -> {Actions.payFunds(player,50);})));
         commonFundCardDeck.add(new Card(new UUID("CARD-28"), "Receive $25 consultancy fee", (player -> {Actions.receiveFunds(player,25);})));
         commonFundCardDeck.add(new Card(new UUID("CARD-29"), "You are assessed for street repair. $40 per house. $115 per hotel", (player -> { Actions.makeRepairs(player,115,40);})));
-        commonFundCardDeck.add(new Card(new UUID("CARD-30"), "You have won second prize in a beauty contest. Collect $10", (player -> {Actions.receiveFunds(player,10);})));
+        commonFundCardDeck.add(new Card(new UUID("CARD-30"), "You have won second prize in a beauty contest. Collect $10", (player -> {Actions.receiveFunds(player,10);})));*/
         commonFundCardDeck.add(new Card(new UUID("CARD-31"), "You inherit $100", (player -> {Actions.receiveFunds(player,100);})));
 
         chanceCardDeck.shuffle();
@@ -75,6 +75,7 @@ public class CardDeckController
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
         String CardUUIDString = fireStoreController.getChanceCard(lobbyController.getToken());
+        TurnController.chanceCardUsed = true;
         for(int i = 0; chanceCardDeck.size() > i; i++){
             if(UUID.compare(CardUUIDString, chanceCardDeck.getCardDeck().get(i).getId())){
                 return chanceCardDeck.getCardDeck().get(i);
@@ -82,6 +83,11 @@ public class CardDeckController
         }
         return null;
     }
+
+    public Card getRandomChanceCard() {
+        this.chanceCardDeck.shuffle();
+        return this.chanceCardDeck.getCardDeck().get(0);
+    };
 
     public Card grabCommonFundCard() throws ExecutionException, InterruptedException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);

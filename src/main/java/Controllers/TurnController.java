@@ -11,6 +11,7 @@ import ObserveablePattern.Subject;
 import Resetter.Resettable;
 import com.google.cloud.firestore.DocumentSnapshot;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -28,6 +29,9 @@ public class TurnController
     private Turn turn = new Turn();
     private Player player = new Player(getCurrentPlayer(), getCurrentPlayer().name());
     private DocumentSnapshot documentSnapshot;
+
+    public static boolean chanceCardUsed = false;
+    public static boolean communityCardUsed = false;
 
     public TurnController() {
 
@@ -136,23 +140,54 @@ public class TurnController
                 turn.addOneToAmountOfDouble();
             } // Don't simplify this yet.
 
-            if(turn.getAmountOfDouble() >= 3) {
+            if(turn.getAmountOfDouble() >= 99) {
                 //TODO: Go to Jail
+                System.out.println("dikke asser");
+                System.out.println("dikke asser");
+                System.out.println("dikke asser");
+                System.out.println("dikke asser");
+                System.out.println("dikke asser");
+                System.out.println("dikke asser");
+                System.out.println("dikke asser");
             } else {
                 movePlayer(currentPlayerEnum, turn.getEyesThrown());
             }
 
             boardController.setDiceLabelPane();
 
+            long oldPosition = currentPlayer.getOldPosition();
+
+            System.out.println("sex");
+            System.out.println("sex");
+            System.out.println("sex");
+            System.out.println("sex");
+            System.out.println("sex");
+            System.out.println("sex");
+            System.out.println("sex");
+            System.out.println("sex");
+            System.out.println("sex");
+            System.out.println("sex");
+            System.out.println(oldPosition);
+
+            standingOnLocation(currentPlayer);
+
+            currentPlayer.setOldPosition(oldPosition);
+
 
             LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
             FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
             try {
                 assert currentPlayer != null;
-                fireStoreController.updatePlayer(lobbyController.getToken(), player);
-                fireStoreController.updateTurn(lobbyController.getToken(), turn);
-                standingOnLocation(player);
                 fireStoreController.updateAllPlayers(lobbyController.getToken(), playerController.getPlayers());
+                fireStoreController.updateTurn(lobbyController.getToken(), turn);
+                System.out.println("value of chancecarsued");
+                System.out.println(chanceCardUsed);
+                /*if (chanceCardUsed) {
+                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHH");
+                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHH");
+                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHH");
+                    fireStoreController.setChanceCardNull(lobbyController.getToken());
+                }*/
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
