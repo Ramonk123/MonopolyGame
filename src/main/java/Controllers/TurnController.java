@@ -62,11 +62,10 @@ public class TurnController
         setCurrentPlayer(nextPlayer.getPlayersEnum());
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
+
         try {
             fireStoreController.updateTurn(lobbyController.getToken(), turn);
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
+        } catch (ExecutionException | InterruptedException e) {
             e.printStackTrace();
         }
     }
@@ -83,6 +82,7 @@ public class TurnController
         Map<String, Object> map = (Map<String, Object>) state.get("turn");
         System.out.println(map);
         assert map != null;
+        //Why set eyesThrown and after that reset it to 0 in turn.update()?
         System.out.println(map.containsKey("eyesThrown"));
         turn.setEyesThrown((long) map.get("eyesThrown"));
         notifyObservers();
