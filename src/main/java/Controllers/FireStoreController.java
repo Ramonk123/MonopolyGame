@@ -115,7 +115,6 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
-        AuctionController auctionController = (AuctionController) ControllerRegistry.get(AuctionController.class);
 
         Map<String, Object> lobbyData = (Map<String, Object>) ((LobbyController) ControllerRegistry.get(LobbyController.class)).getFirestoreFormat();
         lobbyData.put("players", playerController.getFirestoreFormat());
@@ -196,6 +195,20 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     public void setConsumer(Consumer<DocumentSnapshot> lambda) {
         this.lambda = lambda;
+    }
+
+    public void createAuction(HashMap auction){
+        AuctionController auctionController = (AuctionController) ControllerRegistry.get(AuctionController.class);
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        database.collection("Lobbies").document(String.valueOf(token))
+                .update("auction", auctionController.getFirestoreFormat());
+    }
+
+    public void endAuction(){
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        database.collection("Lobbies").document(String.valueOf(token))
+                .update("auction", null);
+
     }
 
     public void listen(int lobbyToken) {
