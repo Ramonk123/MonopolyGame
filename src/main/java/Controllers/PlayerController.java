@@ -186,13 +186,28 @@ public class PlayerController
     }
 
     public void sortPlayerArrayList() {
-        Player player = players.get(0);
-        if(UUID.compare(player, Players.PLAYER_ONE)) {
-            return;
-        } else {
-            players.set(0, players.get(1));
-            players.set(1, player);
+        ArrayList<Player> newPlayerList = new ArrayList<>();
+
+        for(Player player : players) {
+            if (UUID.compare(player, Players.PLAYER_ONE)) {
+                newPlayerList.set(0, player);
+            } else if (UUID.compare(player, Players.PLAYER_TWO)) {
+                newPlayerList.set(1, player);
+            } else if (UUID.compare(player, Players.PLAYER_THREE)) {
+                newPlayerList.set(2, player);
+            } else if (UUID.compare(player, Players.PLAYER_FOUR)) {
+                newPlayerList.set(3, player);
+            } else if (UUID.compare(player, Players.PLAYER_FIVE)) {
+                newPlayerList.set(4, player);
+            } else if (UUID.compare(player, Players.PLAYER_SIX)) {
+                newPlayerList.set(5, player);
+            } else if (UUID.compare(player, Players.PLAYER_SEVEN)) {
+                newPlayerList.set(6, player);
+            } else if (UUID.compare(player, Players.PLAYER_EIGHT)) {
+                newPlayerList.set(7, player);
+            }
         }
 
-    }
+        players = newPlayerList;
+    } //TODO: Very nice sorting algorithm
 }
