@@ -9,10 +9,7 @@ import Resetter.Resettable;
 import com.google.cloud.firestore.DocumentSnapshot;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * Controller for the Player model, controls everything of the player expect the Wallet.
@@ -210,4 +207,13 @@ public class PlayerController
 
         players = newPlayerList;
     } //TODO: Very nice sorting algorithm
+
+    public Player getPlayerByPlayersEnum2(List<Player> list, Players ID) {
+        for (Player player : list) {
+            if (UUID.compare(player, ID)) {
+                return player;
+            }
+        }
+        return null;
+    }
 }

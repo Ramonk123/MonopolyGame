@@ -68,7 +68,7 @@ public class TurnController
         try {
             nextPlayer = list.get(index + 1);
         } catch(Exception e) {
-            nextPlayer = list.get(0);
+            nextPlayer = playerController.getPlayerByPlayersEnum2(list,Players.PLAYER_ONE);
         }
 
         setCurrentPlayer(nextPlayer.getPlayersEnum());
