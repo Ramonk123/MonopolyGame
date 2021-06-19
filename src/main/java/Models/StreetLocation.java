@@ -34,10 +34,10 @@ public class StreetLocation extends OwnableLocation {
         System.out.println(getOwner().isEmpty());
         System.out.println("begin van action");
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
-        OwnableLocation location = (OwnableLocation) locationController.getLocationByEnum(getId()).orElseThrow();
+        //OwnableLocation location = (OwnableLocation) locationController.getLocationByEnum(this.getId()).orElseThrow();
             if (getOwner().isEmpty()){
                 System.out.println("streetlocation popup");
-                Actions.buyLocationPopup(player, getPrice(), location);
+                Actions.buyLocationPopup(player, getPrice(), this);
             }
     }
 
