@@ -122,7 +122,6 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         lobbyData.put("turn", turnController.getFirestoreFormat());
         lobbyData.put("nextChanceCard", cardDeckController.getNextChanceCard());
         lobbyData.put("nextCommonFundCard", cardDeckController.getNextCommonFundCard());
-        lobbyData.put("Auction", auctionController.getFirestoreFormat());
 
 
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
