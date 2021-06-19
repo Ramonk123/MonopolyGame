@@ -76,6 +76,7 @@ public class Actions {
     }
 
     public static void payFunds(Player player, int amount) {
+
         System.out.println("IM ALIVEEE");
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         try{
@@ -191,7 +192,7 @@ public class Actions {
 
     public static void chanceCard(Player player) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        boardController.setChancePopupVisible();
+        boardController.setChancePopupVisible(player);
 
     }
     public void payRent(Player payer, OwnableLocation location) {

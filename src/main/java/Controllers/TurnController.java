@@ -146,6 +146,8 @@ public class TurnController
 
             boardController.setDiceLabelPane();
 
+            standingOnLocation(player);
+
             LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
             FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
             try {
@@ -155,12 +157,7 @@ public class TurnController
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
-
-            standingOnLocation(currentPlayer);
         }
-
-        //standingOnLocation(player);
-
     }
 
     public void standingOnLocation(Player player) {

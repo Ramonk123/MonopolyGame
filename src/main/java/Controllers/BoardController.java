@@ -338,7 +338,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @FXML Label chanceCardText;
     @FXML Button chanceCardButton;
     @FXML Pane ChancePopup;
-    public void setChancePopupVisible() {
+    public void setChancePopupVisible(Player player) {
         CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
         if(!ChancePopup.isVisible()) {
             ChancePopup.setVisible(true);
@@ -346,7 +346,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
                 Card card = cardDeckController.grabChanceCard();
                 chanceCardText.setText(card.getDescription());
-                System.out.println("blablabla" + card.getAction());
+                card.action(player);
 
             } catch (ExecutionException e) {
                 e.printStackTrace();

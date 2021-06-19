@@ -11,10 +11,6 @@ public class StationLocation extends OwnableLocation{
 
     @Override
     public void action(Player player) {
-        /*
-        gebaseerd op prijs kan je de huur bepalen voor dit pand.
-        baseRent = (price / 4)
-        rent = baseRent * amountStationsOwned
-         */
+
     }
 }
