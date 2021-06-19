@@ -37,7 +37,7 @@ public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnaps
         Map<String, Object> map = new HashMap<>();
         map.put("activePlayer", activePlayer.getId().getId());
         map.put("amountOfDoubles", amountOfDouble);
-        map.put("eyesThrown", 0);
+        map.put("eyesThrown", eyesThrown);
         return map;
     }
 
@@ -60,7 +60,8 @@ public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnaps
             assert map != null;
             activePlayer = Players.getByStringUuid((String) map.get("activePlayer"))
                     .orElseThrow(() -> new PlayerException("Player Id doesn't exist."));
-            amountOfDouble = (int) (long) map.get("amountOfDoubles"); //Shouldn't this cast to (long) instead of (int)? -Vincent
+            amountOfDouble = (int) (long) map.get("amountOfDoubles");
+            eyesThrown = (long) map.get("eyesThrown");
         } catch(PlayerException playerException) {
             playerException.printStackTrace();
         }

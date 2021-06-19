@@ -82,8 +82,7 @@ public class TurnController
         Map<String, Object> map = (Map<String, Object>) state.get("turn");
         System.out.println(map);
         assert map != null;
-        System.out.println(map.containsKey("eyesThrown"));
-        turn.setEyesThrown((long) map.get("eyesThrown"));
+        System.out.println("EyesThrown by current player " + map.get("eyesThrown"));
         notifyObservers();
     }
 
@@ -139,10 +138,10 @@ public class TurnController
             LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
             FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
             try {
+                assert currentPlayer != null;
                 fireStoreController.updatePlayer(lobbyController.getToken(), currentPlayer);
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+                fireStoreController.updateTurn(lobbyController.getToken(), turn);
+            } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
         }
@@ -160,7 +159,7 @@ public class TurnController
         boardController.movePlayerOnBoard(currentPlayerEnum, oldPlayerPosition, newPlayerPosition);
     }
 
-    public void movePlayerOnBoard(Players currentPlayerEnum, long eyesThrown) throws PlayerException {
+    public void movePlayerOnBoard(Players currentPlayerEnum) throws PlayerException {
         Player currentPlayer = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getPlayerByPlayersEnum(currentPlayerEnum).orElseThrow(() -> new PlayerException("Player NOT Found"));
 
         long oldPlayerPosition = currentPlayer.getOldPosition();
@@ -168,5 +167,9 @@ public class TurnController
 
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         boardController.movePlayerOnBoard(currentPlayerEnum, oldPlayerPosition, newPlayerPosition);
+    }
+
+    public long getEyesThrown() {
+        return turn.getEyesThrown();
     }
 }
