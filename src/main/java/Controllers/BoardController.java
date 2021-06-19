@@ -60,6 +60,9 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
     @FXML
     private void EndTurnPlayer() {
+        toggleRollDiceButton(false);
+        toggleEndTurnButton(false);
+
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         turnController.nextPlayerTurn();
     }
@@ -125,7 +128,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         }
     }
 
-    public Location playerStandsOn(Position player) { //Player prob gets changed to Players
+    public Location playerStandsOn(Position player) {
         long playerPosition = player.getPosition();
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         List<Location> locationArray = locationController.getLocationArray();
@@ -135,15 +138,15 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @FXML
     private Button BoardViewRollDiceButton;
 
-    public void setRollDiceVisibility(boolean state) {
-        BoardViewRollDiceButton.setVisible(state);
+    public void toggleRollDiceButton(boolean state) {
+        BoardViewRollDiceButton.setDisable(!state);
     }
 
     @FXML
     private Button EndTurnButton;
 
-    public void setEndTurnVisibility(boolean state) {
-        EndTurnButton.setVisible(state);
+    public void toggleEndTurnButton(boolean state) {
+        EndTurnButton.setDisable(!state);
     }
 
     @Override
@@ -157,6 +160,9 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @Override
     public void setStage(Stage primaryStage) {
         board.setStage(primaryStage);
+
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
+        turnController.startGameTurn();
     }
 
     @FXML

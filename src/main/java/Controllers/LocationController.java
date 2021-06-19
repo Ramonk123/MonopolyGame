@@ -585,7 +585,7 @@ public class LocationController implements Controller {
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         try {
-            transactionController.addBalance(playerController.getClientPlayersEnum(), (location.getPrice()/ 2));
+            transactionController.addBalance(playerController.getClientPlayersEnum(), location.getMortgageValue());
             location.setMortgage(true);
             System.out.println(transactionController.getBalance(playerController.getClientPlayersEnum()));
         } catch (TransactionException transactionException) {
@@ -600,7 +600,7 @@ public class LocationController implements Controller {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
 
         try {
-            transactionController.subtractBalance(playerController.getClientPlayersEnum(),(location.getPrice()/ 2));
+            transactionController.subtractBalance(playerController.getClientPlayersEnum(),location.getMortgageValue());
             location.setMortgage(false);
         } catch (TransactionException transactionException) {
             transactionException.printStackTrace();
