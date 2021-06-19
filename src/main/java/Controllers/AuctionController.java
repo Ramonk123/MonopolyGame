@@ -13,8 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
+import javafx.util.Pair;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -75,6 +77,20 @@ public class AuctionController implements Controller, Subject<DocumentSnapshot>,
             }
         });
 
+    }
+
+    public Pair<String, Integer> getHighestBid(){
+        Map<String, Object> playerbids = auction.getPlayerBids();
+        Iterator iterator = playerbids.entrySet().iterator();
+        long highestBid = 0;
+        Pair highestBidPair = null;
+        while(iterator.hasNext()){
+            Map.Entry pair = (Map.Entry) iterator.next();
+            if((int) pair.getValue() > highestBid){
+                highestBidPair = new Pair(pair.getKey(), pair.getValue());
+            }
+        }
+        return highestBidPair;
     }
 
     //TODO create functions that gets Auction bidding results
