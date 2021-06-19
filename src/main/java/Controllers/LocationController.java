@@ -7,6 +7,7 @@ import Monopoly.UUID;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.ToLongFunction;
 
 /**
@@ -655,4 +656,14 @@ public class LocationController implements Controller {
         }
     }
 
+    public Optional<Location> getLocationByEnum(UUID locationId) {
+        Location location = null;
+        for (Location l : locationArray) {
+            if (UUID.compare(l.getId(), locationId)) {
+                location = l;
+                break;
+            }
+        }
+        return Optional.ofNullable(location);
+    }
 }
