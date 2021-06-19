@@ -198,7 +198,6 @@ public class LobbyController
             e.printStackTrace();
         }
 
-        System.out.println(token);
         fireStoreController.createLobby(token);
 
 
@@ -287,7 +286,6 @@ public class LobbyController
     }
     @FXML
     private void goToGameViewFxml(ActionEvent actionEvent) {
-        System.out.println("fxml ass");
         //System.out.println((Stage) ((Node) event.getSource()).getScene().getWindow());
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         fireStoreController.startGame(token);
@@ -296,7 +294,6 @@ public class LobbyController
 
     private void goToGameView() {
         Stage primaryStage = lobby.getStage();
-        System.out.println(primaryStage);
         Platform.runLater(() -> {
             BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
             boardController.setStage(primaryStage);
@@ -311,10 +308,8 @@ public class LobbyController
     public void update(DocumentSnapshot state) {
         documentSnapshot = state;
         System.out.println(state.get("gameHasStarted"));
-        System.out.println("update");
         boolean boolAfterUpdate = (boolean) documentSnapshot.get("gameHasStarted");
-        if (!gameHasStarted && boolAfterUpdate) {
-            System.out.println("if statement");
+        if (!gameHasStarted && boolAfterUpdate) { ;
             gameHasStarted = boolAfterUpdate;
             goToGameView();
         }

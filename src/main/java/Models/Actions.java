@@ -67,7 +67,7 @@ public class Actions {
         try{
             transactionController.addBalance(player.getPlayersEnum(), amount);
         } catch(Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -76,7 +76,7 @@ public class Actions {
         try{
             transactionController.subtractBalance(player.getPlayersEnum(), amount);
         } catch(Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -167,7 +167,8 @@ public class Actions {
     public static void goToJail(Player player){
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         try{playerController.teleportTo(player, 10);}
-        catch(Exception e) {System.out.println(e);
+        catch(Exception e) {
+            e.printStackTrace();
         }
     }
 

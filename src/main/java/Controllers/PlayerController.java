@@ -132,15 +132,11 @@ public class PlayerController
     protected void updatePlayersSize(Map<String, Object> map) {
         Players playersEnum;
         Optional<Player> player;
-        System.out.println("time for enum run");
         try {
             for (Map.Entry<String, Object> entry : map.entrySet()) {
-                System.out.println(entry.getKey());
-                System.out.println(entry.getValue());
                 playersEnum = Players.getByStringUuid(entry.getKey()).orElseThrow(() -> new Exception("invalid PlayersEnum UUID."));
                 player = getPlayerByPlayersEnum(playersEnum);
                 if (player.isEmpty()) {
-                    System.out.println("WHOA setplayer");
                     setPlayerWithPlayersEnum(playersEnum, (String) ((Map<String, Object>) entry.getValue()).get("name"));
                 }
             }

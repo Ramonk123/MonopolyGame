@@ -49,12 +49,9 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
     @Override
     public void notifyObservers() {
-        System.out.println(observers);
         for (Observer<DocumentSnapshot> observer : observers) {
-            System.out.println(observer);
             observer.update(documentSnapshot);
         }
-        System.out.println("WHOA HIOFUIGWRFUIG");
     }
 
     @Override
@@ -92,9 +89,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
     }
 
     public void startGame(int token) {
-        System.out.println("huoewdfuhuoqewfhuoewf");
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
-        System.out.println(token);
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).update("gameHasStarted", true);
     }
 
@@ -102,7 +97,6 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
         DocumentSnapshot documentSnapshot = getSnapshot(token);
 
         HashMap<String, Players> players = (HashMap<String, Players>) documentSnapshot.get("players");
-        System.out.println(players);
         assert players != null;
         return players.size();
     }
@@ -204,7 +198,6 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
 
             public void onEvent(@Nullable DocumentSnapshot snapshot,
                                 @Nullable FirestoreException e) {
-                System.out.println("OMG A DOCSNAP");
                 if (e != null) {
                     System.err.println("Listen failed: " + e);
                     return;

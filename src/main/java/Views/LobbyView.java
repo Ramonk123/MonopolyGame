@@ -77,7 +77,6 @@ public class LobbyView implements View, Observer<LobbySubject>, HasStage {
 
             List<Player> players = state.getPlayers();
             int playersJoined = players.size();
-            System.out.println(playersJoined);
             for(int i = 0; i < playersJoined; i++) {
                 labelList.get(i).setText(players.get(i).getName());
             }

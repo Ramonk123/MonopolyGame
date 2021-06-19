@@ -55,7 +55,6 @@ public class AuctionController implements Controller, Subject<DocumentSnapshot> 
                     }
 
                 } catch(NumberFormatException numberFormatException) {
-                    System.out.println(numberFormatException);
                     NoNumberOnInputError.setVisible(true);
                     bidTextArea.clear();
                 }

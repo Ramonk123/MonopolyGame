@@ -41,13 +41,8 @@ public enum Players implements Identifiable {
 
     public static Optional<Players> getByStringUuid(String uuid) {
         Players playersEnum = null;
-        System.out.println("ENUM ENUM");
-        System.out.println(uuid);
-        System.out.println("loop");
         for (Players p : Players.values()) {
-            System.out.println(p.getId().getId());
             if (UUID.compare(uuid, p)) {
-                System.out.println("found");
                 playersEnum = p;
                 break;
             }
