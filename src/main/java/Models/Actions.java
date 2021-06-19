@@ -194,5 +194,15 @@ public class Actions {
         boardController.setChancePopupVisible();
 
     }
+    public void payRent(Player payer, OwnableLocation location) {
+        TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
+        Player receiver = location.getOwner().orElseThrow();
+        int rent = location.getPrice();
+        try {
+            transactionController.payBalance(payer.getPlayersEnum(), receiver.getPlayersEnum(), rent);
+        } catch (TransactionException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
