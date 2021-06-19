@@ -144,14 +144,15 @@ public class TurnController
 
             boardController.setDiceLabelPane();
 
-            standingOnLocation(player);
 
             LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
             FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
             try {
                 assert currentPlayer != null;
-                fireStoreController.updateAllPlayers(lobbyController.getToken(), playerController.getPlayers());
+                fireStoreController.updatePlayer(lobbyController.getToken(), player);
                 fireStoreController.updateTurn(lobbyController.getToken(), turn);
+                standingOnLocation(player);
+                fireStoreController.updateAllPlayers(lobbyController.getToken(), playerController.getPlayers());
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
