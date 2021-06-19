@@ -26,6 +26,16 @@ public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnaps
     public Turn() {
     }
 
+    public void startGameTurn() {
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+
+        if(UUID.compare(playerController.getClientPlayersEnum(), activePlayer)) {
+            boardController.toggleRollDiceButton(true);
+            boardController.toggleEndTurnButton(true);
+        }
+    }
+
     public void setCurrentPlayer(Players players) {
         // players == client player && players != activePlayer
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
@@ -38,6 +48,12 @@ public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnaps
 
         this.activePlayer = players;
 
+        if(UUID.compare(playerController.getClientPlayersEnum(), activePlayer)) {
+            try {
+                boardController.toggleRollDiceButton(true);
+                boardController.toggleEndTurnButton(true);
+            } catch(Exception ignored) {}
+        }
     }
 
     public Players getCurrentPlayer()

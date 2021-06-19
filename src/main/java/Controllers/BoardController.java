@@ -59,6 +59,9 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
 
     @FXML
     private void EndTurnPlayer() {
+        toggleRollDiceButton(false);
+        toggleEndTurnButton(false);
+
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         turnController.nextPlayerTurn();
     }
@@ -157,6 +160,9 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     @Override
     public void setStage(Stage primaryStage) {
         board.setStage(primaryStage);
+
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
+        turnController.startGameTurn();
     }
 
     @FXML

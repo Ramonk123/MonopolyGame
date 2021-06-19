@@ -35,6 +35,10 @@ public class TurnController
 
     }
 
+    public void startGameTurn() {
+        turn.startGameTurn();
+    }
+
     public Players getCurrentPlayer() {
         return turn.getCurrentPlayer();
     }
