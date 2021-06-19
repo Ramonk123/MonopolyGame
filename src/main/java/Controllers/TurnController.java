@@ -35,6 +35,10 @@ public class TurnController
 
     }
 
+    public void startGameTurn() {
+        turn.startGameTurn();
+    }
+
     public Players getCurrentPlayer() {
         return turn.getCurrentPlayer();
     }
@@ -121,19 +125,16 @@ public class TurnController
             turn.setEyesThrown(throwController.getTotalEyes());
 
             if(!throwController.isDouble()) {
-                boardController.setRollDiceVisibility(true);
+                boardController.toggleRollDiceButton(false);
+                boardController.toggleEndTurnButton(true);
             } else {
                 turn.addOneToAmountOfDouble();
-                boardController.setRollDiceVisibility(true);
             } // Don't simplify this yet.
 
             if(turn.getAmountOfDouble() >= 3) {
-                boardController.setRollDiceVisibility(true);
                 //TODO: Go to Jail
             } else {
                 movePlayer(currentPlayerEnum, turn.getEyesThrown());
-                Location location = boardController.playerStandsOn(player);
-                location.action(player);
             }
 
             boardController.setDiceLabelPane();
@@ -147,8 +148,18 @@ public class TurnController
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
+
+            standingOnLocation(currentPlayer);
         }
 
+        standingOnLocation(player);
+
+    }
+
+    public void standingOnLocation(Player player) {
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        Location location = boardController.playerStandsOn(player);
+        location.action(player);
     }
 
     public void movePlayer(Players currentPlayerEnum, long eyesThrown) throws PlayerException {
@@ -177,4 +188,5 @@ public class TurnController
     public long getEyesThrown() {
         return turn.getEyesThrown();
     }
+
 }

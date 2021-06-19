@@ -390,7 +390,7 @@ public class LocationController implements Controller {
                 "Kans",
                 Set.NONE,
                 7,
-                Actions::exampleAction
+                Actions::chanceCard
 
         );
         SpecialLocation chanceTwo = new SpecialLocation(
@@ -399,7 +399,7 @@ public class LocationController implements Controller {
                 "Kans",
                 Set.NONE,
                 22,
-                Actions::exampleAction
+                Actions::chanceCard
 
         );
         SpecialLocation chanceThree = new SpecialLocation(
@@ -408,7 +408,7 @@ public class LocationController implements Controller {
                 "Kans",
                 Set.NONE,
                 36,
-                Actions::exampleAction
+                Actions::chanceCard
 
         );
         SpecialLocation communityChestOne = new SpecialLocation(

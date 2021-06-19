@@ -15,11 +15,12 @@ import java.util.List;
 public class Actions {
 
     public static void exampleAction(Player player) {
-        System.out.println("An example action has been performed.");
+        System.out.println("An example action has been performed." + player.getPosition());
     }
 
 
     public static void teleportToLocation(Player player, long position, boolean entitledToSalary) {
+        System.out.println("IM ALIVEEE");
         PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
         playerController.teleportTo(player, position);
 
@@ -29,6 +30,7 @@ public class Actions {
     }
 
     public static void teleportToNearestRailroad(Player player) {
+        System.out.println("IM ALIVEEE");
         PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         long playerPosition = player.getPosition();
@@ -48,6 +50,7 @@ public class Actions {
     }
 
     public static void teleportToNearestUtility(Player player) {
+        System.out.println("IM ALIVEEE");
         PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         long playerPosition = player.getPosition();
@@ -63,6 +66,7 @@ public class Actions {
     }
 
     public static void receiveFunds(Player player, int amount) {
+        System.out.println("IM ALIVEEE");
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         try{
             transactionController.addBalance(player.getPlayersEnum(), amount);
@@ -72,6 +76,7 @@ public class Actions {
     }
 
     public static void payFunds(Player player, int amount) {
+        System.out.println("IM ALIVEEE");
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         try{
             transactionController.subtractBalance(player.getPlayersEnum(), amount);
@@ -81,11 +86,13 @@ public class Actions {
     }
 
     public static void goBackThreeSpaces(Player player) {
+        System.out.println("IM ALIVEEE");
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         player.movePlayer(-3);
     }
 
     public static void payEachPlayer(Player player) {
+        System.out.println("IM ALIVEEE");
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         int amount = 50;
@@ -106,6 +113,7 @@ public class Actions {
     }
 
     public static void receiveFromEachPlayer(Player player) {
+        System.out.println("IM ALIVEEE");
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         int amount= 10;
@@ -123,6 +131,7 @@ public class Actions {
     }
 
     public static void makeRepairs(Player player, int hotelCost, int houseCost) {
+        System.out.println("IM ALIVEEE");
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         List<StreetLocation> locations = locationController.getStreetLocationsOwnedByPlayer(player.getId());
@@ -168,6 +177,14 @@ public class Actions {
         catch(Exception e) {
             e.printStackTrace();
         }
+    }
+
+    //Location actions
+
+    public static void chanceCard(Player player) {
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        boardController.setChancePopupVisible();
+
     }
 
 }

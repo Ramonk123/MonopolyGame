@@ -1,9 +1,6 @@
 package Controllers;
 
-import Models.Actions;
-import Models.Card;
-import Models.CardDeck;
-import Models.Player;
+import Models.*;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
@@ -80,7 +77,8 @@ public class CardDeckController
     // In this function the player grabs the card.
     public Card grabChanceCard() throws ExecutionException, InterruptedException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        String CardUUIDString = fireStoreController.getChanceCard();
+        LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
+        String CardUUIDString = fireStoreController.getChanceCard(lobbyController.getToken());
         for(int i = 0; chanceCardDeck.size() > i; i++){
             if(UUID.compare(CardUUIDString, chanceCardDeck.getCardDeck().get(i).getId())){
                 return chanceCardDeck.getCardDeck().get(i);
