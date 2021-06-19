@@ -81,6 +81,25 @@ public class Auction implements Model, Observer<DocumentSnapshot>, FirestoreForm
     }
 
     //TODO: create functions that handle bidding results and receiving property
+
+    /*TODO:
+        The new way the auction will be handled.
+        1. Player gets a turn,
+        2. Player has 10 seconds to place a bid or leave the auction.
+        3. Player that bids the most wins the auction.
+        -
+        Once you leave the auction you cannot bid anymore.
+        -
+        New UI.
+        1. Card must be displayed
+        2. player who's turn it is must be displayed.
+        3. Highest current bid and player who owns that bid must be displayed.
+        4. Enter bid and leave buttons.
+        5. Timer in the right upper corner.
+
+
+     */
+
 }
 
 
