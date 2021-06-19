@@ -181,6 +181,17 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
                 .update("players", map);
     }
 
+    public void updateAllPlayers(int token, Collection<Player> playerCollection) throws ExecutionException, InterruptedException {
+        DocumentSnapshot documentSnapshot = getSnapshot(token);
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        Map<String, Object> map = (Map<String, Object>) documentSnapshot.get("players");
+        for (Player player : playerCollection) {
+            map.put(player.getPlayersEnum().getId().getId(), player.getFirestoreFormat());
+        }
+        database.collection("Lobbies").document(String.valueOf(token))
+                .update("players", map);
+    }
+
     public void updateTurn(int token, FirestoreFormattable turn) throws ExecutionException, InterruptedException {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))
