@@ -6,3 +6,6 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+/target
+/JavaFxApplication.iml
+/libraries/lib.xml

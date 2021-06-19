@@ -157,7 +157,9 @@ public class Actions {
     }
 
     public static void buyLocationPopup(Player player){
-            //TODO show popup
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        boardController.showBuyLocationPopup(player);
     }
 
     public static void goToJail(Player player){

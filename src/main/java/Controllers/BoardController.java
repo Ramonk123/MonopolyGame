@@ -213,6 +213,12 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
             MortgagePopup.setVisible(false);
         }
     }
+
+    @FXML Pane buyLocationPane;
+
+    public void showBuyLocationPopup(Player player) {
+            buyLocationPane.setVisible(!buyLocationPane.isVisible());
+    }
     @FXML
     private Pane Location1Pane;
     @FXML

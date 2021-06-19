@@ -5,7 +5,7 @@ import Models.*;
 import Monopoly.UUID;
 import javafx.geometry.Pos;
 import javafx.scene.input.TransferMode;
-
+import javafx.scene.layout.Pane;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -31,6 +31,7 @@ public class LocationController implements Controller {
                 Comparator.comparingLong((ToLongFunction<Position>) Position::getPosition)
         );
     }
+
 
     /*@Override
     public void registerObserver(View v) {
