@@ -61,11 +61,12 @@ public class TurnController
         System.out.println("Index: " + index);
         System.out.println("Size: " + size);
         Player nextPlayer;
-        if (index == size -1) {
-            nextPlayer = list.get(0);
-        } else {
+        try {
             nextPlayer = list.get(index + 1);
+        } catch(Exception e) {
+            nextPlayer = list.get(0);
         }
+
         setCurrentPlayer(nextPlayer.getPlayersEnum());
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
