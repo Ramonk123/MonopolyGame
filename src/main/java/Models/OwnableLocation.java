@@ -27,6 +27,12 @@ public abstract class OwnableLocation extends Location {
 
     public void setOwner(Player player, boolean isOwned) {
         this.owner = Optional.ofNullable(player);
+        this.isOwned = isOwned;
+    }
+
+    public void setOwnerNull() {
+        owner = null;
+        isOwned = false;
     }
 
     public int getPrice() {
