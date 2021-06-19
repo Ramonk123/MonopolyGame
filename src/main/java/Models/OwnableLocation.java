@@ -25,6 +25,10 @@ public abstract class OwnableLocation extends Location {
         return owner;
     }
 
+    public void setOwner(Player player, boolean isOwned) {
+        this.owner = Optional.ofNullable(player);
+    }
+
     public int getPrice() {
         return price;
     }
@@ -37,7 +41,9 @@ public abstract class OwnableLocation extends Location {
         containsMortgage = value;
     }
 
-    public boolean isOwned(){ return isOwned;}
+    public boolean isOwned(){
+        return isOwned;
+    }
 
     public int getMortgageValue() {
         return price / 2;
