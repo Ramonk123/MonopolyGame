@@ -128,7 +128,7 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         }
     }
 
-    public Location playerStandsOn(Position player) { //Player prob gets changed to Players
+    public Location playerStandsOn(Position player) {
         long playerPosition = player.getPosition();
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         List<Location> locationArray = locationController.getLocationArray();
