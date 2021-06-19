@@ -62,7 +62,7 @@ public class TurnController
         System.out.println("Size: " + size);
         Player nextPlayer;
         for(int i = 0; list.size() > i; i++){
-            System.out.println(list.get(i).getId().getId());
+            System.out.println("Index: " + index + "ID: " + list.get(i).getId().getId());
         }
         try {
             nextPlayer = list.get(index + 1);
