@@ -22,10 +22,6 @@ public class SpecialLocation extends Location {
     @Override
     public void action(Player player) {
         this.action.accept(player);
-
-        if (player.getPosition()==30){
-            Actions.goToJail(player);
-        }
     }
 
     public Consumer<Player> getAction(){return action; }

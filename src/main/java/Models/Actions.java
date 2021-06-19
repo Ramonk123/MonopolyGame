@@ -122,10 +122,6 @@ public class Actions {
         }
     }
 
-//    public static void goToJail(Player player) {
-//        player.setPosition(30);
-//    }
-
     public static void makeRepairs(Player player, int hotelCost, int houseCost) {
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
