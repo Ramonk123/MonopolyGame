@@ -122,7 +122,7 @@ public class TurnController
 
             if(!throwController.isDouble()) {
                 boardController.toggleRollDiceButton(false);
-                boardController.toggleEndTurnButton(false);
+                boardController.toggleEndTurnButton(true);
             } else {
                 turn.addOneToAmountOfDouble();
             } // Don't simplify this yet.

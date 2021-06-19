@@ -6,6 +6,7 @@ import Firestore.FirestoreFormattable;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.application.Platform;
 
 import java.sql.SQLOutput;
 import java.util.HashMap;
@@ -28,15 +29,15 @@ public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnaps
     public void setCurrentPlayer(Players players) {
         // players == client player && players != activePlayer
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
 
-        System.out.println("Check if client player is players: " + UUID.compare(playerController.getClientPlayersEnum(), players));
-        System.out.println("Check if active player is already active player: " + UUID.compare(activePlayer, players));
-        if(!UUID.compare(playerController.getClientPlayersEnum(), players) && !UUID.compare(activePlayer, players)) {
-            boardController.toggleRollDiceButton(false);
-            boardController.toggleEndTurnButton(false);
-        }
+        System.out.println("Player is already the active player: " + !UUID.compare(players, turnController.getCurrentPlayer()));
+        System.out.println("Player is the client player: " + UUID.compare(players, playerController.getClientPlayersEnum()));
+
         this.activePlayer = players;
+
     }
 
     public Players getCurrentPlayer()
