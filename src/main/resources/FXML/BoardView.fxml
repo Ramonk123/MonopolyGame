@@ -19,19 +19,21 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane fx:id="BackgroundImageView" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;/FXML/IMG/background.png&quot;);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <FlowPane prefHeight="400.0" prefWidth="100.0" vgap="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane fx:id="BackgroundImageView" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;/FXML/IMG/background.png&quot;);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="BoardViewUsername1Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #7ed6df;" text="Username1" visible="false" wrapText="true" />
-            <Label fx:id="BoardViewUsername2Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #ff7979;" text="Username2" visible="false" wrapText="true" />
-            <Label fx:id="BoardViewUsername3Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #f6e58d;" text="Username3" visible="false" wrapText="true" />
-            <Label fx:id="BoardViewUsername4Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #686de0;" text="Username4" visible="false" wrapText="true" />
-            <Label fx:id="BoardViewUsername5Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #badc58;" text="Username5" visible="false" wrapText="true" />
-            <Label fx:id="BoardViewUsername6Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #f0932b;" text="Username6" visible="false" wrapText="true" />
-            <Label fx:id="BoardViewUsername7Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #eb4d4b;" text="Username7" visible="false" wrapText="true" />
-            <Label fx:id="BoardViewUsername8Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #4834d4;" text="Username8" visible="false" wrapText="true" />
-         </children>
-      </FlowPane>
+            <FlowPane layoutX="-47.0" layoutY="-21.0" prefHeight="400.0" prefWidth="100.0" vgap="5.0">
+               <children>
+                  <Label fx:id="BoardViewUsername1Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #7ed6df;" text="Username1" visible="false" wrapText="true" />
+                  <Label fx:id="BoardViewUsername2Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #ff7979;" text="Username2" visible="false" wrapText="true" />
+                  <Label fx:id="BoardViewUsername3Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #f6e58d;" text="Username3" visible="false" wrapText="true" />
+                  <Label fx:id="BoardViewUsername4Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #686de0;" text="Username4" visible="false" wrapText="true" />
+                  <Label fx:id="BoardViewUsername5Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #badc58;" text="Username5" visible="false" wrapText="true" />
+                  <Label fx:id="BoardViewUsername6Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #f0932b;" text="Username6" visible="false" wrapText="true" />
+                  <Label fx:id="BoardViewUsername7Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #eb4d4b;" text="Username7" visible="false" wrapText="true" />
+                  <Label fx:id="BoardViewUsername8Label" prefHeight="45.0" prefWidth="80.0" style="-fx-background-color: #4834d4;" text="Username8" visible="false" wrapText="true" />
+               </children>
+            </FlowPane>
+         </children></Pane>
       <GridPane fx:id="BoardViewBoardPane" layoutX="100.0" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #BFDBAE;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -1548,5 +1550,23 @@
             <Label alignment="CENTER" prefWidth="200.0" text="You have thrown double, roll again." visible="false" />
          </children>
       </FlowPane>
+      <VBox fx:id="ChancePopup" alignment="TOP_CENTER" layoutX="135.0" layoutY="36.0" prefHeight="330.0" prefWidth="334.0" visible="false">
+         <children>
+            <Label alignment="CENTER" contentDisplay="TOP" prefHeight="64.0" prefWidth="327.0" text="Kans">
+               <font>
+                  <Font size="53.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="35.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="chanceCardText" alignment="CENTER" contentDisplay="TOP" prefHeight="67.0" prefWidth="327.0" text="LabelText">
+               <VBox.margin>
+                  <Insets bottom="75.0" top="25.0" />
+               </VBox.margin>
+            </Label>
+            <Button fx:id="chanceCardButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" text="Okay" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

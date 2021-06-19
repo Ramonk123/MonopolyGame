@@ -132,8 +132,6 @@ public class TurnController
                 //TODO: Go to Jail
             } else {
                 movePlayer(currentPlayerEnum, turn.getEyesThrown());
-                Location location = boardController.playerStandsOn(player);
-                location.action(player);
             }
 
             boardController.setDiceLabelPane();
@@ -148,6 +146,8 @@ public class TurnController
                 e.printStackTrace();
             }
         }
+
+        standingOnLocation(player);
 
     }
 
@@ -176,5 +176,11 @@ public class TurnController
 
     public long getEyesThrown() {
         return turn.getEyesThrown();
+    }
+
+    public void standingOnLocation(Player player) {
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        Location location = boardController.playerStandsOn(player);
+        location.action(player);
     }
 }

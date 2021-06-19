@@ -156,7 +156,7 @@ public class FireStoreController implements Controller, Subject<DocumentSnapshot
                 .update("nextCommonFundCard", cardDeckController.getNextCommonFundCard());
     }
 
-    public String getChanceCard() throws InterruptedException, ExecutionException {
+    public String getChanceCard(int token) throws InterruptedException, ExecutionException {
         DocumentSnapshot documentSnapshot = getSnapshot(token);
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))

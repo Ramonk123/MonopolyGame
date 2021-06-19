@@ -22,6 +22,7 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Consumer;
 
 /**
  * Controller for the Board model & BoardView view.
@@ -106,7 +107,6 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get((int) oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
 
         System.out.println("current player grid: " + currentPlayerGrid);
-
         Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber); //Gets the playerIcon out of the array/list
         if(UUID.compare("PLAYER-" + playerIcon.getId(), player)) {
 
@@ -305,11 +305,36 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     public void update(DocumentSnapshot documentSnapshot) {
         this.documentSnapshot = documentSnapshot;
         notifyObservers();
+
     }
 
     @FXML
     private void placeBid(ActionEvent actionEvent) {
         //Do shit
+    }
+    @FXML Label chanceCardText;
+    @FXML Button chanceCardButton;
+    @FXML Pane ChancePopup;
+    public void setChancePopupVisible() {
+        CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
+        if(!ChancePopup.isVisible()) {
+            ChancePopup.setVisible(true);
+            try {
+
+                Card card = cardDeckController.grabChanceCard();
+                chanceCardText.setText(card.getDescription());
+                System.out.println("blablabla" + card.getAction());
+
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            chanceCardButton.setOnAction((e) -> {
+
+                ChancePopup.setVisible(false);
+            });
+        }
     }
 
 }

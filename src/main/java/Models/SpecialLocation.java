@@ -1,5 +1,9 @@
 package Models;
 
+import Controllers.ControllerRegistry;
+import Controllers.PlayerController;
+import Controllers.Players;
+import Controllers.TurnController;
 import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
@@ -22,12 +26,21 @@ public class SpecialLocation extends Location {
     @Override
     public void action(Player player) {
         this.action.accept(player);
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        Player player1 = null;
+        try {
+            player1 = playerController.getPlayerByPlayersEnum(turnController.getCurrentPlayer()).orElseThrow(Exception::new);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        if (player.getPosition()==30){
-            Actions.goToJail(player);
+        System.out.println("positie " + player1.getPosition());
+        if(player1.getPosition() == 22) {
+            System.out.println("ik ben bereikt");
+            Actions.chanceCard(player1);
         }
     }
 
     public Consumer<Player> getAction(){return action; }
-
 }
