@@ -208,7 +208,7 @@ public class PlayerController
         players = newPlayerList;
     } //TODO: Very nice sorting algorithm
 
-    public Player getPlayerByPlayersEnum2(List<Player> list, Players ID) {
+    public Player getPlayerFromPlayersByEnum(List<Player> list, Players ID) {
         for (Player player : list) {
             if (UUID.compare(player, ID)) {
                 return player;
