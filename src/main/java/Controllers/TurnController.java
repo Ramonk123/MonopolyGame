@@ -189,9 +189,4 @@ public class TurnController
         return turn.getEyesThrown();
     }
 
-    public void standingOnLocation(Player player) {
-        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        Location location = boardController.playerStandsOn(player);
-        location.action(player);
-    }
 }
