@@ -2,11 +2,9 @@ package Controllers;
 
 import Firestore.FirestoreFormattable;
 import Models.Auction;
-import Models.OwnableLocation;
 import Models.Player;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
-import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,14 +13,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 /**
  * Controller for the Auction model.
  */
-public class AuctionController implements Controller, Subject<DocumentSnapshot>, FirestoreFormattable {
+public class AuctionController implements Subject<DocumentSnapshot>, FirestoreFormattable {
 
     private Player player;
     private Auction auction =  new Auction();

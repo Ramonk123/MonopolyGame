@@ -8,7 +8,6 @@ import ObserveablePattern.Subject;
 import Resetter.Resettable;
 import com.google.cloud.firestore.DocumentSnapshot;
 
-import javax.annotation.Nullable;
 import java.util.*;
 
 /**
@@ -16,8 +15,7 @@ import java.util.*;
  */
 public class PlayerController
         implements
-            Controller,
-            FirestoreFormattable,
+        FirestoreFormattable,
             Subject<DocumentSnapshot>,
             Observer<DocumentSnapshot>,
             Resettable {

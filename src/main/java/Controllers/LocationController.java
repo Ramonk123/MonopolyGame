@@ -3,19 +3,16 @@ package Controllers;
 import Exceptions.TransactionException;
 import Models.*;
 import Monopoly.UUID;
-import javafx.geometry.Pos;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
 /**
  * Controller for the Location, OwnableLocation and SpecialLocation model, mainly to create Lists with (all) Locations in them.
  */
-public class LocationController implements Controller {
+public class LocationController {
     private static LocationController locationController;
     private AuctionController auctionController = new AuctionController();
     private List<Location> locationArray = new ArrayList<>();

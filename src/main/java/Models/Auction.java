@@ -1,26 +1,16 @@
 package Models;
 
-import Controllers.AuctionController;
-import Controllers.FireStoreController;
 import Controllers.PlayerController;
-import Controllers.Players;
 import Firestore.FirestoreFormattable;
-import Monopoly.UUID;
 import ObserveablePattern.Observer;
-import Views.BoardView;
-import Views.View;
 import com.google.cloud.firestore.DocumentSnapshot;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Model for the Auction.
  */
-public class Auction implements Model, Observer<DocumentSnapshot>, FirestoreFormattable {
+public class Auction implements Observer<DocumentSnapshot>, FirestoreFormattable {
     private boolean startedAuction = false;
     private HashMap<String, Object> playerBids = new HashMap<>();
     private HashMap<String, Object> auction= new HashMap<>();

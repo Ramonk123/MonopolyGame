@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Model that contains methods for the MainMenu and setting stages.
  */
-public class MainMenu implements Model, MainMenuSubject, Observer<DocumentSnapshot>, HasStage {
+public class MainMenu implements MainMenuSubject, Observer<DocumentSnapshot>, HasStage {
     private List<Observer<MainMenuSubject>> observers = new ArrayList<>();
 
     public MainMenu() {

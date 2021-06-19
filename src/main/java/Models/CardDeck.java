@@ -1,16 +1,12 @@
 package Models;
 
-import Monopoly.UUID;
-import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
  *
  */
-public class CardDeck implements Model {
+public class CardDeck {
     private ArrayList<Card> cardDeck;
 
     public ArrayList<Card> getCardDeck() {

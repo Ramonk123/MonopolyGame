@@ -4,18 +4,13 @@ import Exceptions.TransactionException;
 import Models.Payer;
 import Models.Player;
 import Models.Receiver;
-import Models.Wallet;
-import Monopoly.UUID;
-import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 /**
  * Controller for the Wallet model with different methods to alter the balance of players.
  */
-public class TransactionController implements Controller {
+public class TransactionController {
 
     private Optional<Player> getPlayerByPlayersEnum(Players playersEnum) {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);

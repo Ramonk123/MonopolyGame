@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 /**
  * Model which is used by the CardDeck model to create a deck of different kind of cards.
  */
-public class Card implements Model, Action, Identifiable {
+public class Card implements Action, Identifiable {
 
     private final UUID id;
     private String description;

@@ -1,7 +1,6 @@
 package Models;
 
 import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 /**
  * Model which combines 2 Dice models into one result.
  */
-public class Throw implements Model, DiceThrower {
+public class Throw implements DiceThrower {
     private final List<View> observers = new ArrayList<>();
     private final DiceThrower diceOne = new Dice();
     private final DiceThrower diceTwo = new Dice();

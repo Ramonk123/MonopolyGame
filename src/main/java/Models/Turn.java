@@ -6,9 +6,7 @@ import Firestore.FirestoreFormattable;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import com.google.cloud.firestore.DocumentSnapshot;
-import javafx.application.Platform;
 
-import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +16,7 @@ import java.util.Map;
  * Model that contains all rules and information of a turn.
  * The player that is "active" is the Player that can roll dice and do other actions that inactive players can't do.
  */
-public class Turn implements Model, FirestoreFormattable, Observer<DocumentSnapshot> {
+public class Turn implements FirestoreFormattable, Observer<DocumentSnapshot> {
     private Players activePlayer = Players.PLAYER_ONE;
     private int amountOfDouble = 0;
     private long eyesThrown = 0;
