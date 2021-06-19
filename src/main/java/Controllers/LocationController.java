@@ -22,6 +22,22 @@ public class LocationController implements Controller {
     private List<OwnableLocation> ownableLocationArray = new ArrayList<>();
     private List<SpecialLocation> specialLocationArray = new ArrayList<>();
 
+    private List<StreetLocation> streetLocationArray = new ArrayList<>();
+    private List<StationLocation> stationLocationArray = new ArrayList<>();
+    private List<UtilityLocation> utilityLocationArray = new ArrayList<>();
+
+    public List<StreetLocation> getStreetLocationArray() {
+        return streetLocationArray;
+    }
+
+    public List<StationLocation> getStationLocationArray() {
+        return stationLocationArray;
+    }
+
+    public List<UtilityLocation> getUtilityLocationArray() {
+        return utilityLocationArray;
+    }
+
     public LocationController(){
         setSpecialLocations();
         setStationLocations();
@@ -311,6 +327,30 @@ public class LocationController implements Controller {
         locationArray.add(coolSingel);
         locationArray.add(leidseStraat);
         locationArray.add(kalverStraat);
+
+        streetLocationArray.add(dorpStraat);
+        streetLocationArray.add(brink);
+        streetLocationArray.add(steenStraat);
+        streetLocationArray.add(ketelStraat);
+        streetLocationArray.add(velperPlein);
+        streetLocationArray.add(bartelJorisStraat);
+        streetLocationArray.add(zijlWeg);
+        streetLocationArray.add(houtStraat);
+        streetLocationArray.add(neude);
+        streetLocationArray.add(biltStraat);
+        streetLocationArray.add(vreeBurg);
+        streetLocationArray.add(aKerkhof);
+        streetLocationArray.add(groteMarkt);
+        streetLocationArray.add(hereStraat);
+        streetLocationArray.add(spui);
+        streetLocationArray.add(plein);
+        streetLocationArray.add(langePoten);
+        streetLocationArray.add(hofplein);
+        streetLocationArray.add(blaak);
+        streetLocationArray.add(coolSingel);
+        streetLocationArray.add(leidseStraat);
+        streetLocationArray.add(kalverStraat);
+
         ownableLocationArray.add(dorpStraat);
         ownableLocationArray.add(brink);
         ownableLocationArray.add(steenStraat);
@@ -510,6 +550,12 @@ public class LocationController implements Controller {
         locationArray.add(stationEast);
         locationArray.add(stationSouth);
         locationArray.add(stationWest);
+
+        stationLocationArray.add(stationNorth);
+        stationLocationArray.add(stationEast);
+        stationLocationArray.add(stationSouth);
+        stationLocationArray.add(stationWest);
+
         ownableLocationArray.add(stationNorth);
         ownableLocationArray.add(stationEast);
         ownableLocationArray.add(stationSouth);
@@ -536,6 +582,10 @@ public class LocationController implements Controller {
         );
         locationArray.add(waterWorks);
         locationArray.add(electricComapany);
+
+        utilityLocationArray.add(waterWorks);
+        utilityLocationArray.add(electricComapany);
+
         ownableLocationArray.add(waterWorks);
         ownableLocationArray.add(electricComapany);
     }
@@ -607,4 +657,5 @@ public class LocationController implements Controller {
             transactionException.printStackTrace();
         }
     }
+
 }

@@ -234,6 +234,17 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
             buyLocationPane.setVisible(true);
     }
 
+    public void buyLocation(Player player, OwnableLocation location) {
+        location.setOwner(player, true);
+        player.subtractBalance(location.getPrice());
+    }
+
+    public void sellLocation(Player player, OwnableLocation location) {
+        location.setOwnerNull();
+        player.addBalance(location.getPrice());
+    }
+
+
     @FXML Pane notEnoughBalancePane;
 
     public void showNotEnoughBalance(){

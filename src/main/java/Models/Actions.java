@@ -177,6 +177,13 @@ public class Actions {
         }
     }
 
+    public static void sellLocationPopup(Player player) {
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        boardController.showBuyLocationPopup(player);
+    }
+
     public static void goToJail(Player player){
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         try{playerController.teleportTo(player, 10);}
@@ -191,6 +198,16 @@ public class Actions {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         boardController.setChancePopupVisible();
 
+    }
+    public void payRent(Player payer, OwnableLocation location) {
+        TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
+        Player receiver = location.getOwner().orElseThrow();
+        int rent = location.getPrice();
+        try {
+            transactionController.payBalance(payer.getPlayersEnum(), receiver.getPlayersEnum(), rent);
+        } catch (TransactionException e) {
+            e.printStackTrace();
+        }
     }
 
 }
