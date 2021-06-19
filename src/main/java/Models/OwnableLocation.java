@@ -38,4 +38,8 @@ public abstract class OwnableLocation extends Location {
     }
 
     public boolean isOwned(){ return isOwned;}
+
+    public int getMortgageValue() {
+        return price / 2;
+    }
 }

@@ -3,6 +3,7 @@ package Controllers;
 import Exceptions.PlayerException;
 import Firestore.FirestoreFormattable;
 import Models.Actions;
+import Models.Location;
 import Models.Player;
 import Models.Turn;
 import Monopoly.UUID;
@@ -131,6 +132,8 @@ public class TurnController
                 //TODO: Go to Jail
             } else {
                 movePlayer(currentPlayerEnum, turn.getEyesThrown());
+                Location location = boardController.playerStandsOn(player);
+                location.action(player);
             }
 
             boardController.setDiceLabelPane();
@@ -139,7 +142,7 @@ public class TurnController
             FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
             try {
                 assert currentPlayer != null;
-                fireStoreController.updatePlayer(lobbyController.getToken(), currentPlayer);
+                fireStoreController.updateAllPlayers(lobbyController.getToken(), playerController.getPlayers());
                 fireStoreController.updateTurn(lobbyController.getToken(), turn);
             } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
@@ -152,11 +155,13 @@ public class TurnController
         Player currentPlayer = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getPlayerByPlayersEnum(currentPlayerEnum).orElseThrow(() -> new PlayerException("Player NOT Found"));
 
         currentPlayer.movePlayer(eyesThrown);
+        /*
         long oldPlayerPosition = currentPlayer.getOldPosition();
         long newPlayerPosition = currentPlayer.getPosition();
 
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         boardController.movePlayerOnBoard(currentPlayerEnum, oldPlayerPosition, newPlayerPosition);
+         */
     }
 
     public void movePlayerOnBoard(Players currentPlayerEnum) throws PlayerException {
