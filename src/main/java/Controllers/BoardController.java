@@ -221,10 +221,25 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     }
 
     @FXML Pane buyLocationPane;
+    @FXML Label locationForSaleName;
+    @FXML Label locationForSalePrice;
+    @FXML Label locationForSaleHouse;
+    @FXML Label locationForSaleMortgage;
+
+    public void updateBuyLocationPane(){
+
+    }
 
     public void showBuyLocationPopup(Player player) {
-            buyLocationPane.setVisible(!buyLocationPane.isVisible());
+            buyLocationPane.setVisible(true);
     }
+
+    @FXML Pane notEnoughBalancePane;
+
+    public void showNotEnoughBalance(){
+        notEnoughBalancePane.setVisible(true);
+    }
+
     @FXML
     private Pane Location1Pane;
     @FXML

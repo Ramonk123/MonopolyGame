@@ -165,10 +165,16 @@ public class Actions {
         }
     }
 
-    public static void buyLocationPopup(Player player){
-        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+    public static void buyLocationPopup(Player player, int price){
+        TransactionController transactionController = (TransactionController) ControllerRegistry.get((TransactionController.class));
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        boardController.showBuyLocationPopup(player);
+        try {
+            if (transactionController.checkBalance(player.getPlayersEnum(), price)==true){
+                boardController.showBuyLocationPopup(player);
+            } else {boardController.showNotEnoughBalance();}
+        } catch (TransactionException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void goToJail(Player player){
