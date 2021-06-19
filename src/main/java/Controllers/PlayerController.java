@@ -184,4 +184,15 @@ public class PlayerController
     public LocationController getLocationController() {
         return (LocationController) ControllerRegistry.get(LocationController.class);
     }
+
+    public void sortPlayerArrayList() {
+        Player player = players.get(0);
+        if(UUID.compare(player, Players.PLAYER_ONE)) {
+            return;
+        } else {
+            players.set(0, players.get(1));
+            players.set(1, player);
+        }
+
+    }
 }

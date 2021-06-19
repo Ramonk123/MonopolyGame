@@ -55,6 +55,7 @@ public class TurnController
         } catch (Exception e) {
             e.printStackTrace();
         }
+        playerController.sortPlayerArrayList();
         List<Player> list = playerController.getPlayers();
         int index = list.indexOf(player);
         int size = list.size();
