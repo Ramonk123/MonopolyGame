@@ -1,10 +1,7 @@
 package Controllers;
 
 import Exceptions.PlayerException;
-import Models.Board;
-import Models.Location;
-import Models.OwnableLocation;
-import Models.Player;
+import Models.*;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
@@ -118,12 +115,13 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
         newPlayerGrid.set(playerNumber, playerIcon);
     }
 
-    public Location playerStandsOn(Player player) { //Player prob gets changed to Players
+    public Location playerStandsOn(Position player) { //Player prob gets changed to Players
         long playerPosition = player.getPosition();
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         List<Location> locationArray = locationController.getLocationArray();
         return locationArray.get((int) playerPosition);
     }
+
     @FXML
     private Button BoardViewRollDiceButton;
 
