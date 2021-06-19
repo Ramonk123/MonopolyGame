@@ -55,7 +55,7 @@ public class TurnController
         } catch (Exception e) {
             e.printStackTrace();
         }
-        playerController.sortPlayerArrayList();
+        //playerController.sortPlayerArrayList();
         List<Player> list = playerController.getPlayers();
         int index = list.indexOf(player);
         int size = list.size();
@@ -68,7 +68,9 @@ public class TurnController
         try {
             nextPlayer = list.get(index + 1);
         } catch(Exception e) {
-            nextPlayer = list.get(0);
+            Players player2 = Players.getByOrder(1).orElseThrow();
+            int index1 = list.indexOf(player2);
+            nextPlayer = list.get(index1);
         }
 
         setCurrentPlayer(nextPlayer.getPlayersEnum());
