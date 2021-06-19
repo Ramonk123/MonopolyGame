@@ -58,8 +58,10 @@ public class TurnController
         List<Player> list = playerController.getPlayers();
         int index = list.indexOf(player);
         int size = list.size();
+        System.out.println("Index: " + index);
+        System.out.println("Size: " + size);
         Player nextPlayer;
-        if (index + 1 >= size) {
+        if (index == size -1) {
             nextPlayer = list.get(0);
         } else {
             nextPlayer = list.get(index + 1);
