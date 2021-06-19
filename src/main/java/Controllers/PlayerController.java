@@ -190,21 +190,21 @@ public class PlayerController
 
         for(Player player : players) {
             if (UUID.compare(player, Players.PLAYER_ONE)) {
-                newPlayerList.set(0, player);
+                newPlayerList.add(0, player);
             } else if (UUID.compare(player, Players.PLAYER_TWO)) {
-                newPlayerList.set(1, player);
+                newPlayerList.add(1, player);
             } else if (UUID.compare(player, Players.PLAYER_THREE)) {
-                newPlayerList.set(2, player);
+                newPlayerList.add(2, player);
             } else if (UUID.compare(player, Players.PLAYER_FOUR)) {
-                newPlayerList.set(3, player);
+                newPlayerList.add(3, player);
             } else if (UUID.compare(player, Players.PLAYER_FIVE)) {
-                newPlayerList.set(4, player);
+                newPlayerList.add(4, player);
             } else if (UUID.compare(player, Players.PLAYER_SIX)) {
-                newPlayerList.set(5, player);
+                newPlayerList.add(5, player);
             } else if (UUID.compare(player, Players.PLAYER_SEVEN)) {
-                newPlayerList.set(6, player);
+                newPlayerList.add(6, player);
             } else if (UUID.compare(player, Players.PLAYER_EIGHT)) {
-                newPlayerList.set(7, player);
+                newPlayerList.add(7, player);
             }
         }
 
