@@ -1,15 +1,12 @@
 package Controllers;
 
 import Models.DiceThrower;
-import Models.Player;
 import Models.Throw;
-import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
 
 /**
  * Controller for the Throw and Dice model.
  */
-public class ThrowController implements Controller, DiceThrower {
+public class ThrowController implements DiceThrower, Controller {
 
     private Throw currentThrow = new Throw();
 

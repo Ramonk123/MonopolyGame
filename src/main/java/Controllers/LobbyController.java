@@ -32,12 +32,11 @@ import java.util.concurrent.ExecutionException;
  */
 public class LobbyController
         implements
-            Controller,
-            Subject<DocumentSnapshot>,
+        Subject<DocumentSnapshot>,
             HasStage,
             FirestoreFormattable,
             Observer<DocumentSnapshot>,
-            Resettable {
+            Resettable, Controller {
 
     private Lobby lobby;
     private DocumentSnapshot documentSnapshot;

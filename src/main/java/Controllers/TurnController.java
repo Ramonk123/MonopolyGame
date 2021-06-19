@@ -2,7 +2,6 @@ package Controllers;
 
 import Exceptions.PlayerException;
 import Firestore.FirestoreFormattable;
-import Models.Actions;
 import Models.Location;
 import Models.Player;
 import Models.Turn;
@@ -21,11 +20,10 @@ import java.util.concurrent.ExecutionException;
  */
 public class TurnController
         implements
-            Controller,
-            FirestoreFormattable,
+        FirestoreFormattable,
             Observer<DocumentSnapshot>,
             Resettable,
-            Subject<DocumentSnapshot> {
+            Subject<DocumentSnapshot>, Controller {
 
     private Turn turn = new Turn();
     private Player player = new Player(getCurrentPlayer(), getCurrentPlayer().name());

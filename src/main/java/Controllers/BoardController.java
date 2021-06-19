@@ -14,7 +14,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -22,12 +21,11 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
-import java.util.function.Consumer;
 
 /**
  * Controller for the Board model & BoardView view.
  */
-public class BoardController implements Controller, Subject<DocumentSnapshot>, Observer<DocumentSnapshot>, HasStage {
+public class BoardController implements Subject<DocumentSnapshot>, Observer<DocumentSnapshot>, HasStage, Controller {
 
     private Board board = new Board();
 
@@ -221,9 +219,17 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     }
 
     @FXML Pane buyLocationPane;
+    @FXML Label locationForSaleName;
+    @FXML Label locationForSalePrice;
+    @FXML Label locationForSaleHouse;
+    @FXML Label locationForSaleMortgage;
+
+    public void updateBuyLocationPane(){
+
+    }
 
     public void showBuyLocationPopup(Player player) {
-            buyLocationPane.setVisible(!buyLocationPane.isVisible());
+            buyLocationPane.setVisible(true);
     }
 
     public void buyLocation(Player player, OwnableLocation location) {
@@ -234,6 +240,13 @@ public class BoardController implements Controller, Subject<DocumentSnapshot>, O
     public void sellLocation(Player player, OwnableLocation location) {
         location.setOwnerNull();
         player.addBalance(location.getPrice());
+    }
+
+
+    @FXML Pane notEnoughBalancePane;
+
+    public void showNotEnoughBalance(){
+        notEnoughBalancePane.setVisible(true);
     }
 
     @FXML

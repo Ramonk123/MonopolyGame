@@ -3,13 +3,10 @@ package Controllers;
 import Exceptions.TransactionException;
 import Models.*;
 import Monopoly.UUID;
-import javafx.geometry.Pos;
-import javafx.scene.input.TransferMode;
-import javafx.scene.layout.Pane;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
 /**

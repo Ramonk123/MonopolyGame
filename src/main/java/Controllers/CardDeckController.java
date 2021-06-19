@@ -7,10 +7,7 @@ import ObserveablePattern.Subject;
 import Resetter.Resettable;
 import com.google.cloud.firestore.DocumentSnapshot;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -18,10 +15,9 @@ import java.util.concurrent.ExecutionException;
  */
 public class CardDeckController
         implements
-            Controller,
-            Observer<DocumentSnapshot>,
+        Observer<DocumentSnapshot>,
             Subject<DocumentSnapshot>,
-            Resettable {
+            Resettable, Controller {
 
     private CardDeck cardDeck;
 

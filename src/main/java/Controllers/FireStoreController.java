@@ -2,7 +2,6 @@ package Controllers;
 
 import Firestore.Firestore;
 import Firestore.FirestoreFormattable;
-import Models.Card;
 import Models.Player;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
@@ -16,16 +15,13 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
-import java.util.function.Supplier;
-
-import Monopoly.UUID;
 
 import javax.annotation.Nullable;
 
 /**
  * Controller for the Firestore model, this controller is the gateway to the database.
  */
-public class FireStoreController implements Controller, Subject<DocumentSnapshot>, HasStage {
+public class FireStoreController implements Subject<DocumentSnapshot>, HasStage, Controller {
 
     private int token;
     private Consumer<DocumentSnapshot> lambda = (doc) -> {};

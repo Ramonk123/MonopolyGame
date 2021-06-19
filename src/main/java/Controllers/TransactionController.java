@@ -4,12 +4,7 @@ import Exceptions.TransactionException;
 import Models.Payer;
 import Models.Player;
 import Models.Receiver;
-import Models.Wallet;
-import Monopoly.UUID;
-import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 /**

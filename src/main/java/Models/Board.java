@@ -1,17 +1,9 @@
 package Models;
 
-import Controllers.*;
-import Exceptions.TransactionException;
-import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import Views.*;
 import com.google.cloud.firestore.DocumentSnapshot;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +11,7 @@ import java.util.List;
 /**
  * Model for the board which mostly has methods for the BoardView view.
  */
-public class Board implements Model, BoardSubject, Observer<DocumentSnapshot>, HasStage {
+public class Board implements BoardSubject, Observer<DocumentSnapshot>, HasStage {
     private List<Observer<BoardSubject>> observers = new ArrayList<>();
 
     public Board() {

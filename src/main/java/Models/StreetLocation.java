@@ -27,7 +27,7 @@ public class StreetLocation extends OwnableLocation {
     @Override
     public void action(Player player) {
             if (getOwner().isEmpty()){
-                Actions.buyLocationPopup(player);
+                Actions.buyLocationPopup(player, getPrice());
             }
     }
 

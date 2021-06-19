@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Model which contains everything about the player.
  */
-public class Player implements Model, Observer<DocumentSnapshot>, BoardSubject, Position, Nameable, Identifiable, FirestoreFormattable, Payer, Receiver {
+public class Player implements Observer<DocumentSnapshot>, BoardSubject, Position, Nameable, Identifiable, FirestoreFormattable, Payer, Receiver {
     ArrayList<Observer<BoardSubject>> observers = new ArrayList<>();
 
     private String name;

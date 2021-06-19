@@ -1,9 +1,6 @@
 package Controllers;
 
-import Models.Player;
 import Models.Trade;
-import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
 
 /**
  * Controller for the Trade model.
