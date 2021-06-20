@@ -286,9 +286,9 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
 
     }
 
-    @FXML private Pane payStreetRentPane;
-    @FXML private Label payStreetRentAmount;
-    @FXML private Button payStreetRentButton;
+    @FXML Pane payStreetRentPane;
+    @FXML Label payStreetRentAmount;
+    @FXML Button payStreetRentButton;
 
     public void showStreetPayRent(Player player, StreetLocation location, PriceInflator priceInflator){
         buyLocationPane.setVisible(false);
