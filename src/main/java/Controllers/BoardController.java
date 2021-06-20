@@ -252,19 +252,26 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     }
 
     public void buyLocation(Player player, OwnableLocation location) {
+        LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         location.setOwner(player, true);
         System.out.println("Eigenaar: " + location.getOwner());
         player.subtractBalance(location.getPrice());
         buyLocationPane.setVisible(false);
+        fireStoreController.updateAllLocations(lobbyController.getToken());
     }
 
     @FXML private Pane sellLocationPopup;
     @FXML private Label sellPropertyFirst;
     @FXML private Button sellLocationButton;
+    @FXML private Button sellPropertyButton;
 
     public void showSellStreetLocationPopup(Player player, StreetLocation location){
         sellLocationPopup.setVisible(true);
         sellLocationButton.setOnAction(event -> {sellStreetLocation(player, location);});
+        sellPropertyButton.setOnAction(actionEvent -> {
+            player.addBalance(location.getHousePrice());
+        });
     }
 
     public void sellStreetLocation(Player player, StreetLocation location){
@@ -272,6 +279,10 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         player.addBalance(location.getPrice()/2);
         location.setOwnerNull();
         } else sellPropertyFirst.setVisible(true);
+    }
+
+    public void setSellPropertyButton(Player player, StreetLocation location){
+
     }
 
     @FXML private Pane payStreetRentPane;

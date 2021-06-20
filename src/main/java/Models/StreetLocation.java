@@ -35,13 +35,7 @@ public class StreetLocation extends OwnableLocation {
         Players players = turnController.getCurrentPlayer();
         PlayerController playerController= (PlayerController) ControllerRegistry.get(PlayerController.class);
         Player currentPlayer = playerController.getPlayerByPlayersEnum(players).orElseThrow();
-        System.out.println(getOwner().isEmpty());
-        System.out.println("begin van action");
-        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
-        //OwnableLocation location = (OwnableLocation) locationController.getLocationByEnum(this.getId()).orElseThrow();
             if (getOwner().isEmpty()){
-                System.out.println(getOwner() + "de owner staat hier");
-                System.out.println("streetlocation popup");
                 Actions.buyLocationPopup(currentPlayer, getPrice(), this);
             } else if(UUID.compare(getOwner().orElseThrow(), currentPlayer)) {
                     Actions.sellLocationPopup(player, this);
@@ -63,4 +57,6 @@ public class StreetLocation extends OwnableLocation {
     }
 
     public int getRent(){ return rent;}
+
+    public int getHousePrice(){ return housePrice;}
 }
