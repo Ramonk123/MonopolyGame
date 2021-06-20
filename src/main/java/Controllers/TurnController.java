@@ -176,6 +176,9 @@ public class TurnController
 
             LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
             FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
+
+            LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+            locationController.testPrintLocationsOwned();
             try {
                 assert currentPlayer != null;
                 fireStoreController.updateAllPlayers(lobbyController.getToken(), playerController.getPlayers());

@@ -76,8 +76,8 @@ public class LocationController implements Controller {
         return locationArray;
     }
 
-    //TODO: Create onEvent function when refusing to buy location
-    private void refuseToBuyLocation() {
+    // Called from BoardController by auction button.
+    public void refuseToBuyLocation() {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         for(Player player : playerController.getPlayers()){
             if(UUID.compare(playerController.getClientPlayersEnum().getId(), player.getId())){
@@ -602,6 +602,11 @@ public class LocationController implements Controller {
         return ownableLocationArray;
     }
 
+    public List<OwnableLocation> getLocationsOwnedByPlayer() {
+        List<OwnableLocation> locations = new ArrayList<>();
+        return locations;
+    }
+
     public List<StreetLocation> getStreetLocationsOwnedByPlayer(UUID uuid) {
         List<OwnableLocation> streetLocations = new ArrayList<>();
         List<StreetLocation> playerOwnedStreetLocations = new ArrayList<>();
@@ -663,6 +668,14 @@ public class LocationController implements Controller {
             location.setMortgage(false);
         } catch (TransactionException transactionException) {
             transactionException.printStackTrace();
+        }
+    }
+
+    public void testPrintLocationsOwned() {
+        for (OwnableLocation location: ownableLocationArray) {
+            if (location.getOwner() != null) {
+                System.out.println("Housa Wousa: " + location.getName() + " " + location.getOwner());
+            }
         }
     }
 }

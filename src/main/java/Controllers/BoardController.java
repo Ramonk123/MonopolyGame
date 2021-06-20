@@ -15,11 +15,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -226,26 +228,48 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     @FXML Label locationForSaleHouse;
     @FXML Label locationForSaleMortgage;
     @FXML Button buyLocationButton;
+    @FXML Button auctionLocationButton;
 
-    public void updateBuyLocationPane(Player player, OwnableLocation location){
-        locationForSaleName.setText(location.getName());
-        locationForSalePrice.setText("" + location.getPrice());
-        locationForSaleMortgage.setText(location.getName());
+    public void updateBuyLocationPane(OwnableLocation location){
+        locationForSaleName.setText("Name: " + location.getName());
+        locationForSalePrice.setText("Price: $" + location.getPrice() + ",--");
+        locationForSaleHouse.setText("Tax Amount: " + " TAX NEEDS TO BE ADDED");  //TODO: as of now idk wtf tax is.
+        locationForSaleMortgage.setText("Mortgage: $" + location.getMortgageValue() + ",--");
     }
 
     public void showBuyLocationPopup(Player player, OwnableLocation location) {
         System.out.println("boardcontroller popup method");
-            buyLocationPane.setVisible(true);
-            //TODO Fix event on button (Koop straat/locatie)
-            buyLocationButton.setOnAction(event -> {
-                buyLocation(player,location);
-            });
+        updateBuyLocationPane(location);
+        buyLocationPane.setVisible(true);
+        buyLocationButton.setOnAction(event -> { buyLocation(player,location); });
+        auctionLocationButton.setOnAction(event -> { auctionLocation(player,location); });
     }
 
     @FXML
     public void buyLocation(Player player, OwnableLocation location) {
         location.setOwner(player, true);
         player.subtractBalance(location.getPrice());
+        buyLocationPane.setVisible(false);
+    }
+
+    @FXML
+    public void auctionLocation(Player player, OwnableLocation location) {
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        buyLocationPane.setVisible(false);
+        locationController.refuseToBuyLocation();
+    }
+
+
+    @FXML Pane auctionPane;
+    @FXML TextArea bidTextArea;
+    @FXML Button placeBidButton;
+    @FXML Label NoNumberOnInputError;
+    @FXML Label cardPlaceholder;
+
+    public void showAuction(String locationName) {
+
+        auctionPane.setVisible(true);
+        cardPlaceholder.setText(locationName);
     }
 
     public void sellLocation(Player player, OwnableLocation location) {
@@ -356,8 +380,38 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     }
 
     @FXML
-    private void placeBid(ActionEvent actionEvent) {
-        //Do shit
+    private void placeBid() {
+        System.out.println("You bid something");
+        AuctionController auctionController = (AuctionController) ControllerRegistry.get(AuctionController.class);
+        Auction auction = auctionController.getAuction();
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        if (!auction.hasStartedAuction()){
+            try{
+                int bid = Integer.parseInt(bidTextArea.getText());
+                System.out.println("You bid: " + bid);
+                Players clientPlayersEnum = playerController.getClientPlayersEnum();
+                for(Player player : playerController.getPlayers()){
+                    if(UUID.compare(clientPlayersEnum, player)){
+                        if(bid <= player.getWallet().getBalance()) {
+                            System.out.println("Good money");
+                            if(bid > auctionController.getHighestBid().getValue()){
+                                System.out.println("Je hebt het hoogste bod lekker man");
+                                auctionController.addPlayerBid(bid);
+                            } else {
+                                System.out.println("niet het hoogste bod");
+                                bidTextArea.clear();
+                            }
+                        } else {
+                            System.out.println("No affordo compadre");
+                            bidTextArea.clear();
+                        }
+                    }
+                }
+            } catch(NumberFormatException numberFormatException) {
+                NoNumberOnInputError.setVisible(true);
+                bidTextArea.clear();
+            }
+        }
     }
     @FXML Label chanceCardText;
     @FXML Button chanceCardButton;
