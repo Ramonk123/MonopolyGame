@@ -236,16 +236,12 @@ public class FireStoreController implements Subject<DocumentSnapshot>, HasStage,
             public void onEvent(@Nullable DocumentSnapshot snapshot,
                                 @Nullable FirestoreException e) {
                 if (e != null) {
-                    System.err.println("Listen failed: " + e);
                     return;
                 }
                 if (snapshot != null && snapshot.exists()) {
                     documentSnapshot = snapshot;
                     notifyObservers();
 
-                    System.out.println("Current data: " + snapshot.getData());
-                } else {
-                    System.out.print("Current data: null");
                 }
             }
         });

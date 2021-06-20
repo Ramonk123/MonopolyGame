@@ -15,7 +15,6 @@ public class UUID {
         if (cache.putIfAbsent(id, true) == null) {
             this.id = id;
         } else {
-            System.out.println(String.format("UUID '%s' already exists.", id));
             System.exit(69420);
         }
     }

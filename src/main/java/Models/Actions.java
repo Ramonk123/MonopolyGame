@@ -21,9 +21,6 @@ public class Actions {
         PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
         playerController.teleportTo(player, position);
 
-        /*if(player.wentPastGo() && entitledToSalary) {
-            //TODO: Activate Go Action
-        }*/
     }
 
     public static void teleportToNearestRailroad(Player player) {
@@ -53,16 +50,12 @@ public class Actions {
         long playerPosition = player.getPosition();
         List<OwnableLocation> utilityLocations = locationController.getUtilityLocations();
         ArrayList<Long> stepsToUtility = new ArrayList<>();
-        System.out.println(utilityLocations.size() + " Util size");
         for(OwnableLocation location : utilityLocations) {
-            System.out.println("Mike2" + location.getName());
             stepsToUtility.add((location.getPosition() - playerPosition));
         }
-        System.out.println(stepsToUtility.size());
         List<Long> sortedList = stepsToUtility.stream().sorted().collect(Collectors.toList());
         for(Long i : sortedList) {
             if (i > 0) {
-                System.out.println("Stappen" +  i);
                 playerController.movePlayerWithPlayerObject(player, i);
                 break;
             }
@@ -166,7 +159,6 @@ public class Actions {
     public static void buyLocationPopup(Player player, int price, OwnableLocation location){
         TransactionController transactionController = (TransactionController) ControllerRegistry.get((TransactionController.class));
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        System.out.println("popup reached");
         try {
             if (transactionController.checkBalance(player.getPlayersEnum(), price) && !location.isOwned()){
                 boardController.showBuyLocationPopup(player, location);

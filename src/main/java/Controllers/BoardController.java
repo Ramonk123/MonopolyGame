@@ -9,7 +9,6 @@ import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
 import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -103,30 +102,19 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     public void movePlayerOnBoard(Players player, long oldPosition, long newPosition) {
         int playerNumber = player.ordinal();
 
-        System.out.println("player number: " + playerNumber);
-
-        System.out.println(oldPosition);
-        System.out.println(newPosition);
-
         ObservableList<Node> boardArray = BoardViewPlayerPane.getChildren(); //Sets the whole board in an array/list
         ObservableList<Node> currentPlayerGrid = ((GridPane) boardArray.get((int) oldPosition)).getChildren(); //Gets the current grid the playerIcon is on
 
-        System.out.println("current player grid: " + currentPlayerGrid);
         Pane playerIcon = (Pane) currentPlayerGrid.get(playerNumber); //Gets the playerIcon out of the array/list
         if(UUID.compare("PLAYER-" + playerIcon.getId(), player)) {
 
             //currentPlayerGrid.remove(playerNumber);
             currentPlayerGrid.set(playerNumber, new Pane());
 
-            System.out.println("current player grid: " + currentPlayerGrid);
-
             ObservableList<Node> newPlayerGrid = ((GridPane) boardArray.get((int) newPosition)).getChildren(); //Gets the grid where the player moved to
-
-            System.out.println("new player grid: " + newPlayerGrid);
 
             newPlayerGrid.set(playerNumber, playerIcon);
 
-            System.out.println("new player grid: " + newPlayerGrid);
         }
     }
 
@@ -134,7 +122,6 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         long playerPosition = player.getPosition();
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         List<Location> locationArray = locationController.getLocationArray();
-        System.out.println(playerPosition + "yeshello");
         return locationArray.get((int) playerPosition);
     }
 
@@ -245,7 +232,6 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     }
 
     public void showBuyLocationPopup(Player player, OwnableLocation location) {
-        System.out.println("boardcontroller popup method");
         updateBuyLocationPane(location);
         buyLocationPane.setVisible(true);
         buyLocationButton.setOnAction(event -> { buyLocation(player,location); });
@@ -256,7 +242,6 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         location.setOwner(player, true);
-        System.out.println("Eigenaar: " + location.getOwner());
         player.subtractBalance(location.getPrice());
         buyLocationPane.setVisible(false);
         fireStoreController.updateAllLocations(lobbyController.getToken());
@@ -389,7 +374,6 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
 
         List<OwnableLocation> locationsOwnedByPlayer = locationController.getLocationsOwnedByPlayer(player);
         int amountLocationsOwnedByPlayer = locationsOwnedByPlayer.size();
-        System.out.println("WOW!: " + locationsOwnedByPlayer);
 
         if(amountLocationsOwnedByPlayer > 0) {
             for (int i = 0; i < amountLocationsOwnedByPlayer; i++) {
@@ -447,28 +431,22 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
 
     @FXML
     private void placeBid() {
-        System.out.println("You bid something");
         AuctionController auctionController = (AuctionController) ControllerRegistry.get(AuctionController.class);
         Auction auction = auctionController.getAuction();
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         if (!auction.hasStartedAuction()){
             try{
                 int bid = Integer.parseInt(bidTextArea.getText());
-                System.out.println("You bid: " + bid);
                 Players clientPlayersEnum = playerController.getClientPlayersEnum();
                 for(Player player : playerController.getPlayers()){
                     if(UUID.compare(clientPlayersEnum, player)){
                         if(bid <= player.getWallet().getBalance()) {
-                            System.out.println("Good money");
                             if(bid > auctionController.getHighestBid().getValue()){
-                                System.out.println("Je hebt het hoogste bod lekker man");
                                 auctionController.addPlayerBid(bid);
                             } else {
-                                System.out.println("niet het hoogste bod");
                                 bidTextArea.clear();
                             }
                         } else {
-                            System.out.println("No affordo compadre");
                             bidTextArea.clear();
                         }
                     }
@@ -490,20 +468,12 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
         if(!ChancePopup.isVisible()) {
             ChancePopup.setVisible(true);
-            //try {
+            Card card = cardDeckController.getRandomChanceCard();
+            Platform.runLater(() -> {
+                chanceCardText.setText(card.getDescription());
+            });
+            card.action(player);
 
-                //Card card = cardDeckController.grabChanceCard();
-                Card card = cardDeckController.getRandomChanceCard();
-                Platform.runLater(() -> {
-                    chanceCardText.setText(card.getDescription());
-                });
-                card.action(player);
-
-            /*} catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
             chanceCardButton.setOnAction((e) -> {
 
                 ChancePopup.setVisible(false);
