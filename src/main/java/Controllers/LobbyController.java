@@ -93,7 +93,7 @@ public class LobbyController
         fireStoreController.addPlayer(token, player);
     }*/
 
-    private void removePlayerFromLobby() throws InterruptedException, ExecutionException {
+    private void removePlayerFromLobby() {
 
         //Added Firebase functionality assuming var player is the player who wants to leave the game.
         //Player player = new Player("Removeme");
@@ -122,7 +122,7 @@ public class LobbyController
      * @throws IOException
      */
     @FXML
-    private void JoinLobbySubmit(ActionEvent actionEvent) throws IOException {
+    private void JoinLobbySubmit(ActionEvent actionEvent) {
         try {
             token = Integer.parseInt(JoinLobbyViewTokenTextField.getText());
             name = JoinLobbyViewNameTextField.getText();
@@ -307,7 +307,7 @@ public class LobbyController
         documentSnapshot = state;
         System.out.println(state.get("gameHasStarted"));
         boolean boolAfterUpdate = (boolean) documentSnapshot.get("gameHasStarted");
-        if (!gameHasStarted && boolAfterUpdate) { ;
+        if (!gameHasStarted && boolAfterUpdate) {
             gameHasStarted = boolAfterUpdate;
             goToGameView();
         }

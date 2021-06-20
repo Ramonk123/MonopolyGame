@@ -3,7 +3,6 @@ package Controllers;
 import Exceptions.PlayerException;
 import Firestore.FirestoreFormattable;
 import Models.Location;
-import Models.OwnableLocation;
 import Models.Player;
 import Models.Turn;
 import Monopoly.UUID;
@@ -12,7 +11,6 @@ import ObserveablePattern.Subject;
 import Resetter.Resettable;
 import com.google.cloud.firestore.DocumentSnapshot;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -27,8 +25,8 @@ public class TurnController
             Resettable,
             Subject<DocumentSnapshot>, Controller {
 
-    private Turn turn = new Turn();
-    private Player player = new Player(getCurrentPlayer(), getCurrentPlayer().name());
+    private final Turn turn = new Turn();
+    private final Player player = new Player(getCurrentPlayer(), getCurrentPlayer().name());
     private DocumentSnapshot documentSnapshot;
 
     public static boolean chanceCardUsed = false;
@@ -68,8 +66,8 @@ public class TurnController
         System.out.println("Index: " + index);
         System.out.println("Size: " + size);
         Player nextPlayer;
-        for(int i = 0; list.size() > i; i++){
-            System.out.println("Index: " + index + "ID: " + list.get(i).getId().getId());
+        for (Player value : list) {
+            System.out.println("Index: " + index + "ID: " + value.getId().getId());
         }
         try {
             nextPlayer = list.get(index + 1);
@@ -88,11 +86,7 @@ public class TurnController
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
 
-        try {
-            fireStoreController.updateTurn(lobbyController.getToken(), turn);
-        } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
+        fireStoreController.updateTurn(lobbyController.getToken(), turn);
     }
 
     @Override

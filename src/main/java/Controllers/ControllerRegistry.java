@@ -7,7 +7,7 @@ import java.util.HashMap;
  * Registers controllers so you only have one instance of each controller.
  */
 public class ControllerRegistry {
-    protected static HashMap<String, Controller> controllers = new HashMap<>();
+    protected final static HashMap<String, Controller> controllers = new HashMap<>();
 
     public static void register(Controller controller) {
         String className = controller.getClass().getSimpleName();

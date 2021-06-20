@@ -7,7 +7,7 @@ import Models.Trade;
  */
 public class TradeController implements Controller {
 
-    private Trade trade = new Trade();
+    private final Trade trade = new Trade();
 
     private TradeController() {
 

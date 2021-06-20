@@ -24,8 +24,8 @@ public class CardDeckController
     private final static UUID CHANCE_JAIL_CARD_UUID = new UUID("CARD-8");
     private final static UUID COMMUNITY_JAIL_CARD_UUID = new UUID("CARD-20");
 
-    private CardDeck chanceCardDeck = new CardDeck(new ArrayList());
-    private CardDeck commonFundCardDeck = new CardDeck(new ArrayList<>());
+    private final CardDeck chanceCardDeck = new CardDeck(new ArrayList());
+    private final CardDeck commonFundCardDeck = new CardDeck(new ArrayList<>());
     private DocumentSnapshot documentSnapshot;
 
     public CardDeckController() {
@@ -87,7 +87,7 @@ public class CardDeckController
     public Card getRandomChanceCard() {
         this.chanceCardDeck.shuffle();
         return this.chanceCardDeck.getCardDeck().get(0);
-    };
+    }
 
     public Card grabCommonFundCard() throws ExecutionException, InterruptedException {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);

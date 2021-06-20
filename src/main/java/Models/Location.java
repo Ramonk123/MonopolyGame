@@ -7,10 +7,10 @@ import Monopoly.UUID;
  * Abstract model that is a blueprint for all locations.
  */
 public abstract class Location implements Position, Action, Nameable, Identifiable {
-    private UUID id;
-    private String name;
-    private int position;
-    private Set set;
+    private final UUID id;
+    private final String name;
+    private final int position;
+    private final Set set;
 
     public Location(Locations locationEnum, String name, Set set, int position) {
         this.id = locationEnum.getId();

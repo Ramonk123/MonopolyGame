@@ -2,7 +2,6 @@ package Controllers;
 
 import Firestore.Firestore;
 import Firestore.FirestoreFormattable;
-import Models.Location;
 import Models.Player;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
@@ -26,7 +25,7 @@ public class FireStoreController implements Subject<DocumentSnapshot>, HasStage,
 
     private int token;
     private Consumer<DocumentSnapshot> lambda = (doc) -> {};
-    private List<Observer<DocumentSnapshot>> observers = new ArrayList<>();
+    private final List<Observer<DocumentSnapshot>> observers = new ArrayList<>();
     private DocumentSnapshot documentSnapshot;
 
 
@@ -56,7 +55,7 @@ public class FireStoreController implements Subject<DocumentSnapshot>, HasStage,
 
     }
 
-    Firestore firestore = new Firestore();
+    private final Firestore firestore = new Firestore();
 
 
     public void initializeFirestore() throws IOException {
@@ -164,7 +163,7 @@ public class FireStoreController implements Subject<DocumentSnapshot>, HasStage,
     }
 
 
-    public void setChanceCardNull(int token) throws InterruptedException, ExecutionException {
+    public void setChanceCardNull(int token) {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))
                 .update("nextChanceCard", null);
@@ -198,7 +197,7 @@ public class FireStoreController implements Subject<DocumentSnapshot>, HasStage,
                 .update("players", map);
     }
 
-    public void updateTurn(int token, FirestoreFormattable turn) throws ExecutionException, InterruptedException {
+    public void updateTurn(int token, FirestoreFormattable turn) {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))
                 .update("turn", turn.getFirestoreFormat());
@@ -224,7 +223,7 @@ public class FireStoreController implements Subject<DocumentSnapshot>, HasStage,
 
     public void listen(int lobbyToken) {
         DocumentReference docRef = firestore.getDatabase().collection("Lobbies").document(String.valueOf(lobbyToken));
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        docRef.addSnapshotListener(new EventListener<>() {
 
 
             public void onEvent(@Nullable DocumentSnapshot snapshot,

@@ -5,7 +5,6 @@ import Exceptions.PlayerException;
 import Models.Player;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
-import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -15,23 +14,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Sets the Stage/Scene for the BoardView.fxml and has additional methods that add things to the view.
  */
 public class BoardView implements View, Observer<BoardSubject>, HasStage {
     //Screensize
-    int WIDTH = 1080;
-    int HEIGHT = 720;
+    private final int WIDTH = 1080;
+    private final int HEIGHT = 720;
 
-    int updateCount = 0;
+    private int updateCount = 0;
 
     private Stage primaryStage;
 

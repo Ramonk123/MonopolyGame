@@ -8,17 +8,12 @@ import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import com.google.cloud.firestore.DocumentSnapshot;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Controller for the Auction model.
@@ -26,7 +21,7 @@ import java.util.Map;
 public class AuctionController implements Subject<DocumentSnapshot>, FirestoreFormattable, Controller {
 
     private Player player;
-    private Auction auction =  new Auction();
+    private final Auction auction =  new Auction();
 
     public AuctionController() {
     }
@@ -87,11 +82,7 @@ public class AuctionController implements Subject<DocumentSnapshot>, FirestoreFo
                 highestBidPair = new Pair(pair.getKey(), pair.getValue());
             }
         }
-        if(highestBidPair == null){
-            return new Pair<>(auction.getSeller(), 10);
-        }else {
-            return highestBidPair;
-        }
+        return Objects.requireNonNullElseGet(highestBidPair, () -> new Pair<>(auction.getSeller(), 10));
     }
 
     //TODO create functions that gets Auction bidding results

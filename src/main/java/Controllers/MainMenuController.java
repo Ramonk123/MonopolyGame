@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  */
 public class MainMenuController implements Subject<DocumentSnapshot>, HasStage, Controller {
 
-    private MainMenu mainMenu = new MainMenu();
+    private final MainMenu mainMenu = new MainMenu();
     private DocumentSnapshot documentSnapshot;
 
     public MainMenuController() {

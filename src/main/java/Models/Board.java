@@ -12,7 +12,7 @@ import java.util.List;
  * Model for the board which mostly has methods for the BoardView view.
  */
 public class Board implements BoardSubject, Observer<DocumentSnapshot>, HasStage {
-    private List<Observer<BoardSubject>> observers = new ArrayList<>();
+    private final List<Observer<BoardSubject>> observers = new ArrayList<>();
 
     public Board() {
         registerObserver(new BoardView());

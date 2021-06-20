@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Auction implements Observer<DocumentSnapshot>, FirestoreFormattable {
     private boolean startedAuction = false;
     private HashMap<String, Integer> playerBids = new HashMap<>();
-    private HashMap<String, Object> auction= new HashMap<>();
+    private final HashMap<String, Object> auction= new HashMap<>();
     private String locationID;
     private String seller;
 

@@ -2,10 +2,8 @@ package Models;
 
 import Controllers.ControllerRegistry;
 import Controllers.PlayerController;
-import Controllers.Players;
 import Controllers.TurnController;
 import Views.View;
-import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +14,7 @@ import java.util.function.Consumer;
  */
 public class SpecialLocation extends Location {
     private final List<View> observers = new ArrayList<>();
-    private Consumer<Player> action;
+    private final Consumer<Player> action;
 
     public SpecialLocation(Locations locationEnum, String name, Set set, int position, Consumer<Player> action) {
         super(locationEnum, name, set, position);

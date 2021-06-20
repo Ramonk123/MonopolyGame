@@ -8,7 +8,7 @@ import java.util.HashMap;
  * Custom UUID class that makes Players, Cards and Locations identifiable by an ID; and has methods to compare different IDs.
  */
 public class UUID {
-    private static HashMap<String, Boolean> cache = new HashMap<>();
+    private static final HashMap<String, Boolean> cache = new HashMap<>();
     private String id;
 
     public UUID(String id) {

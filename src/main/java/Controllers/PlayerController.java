@@ -84,17 +84,15 @@ public class PlayerController
     /**
      * Sets a new Player object and returns the Player that is created.
      * @param name Name that the user gave itself.
-     * @return Returns the new Player object that got created in the method.
      * @throws Exception
      */
-    public Player setPlayer(String name) throws Exception {
+    public void setPlayer(String name) throws Exception {
         int arraySize = players.size();
         Players playerEnum = Players.getByOrder(arraySize+1)
                 .orElseThrow( () -> new Exception("Order out of bounds")
         );
         Player player = new Player(playerEnum, name);
         players.add(player);
-        return player;
     }
 
     public Player setPlayerWithPlayersEnum(Players playersEnum, String name) {
