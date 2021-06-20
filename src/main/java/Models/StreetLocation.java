@@ -51,6 +51,7 @@ public class StreetLocation extends OwnableLocation {
                 } else {
                     Actions.payFunds(currentPlayer, getRent()* priceInflator.inflateByTicks(getHouses()));
                     Actions.receiveFunds(getOwner().orElseThrow(), getRent()* priceInflator.inflateByTicks(getHouses()));
+                    Actions.payRentPopup(player, this);
                 }
             }
     }

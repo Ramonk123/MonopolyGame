@@ -180,8 +180,9 @@ public class Actions {
         }
     }
 
-    public static void payRentPopup(Player player, OwnableLocation location){
-
+    public static void payRentPopup(Player player, StreetLocation location) {
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        boardController.showStreetPayRent(player, location);
     }
 
     public static void sellLocationPopup(Player player, OwnableLocation location) {
