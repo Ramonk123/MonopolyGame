@@ -1259,9 +1259,8 @@
             <Button fx:id="EndTurnButton" disable="true" mnemonicParsing="false" onAction="#EndTurnPlayer" prefWidth="100.0" text="End Turn" />
          </children>
       </VBox>
-      <GridPane fx:id="sellLocationPopup" alignment="CENTER" layoutX="182.0" layoutY="68.0" prefHeight="589.0" prefWidth="718.0" style="-fx-background-image: url(&quot;FXML/IMG/PopupBackground.png&quot;);" visible="false">
+      <GridPane fx:id="sellLocationPopup" alignment="CENTER" layoutX="182.0" layoutY="68.0" prefHeight="589.0" prefWidth="718.0" style="-fx-background-image: url(&quot;FXML/IMG/PopupBackground.png&quot;);">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="206.0" />
@@ -1273,145 +1272,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label fx:id="NoLocationsToSellPopup" prefHeight="98.0" prefWidth="668.0" text="You have no locations to sell!" textFill="WHITE" GridPane.columnSpan="4" GridPane.rowSpan="3">
+            <Label alignment="CENTER" text="Sell Location" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <font>
-                  <Font size="41.0" />
+                  <Font name="System Bold" size="24.0" />
+               </font></Label>
+            <Button fx:id="sellLocationButton" mnemonicParsing="false" prefHeight="43.0" prefWidth="97.0" style="-fx-background-color: #93d28f" text="Sell Location" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" text="You will receive:" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <HBox fx:id="sellLocation1Pane" prefHeight="73.0" prefWidth="432.0" GridPane.columnSpan="3" GridPane.rowIndex="2">
-               <children>
-                  <Label fx:id="sellLocation1Label" text="Locationname" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="sellLocation1Price" text="Price" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Button mnemonicParsing="false" text="sell" />
-               </children>
-            </HBox>
-            <HBox fx:id="sellLocation2Pane" prefHeight="73.0" prefWidth="442.0" GridPane.columnSpan="3" GridPane.rowIndex="3">
-               <children>
-                  <Label fx:id="sellLocation1Label1" text="Locationname" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="sellLocation1Price1" text="Price" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Button mnemonicParsing="false" text="sell" />
-               </children>
-            </HBox>
-            <HBox fx:id="sellLocation3Pane" prefHeight="73.0" prefWidth="442.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
-               <children>
-                  <Label fx:id="sellLocation1Label11" text="Locationname" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="sellLocation1Price11" text="Price" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Button mnemonicParsing="false" text="sell" />
-               </children>
-            </HBox>
-            <HBox fx:id="sellLocation4Pane" prefHeight="73.0" prefWidth="442.0" GridPane.columnSpan="3" GridPane.rowIndex="5">
-               <children>
-                  <Label fx:id="sellLocation1Label12" text="Locationname" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="sellLocation1Price12" text="Price" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Button mnemonicParsing="false" text="sell" />
-               </children>
-            </HBox>
-            <HBox fx:id="sellLocation5Pane" prefHeight="73.0" prefWidth="442.0" GridPane.columnSpan="3" GridPane.rowIndex="6">
-               <children>
-                  <Label fx:id="sellLocation1Label121" text="Locationname" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="sellLocation1Price121" text="Price" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Button mnemonicParsing="false" text="sell" />
-               </children>
-            </HBox>
-            <HBox fx:id="sellLocation6Pane" prefHeight="73.0" prefWidth="432.0" style="-fx-background-image: /IMG/;" GridPane.columnSpan="3" GridPane.rowIndex="7">
-               <children>
-                  <Label fx:id="sellLocation1Label2" text="Locationname" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="sellLocation1Price2" text="Price" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <Button mnemonicParsing="false" text="sell" />
-               </children>
-            </HBox>
-            <Label text="Sell Location menu" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="3">
+            <Label fx:id="locationSellPrice" text="LocationSellPrice" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Label text="Sell houses and hotels first!" textAlignment="CENTER" visible="false" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
-                  <Font size="61.0" />
+                  <Font size="18.0" />
                </font>
             </Label>
          </children>

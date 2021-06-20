@@ -44,8 +44,7 @@ public class StreetLocation extends OwnableLocation {
                 System.out.println("streetlocation popup");
                 Actions.buyLocationPopup(currentPlayer, getPrice(), this);
             } else if(UUID.compare(getOwner().orElseThrow(), currentPlayer)) {
-            //TODO:
-            // Is owned by the player standing on the location
+                    Actions.sellLocationPopup(player, this);
             }else {
                     Actions.payFunds(currentPlayer, getRent()* priceInflator.inflateByTicks(getHouses()));
                     Actions.receiveFunds(getOwner().orElseThrow(), getRent()* priceInflator.inflateByTicks(getHouses()));

@@ -240,7 +240,6 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     public void updateBuyLocationPane(OwnableLocation location){
         locationForSaleName.setText("Name: " + location.getName());
         locationForSalePrice.setText("Price: $" + location.getPrice() + ",--");
-        locationForSaleHouse.setText("Tax Amount: " + " TAX NEEDS TO BE ADDED");  //TODO: as of now idk wtf tax is.
         locationForSaleMortgage.setText("Mortgage: $" + location.getMortgageValue() + ",--");
     }
 
@@ -260,16 +259,19 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     }
 
     @FXML private Pane sellLocationPopup;
+    @FXML private Label sellPropertyFirst;
+    @FXML private Button sellLocationButton;
 
-    public void showSellLocationPopup(Player player, OwnableLocation location){
+    public void showSellStreetLocationPopup(Player player, StreetLocation location){
         sellLocationPopup.setVisible(true);
+        sellLocationButton.setOnAction(event -> {sellStreetLocation(player, location);});
     }
 
     public void sellStreetLocation(Player player, StreetLocation location){
         if (location.getHouses() == 0 && !location.getHotel()){
         player.addBalance(location.getPrice()/2);
         location.setOwnerNull();
-        }
+        } else sellPropertyFirst.setVisible(true);
     }
 
     @FXML private Pane payStreetRentPane;
