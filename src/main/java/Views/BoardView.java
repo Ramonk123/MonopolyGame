@@ -121,9 +121,6 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
         if(boardController.checkGameHasStarted()) {
             Platform.runLater(() -> {
                 updateCount += 1;
-                System.out.println("UpdateCount" + updateCount);
-                System.out.println("Current player: " + turnController.getCurrentPlayer());
-                System.out.println("Client player: " + playerController.getClientPlayersEnum());
 
                 Player player = null;
                 try {
@@ -137,14 +134,9 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
                 long currentPosition = player.getPosition();
                 long eyesThrownOld = currentPosition - oldPosition;
 
-                System.out.println("eyesthrown old " + eyesThrownOld);
-
-
                 long eyesThrown = turnController.getEyesThrown();
-                System.out.println("Updated eyesthrown " + eyesThrown);
 
                 if (eyesThrown != 0) {
-                    System.out.println("Move player");
                     try {
                         turnController.movePlayerOnBoard(player.getPlayersEnum());
                     } catch (PlayerException e) {

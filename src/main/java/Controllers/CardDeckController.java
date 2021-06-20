@@ -48,20 +48,6 @@ public class CardDeckController
         chanceCardDeck.add(new Card(new UUID("CARD-14"), "You have been elected Chairman of the Board. Pay each player $50", Actions::payEachPlayer));
         chanceCardDeck.add(new Card(new UUID("CARD-15"), "Your building loan matures. Collect $150", (player -> { Actions.receiveFunds(player, 150);})));
 
-        /*commonFundCardDeck.add(new Card(new UUID("CARD-16"), "Advance to Go (Collect $200)", (player -> { Actions.teleportToLocation(player, 0, true); })));
-        commonFundCardDeck.add(new Card(new UUID("CARD-17"), "Bank error in your favor. Collect $200", (player -> { Actions.receiveFunds(player, 200);})));
-        commonFundCardDeck.add(new Card(new UUID("CARD-18"), "Doctor’s fee. Pay $50", (player -> {Actions.payFunds(player, 50);})));
-        commonFundCardDeck.add(new Card(new UUID("CARD-19"), "From sale of stock you get $50", (player -> {Actions.receiveFunds(player, 50);})));
-        commonFundCardDeck.add(new Card(new UUID("CARD-21"), "Go to Jail. Go directly to jail, do not pass Go, do not collect $200", Actions::goToJail));
-        commonFundCardDeck.add(new Card(new UUID("CARD-22"), "Holiday fund matures. Receive $100", (player -> {Actions.receiveFunds(player,100);})));
-        commonFundCardDeck.add(new Card(new UUID("CARD-23"), "Income tax refund. Collect $20", (player -> {Actions.receiveFunds(player,20);})));
-        commonFundCardDeck.add(new Card(new UUID("CARD-24"), "It is your birthday. Collect $10 from every player", Actions::receiveFromEachPlayer));
-        commonFundCardDeck.add(new Card(new UUID("CARD-25"), "Life insurance matures. Collect $100", (player -> {Actions.receiveFunds(player,100);})));
-        commonFundCardDeck.add(new Card(new UUID("CARD-26"), "Pay hospital fees of $100", (player -> {Actions.payFunds(player,100);})));
-        commonFundCardDeck.add(new Card(new UUID("CARD-27"), "Pay school fees of $50", (player -> {Actions.payFunds(player,50);})));
-        commonFundCardDeck.add(new Card(new UUID("CARD-28"), "Receive $25 consultancy fee", (player -> {Actions.receiveFunds(player,25);})));
-        commonFundCardDeck.add(new Card(new UUID("CARD-29"), "You are assessed for street repair. $40 per house. $115 per hotel", (player -> { Actions.makeRepairs(player,115,40);})));
-        commonFundCardDeck.add(new Card(new UUID("CARD-30"), "You have won second prize in a beauty contest. Collect $10", (player -> {Actions.receiveFunds(player,10);})));*/
         commonFundCardDeck.add(new Card(new UUID("CARD-31"), "You inherit $100", (player -> {Actions.receiveFunds(player,100);})));
 
         chanceCardDeck.shuffle();

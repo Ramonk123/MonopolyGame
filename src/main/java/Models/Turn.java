@@ -46,9 +46,6 @@ public class Turn implements FirestoreFormattable, Observer<DocumentSnapshot> {
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
 
-        System.out.println("Player is already the active player: " + !UUID.compare(players, turnController.getCurrentPlayer()));
-        System.out.println("Player is the client player: " + UUID.compare(players, playerController.getClientPlayersEnum()));
-
         if(UUID.compare(players, activePlayer)) {
             return;
         }
@@ -59,7 +56,6 @@ public class Turn implements FirestoreFormattable, Observer<DocumentSnapshot> {
             try {
                 boardController.toggleRollDiceButton(true);
                 boardController.toggleEndTurnButton(true);
-                System.out.println("----Buttons turned on----");
             } catch(Exception ignored) {}
         }
     }

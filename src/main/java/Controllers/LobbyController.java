@@ -93,18 +93,10 @@ public class LobbyController
     }
 
 // these 2 functions should be deleted if never used.
-    /*private void addPlayerToLobby(String name) {
-        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        Optional<Player> player = getPlayerByName(name);
-
-        fireStoreController.addPlayer(token, player);
-    }*/
 
     private void removePlayerFromLobby() {
 
         //Added Firebase functionality assuming var player is the player who wants to leave the game.
-        //Player player = new Player("Removeme");
-        //FireStoreController.removePlayer(token, player);
     }
 
     private Optional<Player> getPlayerByName(String name) {
@@ -166,11 +158,6 @@ public class LobbyController
             LobbyAlreadyFullPopup.setVisible(true);
         }
 
-        /*if(!playerNameExists(name)) {
-            playerController.setPlayer(name);
-
-        }
-        JoinLobbyViewNameTextField.setText("Name already exists");*/
     }
 
     //Create Lobby
