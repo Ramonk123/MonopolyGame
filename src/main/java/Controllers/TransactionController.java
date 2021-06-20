@@ -23,7 +23,11 @@ public class TransactionController implements Controller {
         Player player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
         player.getWallet().setBalance(balance);
 
-        updateToFireStore();
+        try{
+            updateToFireStore();
+        } catch(Exception ignore) {
+
+        }
     }
 
     public int getBalance(Players playersEnum) throws TransactionException {
@@ -35,14 +39,22 @@ public class TransactionController implements Controller {
         Receiver receiver = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
         receiver.addBalance(value);
 
-        updateToFireStore();
+        try{
+            updateToFireStore();
+        } catch(Exception ignore) {
+
+        }
     }
 
     public void subtractBalance(Players playersEnum, int value) throws TransactionException {
         Payer payer = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
         payer.subtractBalance(value);
 
-        updateToFireStore();
+        try{
+            updateToFireStore();
+        } catch(Exception ignore) {
+
+        }
 
         Player player = getPlayerByPlayersEnum(playersEnum).orElseThrow();
 
@@ -56,7 +68,12 @@ public class TransactionController implements Controller {
         payer.subtractBalance(value);
         receiver.addBalance(value);
 
-        updateToFireStore();
+        try{
+            updateToFireStore();
+        } catch(Exception ignore) {
+
+        }
+
 
         Player player = getPlayerByPlayersEnum(payerEnum).orElseThrow();
 
