@@ -108,7 +108,7 @@ public class Player implements Observer<DocumentSnapshot>, BoardSubject, Positio
     @Override
     public Object getFirestoreFormat() {
         Map<String, Object> map = new HashMap<>();
-        map.put("inJail", inJail);
+        //map.put("inJail", inJail);
         map.put("name", getName());
         map.put("oldPosition", getOldPosition());
         map.put("currentPosition", getPosition());
@@ -125,7 +125,7 @@ public class Player implements Observer<DocumentSnapshot>, BoardSubject, Positio
                 continue;
             }
             Map<String, Object> map = (Map<String, Object>) entry.getValue();
-            inJail = (boolean) map.get("inJail");
+            //inJail = (boolean) map.get("inJail");
             name = (String) map.get("name");
             currentPosition = (long) map.get("currentPosition");
             oldPosition = (long) map.get("oldPosition");
