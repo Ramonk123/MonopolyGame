@@ -292,19 +292,23 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
 
     public void showStreetPayRent(Player player, StreetLocation location, PriceInflator priceInflator){
         buyLocationPane.setVisible(false);
-        payStreetRentPane.setVisible(true);
-        payStreetRentAmount.setText("Pay Amount: " + location.getRent());
 
-        payStreetRentButton.setOnAction(event -> {
-            Players receivingPlayer = location.getOwner().orElseThrow().getPlayersEnum();
-            int amount = location.getRent()* priceInflator.inflateByTicks(location.getHouses());
-            TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
-            try {
-                transactionController.payBalance(player.getPlayersEnum(),receivingPlayer,amount);
-            } catch (TransactionException e) {
-                e.printStackTrace();
-            }
+        Platform.runLater(()->{
+            payStreetRentPane.setVisible(true);
+            payStreetRentAmount.setText("Pay Amount: " + location.getRent());
+            payStreetRentButton.setOnAction(event -> {
+                Players receivingPlayer = location.getOwner().orElseThrow().getPlayersEnum();
+                int amount = location.getRent()* priceInflator.inflateByTicks(location.getHouses());
+                TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
+                try {
+                    transactionController.payBalance(player.getPlayersEnum(),receivingPlayer,amount);
+                    payStreetRentPane.setVisible(false);
+                } catch (TransactionException e) {
+                    e.printStackTrace();
+                }
+            });
         });
+
     }
 
     @FXML
