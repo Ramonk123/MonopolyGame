@@ -151,7 +151,7 @@ public class TurnController
     @Override
     public void notifyObservers() {
         turn.update(documentSnapshot);
-        checkJailedStatus();
+        //checkJailedStatus();
     }
 
     /**
