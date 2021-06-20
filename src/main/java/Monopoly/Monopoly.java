@@ -41,6 +41,7 @@ public class Monopoly extends Application {
         fireStoreController.registerObserver((Observer<DocumentSnapshot>) ControllerRegistry.get(LobbyController.class));
         fireStoreController.registerObserver((Observer<DocumentSnapshot>) ControllerRegistry.get(CardDeckController.class));
         fireStoreController.registerObserver((Observer<DocumentSnapshot>) ControllerRegistry.get(BoardController.class));
+        fireStoreController.registerObserver((Observer<DocumentSnapshot>) ControllerRegistry.get(LocationController.class));
 
         MainMenuController mainMenuController = (MainMenuController) ControllerRegistry.get(MainMenuController.class);
         mainMenuController.setStage(primaryStage);
