@@ -1659,7 +1659,7 @@
          </children>
 
       </GridPane>
-      <VBox fx:id="ChancePopup" alignment="TOP_CENTER" layoutX="247.0" layoutY="94.0" prefHeight="547.0" prefWidth="600.0" style="-fx-background-image: url(&quot;FXML/IMG/PopupBackground.png&quot;);">
+      <VBox fx:id="ChancePopup" alignment="TOP_CENTER" layoutX="247.0" layoutY="94.0" prefHeight="547.0" prefWidth="600.0" style="-fx-background-image: url(&quot;FXML/IMG/PopupBackground.png&quot;);" visible="false">
          <children>
             <Label alignment="CENTER" contentDisplay="TOP" prefHeight="64.0" prefWidth="327.0" text="Kans" textFill="WHITE">
                <font>
