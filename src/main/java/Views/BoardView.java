@@ -88,11 +88,11 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
 
     @Override
     public void update(BoardSubject state) {
-        updatePlayerLabels(state);
-        updatePlayerPosition(state);
+        updatePlayerLabels();
+        updatePlayerPosition();
     }
 
-    public void updatePlayerLabels(BoardSubject state) {
+    public void updatePlayerLabels() {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         PlayerController playerController = (PlayerController)  ControllerRegistry.get(PlayerController.class);
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
@@ -113,7 +113,7 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
         }
     }
 
-    public void updatePlayerPosition(BoardSubject state) {
+    public void updatePlayerPosition() {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         PlayerController playerController = (PlayerController)  ControllerRegistry.get(PlayerController.class);
         TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
