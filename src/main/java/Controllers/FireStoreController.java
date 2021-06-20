@@ -2,6 +2,7 @@ package Controllers;
 
 import Firestore.Firestore;
 import Firestore.FirestoreFormattable;
+import Models.Location;
 import Models.Player;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
@@ -154,6 +155,14 @@ public class FireStoreController implements Subject<DocumentSnapshot>, HasStage,
         return (String) documentSnapshot.get("nextChanceCard");
     }
 
+    public void updateLocations() {
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+
+        ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token))
+                .update("locations", locationController.getLocationArray());
+    }
+
     public void setChanceCardNull(int token) throws InterruptedException, ExecutionException {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))
@@ -234,4 +243,6 @@ public class FireStoreController implements Subject<DocumentSnapshot>, HasStage,
             }
         });
     }
+
+
 }
