@@ -394,7 +394,11 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
                 for(Player player : playerController.getPlayers()){
                     if(UUID.compare(clientPlayersEnum, player)){
                         if(bid <= player.getWallet().getBalance()) {
-                            auction.addPlayerBid(bid);
+                            System.out.println("Good money");
+                            auctionController.addPlayerBid(bid);
+                        } else {
+                            System.out.println("No affordo compadre");
+                            bidTextArea.clear();
                         }
                     }
                 }

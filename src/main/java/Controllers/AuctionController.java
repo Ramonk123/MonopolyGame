@@ -72,6 +72,10 @@ public class AuctionController implements Subject<DocumentSnapshot>, FirestoreFo
         return auction;
     }
 
+    public void addPlayerBid(int bid){
+        auction.addPlayerBid(bid);
+    }
+
     public Pair<String, Integer> getHighestBid(){
         Map<String, Object> playerbids = auction.getPlayerBids();
         Iterator iterator = playerbids.entrySet().iterator();
