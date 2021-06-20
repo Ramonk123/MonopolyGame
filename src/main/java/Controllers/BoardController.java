@@ -228,17 +228,18 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     @FXML Button buyLocationButton;
     @FXML Button auctionLocationButton;
 
-    public void updateBuyLocationPane(Player player, OwnableLocation location){
-        locationForSaleName.setText(location.getName());
-        locationForSalePrice.setText(location.getName());
-        locationForSaleHouse.setText(location.getName());
-        locationForSaleMortgage.setText(location.getName());
+    public void updateBuyLocationPane(OwnableLocation location){
+        locationForSaleName.setText("Name: " + location.getName());
+        locationForSalePrice.setText("Price: $" + location.getPrice() + ",--");
+        locationForSaleHouse.setText("Tax Amount: " + " TAX NEEDS TO BE ADDED");  //TODO: as of now idk wtf tax is.
+        locationForSaleMortgage.setText("Mortgage: $" + location.getMortgageValue() + ",--");
     }
 
     public void showBuyLocationPopup(Player player, OwnableLocation location) {
         System.out.println("boardcontroller popup method");
-            buyLocationPane.setVisible(true);
-            buyLocationButton.setOnAction(event -> { buyLocation(player,location); });
+        updateBuyLocationPane(location);
+        buyLocationPane.setVisible(true);
+        buyLocationButton.setOnAction(event -> { buyLocation(player,location); });
         auctionLocationButton.setOnAction(event -> { auctionLocation(player,location); });
     }
 
