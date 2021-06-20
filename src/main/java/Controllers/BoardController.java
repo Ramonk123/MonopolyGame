@@ -254,6 +254,15 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         buyLocationPane.setVisible(false);
     }
 
+    @FXML Pane payRentPane;
+    @FXML Label payRentAmount;
+
+    public void showStreetPayRent(Player player, StreetLocation location){
+        buyLocationPane.setVisible(false);
+        payRentPane.setVisible(true);
+        payRentAmount.setText("Pay Amount: " + location.getRent());
+    };
+
     @FXML
     public void auctionLocation(Player player, OwnableLocation location) {
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
@@ -278,7 +287,6 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         location.setOwnerNull();
         player.addBalance(location.getPrice());
     }
-
 
     @FXML Pane notEnoughBalancePane;
 

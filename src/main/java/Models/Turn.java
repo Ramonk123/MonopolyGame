@@ -34,6 +34,10 @@ public class Turn implements FirestoreFormattable, Observer<DocumentSnapshot> {
         }
     }
 
+    /**
+     * Sets the currentPlayer and makes the buttons visible for the currentPlayer.
+     * @param players The new currentPlayer.
+     */
     public void setCurrentPlayer(Players players) {
         // players == client player && players != activePlayer
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);

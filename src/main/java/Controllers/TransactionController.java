@@ -4,6 +4,7 @@ import Exceptions.TransactionException;
 import Models.Payer;
 import Models.Player;
 import Models.Receiver;
+import Models.Turn;
 
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -31,21 +32,22 @@ public class TransactionController implements Controller {
     }
 
     public void addBalance(Players playersEnum, int value) throws TransactionException {
-        Receiver player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
-        player.addBalance(value);
+        Receiver receiver = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
+        receiver.addBalance(value);
 
         updateToFireStore();
     }
 
     public void subtractBalance(Players playersEnum, int value) throws TransactionException {
-        Payer player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
-        if(player.getBalance() >= value) {
-            player.subtractBalance(value);
-        } else {
-            //Do shit
-        }
+        Payer payer = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new TransactionException("PlayerEnum NOT Found"));
+        payer.subtractBalance(value);
 
         updateToFireStore();
+
+        Player player = getPlayerByPlayersEnum(playersEnum).orElseThrow();
+
+        hasLostGame(player);
+
     }
 
     public void payBalance(Players payerEnum, Players receiverEnum, int value) throws TransactionException {
@@ -55,6 +57,10 @@ public class TransactionController implements Controller {
         receiver.addBalance(value);
 
         updateToFireStore();
+
+        Player player = getPlayerByPlayersEnum(payerEnum).orElseThrow();
+
+        hasLostGame(player);
     }
 
     public boolean checkBalance(Players playersEnum, int value) throws TransactionException{
@@ -73,6 +79,13 @@ public class TransactionController implements Controller {
             executionException.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void hasLostGame(Player player) {
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
+        if(turnController.hasLostTheGame(player)) {
+            turnController.nextPlayerTurn();
         }
     }
 
