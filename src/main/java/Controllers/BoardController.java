@@ -9,6 +9,7 @@ import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Firestore;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -437,7 +438,6 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     public void update(DocumentSnapshot documentSnapshot) {
         this.documentSnapshot = documentSnapshot;
         notifyObservers();
-
     }
 
     @FXML
@@ -504,6 +504,15 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
                 ChancePopup.setVisible(false);
             });
         }
+    }
+    @FXML VBox inJailPopup;
+
+    public VBox getInJailPopup() {
+        return inJailPopup;
+    }
+
+    public Button getEndTurnButton() {
+        return EndTurnButton;
     }
 
 }

@@ -732,7 +732,11 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
                     ArrayList<Player> playerList = playerController.getPlayers();
                     for(int i = 0; playerList.size() > i; i++){
                         Player owner = playerList.get(i);
-                        ownableLocation.setOwner(owner, true);
+                        if(UUID.compare(playerString, owner)){
+                            System.out.println(owner);
+                            System.out.println(ownableLocation.getName());
+                            ownableLocation.setOwner(owner, true);
+                        }
                     }
                 }
             }

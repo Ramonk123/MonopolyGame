@@ -43,11 +43,18 @@ public class LobbyController
 
     private int token;
     private String name;
+
+    public boolean isGameHasStarted() {
+        return gameHasStarted;
+    }
+
     private boolean gameHasStarted;
 
     public LobbyController() {
         reset();
     }
+
+
 
     @Override
     public void registerObserver(Observer<DocumentSnapshot> observer) { }
