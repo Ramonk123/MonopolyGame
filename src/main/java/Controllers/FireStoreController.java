@@ -109,7 +109,7 @@ public class FireStoreController implements Subject<DocumentSnapshot>, HasStage,
         lobbyData.put("turn", turnController.getFirestoreFormat());
         lobbyData.put("nextChanceCard", cardDeckController.getNextChanceCard());
         lobbyData.put("nextCommonFundCard", cardDeckController.getNextCommonFundCard());
-        lobbyData.put("locations", locationController.getLocationArray());
+//        lobbyData.put("locations", locationController.getLocationArray());
 
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         ApiFuture<WriteResult> upload = database.collection("Lobbies").document(String.valueOf(token)).set(lobbyData);
