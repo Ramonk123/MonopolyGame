@@ -3,18 +3,16 @@ package Models;
 import Controllers.*;
 import Monopoly.UUID;
 
-import java.util.List;
-
 /**
  * Model that contains everything that a street location needs.
  */
 public class StreetLocation extends OwnableLocation {
-    private int houses;
-    private boolean hotel;
-    private PriceInflator priceInflator;
-    private int housePrice;
-    private int hotelPrice;
-    private int rent;
+    private final int houses;
+    private final boolean hotel;
+    private final PriceInflator priceInflator;
+    private final int housePrice;
+    private final int hotelPrice;
+    private final int rent;
 
 
     public StreetLocation(Locations locationEnum, String name, Set set, int position, int price, int rent, int housePrice, int hotelPrice) {
@@ -42,6 +40,7 @@ public class StreetLocation extends OwnableLocation {
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         //OwnableLocation location = (OwnableLocation) locationController.getLocationByEnum(this.getId()).orElseThrow();
             if (getOwner().isEmpty()){
+                System.out.println(getOwner() + "de owner staat hier");
                 System.out.println("streetlocation popup");
                 Actions.buyLocationPopup(currentPlayer, getPrice(), this);
             } else if(UUID.compare(getOwner().orElseThrow(), currentPlayer)) {

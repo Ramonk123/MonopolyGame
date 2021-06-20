@@ -2,13 +2,10 @@ package Views;
 
 import Controllers.ControllerRegistry;
 import Controllers.LobbyController;
-import Controllers.MainMenuController;
 import Controllers.PlayerController;
 import Models.Player;
 import ObserveablePattern.Observer;
-import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,15 +15,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Sets the Stage/Scene for the LobbyView.fxml and has additional methods that add things to the view.
  */
 public class LobbyView implements View, Observer<LobbySubject>, HasStage {
     //Screensize
-    int WIDTH = 600;
-    int HEIGHT = 400;
+    private final int WIDTH = 600;
+    private final int HEIGHT = 400;
     private Stage primaryStage;
 
     public LobbyView() {

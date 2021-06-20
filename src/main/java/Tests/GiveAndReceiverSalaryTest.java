@@ -12,6 +12,7 @@ public class GiveAndReceiverSalaryTest {
     @Test
     public void Should_Have1700Balance_When_Added200BalanceToABalanceOf1500() throws TransactionException {
         //Arrange
+        ControllerRegistry.register(new LobbyController());
         ControllerRegistry.register(new TransactionController());
         ControllerRegistry.register(new LocationController());
         ControllerRegistry.register(new PlayerController());
@@ -39,6 +40,7 @@ public class GiveAndReceiverSalaryTest {
     @Test
     public void Should_Get200Balance_When_PassingGoFromPosition0To40() {
         //Arrange
+        ControllerRegistry.register(new LobbyController());
         ControllerRegistry.register(new TransactionController());
         ControllerRegistry.register(new LocationController());
         ControllerRegistry.register(new PlayerController());
@@ -62,6 +64,7 @@ public class GiveAndReceiverSalaryTest {
     @Test
     public void Should_Get200Balance_When_PassingGoFromPosition39To0() {
         //Arrange
+        ControllerRegistry.register(new LobbyController());
         ControllerRegistry.register(new TransactionController());
         ControllerRegistry.register(new LocationController());
         ControllerRegistry.register(new PlayerController());
@@ -86,6 +89,7 @@ public class GiveAndReceiverSalaryTest {
     @Test
     public void Should_NotGet200Balance_When_TeleportingFromPosition39To0() {
         //Arrange
+        ControllerRegistry.register(new LobbyController());
         ControllerRegistry.register(new TransactionController());
         ControllerRegistry.register(new LocationController());
         ControllerRegistry.register(new PlayerController());
@@ -110,6 +114,7 @@ public class GiveAndReceiverSalaryTest {
     @Test
     public void Should_NotGet200Balance_When_TeleportingFromPosition0To0() {
         //Arrange
+        ControllerRegistry.register(new LobbyController());
         ControllerRegistry.register(new TransactionController());
         ControllerRegistry.register(new LocationController());
         ControllerRegistry.register(new PlayerController());
@@ -133,6 +138,7 @@ public class GiveAndReceiverSalaryTest {
     @Test
     public void Should_NotGet200Balance_When_MovingFromPosition0To0() {
         //Arrange
+        ControllerRegistry.register(new LobbyController());
         ControllerRegistry.register(new TransactionController());
         ControllerRegistry.register(new LocationController());
         ControllerRegistry.register(new PlayerController());
@@ -152,4 +158,5 @@ public class GiveAndReceiverSalaryTest {
         Assertions.assertTrue(wallet.getBalance() == 1500);
         Assertions.assertFalse(wallet.getBalance() == 1700);
     }
+
 }

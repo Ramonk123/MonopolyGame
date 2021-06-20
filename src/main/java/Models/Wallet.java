@@ -12,7 +12,7 @@ import java.util.List;
  * Wallet has a Payer interface and a Receiver interface implemented to control what can and can't be used.
  */
 public class Wallet implements Payer, Receiver, BoardSubject {
-    private ArrayList<Observer<BoardSubject>> observers = new ArrayList<>();
+    private final ArrayList<Observer<BoardSubject>> observers = new ArrayList<>();
 
     private int balance = 1500;
 

@@ -4,6 +4,9 @@ import Exceptions.TransactionException;
 import Models.*;
 import Models.Set;
 import Monopoly.UUID;
+import ObserveablePattern.Observer;
+import ObserveablePattern.Subject;
+import com.google.cloud.firestore.DocumentSnapshot;
 
 import java.util.*;
 import java.util.function.ToLongFunction;
@@ -11,16 +14,16 @@ import java.util.function.ToLongFunction;
 /**
  * Controller for the Location, OwnableLocation and SpecialLocation model, mainly to create Lists with (all) Locations in them.
  */
-public class LocationController implements Controller {
+public class LocationController implements Controller, Subject<DocumentSnapshot>, Observer<DocumentSnapshot> {
     private static LocationController locationController;
-    private AuctionController auctionController = new AuctionController();
+    private final AuctionController auctionController = new AuctionController();
     private List<Location> locationArray = new ArrayList<>();
-    private List<OwnableLocation> ownableLocationArray = new ArrayList<>();
-    private List<SpecialLocation> specialLocationArray = new ArrayList<>();
+    private final List<OwnableLocation> ownableLocationArray = new ArrayList<>();
+    private final List<SpecialLocation> specialLocationArray = new ArrayList<>();
 
-    private List<StreetLocation> streetLocationArray = new ArrayList<>();
-    private List<StationLocation> stationLocationArray = new ArrayList<>();
-    private List<UtilityLocation> utilityLocationArray = new ArrayList<>();
+    private final List<StreetLocation> streetLocationArray = new ArrayList<>();
+    private final List<StationLocation> stationLocationArray = new ArrayList<>();
+    private final List<UtilityLocation> utilityLocationArray = new ArrayList<>();
 
     public List<StreetLocation> getStreetLocationArray() {
         return streetLocationArray;
@@ -682,9 +685,38 @@ public class LocationController implements Controller {
 
     public void testPrintLocationsOwned() {
         for (OwnableLocation location: ownableLocationArray) {
-            if (location.getOwner() != null) {
+            if (location.getOwner().isPresent()) {
                 System.out.println("Housa Wousa: " + location.getName() + " " + location.getOwner());
             }
         }
+    }
+
+
+    public HashMap<String, String> getFirestoreFormat() {
+        HashMap<String, String> locationMap = new HashMap<>();
+        for(OwnableLocation location : ownableLocationArray) {
+            if(location.getOwner().isEmpty()){
+                locationMap.put(location.getId().getId(), null);
+            }else {
+                locationMap.put(location.getId().getId(), location.getOwner().get().getId().getId());
+            }
+        }
+        return locationMap;
+    }
+
+
+    @Override
+    public void registerObserver(Observer<DocumentSnapshot> observer) {
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
+    }
+
+    @Override
+    public void update(DocumentSnapshot state) {
+        this.locationArray = (ArrayList<Location>) state.get("locations");
     }
 }

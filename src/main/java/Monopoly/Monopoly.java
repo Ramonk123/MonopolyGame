@@ -1,7 +1,6 @@
 package Monopoly;
 
 import Controllers.*;
-import Firestore.Firestore;
 import ObserveablePattern.Observer;
 import Resetter.GameResetter;
 import Resetter.Resettable;
@@ -10,7 +9,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 public class Monopoly extends Application {
 
@@ -19,7 +17,7 @@ public class Monopoly extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
         ControllerRegistry.register(new MainMenuController());
         ControllerRegistry.register(new BoardController());
         ControllerRegistry.register(new LobbyController());

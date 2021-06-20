@@ -19,15 +19,16 @@ import java.util.Map;
  * Model which contains everything about the player.
  */
 public class Player implements Observer<DocumentSnapshot>, BoardSubject, Position, Nameable, Identifiable, FirestoreFormattable, Payer, Receiver {
-    ArrayList<Observer<BoardSubject>> observers = new ArrayList<>();
+    private final ArrayList<Observer<BoardSubject>> observers = new ArrayList<>();
 
     private String name;
-    private Wallet wallet = new Wallet();
+    private final Wallet wallet = new Wallet();
     private long oldPosition;
     private long currentPosition;
     private boolean inJail;
     private Players playersEnum;
     private int turnsInJail = 0;
+    private final Players playersEnum;
 
     public Player(Players playersEnum, String name) {
         this.playersEnum = playersEnum;
@@ -123,7 +124,7 @@ public class Player implements Observer<DocumentSnapshot>, BoardSubject, Positio
         for (Map.Entry<String, Object> entry : playerMap.entrySet()) {
             if (!UUID.compare(entry.getKey(), playersEnum)) {
                 continue;
-            };
+            }
             Map<String, Object> map = (Map<String, Object>) entry.getValue();
             inJail = (boolean) map.get("inJail");
             name = (String) map.get("name");

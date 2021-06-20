@@ -1,11 +1,9 @@
 package Models;
 
 import Controllers.*;
-import Controllers.*;
 import Exceptions.TransactionException;
 import Monopoly.UUID;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -160,7 +158,7 @@ public class Actions {
     public static void startAuction(OwnableLocation ownableLocation, Player player){
         AuctionController auctionController = (AuctionController) ControllerRegistry.get(AuctionController.class);
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
-        if (player.getPosition() == ownableLocation.getPosition() && ownableLocation.isOwned()==false){
+        if (player.getPosition() == ownableLocation.getPosition() && !ownableLocation.isOwned()){
             auctionController.startAuction(ownableLocation.getId().getId());
         }
     }
@@ -170,7 +168,7 @@ public class Actions {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         System.out.println("popup reached");
         try {
-            if (transactionController.checkBalance(player.getPlayersEnum(), price)==true && location.isOwned()==false){
+            if (transactionController.checkBalance(player.getPlayersEnum(), price) && !location.isOwned()){
                 boardController.showBuyLocationPopup(player, location);
             } else {boardController.showNotEnoughBalance();}
         } catch (TransactionException e) {
@@ -185,7 +183,6 @@ public class Actions {
 
     public static void sellLocationPopup(Player player, OwnableLocation location) {
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
-
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         boardController.showBuyLocationPopup(player, location);
     }
@@ -207,16 +204,6 @@ public class Actions {
         boardController.setChancePopupVisible(player);
     }
 
-    public void payRent(Player payer, OwnableLocation location) {
-        TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
-        Player receiver = location.getOwner().orElseThrow();
-        int rent = location.getPrice();
-        try {
-            transactionController.payBalance(payer.getPlayersEnum(), receiver.getPlayersEnum(), rent);
-        } catch (TransactionException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void standingOnGo(Player player) {
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);

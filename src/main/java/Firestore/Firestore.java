@@ -8,15 +8,8 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.nio.file.Files;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
@@ -37,7 +30,7 @@ public class Firestore {
      */
     public void initializeFirestore() throws IOException {
 
-        String fileName = "monopolyteam6-47708-firebase-adminsdk-tp5m6-9a482af7f7.json";
+        String fileName = "FireStore/monopolyteam6-47708-firebase-adminsdk-tp5m6-9a482af7f7.json";
 
         ClassLoader classLoader = Firestore.class.getClassLoader();
         System.out.println(Objects.requireNonNull(Objects.requireNonNull(classLoader.getResource(fileName)).getFile()));

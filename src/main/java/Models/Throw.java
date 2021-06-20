@@ -22,10 +22,7 @@ public class Throw implements DiceThrower {
 
     @Override
     public boolean isDouble() {
-        if (diceOne.getTotalEyes() == diceTwo.getTotalEyes()) {
-            return true;
-        }
-        return false;
+        return diceOne.getTotalEyes() == diceTwo.getTotalEyes();
     }
 
     @Override
