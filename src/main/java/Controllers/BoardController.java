@@ -2,6 +2,7 @@ package Controllers;
 
 import Exceptions.PlayerException;
 
+import Exceptions.TransactionException;
 import Models.*;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
@@ -246,13 +247,32 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         auctionLocationButton.setOnAction(event -> { auctionLocation(player,location); });
     }
 
-    @FXML
     public void buyLocation(Player player, OwnableLocation location) {
         location.setOwner(player, true);
         System.out.println("Eigenaar: " + location.getOwner());
         player.subtractBalance(location.getPrice());
         buyLocationPane.setVisible(false);
     }
+
+    @FXML Pane payRentPane;
+    @FXML Label payRentAmount;
+    @FXML Button payRentButton;
+
+    public void showStreetPayRent(Player player, StreetLocation location){
+        buyLocationPane.setVisible(false);
+        payRentAmount.setText("Pay Amount: " + location.getRent());
+        payRentPane.setVisible(true);
+        payRentButton.setOnAction(event -> {
+            Players receivingPlayer = location.getOwner().orElseThrow().getPlayersEnum();
+            int amount = location.getRent();
+            TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
+            try {
+                transactionController.payBalance(player.getPlayersEnum(),receivingPlayer,amount);
+            } catch (TransactionException e) {
+                e.printStackTrace();
+            }
+        });
+    };
 
     @FXML
     public void auctionLocation(Player player, OwnableLocation location) {
@@ -278,7 +298,6 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         location.setOwnerNull();
         player.addBalance(location.getPrice());
     }
-
 
     @FXML Pane notEnoughBalancePane;
 

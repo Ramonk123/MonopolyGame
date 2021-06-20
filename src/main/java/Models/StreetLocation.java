@@ -44,16 +44,17 @@ public class StreetLocation extends OwnableLocation {
             if (getOwner().isEmpty()){
                 System.out.println("streetlocation popup");
                 Actions.buyLocationPopup(currentPlayer, getPrice(), this);
-            } else {
-                if(UUID.compare(getOwner().orElseThrow(), currentPlayer)) {
-                    //TODO:
-                    // Is owned by the player standing on the location
-                } else {
+            } else if(UUID.compare(getOwner().orElseThrow(), currentPlayer)) {
+            //TODO:
+            // Is owned by the player standing on the location
+            }else {
                     Actions.payFunds(currentPlayer, getRent()* priceInflator.inflateByTicks(getHouses()));
                     Actions.receiveFunds(getOwner().orElseThrow(), getRent()* priceInflator.inflateByTicks(getHouses()));
+                    Actions.payRentPopup(player, this);
                 }
             }
-    }
+
+
 
     public int getHouses() {
         return houses;

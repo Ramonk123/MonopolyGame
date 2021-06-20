@@ -577,14 +577,14 @@ public class LocationController implements Controller {
         UtilityLocation waterWorks = new UtilityLocation(
                 Locations.WaterWorks,
                 "Waterleiding",
-                Set.TRAINSTATION,
+                Set.UTILITY,
                 28,
                 0
         );
         UtilityLocation electricComapany = new UtilityLocation(
                 Locations.ElectricCompany,
                 "Elektriciteitsbedrijf",
-                Set.TRAINSTATION,
+                Set.UTILITY,
                 12,
                 0
         );
