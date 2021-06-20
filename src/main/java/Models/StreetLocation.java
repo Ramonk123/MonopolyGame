@@ -15,12 +15,14 @@ public class StreetLocation extends OwnableLocation {
     private PriceInflator priceInflator;
     private int housePrice;
     private int hotelPrice;
+    private int rent;
 
 
     public StreetLocation(Locations locationEnum, String name, Set set, int position, int price, int rent, int housePrice, int hotelPrice) {
         super(locationEnum, name, set, position, price);
         this.houses         = 0;
         this.hotel          = false;
+        this.rent           = rent;
         this.priceInflator  = new PriceInflator(rent, 1.6);
         this.housePrice     = housePrice;
         this.hotelPrice     = hotelPrice;
@@ -44,8 +46,8 @@ public class StreetLocation extends OwnableLocation {
                     //TODO:
                     // Is owned by the player standing on the location
                 } else {
-                    Actions.payFunds(player, getPrice()/11);
-                    Actions.receiveFunds(getOwner().orElseThrow(), getPrice()/11);
+                    Actions.payFunds(player, getRent()* priceInflator.inflateByTicks(getHouses()));
+                    Actions.receiveFunds(getOwner().orElseThrow(), getRent()* priceInflator.inflateByTicks(getHouses()));
                 }
             }
     }
@@ -57,4 +59,6 @@ public class StreetLocation extends OwnableLocation {
     public boolean getHotel() {
         return hotel;
     }
+
+    public int getRent(){ return rent;}
 }

@@ -13,6 +13,8 @@ public class PriceInflator {
     }
 
     public int inflateByTicks(int ticks) {
-        return (int) ((double) inflation * (ratio * (double) ticks));
+        if (ticks >= 1) {
+            return (int) ((double) inflation * (ratio * (double) ticks));
+        } else return  1;
     }
 }
