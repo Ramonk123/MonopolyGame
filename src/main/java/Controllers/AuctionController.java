@@ -95,6 +95,8 @@ public class AuctionController implements Subject<DocumentSnapshot>, FirestoreFo
     }
 
     //TODO create functions that gets Auction bidding results
+    // 2. extra card info
+    // 3. update to firestore for everyone to bid.
 
 
     @Override
