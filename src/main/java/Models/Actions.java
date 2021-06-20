@@ -186,7 +186,7 @@ public class Actions {
     public static void sellLocationPopup(Player player, OwnableLocation location) {
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        boardController.showBuyLocationPopup(player, location);
+        boardController.showSellLocationPopup(player, location);
     }
 
     public static void goToJail(Player player){

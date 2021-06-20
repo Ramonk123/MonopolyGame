@@ -261,14 +261,10 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         buyLocationPane.setVisible(false);
     }
 
-    @FXML
-    private Pane payRentPane;
-    @FXML
-    private Label payRentAmount;
-    @FXML
-    private Button payRentButton;
-    public void showSellLocationPopup(Player player, OwnableLocation location){
+    @FXML private Pane sellLocationPopup;
 
+    public void showSellLocationPopup(Player player, OwnableLocation location){
+        sellLocationPopup.setVisible(true);
     }
 
     public void sellStreetLocation(Player player, StreetLocation location){
@@ -278,9 +274,9 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         }
     }
 
-    @FXML Pane payStreetRentPane;
-    @FXML Label payStreetRentAmount;
-    @FXML Button payStreetRentButton;
+    @FXML private Pane payStreetRentPane;
+    @FXML private Label payStreetRentAmount;
+    @FXML private Button payStreetRentButton;
 
     public void showStreetPayRent(Player player, StreetLocation location){
         buyLocationPane.setVisible(false);
