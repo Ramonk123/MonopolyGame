@@ -108,6 +108,10 @@ public class PlayerController
         player.movePlayer(amountThrown);
     }
 
+    public void movePlayerWithPlayerObject(Player player, long steps) {
+        player.movePlayer(steps);
+    }
+
     public void teleportTo(Player player, long position) {
         player.setPosition(position);
     }
