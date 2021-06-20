@@ -15,11 +15,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -258,6 +260,19 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         locationController.refuseToBuyLocation();
     }
 
+
+    @FXML Pane auctionPane;
+    @FXML TextArea bidTextArea;
+    @FXML Button placeBidButton;
+    @FXML Label NoNumberOnInputError;
+    @FXML Label cardPlaceholder;
+
+    public void showAuction(String locationName) {
+
+        auctionPane.setVisible(true);
+        cardPlaceholder.setText(locationName);
+    }
+
     public void sellLocation(Player player, OwnableLocation location) {
         location.setOwnerNull();
         player.addBalance(location.getPrice());
@@ -366,8 +381,28 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     }
 
     @FXML
-    private void placeBid(ActionEvent actionEvent) {
-        //Do shit
+    private void placeBid() {
+        placeBidButton.setOnAction(actionEvent -> {
+            AuctionController auctionController = (AuctionController) ControllerRegistry.get(AuctionController.class);
+            Auction auction = auctionController.getAuction();
+            PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+            if (!auction.hasStartedAuction()){
+                try{
+                    int bid = Integer.parseInt(bidTextArea.getText());
+                    Players clientPlayersEnum = playerController.getClientPlayersEnum();
+                    for(Player player : playerController.getPlayers()){
+                        if(UUID.compare(clientPlayersEnum, player)){
+                            if(bid <= player.getWallet().getBalance()) {
+                                auction.addPlayerBid(bid);
+                            }
+                        }
+                    }
+                } catch(NumberFormatException numberFormatException) {
+                    NoNumberOnInputError.setVisible(true);
+                    bidTextArea.clear();
+                }
+            }
+        });
     }
     @FXML Label chanceCardText;
     @FXML Button chanceCardButton;

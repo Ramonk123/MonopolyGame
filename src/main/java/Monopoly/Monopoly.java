@@ -30,6 +30,7 @@ public class Monopoly extends Application {
         ControllerRegistry.register(new TurnController());
         ControllerRegistry.register(new ThrowController());
         ControllerRegistry.register(new TransactionController());
+        ControllerRegistry.register(new AuctionController());
 
         GameResetter.attachResettable((Resettable) ControllerRegistry.get(PlayerController.class));
         GameResetter.attachResettable((Resettable) ControllerRegistry.get(LobbyController.class));

@@ -41,30 +41,22 @@ public class AuctionController implements Subject<DocumentSnapshot>, FirestoreFo
 
     }
 
-    @FXML Pane auctionPane;
-    @FXML TextArea bidTextArea;
-    @FXML Button placeBidButton;
-    @FXML Label NoNumberOnInputError;
-    @FXML Label cardPlaceHolder;
-
-
 
     public void startAuction(String positionId) {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
-        auctionPane.setVisible(!auctionPane.isVisible());
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
 
         List<Location> locations = locationController.getLocationArray();
 
         for(Location location : locations){
             if(UUID.compare(positionId, location)){
-                cardPlaceHolder.setText(location.getName());
+                boardController.showAuction(location.getName());
             }
         }
 
         //begin boring stuff
         String sellerUUID = playerController.getClientPlayersEnum().getId().getId();
-
         auction.startAuction(positionId, sellerUUID);
 
         //TODO: turn functions
@@ -72,23 +64,12 @@ public class AuctionController implements Subject<DocumentSnapshot>, FirestoreFo
     }
 
     //TODO: needs to be used when its the players turn. Extra thread for the timer. that needs to be added. of course.
-    public void placeBid(){
-        placeBidButton.setOnAction(actionEvent -> {
+    public void placeBid(int bid){
 
-            if (!auction.hasStartedAuction()){
-                try{
-                    int bid = Integer.parseInt(bidTextArea.getText());
-                    if(bid <= player.getWallet().getBalance()) {
-                        auction.addPlayerBid(bid);
-                    }
+    }
 
-                } catch(NumberFormatException numberFormatException) {
-                    NoNumberOnInputError.setVisible(true);
-                    bidTextArea.clear();
-                }
-
-            }
-        });
+    public Auction getAuction(){
+        return auction;
     }
 
     public Pair<String, Integer> getHighestBid(){
