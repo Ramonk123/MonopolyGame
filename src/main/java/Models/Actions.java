@@ -176,9 +176,9 @@ public class Actions {
         }
     }
 
-    public static void payRentPopup(Player player, StreetLocation location) {
+    public static void payRentPopup(Player player, StreetLocation location, PriceInflator priceInflator) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        boardController.showStreetPayRent(player, location);
+        boardController.showStreetPayRent(player, location, priceInflator);
     }
 
     public static void sellLocationPopup(Player player, StreetLocation location) {

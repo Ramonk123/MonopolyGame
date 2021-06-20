@@ -39,10 +39,7 @@ public class StreetLocation extends OwnableLocation {
                 Actions.buyLocationPopup(currentPlayer, getPrice(), this);
             } else if(UUID.compare(getOwner().orElseThrow(), currentPlayer)) {
                     Actions.sellLocationPopup(player, this);
-            }else {
-                    Actions.payFunds(currentPlayer, getRent()* priceInflator.inflateByTicks(getHouses()));
-                    Actions.receiveFunds(getOwner().orElseThrow(), getRent()* priceInflator.inflateByTicks(getHouses()));
-                    Actions.payRentPopup(player, this);
+            }else { Actions.payRentPopup(player, this, priceInflator);
                 }
             }
 

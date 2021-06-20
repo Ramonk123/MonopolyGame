@@ -290,13 +290,13 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     @FXML private Label payStreetRentAmount;
     @FXML private Button payStreetRentButton;
 
-    public void showStreetPayRent(Player player, StreetLocation location){
+    public void showStreetPayRent(Player player, StreetLocation location, PriceInflator priceInflator){
         buyLocationPane.setVisible(false);
         payStreetRentAmount.setText("Pay Amount: " + location.getRent());
         payStreetRentPane.setVisible(true);
         payStreetRentButton.setOnAction(event -> {
             Players receivingPlayer = location.getOwner().orElseThrow().getPlayersEnum();
-            int amount = location.getRent();
+            int amount = location.getRent()* priceInflator.inflateByTicks(location.getHouses());
             TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
             try {
                 transactionController.payBalance(player.getPlayersEnum(),receivingPlayer,amount);
