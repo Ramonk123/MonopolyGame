@@ -703,6 +703,6 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
 
     @Override
     public void update(DocumentSnapshot state) {
-        //locationArray = (List<Location>) state.get("locations");
+        this.locationArray = (ArrayList<Location>) state.get("locations");
     }
 }
