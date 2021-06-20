@@ -12,11 +12,10 @@ import java.util.HashMap;
  */
 public class Auction implements Observer<DocumentSnapshot>, FirestoreFormattable {
     private boolean startedAuction = false;
-    private HashMap<String, Object> playerBids = new HashMap<>();
+    private HashMap<String, Integer> playerBids = new HashMap<>();
     private HashMap<String, Object> auction= new HashMap<>();
     private String locationID;
     private String seller;
-
 
     public void startAuction(String locationID, String seller) {
         this.locationID = locationID;
@@ -26,8 +25,7 @@ public class Auction implements Observer<DocumentSnapshot>, FirestoreFormattable
 
     public void addPlayerBid(int bid) {
         PlayerController playerController = new PlayerController();
-        playerBids.put("player_uuid", playerController.getClientPlayersEnum().getId().getId());
-        playerBids.put("bid", bid);
+        playerBids.put(playerController.getClientPlayersEnum().getId().getId(), bid);
         auction.put("playerBids", playerBids);
 
         //TODO: Create method to send playerBidCollection to Firestore
@@ -49,7 +47,7 @@ public class Auction implements Observer<DocumentSnapshot>, FirestoreFormattable
             startedAuction = false;
         }else{
             startedAuction = true;
-            playerBids = (HashMap<String, Object>) firestoreAuction.get("playerBids");
+            playerBids = (HashMap<String, Integer>) firestoreAuction.get("playerBids");
             locationID = (String) firestoreAuction.get("location");
         }
     }
@@ -58,16 +56,24 @@ public class Auction implements Observer<DocumentSnapshot>, FirestoreFormattable
         return locationID;
     }
 
-    public HashMap<String, Object> getPlayerBids() {
+    public HashMap<String, Integer> getPlayerBids() {
         return playerBids;
     }
 
-    public void setPlayerBids(HashMap<String, Object> playerBids) {
+    public void setPlayerBids(HashMap<String, Integer> playerBids) {
         this.playerBids = playerBids;
     }
 
     public void setLocationID(String locationID) {
         this.locationID = locationID;
+    }
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
     }
 
     //TODO: create functions that handle bidding results and receiving property

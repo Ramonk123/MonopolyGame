@@ -77,7 +77,7 @@ public class AuctionController implements Subject<DocumentSnapshot>, FirestoreFo
     }
 
     public Pair<String, Integer> getHighestBid(){
-        Map<String, Object> playerbids = auction.getPlayerBids();
+        Map<String, Integer> playerbids = auction.getPlayerBids();
         Iterator iterator = playerbids.entrySet().iterator();
         long highestBid = 0;
         Pair highestBidPair = null;
@@ -87,7 +87,11 @@ public class AuctionController implements Subject<DocumentSnapshot>, FirestoreFo
                 highestBidPair = new Pair(pair.getKey(), pair.getValue());
             }
         }
-        return highestBidPair;
+        if(highestBidPair == null){
+            return new Pair<>(auction.getSeller(), 10);
+        }else {
+            return highestBidPair;
+        }
     }
 
     //TODO create functions that gets Auction bidding results
