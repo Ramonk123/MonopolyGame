@@ -11,9 +11,9 @@ public class Dice implements DiceThrower {
     @Override
     public void throwDice() {
         Random random = new Random();
-        //eyes = random.nextInt(6) + 1;
+        eyes = random.nextInt(6) + 1;
         //eyes = 11; //Always land on Chance
-        eyes = 3; //Always lands on steenstraat
+        //eyes = 3; //Always lands on steenstraat
     }
 
     @Override
