@@ -49,6 +49,9 @@ public class TurnController
         turn.setCurrentPlayer(playersEnum);
     }
 
+    /**
+     * Sets a new currentPlayer based on the playerArray.
+     */
     public void nextPlayerTurn() {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         Players playersEnum = playerController.getClientPlayersEnum();
@@ -122,6 +125,10 @@ public class TurnController
         turn.update(documentSnapshot);
     }
 
+    /**
+     * This method controlls the flow of rolling a dice and partly what happens after.
+     * @throws PlayerException
+     */
     public void RollDice() throws PlayerException {
         Players currentPlayerEnum = getCurrentPlayer();
 
@@ -197,6 +204,10 @@ public class TurnController
         }
     }
 
+    /**
+     * Detects on which location you are standing and activates its action.
+     * @param player Player is the old currentPlayer because Firestore
+     */
     public void standingOnLocation(Player player) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         Player currentPlayer = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getPlayerByPlayersEnum(getCurrentPlayer()).orElseThrow();
@@ -205,6 +216,12 @@ public class TurnController
         location.action(player);
     }
 
+    /**
+     * Moves the player on the back-end.
+     * @param currentPlayerEnum The enum of the currentPlayer.
+     * @param eyesThrown The amount of eyes thrown.
+     * @throws PlayerException
+     */
     public void movePlayer(Players currentPlayerEnum, long eyesThrown) throws PlayerException {
         Player currentPlayer = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getPlayerByPlayersEnum(currentPlayerEnum).orElseThrow(() -> new PlayerException("Player NOT Found"));
 
@@ -218,6 +235,11 @@ public class TurnController
          */
     }
 
+    /**
+     * Moves the player on the front-end.
+     * @param currentPlayerEnum The enum of the currentPlayer.
+     * @throws PlayerException
+     */
     public void movePlayerOnBoard(Players currentPlayerEnum) throws PlayerException {
         Player currentPlayer = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getPlayerByPlayersEnum(currentPlayerEnum).orElseThrow(() -> new PlayerException("Player NOT Found"));
 
@@ -232,6 +254,11 @@ public class TurnController
         return turn.getEyesThrown();
     }
 
+    /**
+     * Detects if the player give has lost the game or if there is still a chance to not lose.
+     * @param player The player in question that could be losing.
+     * @return Returns true if the player has lost, false if the player still has a chance.
+     */
     public boolean hasLostTheGame(Player player) {
         if(player.getWallet().getBalance() <= 0) {
             LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
