@@ -22,6 +22,7 @@ public class Turn implements FirestoreFormattable, Observer<DocumentSnapshot> {
     private long eyesThrown = 0;
 
     public Turn() {
+
     }
 
     public void startGameTurn() {
@@ -96,12 +97,13 @@ public class Turn implements FirestoreFormattable, Observer<DocumentSnapshot> {
             assert map != null;
             setCurrentPlayer(Players.getByStringUuid((String) map.get("activePlayer"))
                     .orElseThrow(() -> new PlayerException("Player Id doesn't exist.")));
-            amountOfDouble = (int) (long) map.get("amountOfDoubles");
+            //amountOfDouble = (int) (long) map.get("amountOfDoubles");
             eyesThrown = (long) map.get("eyesThrown");
 
         } catch(PlayerException playerException) {
             playerException.printStackTrace();
         }
+
     }
 
     public void setEyesThrown(long eyesThrown) {

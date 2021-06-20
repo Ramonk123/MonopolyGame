@@ -496,5 +496,14 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
             });
         }
     }
+    @FXML VBox inJailPopup;
+
+    public VBox getInJailPopup() {
+        return inJailPopup;
+    }
+
+    public Button getEndTurnButton() {
+        return EndTurnButton;
+    }
 
 }

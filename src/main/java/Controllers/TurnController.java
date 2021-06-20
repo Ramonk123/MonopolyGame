@@ -15,6 +15,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.util.List;
 import java.util.Map;
@@ -56,6 +57,7 @@ public class TurnController
      * Sets a new currentPlayer based on the playerArray.
      */
     public void nextPlayerTurn() {
+        turn.resetAmountOfDouble();
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         Players playersEnum = playerController.getClientPlayersEnum();
         Player player = null;
@@ -93,23 +95,27 @@ public class TurnController
 
         fireStoreController.updateTurn(lobbyController.getToken(), turn);
     }
-    @FXML Button BoardViewRollDiceButton;
-    @FXML Pane InJailPopup;
-    @FXML Button EndTurnButton;
+
 
     public void checkJailedStatus() {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         Player player = playerController.getPlayerByPlayersEnum(getCurrentPlayer()).orElseThrow();
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         if(player.isInJail()) {
+            player.setTurnInJail();
             Platform.runLater(()->{
-                InJailPopup.setVisible(true);
+                boardController.getInJailPopup().setVisible(true);
                 boardController.toggleEndTurnButton(true);
                 boardController.toggleRollDiceButton(false);
-                player.setTurnInJail();
-                EndTurnButton.setOnAction(event -> {
-                    InJailPopup.setVisible(false);
-                });
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                boardController.getInJailPopup().setVisible(false);
+                            }
+                        },
+                        2000
+                );
             });
 
 
@@ -145,6 +151,7 @@ public class TurnController
     @Override
     public void notifyObservers() {
         turn.update(documentSnapshot);
+        checkJailedStatus();
     }
 
     /**

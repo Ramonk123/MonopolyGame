@@ -28,7 +28,6 @@ public class Player implements Observer<DocumentSnapshot>, BoardSubject, Positio
     private boolean inJail;
     private Players playersEnum;
     private int turnsInJail = 0;
-    private final Players playersEnum;
 
     public Player(Players playersEnum, String name) {
         this.playersEnum = playersEnum;
