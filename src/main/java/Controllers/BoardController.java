@@ -254,15 +254,26 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         buyLocationPane.setVisible(false);
     }
 
-    @FXML Pane payRentPane;
-    @FXML Label payRentAmount;
-    @FXML Button payRentButton;
+    public void showSellLocationPopup(Player player, OwnableLocation location){
+
+    }
+
+    public void sellStreetLocation(Player player, StreetLocation location){
+        if (location.getHouses() == 0 && location.getHotel()== false){
+        player.addBalance(location.getPrice()/2);
+        location.setOwnerNull();
+        }
+    }
+
+    @FXML Pane payStreetRentPane;
+    @FXML Label payStreetRentAmount;
+    @FXML Button payStreetRentButton;
 
     public void showStreetPayRent(Player player, StreetLocation location){
         buyLocationPane.setVisible(false);
-        payRentAmount.setText("Pay Amount: " + location.getRent());
-        payRentPane.setVisible(true);
-        payRentButton.setOnAction(event -> {
+        payStreetRentAmount.setText("Pay Amount: " + location.getRent());
+        payStreetRentPane.setVisible(true);
+        payStreetRentButton.setOnAction(event -> {
             Players receivingPlayer = location.getOwner().orElseThrow().getPlayersEnum();
             int amount = location.getRent();
             TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
