@@ -248,7 +248,6 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
 
     @FXML
     public void buyLocation(Player player, OwnableLocation location) {
-        System.out.println("je kan locaties kopen, Kkr ding werkt");
         location.setOwner(player, true);
         System.out.println("Eigenaar: " + location.getOwner());
         player.subtractBalance(location.getPrice());
