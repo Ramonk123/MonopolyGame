@@ -2,7 +2,9 @@ package Controllers;
 
 import Firestore.FirestoreFormattable;
 import Models.Auction;
+import Models.Location;
 import Models.Player;
+import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -13,7 +15,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
 import javafx.util.Pair;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,17 +45,24 @@ public class AuctionController implements Subject<DocumentSnapshot>, FirestoreFo
     @FXML TextArea bidTextArea;
     @FXML Button placeBidButton;
     @FXML Label NoNumberOnInputError;
+    @FXML Label cardPlaceHolder;
 
 
 
     public void startAuction(String positionId) {
-        //TODO:  add card to FX:ID cardPlaceHolder
-
-        //TODO: 2. Ik (Brandon) fix de fxml en view voor de nieuwe auction later.
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         auctionPane.setVisible(!auctionPane.isVisible());
 
+        List<Location> locations = locationController.getLocationArray();
+
+        for(Location location : locations){
+            if(UUID.compare(positionId, location)){
+                cardPlaceHolder.setText(location.getName());
+            }
+        }
+
         //begin boring stuff
-        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         String sellerUUID = playerController.getClientPlayersEnum().getId().getId();
 
         auction.startAuction(positionId, sellerUUID);
