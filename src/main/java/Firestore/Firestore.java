@@ -39,26 +39,15 @@ public class Firestore {
 
         String fileName = "monopolyteam6-47708-firebase-adminsdk-tp5m6-9a482af7f7.json";
 
-        //possible fix?
-        InputStream keyAccount = new FileInputStream(fileName);
-        GoogleCredentials serviceAccount = GoogleCredentials.fromStream(keyAccount);
+        ClassLoader classLoader = Firestore.class.getClassLoader();
+        System.out.println(Objects.requireNonNull(Objects.requireNonNull(classLoader.getResource(fileName)).getFile()));
+        FileInputStream serviceAccount = new FileInputStream(classLoader.getResource(fileName).getFile());
 
         FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(serviceAccount)
+                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .build();
+
         FirebaseApp.initializeApp(options);
-
-        //
-//        ClassLoader classLoader = Firestore.class.getClassLoader();
-//        File file = new File(Objects.requireNonNull(classLoader.getResource(fileName)).getFile());
-//        FileInputStream serviceAccount = new FileInputStream(String.valueOf(file.toPath()));
-
-
-//        FirebaseOptions options = new FirebaseOptions.Builder()
-//                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-//                .build();
-
-//        FirebaseApp.initializeApp(options);
 
         com.google.cloud.firestore.Firestore firestoreDatabase = FirestoreClient.getFirestore();
 
