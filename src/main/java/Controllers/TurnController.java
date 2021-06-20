@@ -152,7 +152,9 @@ public class TurnController
     public void notifyObservers() {
         turn.update(documentSnapshot);
         LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
-        if (lobbyController.isGameHasStarted()) {
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+
+        if (lobbyController.isGameHasStarted() && UUID.compare(playerController.getClientPlayersEnum(), getCurrentPlayer())) {
             checkJailedStatus();
         }
     }
