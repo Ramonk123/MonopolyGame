@@ -33,7 +33,6 @@ public class Firestore {
         String fileName = "FireStore/monopolyteam6-47708-firebase-adminsdk-tp5m6-9a482af7f7.json";
 
         ClassLoader classLoader = Firestore.class.getClassLoader();
-        System.out.println(Objects.requireNonNull(Objects.requireNonNull(classLoader.getResource(fileName)).getFile()));
         FileInputStream serviceAccount = new FileInputStream(classLoader.getResource(fileName).getFile());
 
         FirebaseOptions options = new FirebaseOptions.Builder()

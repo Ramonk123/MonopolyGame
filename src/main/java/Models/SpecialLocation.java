@@ -34,9 +34,7 @@ public class SpecialLocation extends Location {
         }
 
         long position = player1.getPosition();
-        System.out.println("positie " + player1.getPosition());
         if(position == 22 || position == 7 || position == 38) {
-            System.out.println("ik ben bereikt");
             Actions.chanceCard(player1);
         } else if(position == 2 || position == 17 || position == 35) {
             //TODO: Make this common funds card instead of chance card.
