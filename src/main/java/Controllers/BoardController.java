@@ -432,7 +432,6 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     public void update(DocumentSnapshot documentSnapshot) {
         this.documentSnapshot = documentSnapshot;
         notifyObservers();
-
     }
 
     @FXML
