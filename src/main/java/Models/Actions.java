@@ -172,7 +172,7 @@ public class Actions {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         System.out.println("popup reached");
         try {
-            if (transactionController.checkBalance(player.getPlayersEnum(), price)==true){
+            if (transactionController.checkBalance(player.getPlayersEnum(), price)==true && location.isOwned()==false){
                 boardController.showBuyLocationPopup(player, location);
             } else {boardController.showNotEnoughBalance();}
         } catch (TransactionException e) {
