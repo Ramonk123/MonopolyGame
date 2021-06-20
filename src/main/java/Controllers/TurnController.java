@@ -2,15 +2,16 @@ package Controllers;
 
 import Exceptions.PlayerException;
 import Firestore.FirestoreFormattable;
-import Models.Location;
-import Models.OwnableLocation;
-import Models.Player;
-import Models.Turn;
+import Models.*;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Resetter.Resettable;
 import com.google.cloud.firestore.DocumentSnapshot;
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -94,6 +95,29 @@ public class TurnController
             e.printStackTrace();
         }
     }
+    @FXML Button BoardViewRollDiceButton;
+    @FXML Pane InJailPopup;
+    @FXML Button EndTurnButton;
+
+    public void checkJailedStatus() {
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+        Player player = playerController.getPlayerByPlayersEnum(getCurrentPlayer()).orElseThrow();
+        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
+        if(player.isInJail()) {
+            Platform.runLater(()->{
+                InJailPopup.setVisible(true);
+                boardController.toggleEndTurnButton(true);
+                boardController.toggleRollDiceButton(false);
+                player.setTurnInJail();
+                EndTurnButton.setOnAction(event -> {
+                    InJailPopup.setVisible(false);
+                });
+            });
+
+
+
+        }
+    }
 
     @Override
     public Object getFirestoreFormat() {
@@ -151,19 +175,13 @@ public class TurnController
             if(!throwController.isDouble()) {
                 boardController.toggleRollDiceButton(false);
                 boardController.toggleEndTurnButton(true);
+
             } else {
                 turn.addOneToAmountOfDouble();
             } // Don't simplify this yet.
 
-            if(turn.getAmountOfDouble() >= 99) {
-                //TODO: Go to Jail
-                System.out.println("dikke asser");
-                System.out.println("dikke asser");
-                System.out.println("dikke asser");
-                System.out.println("dikke asser");
-                System.out.println("dikke asser");
-                System.out.println("dikke asser");
-                System.out.println("dikke asser");
+            if(turn.getAmountOfDouble() >=3) {
+                Actions.goToJail(playerController.getPlayerByPlayersEnum(clientPlayerEnum).orElseThrow());
             } else {
                 movePlayer(currentPlayerEnum, turn.getEyesThrown());
             }
@@ -172,17 +190,6 @@ public class TurnController
 
             long oldPosition = currentPlayer.getOldPosition();
 
-            System.out.println("sex");
-            System.out.println("sex");
-            System.out.println("sex");
-            System.out.println("sex");
-            System.out.println("sex");
-            System.out.println("sex");
-            System.out.println("sex");
-            System.out.println("sex");
-            System.out.println("sex");
-            System.out.println("sex");
-            System.out.println(oldPosition);
 
             standingOnLocation(currentPlayer);
 
