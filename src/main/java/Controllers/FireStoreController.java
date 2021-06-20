@@ -163,6 +163,7 @@ public class FireStoreController implements Subject<DocumentSnapshot>, HasStage,
                 .update("locations", locationController.getLocationArray());
     }
 
+
     public void setChanceCardNull(int token) throws InterruptedException, ExecutionException {
         com.google.cloud.firestore.Firestore database = firestore.getDatabase();
         database.collection("Lobbies").document(String.valueOf(token))

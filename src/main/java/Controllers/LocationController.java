@@ -2,18 +2,19 @@ package Controllers;
 
 import Exceptions.TransactionException;
 import Models.*;
+import Models.Set;
 import Monopoly.UUID;
+import ObserveablePattern.Observer;
+import ObserveablePattern.Subject;
+import com.google.cloud.firestore.DocumentSnapshot;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.ToLongFunction;
 
 /**
  * Controller for the Location, OwnableLocation and SpecialLocation model, mainly to create Lists with (all) Locations in them.
  */
-public class LocationController implements Controller {
+public class LocationController implements Controller, Subject<DocumentSnapshot>, Observer<DocumentSnapshot> {
     private static LocationController locationController;
     private AuctionController auctionController = new AuctionController();
     private List<Location> locationArray = new ArrayList<>();
@@ -688,5 +689,20 @@ public class LocationController implements Controller {
                 System.out.println("Housa Wousa: " + location.getName() + " " + location.getOwner());
             }
         }
+    }
+
+    @Override
+    public void registerObserver(Observer<DocumentSnapshot> observer) {
+
+    }
+
+    @Override
+    public void notifyObservers() {
+
+    }
+
+    @Override
+    public void update(DocumentSnapshot state) {
+        //locationArray = (List<Location>) state.get("locations");
     }
 }
