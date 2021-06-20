@@ -602,8 +602,18 @@ public class LocationController implements Controller {
         return ownableLocationArray;
     }
 
-    public List<OwnableLocation> getLocationsOwnedByPlayer() {
+    public List<OwnableLocation> getLocationsOwnedByPlayer(Player player) {
         List<OwnableLocation> locations = new ArrayList<>();
+        System.out.println("PlayerUUID" + player.getId());
+        for(OwnableLocation location: ownableLocationArray) {
+            //System.out.println("NAME: " + location.getName());
+                if(location.getOwner().isPresent()) {
+                    System.out.println("hier kom ik nog wel");
+                    if(UUID.compare(location.getOwner().orElseThrow(), player)) {
+                        locations.add(location);
+                    }
+                }
+        }
         return locations;
     }
 
