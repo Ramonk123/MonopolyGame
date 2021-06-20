@@ -533,21 +533,21 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
                 "Station Noord",
                 Set.TRAINSTATION,
                 25,
-                0
+                250
         );
         StationLocation stationEast = new StationLocation(
                 Locations.StationEast,
                 "Station Oost",
                 Set.TRAINSTATION,
                 35,
-                0
+                250
         );
         StationLocation stationSouth = new StationLocation(
                 Locations.StationSouth,
                 "Station Zuid",
                 Set.TRAINSTATION,
                 5,
-                0
+                250
         );
         StationLocation stationWest = new StationLocation(
                 Locations.StationWest,
@@ -581,14 +581,14 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
                 "Waterleiding",
                 Set.UTILITY,
                 28,
-                0
+                100
         );
         UtilityLocation electricComapany = new UtilityLocation(
                 Locations.ElectricCompany,
                 "Elektriciteitsbedrijf",
                 Set.UTILITY,
                 12,
-                0
+                100
         );
         locationArray.add(waterWorks);
         locationArray.add(electricComapany);
@@ -718,6 +718,7 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
 
     @Override
     public void update(DocumentSnapshot state) {
+        System.out.println("nigga balls");
 //        this.locationArray = (ArrayList<Location>) state.get("locations");
         HashMap<String, String> locationMap = (HashMap<String, String>) state.get("locations");
         Iterator iterator = locationMap.entrySet().iterator();
@@ -733,8 +734,8 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
                     for(int i = 0; playerList.size() > i; i++){
                         Player owner = playerList.get(i);
                         if(UUID.compare(playerString, owner)){
-                            System.out.println(owner);
-                            System.out.println(ownableLocation.getName());
+                            System.out.println("HIER STAAT DIE KANKER OWNER" + owner);
+                            System.out.println("HIER STAAT DIE KANKER LOCATIE" + ownableLocation.getName());
                             ownableLocation.setOwner(owner, true);
                         }
                     }

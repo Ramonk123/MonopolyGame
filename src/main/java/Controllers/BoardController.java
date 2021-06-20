@@ -241,7 +241,6 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     public void updateBuyLocationPane(OwnableLocation location){
         locationForSaleName.setText("Name: " + location.getName());
         locationForSalePrice.setText("Price: $" + location.getPrice() + ",--");
-        locationForSaleHouse.setText("Tax Amount: " + " TAX NEEDS TO BE ADDED");  //TODO: as of now idk wtf tax is.
         locationForSaleMortgage.setText("Mortgage: $" + location.getMortgageValue() + ",--");
     }
 
@@ -263,34 +262,41 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         fireStoreController.updateAllLocations(lobbyController.getToken());
     }
 
-    @FXML
-    private Pane payRentPane;
-    @FXML
-    private Label payRentAmount;
-    @FXML
-    private Button payRentButton;
-    public void showSellLocationPopup(Player player, OwnableLocation location){
+    @FXML private Pane sellLocationPopup;
+    @FXML private Label sellPropertyFirst;
+    @FXML private Button sellLocationButton;
+    @FXML private Button sellPropertyButton;
 
+    public void showSellStreetLocationPopup(Player player, StreetLocation location){
+        sellLocationPopup.setVisible(true);
+        sellLocationButton.setOnAction(event -> {sellStreetLocation(player, location);});
+        sellPropertyButton.setOnAction(actionEvent -> {
+            player.addBalance(location.getHousePrice());
+        });
     }
 
     public void sellStreetLocation(Player player, StreetLocation location){
         if (location.getHouses() == 0 && !location.getHotel()){
         player.addBalance(location.getPrice()/2);
         location.setOwnerNull();
-        }
+        } else sellPropertyFirst.setVisible(true);
     }
 
-    @FXML Pane payStreetRentPane;
-    @FXML Label payStreetRentAmount;
-    @FXML Button payStreetRentButton;
+    public void setSellPropertyButton(Player player, StreetLocation location){
 
-    public void showStreetPayRent(Player player, StreetLocation location){
+    }
+
+    @FXML private Pane payStreetRentPane;
+    @FXML private Label payStreetRentAmount;
+    @FXML private Button payStreetRentButton;
+
+    public void showStreetPayRent(Player player, StreetLocation location, PriceInflator priceInflator){
         buyLocationPane.setVisible(false);
         payStreetRentAmount.setText("Pay Amount: " + location.getRent());
         payStreetRentPane.setVisible(true);
         payStreetRentButton.setOnAction(event -> {
             Players receivingPlayer = location.getOwner().orElseThrow().getPlayersEnum();
-            int amount = location.getRent();
+            int amount = location.getRent()* priceInflator.inflateByTicks(location.getHouses());
             TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
             try {
                 transactionController.payBalance(player.getPlayersEnum(),receivingPlayer,amount);

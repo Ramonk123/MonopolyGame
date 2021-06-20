@@ -176,15 +176,15 @@ public class Actions {
         }
     }
 
-    public static void payRentPopup(Player player, StreetLocation location) {
+    public static void payRentPopup(Player player, StreetLocation location, PriceInflator priceInflator) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        boardController.showStreetPayRent(player, location);
+        boardController.showStreetPayRent(player, location, priceInflator);
     }
 
-    public static void sellLocationPopup(Player player, OwnableLocation location) {
+    public static void sellLocationPopup(Player player, StreetLocation location) {
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        boardController.showBuyLocationPopup(player, location);
+        boardController.showSellStreetLocationPopup(player, location);
     }
 
     public static void goToJail(Player player){
