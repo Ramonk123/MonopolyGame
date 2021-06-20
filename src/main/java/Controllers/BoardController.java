@@ -9,6 +9,7 @@ import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Views.HasStage;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Firestore;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -253,10 +254,13 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     }
 
     public void buyLocation(Player player, OwnableLocation location) {
+        LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
+        FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         location.setOwner(player, true);
         System.out.println("Eigenaar: " + location.getOwner());
         player.subtractBalance(location.getPrice());
         buyLocationPane.setVisible(false);
+        fireStoreController.updateAllLocations(lobbyController.getToken());
     }
 
     @FXML
