@@ -602,6 +602,11 @@ public class LocationController implements Controller {
         return ownableLocationArray;
     }
 
+    public List<OwnableLocation> getLocationsOwnedByPlayer() {
+        List<OwnableLocation> locations = new ArrayList<>();
+        return locations;
+    }
+
     public List<StreetLocation> getStreetLocationsOwnedByPlayer(UUID uuid) {
         List<OwnableLocation> streetLocations = new ArrayList<>();
         List<StreetLocation> playerOwnedStreetLocations = new ArrayList<>();
@@ -663,6 +668,14 @@ public class LocationController implements Controller {
             location.setMortgage(false);
         } catch (TransactionException transactionException) {
             transactionException.printStackTrace();
+        }
+    }
+
+    public void testPrintLocationsOwned() {
+        for (OwnableLocation location: ownableLocationArray) {
+            if (location.getOwner() != null) {
+                System.out.println("Housa Wousa: " + location.getName() + " " + location.getOwner());
+            }
         }
     }
 }

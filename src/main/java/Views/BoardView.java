@@ -126,7 +126,6 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
             Platform.runLater(() -> {
                 updateCount += 1;
                 System.out.println("UpdateCount" + updateCount);
-
                 System.out.println("Current player: " + turnController.getCurrentPlayer());
                 System.out.println("Client player: " + playerController.getClientPlayersEnum());
 
