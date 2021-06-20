@@ -718,6 +718,7 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
 
     @Override
     public void update(DocumentSnapshot state) {
+        System.out.println("nigga balls");
 //        this.locationArray = (ArrayList<Location>) state.get("locations");
         HashMap<String, String> locationMap = (HashMap<String, String>) state.get("locations");
         Iterator iterator = locationMap.entrySet().iterator();
