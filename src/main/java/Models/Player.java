@@ -184,8 +184,9 @@ public class Player implements Observer<DocumentSnapshot>, BoardSubject, Positio
     public void setTurnInJail() {
         this.turnsInJail ++;
         System.out.println("Turns in jail: " + turnsInJail);
-        if (turnsInJail== 3) {
+        if (turnsInJail >= 3) {
             setInJail(false);
+            turnsInJail = 0;
         }
     }
 
