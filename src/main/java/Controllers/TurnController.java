@@ -57,7 +57,7 @@ public class TurnController
      * Sets a new currentPlayer based on the playerArray.
      */
     public void nextPlayerTurn() {
-        turn.resetAmountOfDouble();
+        //turn.resetAmountOfDouble();
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         Players playersEnum = playerController.getClientPlayersEnum();
         Player player = null;
