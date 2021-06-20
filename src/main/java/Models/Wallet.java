@@ -22,7 +22,7 @@ public class Wallet implements Payer, Receiver, BoardSubject {
 
     public void setBalance(int balance) {
         this.balance = balance;
-        //notifyObservers();
+        notifyObservers();
     }
 
     @Override
@@ -33,11 +33,13 @@ public class Wallet implements Payer, Receiver, BoardSubject {
     @Override
     public void addBalance(int value) {
         this.balance += value;
+        notifyObservers();
     }
 
     @Override
     public void subtractBalance(int value) {
         this.balance -= value;
+        notifyObservers();
     }
 
     @Override
