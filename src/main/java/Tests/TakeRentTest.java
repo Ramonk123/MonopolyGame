@@ -9,7 +9,7 @@ import Models.Wallet;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class TakeRent {
+public class TakeRentTest {
 
     @Test
     public void Receive_Rent_From_Player() throws TransactionException {
