@@ -245,6 +245,7 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         System.out.println("je kan locaties kopen, Kkr ding werkt");
         location.setOwner(player, true);
         player.subtractBalance(location.getPrice());
+        buyLocationPane.setVisible(false);
     }
 
     public void sellLocation(Player player, OwnableLocation location) {
