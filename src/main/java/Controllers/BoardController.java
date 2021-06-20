@@ -382,13 +382,16 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
 
     @FXML
     private void placeBid() {
-        placeBidButton.setOnAction(actionEvent -> {
+
+        placeBidButton.setOnAction(event -> {
+            System.out.println("You bid something");
             AuctionController auctionController = (AuctionController) ControllerRegistry.get(AuctionController.class);
             Auction auction = auctionController.getAuction();
             PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
             if (!auction.hasStartedAuction()){
                 try{
                     int bid = Integer.parseInt(bidTextArea.getText());
+                    System.out.println("You bid: " + bid);
                     Players clientPlayersEnum = playerController.getClientPlayersEnum();
                     for(Player player : playerController.getPlayers()){
                         if(UUID.compare(clientPlayersEnum, player)){
