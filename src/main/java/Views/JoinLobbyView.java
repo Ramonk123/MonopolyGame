@@ -2,10 +2,7 @@ package Views;
 
 import Controllers.ControllerRegistry;
 import Controllers.LobbyController;
-import Controllers.MainMenuController;
 import ObserveablePattern.Observer;
-import com.google.cloud.firestore.DocumentSnapshot;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -18,8 +15,8 @@ import java.io.IOException;
  */
 public class JoinLobbyView implements View, Observer<LobbySubject>, HasStage {
     //Screensize
-    int WIDTH = 600;
-    int HEIGHT = 400;
+    private final int WIDTH = 600;
+    private final int HEIGHT = 400;
 
     private Stage primaryStage;
 

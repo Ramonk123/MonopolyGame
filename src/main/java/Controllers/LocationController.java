@@ -16,14 +16,14 @@ import java.util.function.ToLongFunction;
  */
 public class LocationController implements Controller, Subject<DocumentSnapshot>, Observer<DocumentSnapshot> {
     private static LocationController locationController;
-    private AuctionController auctionController = new AuctionController();
+    private final AuctionController auctionController = new AuctionController();
     private List<Location> locationArray = new ArrayList<>();
-    private List<OwnableLocation> ownableLocationArray = new ArrayList<>();
-    private List<SpecialLocation> specialLocationArray = new ArrayList<>();
+    private final List<OwnableLocation> ownableLocationArray = new ArrayList<>();
+    private final List<SpecialLocation> specialLocationArray = new ArrayList<>();
 
-    private List<StreetLocation> streetLocationArray = new ArrayList<>();
-    private List<StationLocation> stationLocationArray = new ArrayList<>();
-    private List<UtilityLocation> utilityLocationArray = new ArrayList<>();
+    private final List<StreetLocation> streetLocationArray = new ArrayList<>();
+    private final List<StationLocation> stationLocationArray = new ArrayList<>();
+    private final List<UtilityLocation> utilityLocationArray = new ArrayList<>();
 
     public List<StreetLocation> getStreetLocationArray() {
         return streetLocationArray;
@@ -685,7 +685,7 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
 
     public void testPrintLocationsOwned() {
         for (OwnableLocation location: ownableLocationArray) {
-            if (location.getOwner() != null) {
+            if (location.getOwner().isPresent()) {
                 System.out.println("Housa Wousa: " + location.getName() + " " + location.getOwner());
             }
         }

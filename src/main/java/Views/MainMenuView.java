@@ -6,8 +6,6 @@ import ObserveablePattern.Observer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,8 +15,8 @@ import java.io.IOException;
  */
 public class MainMenuView implements View, Observer<MainMenuSubject>, HasStage {
     //Screensize
-    int WIDTH = 630;
-    int HEIGHT = 600;
+    private final int WIDTH = 630;
+    private final int HEIGHT = 600;
 
     private Stage primaryStage;
 

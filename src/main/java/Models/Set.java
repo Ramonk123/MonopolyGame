@@ -16,9 +16,9 @@ public enum Set {
     TRAINSTATION(4),
     NONE(12);
 
-    private int amount;
+    private final int amount;
 
-    private Set(int amount) {
+    Set(int amount) {
         this.amount = amount;
     }
 }

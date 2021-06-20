@@ -48,7 +48,7 @@ public enum Locations implements Identifiable {
     Jail(new UUID("LOCATION-JAIL")),
     GoToJail(new UUID("LOCATION-GOTOJAIL"));
 
-    private UUID id;
+    private final UUID id;
 
     Locations(UUID id) {
         this.id = id;

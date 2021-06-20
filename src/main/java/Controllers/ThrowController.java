@@ -8,7 +8,7 @@ import Models.Throw;
  */
 public class ThrowController implements DiceThrower, Controller {
 
-    private Throw currentThrow = new Throw();
+    private final Throw currentThrow = new Throw();
 
     public ThrowController() {
     }

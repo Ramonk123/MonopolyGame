@@ -15,7 +15,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
@@ -23,7 +22,6 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -32,7 +30,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class BoardController implements Subject<DocumentSnapshot>, Observer<DocumentSnapshot>, HasStage, Controller {
 
-    private Board board = new Board();
+    private final Board board = new Board();
 
     private DocumentSnapshot documentSnapshot;
 
@@ -52,13 +50,13 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     public Pair<Double, Double> getBoardViewBoardPanePosition(Pair<Integer, Integer> gridPositionPair) {
         double x = BoardViewBoardPane.getCellBounds(gridPositionPair.getKey(), gridPositionPair.getValue()).getMinX();
         double y = BoardViewBoardPane.getCellBounds(gridPositionPair.getKey(), gridPositionPair.getValue()).getMinY();
-        return new Pair<Double, Double>(x, y);
+        return new Pair<>(x, y);
     }
 
     public Pair<Double, Double> getGridSize(Pair<Integer, Integer> gridPositionPair) {
         double width = BoardViewBoardPane.getWidth();
         double height = BoardViewBoardPane.getHeight();
-        return new Pair<Double, Double>(width, height);
+        return new Pair<>(width, height);
     }
 
     @FXML
@@ -215,7 +213,7 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     @FXML
     private Pane MortgagePopup;
     @FXML
-    private void showMortgagePopup() throws Exception {
+    private void showMortgagePopup() {
         if(!MortgagePopup.isVisible()) {
             MortgagePopup.setVisible(true);
             displayMortgageMenuLocations();
@@ -268,7 +266,7 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     }
 
     public void sellStreetLocation(Player player, StreetLocation location){
-        if (location.getHouses() == 0 && location.getHotel()== false){
+        if (location.getHouses() == 0 && !location.getHotel()){
         player.addBalance(location.getPrice()/2);
         location.setOwnerNull();
         }
@@ -292,7 +290,7 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
                 e.printStackTrace();
             }
         });
-    };
+    }
 
     @FXML
     public void auctionLocation(Player player, OwnableLocation location) {

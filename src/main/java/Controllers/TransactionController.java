@@ -4,7 +4,6 @@ import Exceptions.TransactionException;
 import Models.Payer;
 import Models.Player;
 import Models.Receiver;
-import Models.Turn;
 
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -92,10 +91,8 @@ public class TransactionController implements Controller {
 
         try {
             fireStoreController.updateAllPlayers(lobbyController.getToken(), playerController.getPlayers());
-        } catch (ExecutionException executionException) {
+        } catch (ExecutionException | InterruptedException executionException) {
             executionException.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 
