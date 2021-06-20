@@ -3,6 +3,7 @@ package Controllers;
 import Exceptions.TransactionException;
 import Models.*;
 import Models.Set;
+import Monopoly.Main;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
@@ -717,6 +718,25 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
 
     @Override
     public void update(DocumentSnapshot state) {
-        this.locationArray = (ArrayList<Location>) state.get("locations");
+//        this.locationArray = (ArrayList<Location>) state.get("locations");
+        HashMap<String, String> locationMap = (HashMap<String, String>) state.get("locations");
+        Iterator iterator = locationMap.entrySet().iterator();
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
+
+        while(iterator.hasNext()){
+            Map.Entry mapEntry = (Map.Entry) iterator.next();
+            String locationString = (String) mapEntry.getKey();
+            String playerString = (String) mapEntry.getValue();
+            for(OwnableLocation ownableLocation : ownableLocationArray){
+                if(UUID.compare(locationString, ownableLocation.getId())){
+                    ArrayList<Player> playerList = playerController.getPlayers();
+                    for(int i = 0; playerList.size() > i; i++){
+                        Player owner = playerList.get(i);
+                        ownableLocation.setOwner(owner, true);
+                    }
+                }
+            }
+        }
+
     }
 }
