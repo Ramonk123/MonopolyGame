@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Control;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
@@ -249,6 +250,7 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     public void buyLocation(Player player, OwnableLocation location) {
         System.out.println("je kan locaties kopen, Kkr ding werkt");
         location.setOwner(player, true);
+        System.out.println("Eigenaar: " + location.getOwner());
         player.subtractBalance(location.getPrice());
         buyLocationPane.setVisible(false);
     }
@@ -318,12 +320,15 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
 
     public void displayMortgageMenuLocations() {
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
-
+        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         ArrayList<Pane> labelList = setLabelListVisibility(getMortgageLabelList(), false);
+        Players playersEnum = playerController.getClientPlayersEnum();
+        Player player = playerController.getPlayerByPlayersEnum(playersEnum).orElseThrow();
 
-        ArrayList<OwnableLocation> locationsOwnedByPlayer = addOwnedLocations(new ArrayList<>());
 
+        List<OwnableLocation> locationsOwnedByPlayer = locationController.getLocationsOwnedByPlayer(player);
         int amountLocationsOwnedByPlayer = locationsOwnedByPlayer.size();
+        System.out.println("WOW!: " + locationsOwnedByPlayer);
 
         if(amountLocationsOwnedByPlayer > 0) {
             for (int i = 0; i < amountLocationsOwnedByPlayer; i++) {
