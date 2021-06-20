@@ -41,9 +41,11 @@ public class StreetLocation extends OwnableLocation {
                 Actions.buyLocationPopup(player, getPrice(), this);
             } else {
                 if(UUID.compare(getOwner().orElseThrow(), player)) {
-                    //Is owned by the player standing on the location
+                    //TODO:
+                    // Is owned by the player standing on the location
                 } else {
-                    //Is owned by someone else
+                    Actions.payFunds(player, getPrice()/11);
+                    Actions.receiveFunds(getOwner().orElseThrow(), getPrice()/11);
                 }
             }
     }
