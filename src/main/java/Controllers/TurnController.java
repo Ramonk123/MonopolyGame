@@ -3,19 +3,12 @@ package Controllers;
 import Exceptions.PlayerException;
 import Firestore.FirestoreFormattable;
 import Models.*;
-import Models.Location;
-import Models.Player;
-import Models.Turn;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
 import Resetter.Resettable;
 import com.google.cloud.firestore.DocumentSnapshot;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 import java.util.List;
 import java.util.Map;
@@ -70,8 +63,6 @@ public class TurnController
         List<Player> list = playerController.getPlayers();
         int index = list.indexOf(player);
         int size = list.size();
-        System.out.println("Index: " + index);
-        System.out.println("Size: " + size);
         Player nextPlayer;
         for (Player value : list) {
             System.out.println("Index: " + index + "ID: " + value.getId().getId());
@@ -135,7 +126,6 @@ public class TurnController
         Map<String, Object> map = (Map<String, Object>) state.get("turn");
         System.out.println(map);
         assert map != null;
-        System.out.println("EyesThrown by current player " + map.get("eyesThrown"));
         notifyObservers();
     }
 
@@ -227,7 +217,6 @@ public class TurnController
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         Player currentPlayer = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getPlayerByPlayersEnum(getCurrentPlayer()).orElseThrow();
         Location location = boardController.playerStandsOn(currentPlayer);
-        System.out.println(location.getName() + "location hier");
         location.action(player);
     }
 
@@ -241,13 +230,6 @@ public class TurnController
         Player currentPlayer = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getPlayerByPlayersEnum(currentPlayerEnum).orElseThrow(() -> new PlayerException("Player NOT Found"));
 
         currentPlayer.movePlayer(eyesThrown);
-        /*
-        long oldPlayerPosition = currentPlayer.getOldPosition();
-        long newPlayerPosition = currentPlayer.getPosition();
-
-        BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        boardController.movePlayerOnBoard(currentPlayerEnum, oldPlayerPosition, newPlayerPosition);
-         */
     }
 
     /**

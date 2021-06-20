@@ -3,7 +3,6 @@ package Controllers;
 import Exceptions.TransactionException;
 import Models.*;
 import Models.Set;
-import Monopoly.Main;
 import Monopoly.UUID;
 import ObserveablePattern.Observer;
 import ObserveablePattern.Subject;
@@ -18,7 +17,7 @@ import java.util.function.ToLongFunction;
 public class LocationController implements Controller, Subject<DocumentSnapshot>, Observer<DocumentSnapshot> {
     private static LocationController locationController;
     private final AuctionController auctionController = new AuctionController();
-    private List<Location> locationArray = new ArrayList<>();
+    private final List<Location> locationArray = new ArrayList<>();
     private final List<OwnableLocation> ownableLocationArray = new ArrayList<>();
     private final List<SpecialLocation> specialLocationArray = new ArrayList<>();
 
@@ -58,21 +57,6 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
         return Optional.ofNullable(location);
     }
 
-
-    /*@Override
-    public void registerObserver(View v) {
-
-    }
-
-    @Override
-    public void unregisterObserver(View v) {
-
-    }
-
-    @Override
-    public void notifyObservers(DocumentSnapshot ds) {
-
-    }*/
 
     public List<Location> getLocationArray() {
         return locationArray;
@@ -606,12 +590,8 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
 
     public List<OwnableLocation> getLocationsOwnedByPlayer(Player player) {
         List<OwnableLocation> locations = new ArrayList<>();
-        System.out.println("PlayerUUID" + player.getId());
         for(OwnableLocation location: ownableLocationArray) {
             if (location.getOwner().isPresent()) {
-            System.out.println("Location owner name : " + location.getOwner().orElseThrow().getName());
-                    System.out.println("hier kom ik nog wel");
-                    System.out.println("Player name: " + player.getName());
                     if(UUID.compare(location.getOwner().orElseThrow(), player)) {
                         locations.add(location);
                     }
@@ -733,9 +713,8 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
                     if(playerString == null){
                         ownableLocation.setOwner(null, false);
                     }else{
-                        for(int i = 0; playerList.size() > i; i++){
-                            Player owner = playerList.get(i);
-                            if(UUID.compare(playerString, owner)){
+                        for (Player owner : playerList) {
+                            if (UUID.compare(playerString, owner)) {
                                 ownableLocation.setOwner(owner, true);
                             }
                         }

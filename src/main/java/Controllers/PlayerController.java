@@ -155,17 +155,6 @@ public class PlayerController
         Map<String, Object> map = (Map<String, Object>) documentSnapshot.get("players");
         assert map != null;
 
-        /*for (Map.Entry<String, Object> entry : map.entrySet()) {
-            Players playersEnum = null;
-            Player player = null;
-            try {
-                playersEnum = Players.getByStringUuid(entry.getKey()).orElseThrow(() -> new Exception("Player doesn't exist."));
-                player = getPlayerByPlayersEnum(playersEnum).orElseThrow(() -> new Exception("Player doesn't exist."));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
-
         if (map.size() > players.size()) {
             updatePlayersSize(map);
         }

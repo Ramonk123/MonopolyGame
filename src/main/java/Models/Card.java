@@ -21,9 +21,7 @@ public class Card implements Action, Identifiable {
 
     @Override
     public void action(Player player) {
-        System.out.println("Ik word herkend");
         this.action.accept(player);
-        System.out.println("Moneys: " + player.getBalance());
     }
 
     public String getDescription() {
