@@ -691,6 +691,20 @@ public class LocationController implements Controller, Subject<DocumentSnapshot>
         }
     }
 
+
+    public HashMap<String, String> getFirestoreFormat() {
+        HashMap<String, String> locationMap = new HashMap<>();
+        for(OwnableLocation location : ownableLocationArray) {
+            if(location.getOwner().isEmpty()){
+                locationMap.put(location.getId().getId(), null);
+            }else {
+                locationMap.put(location.getId().getId(), location.getOwner().get().getId().getId());
+            }
+        }
+        return locationMap;
+    }
+
+
     @Override
     public void registerObserver(Observer<DocumentSnapshot> observer) {
 
