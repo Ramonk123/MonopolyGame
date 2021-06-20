@@ -101,7 +101,7 @@ public class TurnController
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         Player player = playerController.getPlayerByPlayersEnum(playerController.getClientPlayersEnum()).orElseThrow();
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
-        if(player.isInJail()) {
+        if(player.isInJail() && UUID.compare(playerController.getClientPlayersEnum(), getCurrentPlayer())) {
             player.setTurnInJail();
             Platform.runLater(()->{
                 boardController.getInJailPopup().setVisible(true);
@@ -152,9 +152,7 @@ public class TurnController
     public void notifyObservers() {
         turn.update(documentSnapshot);
         LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
-        PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-
-        if (lobbyController.isGameHasStarted() && UUID.compare(playerController.getClientPlayersEnum(), getCurrentPlayer())) {
+        if (lobbyController.isGameHasStarted()) {
             checkJailedStatus();
         }
     }
