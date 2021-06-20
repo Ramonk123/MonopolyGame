@@ -229,8 +229,7 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
 
     public void updateBuyLocationPane(Player player, OwnableLocation location){
         locationForSaleName.setText(location.getName());
-        locationForSalePrice.setText(location.getName());
-        locationForSaleHouse.setText(location.getName());
+        locationForSalePrice.setText("" + location.getPrice());
         locationForSaleMortgage.setText(location.getName());
     }
 

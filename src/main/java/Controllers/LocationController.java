@@ -98,220 +98,220 @@ public class LocationController implements Controller {
                 "Dorpstraat",
                 Set.BROWN,
                 1,
-                100,
-                0,
-                0,
-                0
+                60,
+                2,
+                50,
+                250
         );
         StreetLocation brink = new StreetLocation(
                 Locations.Brink,
                 "Brink",
                 Set.BROWN,
                 3,
-                0,
-                0,
-                0,
-                0
+                60,
+                4,
+                50,
+                450
         );
         StreetLocation steenStraat = new StreetLocation(
                 Locations.Steenstraat,
                 "Steenstraat",
                 Set.LIGHTBLUE,
                 6,
-                125,
-                0,
-                0,
-                0
+                100,
+                6,
+                50,
+                550
         );
         StreetLocation ketelStraat = new StreetLocation(
                 Locations.Ketelstraat,
                 "Ketelstraat",
                 Set.LIGHTBLUE,
                 8,
-                0,
-                0,
-                0,
-                0
+                100,
+                6,
+                50,
+                550
         );
         StreetLocation velperPlein = new StreetLocation(
                 Locations.Velperplein,
                 "Velperplein",
                 Set.LIGHTBLUE,
                 9,
-                0,
-                0,
-                0,
-                0
+                120,
+                8,
+                50,
+                600
         );
         StreetLocation bartelJorisStraat = new StreetLocation(
                 Locations.Barteljorisstraat,
                 "Barteljorisstraat",
                 Set.PINK,
                 11,
-                0,
-                0,
-                0,
-                0
+                140,
+                10,
+                100,
+                750
         );
         StreetLocation zijlWeg = new StreetLocation(
                 Locations.Zijlweg,
                 "Zijlweg",
                 Set.PINK,
                 13,
-                0,
-                0,
-                0,
-                0
+                140,
+                10,
+                100,
+                750
         );
         StreetLocation houtStraat = new StreetLocation(
                 Locations.Houtstraat,
                 "Houtstraat",
                 Set.PINK,
                 14,
-                0,
-                0,
-                0,
-                0
+                160,
+                12,
+                100,
+                900
         );
         StreetLocation neude = new StreetLocation(
                 Locations.Neude,
                 "Neude",
                 Set.ORANGE,
                 16,
-                0,
-                0,
-                0,
-                0
+                180,
+                14,
+                100,
+                950
         );
         StreetLocation biltStraat = new StreetLocation(
                 Locations.Biltstraat,
                 "Biltstraat",
                 Set.ORANGE,
                 18,
-                0,
-                0,
-                0,
-                0
+                180,
+                14,
+                100,
+                950
         );
         StreetLocation vreeBurg = new StreetLocation(
                 Locations.Vreeburg,
                 "Vreeburg",
                 Set.ORANGE,
                 19,
-                0,
-                0,
-                0,
-                0
+                200,
+                16,
+                100,
+                1000
         );
         StreetLocation aKerkhof = new StreetLocation(
                 Locations.A_Kerkhof,
                 "A-Kerkhof",
                 Set.RED,
                 21,
-                0,
-                0,
-                0,
-                0
+                220,
+                18,
+                150,
+                1050
         );
         StreetLocation groteMarkt = new StreetLocation(
                 Locations.GroteMarkt,
                 "Grote Markt",
                 Set.RED,
                 23,
-                0,
-                0,
-                0,
-                0
+                220,
+                18,
+                150,
+                1050
         );
         StreetLocation hereStraat = new StreetLocation(
                 Locations.Herestraat,
                 "Herestraat",
                 Set.RED,
                 24,
-                0,
-                0,
-                0,
-                0
+                240,
+                20,
+                150,
+                1100
         );
         StreetLocation spui = new StreetLocation(
                 Locations.Spui,
                 "Spui",
                 Set.YELLOW,
                 26,
-                0,
-                0,
-                0,
-                0
+                260,
+                22,
+                150,
+                1150
         );
         StreetLocation plein = new StreetLocation(
                 Locations.Plein,
                 "Plein",
                 Set.YELLOW,
                 27,
-                0,
-                0,
-                0,
-                0
+                260,
+                22,
+                150,
+                1150
         );
         StreetLocation langePoten = new StreetLocation(
                 Locations.LangePoten,
                 "Lange Poten",
                 Set.YELLOW,
                 29,
-                0,
-                0,
-                0,
-                0
+                280,
+                24,
+                150,
+                1200
         );
         StreetLocation hofplein = new StreetLocation(
                 Locations.Hofplein,
                 "Hofplein",
                 Set.GREEN,
                 31,
-                0,
-                0,
-                0,
-                0
+                300,
+                26,
+                200,
+                1275
         );
         StreetLocation blaak = new StreetLocation(
                 Locations.Blaak,
                 "Blaak",
                 Set.GREEN,
                 32,
-                0,
-                0,
-                0,
-                0
+                300,
+                26,
+                130,
+                1275
         );
         StreetLocation coolSingel = new StreetLocation(
                 Locations.Coolsingel,
                 "Coolsingel",
                 Set.GREEN,
                 34,
-                0,
-                0,
-                0,
-                0
+                320,
+                28,
+                200,
+                1400
         );
         StreetLocation leidseStraat = new StreetLocation(
                 Locations.Leidsestraat,
                 "Leidsestraat",
                 Set.DARKBLUE,
                 37,
-                0,
-                0,
-                0,
-                0
+                350,
+                35,
+                200,
+                1500
         );
         StreetLocation kalverStraat = new StreetLocation(
                 Locations.Kalverstraat,
                 "Kalverstraat",
                 Set.DARKBLUE,
                 39,
-                0,
-                0,
-                0,
-                0
+                400,
+                50,
+                200,
+                2000
         );
         locationArray.add(dorpStraat);
         locationArray.add(brink);
