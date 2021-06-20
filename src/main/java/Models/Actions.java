@@ -200,7 +200,6 @@ public class Actions {
     public static void chanceCard(Player player) {
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         boardController.setChancePopupVisible(player);
-
     }
 
     public void payRent(Player payer, OwnableLocation location) {
@@ -209,6 +208,15 @@ public class Actions {
         int rent = location.getPrice();
         try {
             transactionController.payBalance(payer.getPlayersEnum(), receiver.getPlayersEnum(), rent);
+        } catch (TransactionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void standingOnGo(Player player) {
+        TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
+        try {
+            transactionController.addBalance(player.getPlayersEnum(), 200);
         } catch (TransactionException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package Models;
 
 import Controllers.ControllerRegistry;
 import Controllers.LocationController;
+import Monopoly.UUID;
 
 import java.util.List;
 
@@ -38,6 +39,12 @@ public class StreetLocation extends OwnableLocation {
             if (getOwner().isEmpty()){
                 System.out.println("streetlocation popup");
                 Actions.buyLocationPopup(player, getPrice(), this);
+            } else {
+                if(UUID.compare(getOwner().orElseThrow(), player)) {
+                    //Is owned by the player standing on the location
+                } else {
+                    //Is owned by someone else
+                }
             }
     }
 

@@ -35,10 +35,24 @@ public class SpecialLocation extends Location {
             e.printStackTrace();
         }
 
+        long position = player1.getPosition();
         System.out.println("positie " + player1.getPosition());
-        if(player1.getPosition() == 22) {
+        if(position == 22 || position == 7 || position == 38) {
             System.out.println("ik ben bereikt");
             Actions.chanceCard(player1);
+        } else if(position == 2 || position == 17 || position == 35) {
+            //TODO: Make this common funds card instead of chance card.
+            Actions.chanceCard(player1);
+        } else if(position == 4 || position == 33) {
+            Actions.payFunds(player1, 200);
+        } else if(position == 10) {
+            // On Jail grid
+        } else if(position == 20) {
+            // Free parking
+        } else if(position == 30) {
+            Actions.goToJail(player1);
+        } else if(position == 0) {
+            Actions.standingOnGo(player1);
         }
     }
 
