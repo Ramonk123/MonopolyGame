@@ -99,7 +99,7 @@ public class TurnController
 
     public void checkJailedStatus() {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        Player player = playerController.getPlayerByPlayersEnum(getCurrentPlayer()).orElseThrow();
+        Player player = playerController.getPlayerByPlayersEnum(playerController.getClientPlayersEnum()).orElseThrow();
         BoardController boardController = (BoardController) ControllerRegistry.get(BoardController.class);
         if(player.isInJail()) {
             player.setTurnInJail();
