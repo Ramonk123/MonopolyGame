@@ -3,6 +3,7 @@ package Controllers;
 import Exceptions.PlayerException;
 import Firestore.FirestoreFormattable;
 import Models.Location;
+import Models.OwnableLocation;
 import Models.Player;
 import Models.Turn;
 import Monopoly.UUID;
@@ -74,6 +75,13 @@ public class TurnController
         }
 
         setCurrentPlayer(nextPlayer.getPlayersEnum());
+
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
+        Players players = turnController.getCurrentPlayer();
+        Player player1 = playerController.getPlayerByPlayersEnum(players).orElseThrow();
+        if(hasLostTheGame(player1)) {
+            nextPlayerTurn();
+        }
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
         LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
 
@@ -222,6 +230,20 @@ public class TurnController
 
     public long getEyesThrown() {
         return turn.getEyesThrown();
+    }
+
+    public boolean hasLostTheGame(Player player) {
+        if(player.getWallet().getBalance() <= 0) {
+            LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+            List<OwnableLocation> ownableLocations = locationController.getOwnableLocations();
+            for(OwnableLocation location : ownableLocations) {
+                if(UUID.compare(location.getOwner().orElseThrow(), player)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
 }
