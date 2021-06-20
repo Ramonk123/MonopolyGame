@@ -85,19 +85,18 @@ public class LobbyController
         lobby.setStage(primaryStage);
     }
 
+// these 2 functions should be deleted if never used.
     /*private void addPlayerToLobby(String name) {
         FireStoreController fireStoreController = (FireStoreController) ControllerRegistry.get(FireStoreController.class);
-        Optional<Player> player = getPlayerByName(name); // TODO: idk if this is supposed to be optional
+        Optional<Player> player = getPlayerByName(name);
 
         fireStoreController.addPlayer(token, player);
     }*/
 
     private void removePlayerFromLobby() throws InterruptedException, ExecutionException {
-        //TODO:
-        // Question is: "How do you know which player pressed the leave button?"
 
         //Added Firebase functionality assuming var player is the player who wants to leave the game.
-        //Player player = new Player("Removeme"); // TODO: remove this of course
+        //Player player = new Player("Removeme");
         //FireStoreController.removePlayer(token, player);
     }
 
