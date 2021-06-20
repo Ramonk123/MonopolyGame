@@ -237,14 +237,12 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     public void showBuyLocationPopup(Player player, OwnableLocation location) {
         System.out.println("boardcontroller popup method");
             buyLocationPane.setVisible(true);
-            //TODO Fix event on button (Koop straat/locatie)
-            buyLocationButton.setOnAction(event -> {
-                buyLocation(player,location);
-            });
+            buyLocationButton.setOnAction(event -> { buyLocation(player,location); });
     }
 
     @FXML
     public void buyLocation(Player player, OwnableLocation location) {
+        System.out.println("je kan locaties kopen, Kkr ding werkt");
         location.setOwner(player, true);
         player.subtractBalance(location.getPrice());
     }

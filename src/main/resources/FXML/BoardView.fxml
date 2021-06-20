@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane fx:id="BackgroundImageView" prefHeight="400.0" prefWidth="600.0" style="-fx-background-image: url(&quot;/FXML/IMG/background.png&quot;);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <FlowPane prefHeight="400.0" prefWidth="100.0" vgap="5.0">
@@ -1259,127 +1271,6 @@
             <Button fx:id="EndTurnButton" disable="true" mnemonicParsing="false" onAction="#EndTurnPlayer" prefWidth="100.0" text="End Turn" />
          </children>
       </VBox>
-      <GridPane fx:id="MortgagePopup" alignment="CENTER" layoutX="178.0" layoutY="62.0" prefHeight="582.0" prefWidth="723.0" style="-fx-background-color: BLACK;" visible="false">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="206.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label fx:id="NoLocationsToMortgagePopup" prefHeight="98.0" prefWidth="668.0" text="You have no locations to mortgage!" textFill="WHITE" visible="false" GridPane.columnSpan="4" GridPane.rowSpan="3">
-               <font>
-                  <Font size="41.0" />
-               </font>
-            </Label>
-            <HBox fx:id="Location1Pane" prefHeight="73.0" prefWidth="432.0" GridPane.columnSpan="3" GridPane.rowIndex="2">
-               <children>
-                  <Label fx:id="location1Label" text="Locationname" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="location1Price" text="Price">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Button mnemonicParsing="false" text="Mortgage" />
-               </children>
-            </HBox>
-            <HBox fx:id="Location2Pane" prefHeight="73.0" prefWidth="442.0" GridPane.columnSpan="3" GridPane.rowIndex="3">
-               <children>
-                  <Label fx:id="location1Label1" text="Locationname" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="location1Price1" text="Price">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Button mnemonicParsing="false" text="Mortgage" />
-               </children>
-            </HBox>
-            <HBox fx:id="Location3Pane" prefHeight="73.0" prefWidth="442.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
-               <children>
-                  <Label fx:id="location1Label11" text="Locationname" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="location1Price11" text="Price">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Button mnemonicParsing="false" text="Mortgage" />
-               </children>
-            </HBox>
-            <HBox fx:id="Location4Pane" prefHeight="73.0" prefWidth="442.0" GridPane.columnSpan="3" GridPane.rowIndex="5">
-               <children>
-                  <Label fx:id="location1Label12" text="Locationname" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="location1Price12" text="Price">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Button mnemonicParsing="false" text="Mortgage" />
-               </children>
-            </HBox>
-            <HBox fx:id="Location5Pane" prefHeight="73.0" prefWidth="442.0" GridPane.columnSpan="3" GridPane.rowIndex="6">
-               <children>
-                  <Label fx:id="location1Label121" text="Locationname" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="location1Price121" text="Price">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Button mnemonicParsing="false" text="Mortgage" />
-               </children>
-            </HBox>
-            <HBox fx:id="Location6Pane" prefHeight="73.0" prefWidth="432.0" GridPane.columnSpan="3" GridPane.rowIndex="7">
-               <children>
-                  <Label fx:id="location1Label2" text="Locationname" textFill="WHITE">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label fx:id="location1Price2" text="Price">
-                     <HBox.margin>
-                        <Insets right="100.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Button mnemonicParsing="false" text="Mortgage" />
-               </children>
-            </HBox>
-            <Label text="Mortgage menu" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="3">
-               <font>
-                  <Font size="61.0" />
-               </font>
-            </Label>
-         </children>
-      </GridPane>
       <GridPane fx:id="auctionPane" layoutX="100.0" prefHeight="400.0" prefWidth="801.0" style="-fx-background-color: #bfdbae;" visible="false">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -1557,6 +1448,15 @@
                <GridPane.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </GridPane.margin>
+               <graphic>
+                  <FlowPane fx:id="DiceLabelPane" prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label alignment="CENTER" prefWidth="100.0" />
+                        <Label alignment="CENTER" prefWidth="100.0" />
+                        <Label alignment="CENTER" prefWidth="200.0" text="You have thrown double, roll again." visible="false" />
+                     </children>
+                  </FlowPane>
+               </graphic>
             </Label>
             <ScrollPane hbarPolicy="NEVER" prefHeight="19.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                <content>
@@ -1602,13 +1502,6 @@
          </children>
 
       </GridPane>
-      <FlowPane fx:id="DiceLabelPane" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
-         <children>
-            <Label alignment="CENTER" prefWidth="100.0" />
-            <Label alignment="CENTER" prefWidth="100.0" />
-            <Label alignment="CENTER" prefWidth="200.0" text="You have thrown double, roll again." visible="false" />
-         </children>
-      </FlowPane>
       <VBox fx:id="ChancePopup" alignment="TOP_CENTER" layoutX="135.0" layoutY="36.0" prefHeight="330.0" prefWidth="334.0" visible="false">
          <children>
             <Label alignment="CENTER" contentDisplay="TOP" prefHeight="64.0" prefWidth="327.0" text="Kans">
@@ -1627,5 +1520,126 @@
             <Button fx:id="chanceCardButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="160.0" text="Okay" />
          </children>
       </VBox>
+      <GridPane fx:id="MortgagePopup" alignment="CENTER" layoutX="178.0" layoutY="62.0" prefHeight="582.0" prefWidth="723.0" style="-fx-background-color: BLACK;" visible="false">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="210.0" minWidth="10.0" prefWidth="210.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="206.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="NoLocationsToMortgagePopup" prefHeight="98.0" prefWidth="668.0" text="You have no locations to mortgage!" textFill="WHITE" visible="false" GridPane.columnSpan="4" GridPane.rowSpan="3">
+               <font>
+                  <Font size="41.0" />
+               </font>
+            </Label>
+            <HBox fx:id="Location1Pane" prefHeight="73.0" prefWidth="432.0" GridPane.columnSpan="3" GridPane.rowIndex="2">
+               <children>
+                  <Label fx:id="location1Label" text="Locationname" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="location1Price" text="Price">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" text="Mortgage" />
+               </children>
+            </HBox>
+            <HBox fx:id="Location2Pane" prefHeight="73.0" prefWidth="442.0" GridPane.columnSpan="3" GridPane.rowIndex="3">
+               <children>
+                  <Label fx:id="location1Label1" text="Locationname" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="location1Price1" text="Price">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" text="Mortgage" />
+               </children>
+            </HBox>
+            <HBox fx:id="Location3Pane" prefHeight="73.0" prefWidth="442.0" GridPane.columnSpan="3" GridPane.rowIndex="4">
+               <children>
+                  <Label fx:id="location1Label11" text="Locationname" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="location1Price11" text="Price">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" text="Mortgage" />
+               </children>
+            </HBox>
+            <HBox fx:id="Location4Pane" prefHeight="73.0" prefWidth="442.0" GridPane.columnSpan="3" GridPane.rowIndex="5">
+               <children>
+                  <Label fx:id="location1Label12" text="Locationname" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="location1Price12" text="Price">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" text="Mortgage" />
+               </children>
+            </HBox>
+            <HBox fx:id="Location5Pane" prefHeight="73.0" prefWidth="442.0" GridPane.columnSpan="3" GridPane.rowIndex="6">
+               <children>
+                  <Label fx:id="location1Label121" text="Locationname" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="location1Price121" text="Price">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" text="Mortgage" />
+               </children>
+            </HBox>
+            <HBox fx:id="Location6Pane" prefHeight="73.0" prefWidth="432.0" GridPane.columnSpan="3" GridPane.rowIndex="7">
+               <children>
+                  <Label fx:id="location1Label2" text="Locationname" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label fx:id="location1Price2" text="Price">
+                     <HBox.margin>
+                        <Insets right="100.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button mnemonicParsing="false" text="Mortgage" />
+               </children>
+            </HBox>
+            <Label text="Mortgage menu" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="3">
+               <font>
+                  <Font size="61.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>
