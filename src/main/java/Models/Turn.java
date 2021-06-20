@@ -73,7 +73,7 @@ public class Turn implements FirestoreFormattable, Observer<DocumentSnapshot> {
     public Object getFirestoreFormat() {
         Map<String, Object> map = new HashMap<>();
         map.put("activePlayer", activePlayer.getId().getId());
-        map.put("amountOfDoubles", amountOfDouble);
+        //map.put("amountOfDoubles", amountOfDouble);
         map.put("eyesThrown", eyesThrown);
         return map;
     }
