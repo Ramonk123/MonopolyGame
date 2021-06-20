@@ -1,7 +1,6 @@
 package Models;
 
-import Controllers.ControllerRegistry;
-import Controllers.LocationController;
+import Controllers.*;
 import Monopoly.UUID;
 
 import java.util.List;
@@ -15,12 +14,14 @@ public class StreetLocation extends OwnableLocation {
     private PriceInflator priceInflator;
     private int housePrice;
     private int hotelPrice;
+    private int rent;
 
 
     public StreetLocation(Locations locationEnum, String name, Set set, int position, int price, int rent, int housePrice, int hotelPrice) {
         super(locationEnum, name, set, position, price);
         this.houses         = 0;
         this.hotel          = false;
+        this.rent           = rent;
         this.priceInflator  = new PriceInflator(rent, 1.6);
         this.housePrice     = housePrice;
         this.hotelPrice     = hotelPrice;
@@ -32,18 +33,24 @@ public class StreetLocation extends OwnableLocation {
 
     @Override
     public void action(Player player) {
+        TurnController turnController = (TurnController) ControllerRegistry.get(TurnController.class);
+        Players players = turnController.getCurrentPlayer();
+        PlayerController playerController= (PlayerController) ControllerRegistry.get(PlayerController.class);
+        Player currentPlayer = playerController.getPlayerByPlayersEnum(players).orElseThrow();
         System.out.println(getOwner().isEmpty());
         System.out.println("begin van action");
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         //OwnableLocation location = (OwnableLocation) locationController.getLocationByEnum(this.getId()).orElseThrow();
             if (getOwner().isEmpty()){
                 System.out.println("streetlocation popup");
-                Actions.buyLocationPopup(player, getPrice(), this);
+                Actions.buyLocationPopup(currentPlayer, getPrice(), this);
             } else {
-                if(UUID.compare(getOwner().orElseThrow(), player)) {
-                    //Is owned by the player standing on the location
+                if(UUID.compare(getOwner().orElseThrow(), currentPlayer)) {
+                    //TODO:
+                    // Is owned by the player standing on the location
                 } else {
-                    //Is owned by someone else
+                    Actions.payFunds(currentPlayer, getRent()* priceInflator.inflateByTicks(getHouses()));
+                    Actions.receiveFunds(getOwner().orElseThrow(), getRent()* priceInflator.inflateByTicks(getHouses()));
                 }
             }
     }
@@ -55,4 +62,6 @@ public class StreetLocation extends OwnableLocation {
     public boolean getHotel() {
         return hotel;
     }
+
+    public int getRent(){ return rent;}
 }
