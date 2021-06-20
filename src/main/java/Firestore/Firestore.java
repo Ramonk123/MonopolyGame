@@ -40,8 +40,8 @@ public class Firestore {
         String fileName = "monopolyteam6-47708-firebase-adminsdk-tp5m6-9a482af7f7.json";
 
         ClassLoader classLoader = Firestore.class.getClassLoader();
-        File file = new File(Objects.requireNonNull(classLoader.getResource(fileName)).getFile());
-        FileInputStream serviceAccount = new FileInputStream(String.valueOf(file.toPath()));
+        System.out.println(Objects.requireNonNull(Objects.requireNonNull(classLoader.getResource(fileName)).getFile()));
+        FileInputStream serviceAccount = new FileInputStream(Objects.requireNonNull(classLoader.getResource(fileName).getFile()));
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
