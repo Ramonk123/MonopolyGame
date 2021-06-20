@@ -260,17 +260,7 @@ public class TurnController
      * @return Returns true if the player has lost, false if the player still has a chance.
      */
     public boolean hasLostTheGame(Player player) {
-        if(player.getWallet().getBalance() <= 0) {
-            LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
-            List<OwnableLocation> ownableLocations = locationController.getOwnableLocations();
-            for(OwnableLocation location : ownableLocations) {
-                if(UUID.compare(location.getOwner().orElseThrow(), player)) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
+        return player.getWallet().getBalance() <= 0;
     }
 
 }
