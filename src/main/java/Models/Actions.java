@@ -8,6 +8,7 @@ import Monopoly.UUID;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Model for all actions of cards and locations.
@@ -20,7 +21,6 @@ public class Actions {
 
 
     public static void teleportToLocation(Player player, long position, boolean entitledToSalary) {
-        System.out.println("IM ALIVEEE1");
         PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
         playerController.teleportTo(player, position);
 
@@ -30,44 +30,49 @@ public class Actions {
     }
 
     public static void teleportToNearestRailroad(Player player) {
-        System.out.println("IM ALIVEEE");
         PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         long playerPosition = player.getPosition();
         List<OwnableLocation> railRoadLocations = locationController.getRailroadLocations();
         ArrayList<Long> stepsToRailroad = new ArrayList<>();
 
-        for(OwnableLocation location : railRoadLocations) {
-            long railRoadPosition = location.getPosition();
-            stepsToRailroad.add((railRoadPosition - playerPosition));
+        for (OwnableLocation location : railRoadLocations) {
+            stepsToRailroad.add((location.getPosition() - playerPosition));
         }
-        long nearestRailroad = (stepsToRailroad.indexOf(Collections.min(stepsToRailroad)) + playerPosition);
-        playerController.teleportTo(player, nearestRailroad);
-
-
+        List<Long> sortedList = stepsToRailroad.stream().sorted().collect(Collectors.toList());
+        for (Long i : sortedList) {
+            if(i > 0) {
+                playerController.movePlayerWithPlayerObject(player, i);
+                break;
+            }
+        }
 
 
     }
 
     public static void teleportToNearestUtility(Player player) {
-        System.out.println("IM ALIVEEE");
         PlayerController playerController = (PlayerController)ControllerRegistry.get(PlayerController.class);
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         long playerPosition = player.getPosition();
         List<OwnableLocation> utilityLocations = locationController.getUtilityLocations();
         ArrayList<Long> stepsToUtility = new ArrayList<>();
-
+        System.out.println(utilityLocations.size() + " Util size");
         for(OwnableLocation location : utilityLocations) {
-            long utilityPosition = location.getPosition();
-            stepsToUtility.add((utilityPosition - playerPosition));
+            System.out.println("Mike2" + location.getName());
+            stepsToUtility.add((location.getPosition() - playerPosition));
         }
-        //long nearestUtility = (stepsToUtility.indexOf(Collections.min(stepsToUtility)) + playerPosition);
-        long nearestUtility = 3;
-        playerController.teleportTo(player, nearestUtility);
+        System.out.println(stepsToUtility.size());
+        List<Long> sortedList = stepsToUtility.stream().sorted().collect(Collectors.toList());
+        for(Long i : sortedList) {
+            if (i > 0) {
+                System.out.println("Stappen" +  i);
+                playerController.movePlayerWithPlayerObject(player, i);
+                break;
+            }
+        }
     }
 
     public static void receiveFunds(Player player, int amount) {
-        System.out.println("IM ALIVEEE");
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         try{
             transactionController.addBalance(player.getPlayersEnum(), amount);
@@ -77,8 +82,6 @@ public class Actions {
     }
 
     public static void payFunds(Player player, int amount) {
-
-        System.out.println("IM ALIVEEE");
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         try{
             transactionController.subtractBalance(player.getPlayersEnum(), amount);
@@ -88,13 +91,11 @@ public class Actions {
     }
 
     public static void goBackThreeSpaces(Player player) {
-        System.out.println("IM ALIVEEE");
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         player.movePlayer(-3);
     }
 
     public static void payEachPlayer(Player player) {
-        System.out.println("IM ALIVEEE");
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         int amount = 50;
@@ -115,7 +116,6 @@ public class Actions {
     }
 
     public static void receiveFromEachPlayer(Player player) {
-        System.out.println("IM ALIVEEE");
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         int amount= 10;
@@ -133,7 +133,6 @@ public class Actions {
     }
 
     public static void makeRepairs(Player player, int hotelCost, int houseCost) {
-        System.out.println("IM ALIVEEE");
         LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
         TransactionController transactionController = (TransactionController) ControllerRegistry.get(TransactionController.class);
         List<StreetLocation> locations = locationController.getStreetLocationsOwnedByPlayer(player.getId());
