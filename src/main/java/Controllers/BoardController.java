@@ -292,8 +292,9 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
 
     public void showStreetPayRent(Player player, StreetLocation location, PriceInflator priceInflator){
         buyLocationPane.setVisible(false);
-        payStreetRentAmount.setText("Pay Amount: " + location.getRent());
         payStreetRentPane.setVisible(true);
+        payStreetRentAmount.setText("Pay Amount: " + location.getRent());
+
         payStreetRentButton.setOnAction(event -> {
             Players receivingPlayer = location.getOwner().orElseThrow().getPlayersEnum();
             int amount = location.getRent()* priceInflator.inflateByTicks(location.getHouses());
