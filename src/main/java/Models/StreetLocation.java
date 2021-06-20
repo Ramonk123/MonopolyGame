@@ -46,7 +46,7 @@ public class StreetLocation extends OwnableLocation {
             } else if(UUID.compare(getOwner().orElseThrow(), currentPlayer)) {
             //TODO:
             // Is owned by the player standing on the location
-            }else {
+            } else {
                     Actions.payFunds(currentPlayer, getRent()* priceInflator.inflateByTicks(getHouses()));
                     Actions.receiveFunds(getOwner().orElseThrow(), getRent()* priceInflator.inflateByTicks(getHouses()));
                     Actions.payRentPopup(player, this);
