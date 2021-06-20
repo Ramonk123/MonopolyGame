@@ -203,6 +203,13 @@ public class FireStoreController implements Subject<DocumentSnapshot>, HasStage,
                 .update("turn", turn.getFirestoreFormat());
     }
 
+    public void updateAllLocations(int token) {
+        com.google.cloud.firestore.Firestore database = firestore.getDatabase();
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        database.collection("Lobbies").document(String.valueOf(token))
+                .update("locations", locationController.getFirestoreFormat());
+    }
+
     public void setConsumer(Consumer<DocumentSnapshot> lambda) {
         this.lambda = lambda;
     }
