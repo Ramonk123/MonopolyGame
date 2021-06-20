@@ -57,6 +57,10 @@ public class Player implements Observer<DocumentSnapshot>, BoardSubject, Positio
         System.out.println(currentPosition + "currentpositionhier");
     }
 
+    /**
+     * Moves the player on the back-end.
+     * @param amountThrown The amount of eyes the player has thrown.
+     */
     public void movePlayer(long amountThrown) {
         LocationController locationController = ((PlayerController) ControllerRegistry.get(PlayerController.class)).getLocationController();
         long amountOfLocations = locationController.getLocationArray().size();
