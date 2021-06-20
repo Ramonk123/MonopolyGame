@@ -224,13 +224,20 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         }
     }
 
-    @FXML Pane buyLocationPane;
-    @FXML Label locationForSaleName;
-    @FXML Label locationForSalePrice;
-    @FXML Label locationForSaleHouse;
-    @FXML Label locationForSaleMortgage;
-    @FXML Button buyLocationButton;
-    @FXML Button auctionLocationButton;
+    @FXML
+    private Pane buyLocationPane;
+    @FXML
+    private Label locationForSaleName;
+    @FXML
+    private Label locationForSalePrice;
+    @FXML
+    private Label locationForSaleHouse;
+    @FXML
+    private Label locationForSaleMortgage;
+    @FXML
+    private Button buyLocationButton;
+    @FXML
+    private Button auctionLocationButton;
 
     public void updateBuyLocationPane(OwnableLocation location){
         locationForSaleName.setText("Name: " + location.getName());
@@ -254,6 +261,12 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         buyLocationPane.setVisible(false);
     }
 
+    @FXML
+    private Pane payRentPane;
+    @FXML
+    private Label payRentAmount;
+    @FXML
+    private Button payRentButton;
     public void showSellLocationPopup(Player player, OwnableLocation location){
 
     }
@@ -293,11 +306,16 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     }
 
 
-    @FXML Pane auctionPane;
-    @FXML TextArea bidTextArea;
-    @FXML Button placeBidButton;
-    @FXML Label NoNumberOnInputError;
-    @FXML Label cardPlaceholder;
+    @FXML
+    private Pane auctionPane;
+    @FXML
+    private TextArea bidTextArea;
+    @FXML
+    private Button placeBidButton;
+    @FXML
+    private Label NoNumberOnInputError;
+    @FXML
+    private Label cardPlaceholder;
 
     public void showAuction(String locationName) {
 
@@ -310,7 +328,8 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         player.addBalance(location.getPrice());
     }
 
-    @FXML Pane notEnoughBalancePane;
+    @FXML
+    private Pane notEnoughBalancePane;
 
     public void showNotEnoughBalance(){
         notEnoughBalancePane.setVisible(true);
@@ -448,9 +467,13 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
             }
         }
     }
-    @FXML Label chanceCardText;
-    @FXML Button chanceCardButton;
-    @FXML Pane ChancePopup;
+    @FXML
+    private Label chanceCardText;
+    @FXML
+    private Button chanceCardButton;
+    @FXML
+    private Pane ChancePopup;
+
     public void setChancePopupVisible(Player player) {
         CardDeckController cardDeckController = (CardDeckController) ControllerRegistry.get(CardDeckController.class);
         if(!ChancePopup.isVisible()) {
