@@ -45,7 +45,7 @@ public class BoardView implements View, Observer<BoardSubject>, HasStage {
         Parent root = loader.load();
 
         primaryStage.setScene(new Scene(root, WIDTH, HEIGHT));
-        primaryStage.setMaximized(true);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
