@@ -151,7 +151,10 @@ public class TurnController
     @Override
     public void notifyObservers() {
         turn.update(documentSnapshot);
-        //checkJailedStatus();
+        LobbyController lobbyController = (LobbyController) ControllerRegistry.get(LobbyController.class);
+        if (lobbyController.isGameHasStarted()) {
+            checkJailedStatus();
+        }
     }
 
     /**
