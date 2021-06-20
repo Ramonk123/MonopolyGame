@@ -76,8 +76,8 @@ public class LocationController implements Controller {
         return locationArray;
     }
 
-    //TODO: Create onEvent function when refusing to buy location
-    private void refuseToBuyLocation() {
+    // Called from BoardController by auction button.
+    public void refuseToBuyLocation() {
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
         for(Player player : playerController.getPlayers()){
             if(UUID.compare(playerController.getClientPlayersEnum().getId(), player.getId())){

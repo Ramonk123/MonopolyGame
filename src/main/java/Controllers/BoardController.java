@@ -226,6 +226,7 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
     @FXML Label locationForSaleHouse;
     @FXML Label locationForSaleMortgage;
     @FXML Button buyLocationButton;
+    @FXML Button auctionLocationButton;
 
     public void updateBuyLocationPane(Player player, OwnableLocation location){
         locationForSaleName.setText(location.getName());
@@ -238,6 +239,7 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         System.out.println("boardcontroller popup method");
             buyLocationPane.setVisible(true);
             buyLocationButton.setOnAction(event -> { buyLocation(player,location); });
+        auctionLocationButton.setOnAction(event -> { auctionLocation(player,location); });
     }
 
     @FXML
@@ -246,6 +248,13 @@ public class BoardController implements Subject<DocumentSnapshot>, Observer<Docu
         location.setOwner(player, true);
         player.subtractBalance(location.getPrice());
         buyLocationPane.setVisible(false);
+    }
+
+    @FXML
+    public void auctionLocation(Player player, OwnableLocation location) {
+        LocationController locationController = (LocationController) ControllerRegistry.get(LocationController.class);
+        buyLocationPane.setVisible(false);
+        locationController.refuseToBuyLocation();
     }
 
     public void sellLocation(Player player, OwnableLocation location) {
