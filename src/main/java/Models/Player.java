@@ -26,7 +26,8 @@ public class Player implements Observer<DocumentSnapshot>, BoardSubject, Positio
     private long oldPosition;
     private long currentPosition;
     private boolean inJail;
-    private final Players playersEnum;
+    private Players playersEnum;
+    private int turnsInJail = 0;
 
     public Player(Players playersEnum, String name) {
         this.playersEnum = playersEnum;
@@ -174,5 +175,21 @@ public class Player implements Observer<DocumentSnapshot>, BoardSubject, Positio
     @Override
     public List<Player> getPlayers() {
         return null;
+    }
+
+    public void setInJail(boolean inJail) {
+        this.inJail = inJail;
+    }
+
+    public void setTurnInJail() {
+        this.turnsInJail ++;
+        System.out.println("Turns in jail: " + turnsInJail);
+        if (turnsInJail== 3) {
+            setInJail(false);
+        }
+    }
+
+    public boolean isInJail() {
+        return inJail;
     }
 }

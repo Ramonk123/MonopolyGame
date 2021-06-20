@@ -189,7 +189,9 @@ public class Actions {
 
     public static void goToJail(Player player){
         PlayerController playerController = (PlayerController) ControllerRegistry.get(PlayerController.class);
-        try{playerController.teleportTo(player, 10);}
+        try{playerController.teleportTo(player, 10);
+            player.setInJail(true);
+        }
         catch(Exception e) {
             e.printStackTrace();
         }
